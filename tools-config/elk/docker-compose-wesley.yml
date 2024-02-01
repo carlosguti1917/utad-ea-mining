@@ -1,0 +1,48 @@
+version: "3.8"
+
+networks:
+  kong-net:
+    driver: bridge
+    ipam:
+      config:
+        -subnet: 172.1.1.0/24
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.11.1
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    volumes:
+      - ./elasticsearch/config/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch,yml:ro
+    environment:
+      ES_jAVA_OPTS: "-Xmx256m -Xms256m"
+      ELASTIC_PASSWORD: 123
+    networks:
+      - kong-net
+
+  logstash:
+    image: docker.elastic.co/logstash/logstash:8.11.1
+    ports:
+      - "5000:5000"
+      - "9600:9600"
+    volumes:
+      - ./logstash/config/logstash.yml:/usr/share/logstash/config/logstash.yml:ro
+      - ./logstash/pipeline:/usr/share/logstash/pipeline:ro
+    environment:
+      - LS_JAVA_OPTS: "-Xmx256m -Xms256m"
+    networks:
+      - kong-net
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:8.11.1
+    labels:
+      co.elastic.logs/module: kibana
+    ports:
+      - 5601:5601
+    volumes:
+      - ./kibana/config/kibana.yml:/usr/share/kibana/config/kibana.yml:ro
+    networks:
+      - kong-net
+
+ 

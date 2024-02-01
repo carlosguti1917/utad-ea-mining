@@ -1,0 +1,25 @@
+_format_version: "3.0"
+_transform: true
+
+services:
+- name: demo-svc
+  url: http://httpbin.org/anything
+  routes:
+  - name: demo-route
+    paths:
+    - /test
+  - name: other-route
+    paths:
+    - /demo
+
+plugins:
+- name: file-log
+  config:
+    path: /dev/stdout
+- name: pre-function
+  route: demo-route
+  config:
+    access:
+    - kong.log.set_serialize_value("request.body", kong.request.get_raw_body())
+    body_filter:
+    - kong.log.set_serialize_value("response.body", kong.response.get_raw_body())
