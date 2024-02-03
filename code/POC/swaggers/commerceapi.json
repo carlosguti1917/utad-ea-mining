@@ -1,0 +1,840 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "1.0.0",
+    "title": "Swagger Commerce API v1"
+  },
+  "security": [
+    {
+      "regularSecurity": [],
+      "OAuth2": [
+        "readOnly"
+      ]
+    }
+  ],
+  "servers": [
+    {
+      "url": "https://apiplatform.sensedia.com/sandbox/commerce/v1"
+    }
+  ],
+  "paths": {
+    "/cep": {
+      "get": {
+        "summary": "Zip Code Address",
+        "operationId": "getAddressCep",
+        "tags": [
+          "Address"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "How many items to return at one time (max 100)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A paged array of pets",
+            "headers": {
+              "x-next": {
+                "description": "A link to the next page of responses",
+                "schema": {
+                  "type": "string",
+                  "pattern": "^example-[0-9a-z]+$",
+                  "maxLength": 32
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/order"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders": {
+      "get": {
+        "summary": "get orders lis",
+        "operationId": "getListOrders",
+        "tags": [
+          "Orders"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "How many items to return at one time (max 100)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "maximum": 1024,
+              "minimum": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A paged array of orders",
+            "headers": {
+              "x-next": {
+                "description": "A link to the next page of responses",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/orders"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a Order",
+        "operationId": "createOrder",
+        "tags": [
+          "Orders"
+        ],
+        "responses": {
+          "201": {
+            "description": "Null response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/address"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/orders/{id}": {
+      "get": {
+        "summary": "Info for a specific order",
+        "operationId": "getOrder",
+        "tags": [
+          "Orders"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the order to retrieve",
+            "schema": {
+              "type": "string",
+              "pattern": "^example-[0-9a-z]+$",
+              "maxLength": 32
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/order"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/carts": {
+      "get": {
+        "summary": "get carts",
+        "operationId": "getListOfCarts",
+        "tags": [
+          "Carts"
+        ],
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "How many items to return at one time (max 100)",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "maximum": 1024,
+              "minimum": 0
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A paged array of carts",
+            "headers": {
+              "x-next": {
+                "description": "A link to the next page of responses",
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/carts"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/carts/{id}": {
+      "get": {
+        "summary": "Info for a specific cart",
+        "operationId": "getCart",
+        "tags": [
+          "Carts"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the cart to retrieve",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cart"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/carts/{id}/itens": {
+      "post": {
+        "summary": "Add an item in a cart",
+        "operationId": "addItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the cart",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "responses": {
+          "201": {
+            "description": "Null response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cart-item"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/carts/{id}/itens/{itemid}": {
+      "get": {
+        "summary": "Get an item in a cart",
+        "operationId": "getItem",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the cart",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "itemid",
+            "in": "path",
+            "required": true,
+            "description": "The id of the cart",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "responses": {
+          "201": {
+            "description": "Null response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cart-item"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/carts/{id}/deliveryaddresses": {
+      "post": {
+        "summary": "Add an delivety address in a cart",
+        "operationId": "addDeliveryAddresses",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the cart to retrieve",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "responses": {
+          "201": {
+            "description": "Null response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cart-deliveryaddress"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Info for a specific delivery address",
+        "operationId": "getAddress",
+        "tags": [
+          "Carts"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the cart to retrieve",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cart-deliveryaddress"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/carts/{id}/paymentmethod": {
+      "post": {
+        "summary": "Add a paymentmethod to a cart",
+        "operationId": "addPaymentMethod",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the cart to retrieve",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "tags": [
+          "Carts"
+        ],
+        "responses": {
+          "201": {
+            "description": "Null response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cart-paymentmethod"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Info for a specific paymentmethod address",
+        "operationId": "getPaymentmethod",
+        "tags": [
+          "Carts"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "description": "The id of the cart to retrieve",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Expected response to a valid request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/cart-paymentmethod"
+                }
+              }
+            }
+          },
+          "default": {
+            "description": "unexpected error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "address": {
+        "type": "object",
+        "properties": {
+          "street": {
+            "type": "string"
+          },
+          "number": {
+            "type": "integer"
+          },
+          "neighborhood": {
+            "type": "string"
+          },
+          "city": {
+            "type": "string"
+          },
+          "state": {
+            "type": "string"
+          },
+          "country": {
+            "type": "string"
+          }
+        }
+      },
+      "order": {
+        "type": "object",
+        "required": [
+          "cart"
+        ],
+        "properties": {
+          "cart": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "orderDate": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 32
+          },
+          "tag": {
+            "type": "string"
+          }
+        }
+      },
+      "orders": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/order"
+        },
+        "maxItems": 100
+      },
+      "cart": {
+        "type": "object",
+        "properties": {
+          "client": {
+            "type": "object",
+            "properties": {
+              "cod": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "product": {
+            "type": "object",
+            "properties": {
+              "sku": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              },
+              "value": {
+                "type": "string"
+              }
+            }
+          },
+          "source": {
+            "type": "object",
+            "properties": {
+              "code": {
+                "type": "integer",
+                "format": "int64"
+              },
+              "creation_date": {
+                "type": "string",
+                "format": "date-time",
+                "maxLength": 32
+              }
+            }
+          }
+        }
+      },
+      "carts": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/order"
+        },
+        "maxItems": 100
+      },
+      "cart-item": {
+        "type": "object",
+        "properties": {
+          "client_id": {
+            "type": "string"
+          },
+          "product_sky": {
+            "type": "string"
+          },
+          "quantity": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "source": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "cart-deliveryaddress": {
+        "type": "object",
+        "properties": {
+          "cart": {
+            "type": "string"
+          },
+          "order_date": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 32
+          },
+          "client": {
+            "type": "object",
+            "properties": {
+              "cod": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "deliveryAddress": {
+            "type": "object",
+            "properties": {
+              "address": {
+                "type": "string"
+              },
+              "compliment": {
+                "type": "string"
+              },
+              "number": {
+                "type": "string"
+              },
+              "neighborhood": {
+                "type": "string"
+              },
+              "zipcode": {
+                "type": "string"
+              },
+              "uf": {
+                "type": "string"
+              },
+              "city": {
+                "type": "string"
+              },
+              "postalcode": {
+                "type": "string"
+              }
+            }
+          },
+          "source": {
+            "type": "string"
+          }
+        }
+      },
+      "cart-paymentmethod": {
+        "type": "object",
+        "properties": {
+          "cart": {
+            "type": "string"
+          },
+          "order_date": {
+            "type": "string",
+            "format": "date-time",
+            "maxLength": 32
+          },
+          "client": {
+            "type": "object",
+            "properties": {
+              "cod": {
+                "type": "string"
+              },
+              "name": {
+                "type": "string"
+              }
+            }
+          },
+          "paymentMethod": {
+            "type": "object",
+            "properties": {
+              "method": {
+                "type": "string"
+              },
+              "cardHolder": {
+                "type": "string"
+              },
+              "cardNumber": {
+                "type": "string"
+              },
+              "dueDate": {
+                "type": "string"
+              },
+              "cvv": {
+                "type": "string"
+              }
+            }
+          },
+          "totalValue": {
+            "type": "number"
+          },
+          "statusPedidos": {
+            "type": "object",
+            "properties": {
+              "cod": {
+                "type": "string"
+              },
+              "description": {
+                "type": "string"
+              }
+            }
+          },
+          "source": {
+            "type": "string"
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": [
+          "code",
+          "message"
+        ],
+        "properties": {
+          "code": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "regularSecurity": {
+        "type": "http",
+        "scheme": "basic"
+      },
+      "api_key": {
+        "type": "apiKey",
+        "name": "api_key",
+        "in": "header"
+      },
+      "OAuth2": {
+        "type": "oauth2",
+        "flows": {
+          "authorizationCode": {
+            "scopes": {
+              "readOnly": "read objects in your account"
+            },
+            "authorizationUrl": "https://example.com/oauth/authorize",
+            "tokenUrl": "https://example.com/oauth/token"
+          },
+          "implicit": {
+            "authorizationUrl": "http://example.org/api/oauth/dialog",
+            "scopes": {
+              "write:orders": "modify pets in your account",
+              "read:orders": "read your pets"
+            }
+          }
+        }
+      }
+    }
+  }
+}
