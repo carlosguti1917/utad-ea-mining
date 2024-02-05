@@ -1,0 +1,9 @@
+<diagram program="umletino" version="14.4.0-SNAPSHOT"><zoom_level>10</zoom_level><element><id>UMLClass</id><coordinates><x>294</x><y>90</y><w>100</w><h>30</h></coordinates><panel_attributes>SimpleClass</panel_attributes><additional_attributes></additional_attributes></element><element><id>UMLClass</id><coordinates><x>174</x><y>170</y><w>100</w><h>30</h></coordinates><panel_attributes>SimpleClass</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>94</x><y>160</y><w>100</w><h>50</h></coordinates><panel_attributes>lt=)-
+m1=require
+</panel_attributes><additional_attributes>20;20;80;30</additional_attributes></element><element><id>UMLClass</id><coordinates><x>554</x><y>230</y><w>100</w><h>30</h></coordinates><panel_attributes>SimpleClass</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>264</x><y>180</y><w>310</w><h>90</h></coordinates><panel_attributes>lt=-
+m1=0..n
+m2=0..1
+teaches to &gt;</panel_attributes><additional_attributes>10;10;290;70</additional_attributes></element><element><id>Relation</id><coordinates><x>224</x><y>110</y><w>150</w><h>80</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>130;10;10;60</additional_attributes></element><element><id>UMLClass</id><coordinates><x>150</x><y>340</y><w>210</w><h>70</h></coordinates><panel_attributes>_object: Class_
+--
+id: Long="36548"
+[waiting for message]</panel_attributes><additional_attributes></additional_attributes></element><element><id>Relation</id><coordinates><x>210</x><y>190</y><w>40</w><h>170</h></coordinates><panel_attributes>lt=&lt;&lt;&lt;&lt;-</panel_attributes><additional_attributes>10;150;20;10</additional_attributes></element></diagram>
