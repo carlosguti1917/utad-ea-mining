@@ -6,9 +6,14 @@ import pymongo
 from io import open
 import sys
 import os.path
-sys.path.append(
-    os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
-import config
+from app.src.api_gateway_load import configs
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
+
+print("sys.path",   sys.path)
+
+
+
+
 
 
 
@@ -58,8 +63,8 @@ class LoaderCalls:
 
     @staticmethod
     def saveCallDetails(dicJson):
-        myclient = pymongo.MongoClient(config.MONGO_DB_SERVER["host"])
-        mydb = myclient[config.MONGO_DB_SERVER["databasename"]]
+        myclient = pymongo.MongoClient(configs.MONGO_DB_SERVER["host"])
+        mydb = myclient[configs.MONGO_DB_SERVER["databasename"]]
         collection_calls = mydb["api-calls"]
         collection_call_detail = mydb["api-call-details"]
         x = collection_call_detail.insert_one(dicJson)
