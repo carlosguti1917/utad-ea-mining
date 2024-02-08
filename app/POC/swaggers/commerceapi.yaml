@@ -508,7 +508,7 @@ components:
     Error:
       type: object
       required:
-        - code
+        - app
         - message
       properties:
         code:
