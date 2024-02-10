@@ -49,7 +49,6 @@ ignore_field_name = [
     "x-ratelimit-reset",   
     "write_timeout",     
     "ws_id",
-
     ['_ignored', '0'],
     ['_source', 'latencies'],
     ['_source', 'request', 'headers', 'accept'],  
@@ -93,7 +92,6 @@ ignore_field_name = [
     ['_source', '@version'],  
     ['_source', 'tags'],    
     ['_source', 'tries'],    
-
     "read_timeout"
 ]
 
