@@ -34,5 +34,51 @@ class MongoDbRepository4Kong:
         except Exception as error:
             print("MongoDvRepository.saveCallDetails()")
             print(__class__, __name__, __file__)
-            print('MongoDvRepository.saveCallDetails() Ocorreu problema {} '.format(error.__class__))
+            print('saveCallDetails() Ocorreu problema {} '.format(error.__class__))
             print("mensagem", str(error))
+
+
+    def getApiCallsDetails() -> list:
+        # itera sobre os logs obtidos no banco de dados e retorna a lista destes logs
+        try:
+            myclient = pymongo.MongoClient(configs.MONGO_DB_SERVER["host"])
+            mydb = myclient[configs.MONGO_DB_SERVER["databasename"]]
+            collection_calls = mydb["kong-api-call-details"]
+
+            # isso aqui Recupera um cursor a partir do filtro
+            """     for x in collection_calls.find({}, { "_id": 0, "id" : 1}):
+                request_id = x["id"]
+            #    request_id = "D8KkloEBGjj1AzoTb38x"
+                print(request_id)
+                getCallsById(request_id) """
+
+            #logs = []
+            # cursor = collection_calls.find()
+
+            """ usando o pandas"""
+            cursor_of_docs = list(collection_calls.find())
+            # list_docs = collection_calls.find()
+            #df_aux = pandas.read_sql(teste)
+            # document_list = pandas.DataFrame(list_docs)
+            documents = []
+
+            #for i, doc in enumerate(cursor_of_docs):
+            for doc in cursor_of_docs:
+                #document = pandas.DataFrame(columns=[])
+                document = pandas.DataFrame([doc])
+                doc_id = doc["_id"]
+                serial_obj = pandas.Series(doc, name=doc_id)
+                document = pandas.concat([document, serial_obj], axis=0)  # Concatenate the serial_obj to the document DataFrame
+                document.dropna
+                #documents.append(document.to_dict('records'))
+                documents.append(document)
+
+            #print("documents:", str(documents))
+            #json_export = documents.to_json()
+            #json_loaded = json.loads(json_export)
+            return documents # list of pandas.DataFrame documents
+        except Exception as error:
+            print('Ocorreu problema {} '.format(error.__class__))
+            print(__class__, __name__, __file__)
+            print("getApiCallsDetails() Ocorreu problema {} ".format(error.__class__))
+            print("mensagem", str(error))            
