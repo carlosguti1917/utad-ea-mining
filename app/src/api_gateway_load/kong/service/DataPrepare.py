@@ -36,16 +36,6 @@ class DataPrepare:
         api_calls = list(self.collection_call_detail.find())
         return api_calls
 
-    # def removeNoise(self, api_calls):
-    #     cleaned_api_calls = []
-    #     for call in api_calls:
-    #         cleaned_call = {}
-    #         for key, value in call.items():
-    #             if key not in ignore.ignore_field_name and (value or (isinstance(value, list) and value)):
-    #                 cleaned_call[key] = value
-    #         cleaned_api_calls.append(cleaned_call)
-    #     return cleaned_api_calls
-        
     def removeNoise(self, api_calls):
         cleaned_api_calls = []
         aux_path_key = {} # inicializando aux  vazia, aux representa a hierarquia de um atributo
@@ -53,7 +43,6 @@ class DataPrepare:
             for call in api_calls:
                 cleaned_call = self.cleanIgnoredAttributes(call, aux_path_key.copy())
                 self.collection_call_cleaned.insert_one(cleaned_call)
-                #cleaned_api_calls.append(cleaned_call)
             return cleaned_api_calls
         except Exception as error:
             print('Ocorreu problema {} '.format(error.__class__))

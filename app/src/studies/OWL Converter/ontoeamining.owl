@@ -1,0 +1,348 @@
+@prefix : <http://apieamining.edu.pt#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix core: <http://apieamining.edu.pt/core#> .
+@prefix gufo: <http://purl.org/nemo/gufo#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix processView: <http://apieamining.edu.pt/process-view#> .
+@prefix dataRelationView: <http://apieamining.edu.pt/data-relation-view#> .
+@prefix dataObjectRelationView: <http://apieamining.edu.pt/data-object-relation-view#> .
+@base <http://apieamining.edu.pt> .
+
+<http://apieamining.edu.pt> rdf:type owl:Ontology .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/nemo/gufo#isDerivedFrom
+gufo:isDerivedFrom rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  aPIResource:OR1BHxGGAqDgAQyZ
+<aPIResource:OR1BHxGGAqDgAQyZ> rdf:type owl:ObjectProperty ;
+                               rdfs:domain core:OztW7xGGAqDgAQtd ;
+                               rdfs:label "data"@en .
+
+
+###  http://purl.org/nemo/gufo#isEventProperPartOf
+gufo:isEventProperPartOf rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/nemo/gufo#participatedIn
+gufo:participatedIn rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/nemo/gufo#wasCreatedIn
+gufo:wasCreatedIn rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  aPICall:AOtJHxGGAqDgAQ3i
+<aPICall:AOtJHxGGAqDgAQ3i> rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf gufo:hasQualityValue ;
+                           rdfs:domain core:Z5VA7xGGAqDgAQmP ;
+                           rdfs:range xsd:int ;
+                           rdfs:label "result_status"@en .
+
+
+###  aPICall:DfdJHxGGAqDgAQ3l
+<aPICall:DfdJHxGGAqDgAQ3l> rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf gufo:hasQualityValue ;
+                           rdfs:domain core:Z5VA7xGGAqDgAQmP ;
+                           rdfs:range xsd:string ;
+                           rdfs:label "uri"@en .
+
+
+###  aPICall:GP1JHxGGAqDgAQ3f
+<aPICall:GP1JHxGGAqDgAQ3f> rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf gufo:hasQualityValue ;
+                           rdfs:domain core:Z5VA7xGGAqDgAQmP ;
+                           rdfs:range xsd:int ;
+                           rdfs:label "request_time"@en .
+
+
+###  aPICall:GqbnPxGGAqDgAQpq
+<aPICall:GqbnPxGGAqDgAQpq> rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf gufo:hasQualityValue ;
+                           rdfs:domain core:Z5VA7xGGAqDgAQmP ;
+                           rdfs:range xsd:int ;
+                           rdfs:label "response_time"@en .
+
+
+###  aPICall:be9JHxGGAqDgAQ3o
+<aPICall:be9JHxGGAqDgAQ3o> rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf gufo:hasQualityValue ;
+                           rdfs:domain core:Z5VA7xGGAqDgAQmP ;
+                           rdfs:range xsd:string ;
+                           rdfs:label "api_name"@en .
+
+
+###  aPIOperation:0kbVVpGAUZhKlhOr
+<aPIOperation:0kbVVpGAUZhKlhOr> rdf:type owl:DatatypeProperty ;
+                                rdfs:subPropertyOf gufo:hasQualityValue ;
+                                rdfs:domain core:rzeI7xGGAqDgAQm3 ;
+                                rdfs:range xsd:string ;
+                                rdfs:label "method"@en .
+
+
+###  aPIResource:QClBHxGGAqDgAQyW
+<aPIResource:QClBHxGGAqDgAQyW> rdf:type owl:DatatypeProperty ;
+                               rdfs:subPropertyOf gufo:hasQualityValue ;
+                               rdfs:domain core:OztW7xGGAqDgAQtd ;
+                               rdfs:range xsd:string ;
+                               rdfs:label "name"@en .
+
+
+###  aPIResource:x0OcVJGGAqDgAUUd
+<aPIResource:x0OcVJGGAqDgAUUd> rdf:type owl:DatatypeProperty ;
+                               rdfs:subPropertyOf gufo:hasQualityValue ;
+                               rdfs:domain core:OztW7xGGAqDgAQtd ;
+                               rdfs:range xsd:string ;
+                               rdfs:label "uri"@en .
+
+
+###  attribute:Qwu0tpGAUZhKlhTm
+<attribute:Qwu0tpGAUZhKlhTm> rdf:type owl:DatatypeProperty ;
+                             rdfs:subPropertyOf gufo:hasValueComponent ;
+                             rdfs:range xsd:string ;
+                             rdfs:label "name"@en .
+
+
+###  attribute:6SR0tpGAUZhKlhTo
+<attribute:6SR0tpGAUZhKlhTo> rdf:type owl:DatatypeProperty ;
+                             rdfs:subPropertyOf gufo:hasValueComponent ;
+                             rdfs:range xsd:string ;
+                             rdfs:label "value"@en .
+
+
+###  consumerApp:IZ3TvxGGAqDgAS6e
+<consumerApp:IZ3TvxGGAqDgAS6e> rdf:type owl:DatatypeProperty ;
+                               rdfs:subPropertyOf gufo:hasQualityValue ;
+                               rdfs:domain core:zFEeHxGGAqDgAQwB ;
+                               rdfs:range xsd:string ;
+                               rdfs:label "app_name"@en .
+
+
+###  consumerApp:8CP1HxGGAqDgARCw
+<consumerApp:8CP1HxGGAqDgARCw> rdf:type owl:DatatypeProperty ;
+                               rdfs:subPropertyOf gufo:hasQualityValue ;
+                               rdfs:domain core:zFEeHxGGAqDgAQwB ;
+                               rdfs:range xsd:string ;
+                               rdfs:label "client_id"@en .
+
+
+###  correlatedDataObjects:aNaWBpGGAqDgATcb
+<correlatedDataObjects:aNaWBpGGAqDgATcb> rdf:type owl:DatatypeProperty ;
+                                         rdfs:subPropertyOf gufo:hasQualityValue ;
+                                         rdfs:range xsd:string ;
+                                         rdfs:label "entity_name"@en .
+
+
+###  http://purl.org/nemo/gufo#hasQualityValue
+gufo:hasQualityValue rdf:type owl:DatatypeProperty .
+
+
+###  http://purl.org/nemo/gufo#hasValueComponent
+gufo:hasValueComponent rdf:type owl:DatatypeProperty .
+
+
+###  service:dzANHxGGAqDgARC7
+<service:dzANHxGGAqDgARC7> rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf gufo:hasQualityValue ;
+                           rdfs:domain core:bN_o7xGGAqDgAQqB ;
+                           rdfs:range xsd:string ;
+                           rdfs:label "endpoint_route"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://apieamining.edu.pt/core#OztW7xGGAqDgAQtd
+core:OztW7xGGAqDgAQtd rdf:type owl:Class ;
+                      rdfs:subClassOf gufo:FunctionalComplex .
+
+
+###  http://apieamining.edu.pt/core#Z5VA7xGGAqDgAQmP
+core:Z5VA7xGGAqDgAQmP rdf:type owl:Class ;
+                      rdfs:subClassOf gufo:Event ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty gufo:participatedIn ;
+                                        owl:someValuesFrom <http://apieamining.edu.pt/core#5.lI7xGGAqDgAQnI>
+                                      ] ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty [ owl:inverseOf gufo:wasCreatedIn
+                                                       ] ;
+                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                        owl:onClass core:zFEeHxGGAqDgAQwB
+                                      ] .
+
+
+###  http://apieamining.edu.pt/core#bN_o7xGGAqDgAQqB
+core:bN_o7xGGAqDgAQqB rdf:type owl:Class ;
+                      rdfs:subClassOf gufo:FunctionalComplex .
+
+
+###  http://apieamining.edu.pt/core#rzeI7xGGAqDgAQm3
+core:rzeI7xGGAqDgAQm3 rdf:type owl:Class ;
+                      rdfs:subClassOf core:bN_o7xGGAqDgAQqB ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                                       ] ;
+                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                        owl:onClass core:Z5VA7xGGAqDgAQmP
+                                      ] .
+
+
+###  http://apieamining.edu.pt/core#zFEeHxGGAqDgAQwB
+core:zFEeHxGGAqDgAQwB rdf:type owl:Class ;
+                      rdfs:subClassOf gufo:FunctionalComplex .
+
+
+###  http://apieamining.edu.pt/core#5.lI7xGGAqDgAQnI
+<http://apieamining.edu.pt/core#5.lI7xGGAqDgAQnI> rdf:type owl:Class ;
+                                                  rdfs:subClassOf core:bN_o7xGGAqDgAQqB .
+
+
+###  http://apieamining.edu.pt/data-relation-view#IBvGfxGGAqDgAS9J
+dataRelationView:IBvGfxGGAqDgAS9J rdf:type owl:Class ;
+                                  rdfs:subClassOf core:OztW7xGGAqDgAQtd .
+
+
+###  http://apieamining.edu.pt/process-view#fEohHxGGAqDgAQzc
+processView:fEohHxGGAqDgAQzc rdf:type owl:Class ;
+                             rdfs:subClassOf core:zFEeHxGGAqDgAQwB .
+
+
+###  http://purl.org/nemo/gufo#Event
+gufo:Event rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#EventType
+gufo:EventType rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#FunctionalComplex
+gufo:FunctionalComplex rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#Kind
+gufo:Kind rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#Role
+gufo:Role rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#SubKind
+gufo:SubKind rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://apieamining.edu.pt#APICall1
+:APICall1 rdf:type owl:NamedIndividual ,
+                   core:Z5VA7xGGAqDgAQmP ;
+          gufo:wasCreatedIn :Consumer001 ;
+          <aPICall:AOtJHxGGAqDgAQ3i> "200"^^xsd:string ;
+          <aPICall:DfdJHxGGAqDgAQ3l> "http://api.mydomain.com/ecommerce/v1/carts"^^xsd:string ;
+          <aPICall:GP1JHxGGAqDgAQ3f> "2023-10-06T16:20:50-03:00"^^xsd:dateTimeStamp ;
+          <aPICall:GqbnPxGGAqDgAQpq> "2023-10-06T16:20:50-04:01"^^xsd:dateTimeStamp ;
+          <aPICall:be9JHxGGAqDgAQ3o> "ecommerce/v1"^^xsd:string .
+
+
+###  http://apieamining.edu.pt#APICall2
+:APICall2 rdf:type owl:NamedIndividual ,
+                   core:Z5VA7xGGAqDgAQmP ;
+          <aPICall:AOtJHxGGAqDgAQ3i> "200"^^xsd:string ;
+          <aPICall:DfdJHxGGAqDgAQ3l> "http://api.mydomain.com/ecommerce/v1/carts/{id}"^^xsd:string ;
+          <aPICall:GP1JHxGGAqDgAQ3f> "2023-10-06T16:20:50-05:00"^^xsd:string ;
+          <aPICall:GqbnPxGGAqDgAQpq> "2023-10-06T16:20:50-06:01"^^xsd:string ;
+          <aPICall:be9JHxGGAqDgAQ3o> "ecommerce/v1"^^xsd:string .
+
+
+###  http://apieamining.edu.pt#Consumer001
+:Consumer001 rdf:type owl:NamedIndividual ,
+                      core:zFEeHxGGAqDgAQwB ;
+             owl:sameAs :Partner001 ;
+             <consumerApp:IZ3TvxGGAqDgAS6e> "Consumer001 Name"^^xsd:string ;
+             <consumerApp:8CP1HxGGAqDgARCw> "001"^^xsd:string .
+
+
+###  http://apieamining.edu.pt#Consumer002
+:Consumer002 rdf:type owl:NamedIndividual ,
+                      core:zFEeHxGGAqDgAQwB ;
+             <consumerApp:IZ3TvxGGAqDgAS6e> "Consumer 002 Name"^^xsd:string ;
+             <consumerApp:8CP1HxGGAqDgARCw> "002"^^xsd:string .
+
+
+###  http://apieamining.edu.pt#Partner001
+:Partner001 rdf:type owl:NamedIndividual ,
+                     processView:fEohHxGGAqDgAQzc .
+
+
+###  http://apieamining.edu.pt/core#OztW7xGGAqDgAQtd
+core:OztW7xGGAqDgAQtd rdf:type owl:NamedIndividual ,
+                               gufo:Kind .
+
+
+###  http://apieamining.edu.pt/core#Z5VA7xGGAqDgAQmP
+core:Z5VA7xGGAqDgAQmP rdf:type owl:NamedIndividual ,
+                               gufo:EventType .
+
+
+###  http://apieamining.edu.pt/core#rzeI7xGGAqDgAQm3
+core:rzeI7xGGAqDgAQm3 rdf:type owl:NamedIndividual ,
+                               gufo:SubKind .
+
+
+###  http://apieamining.edu.pt/core#zFEeHxGGAqDgAQwB
+core:zFEeHxGGAqDgAQwB rdf:type owl:NamedIndividual ,
+                               gufo:Kind .
+
+
+###  http://apieamining.edu.pt/data-relation-view#IBvGfxGGAqDgAS9J
+dataRelationView:IBvGfxGGAqDgAS9J rdf:type owl:NamedIndividual ,
+                                           gufo:Role .
+
+
+###  http://apieamining.edu.pt/process-view#fEohHxGGAqDgAQzc
+processView:fEohHxGGAqDgAQzc rdf:type owl:NamedIndividual ,
+                                      gufo:Role .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+core:OztW7xGGAqDgAQtd rdfs:label "API Resource"@en .
+
+
+core:Z5VA7xGGAqDgAQmP rdfs:label "API Call"@en .
+
+
+core:rzeI7xGGAqDgAQm3 rdfs:label "API Operation"@en .
+
+
+core:zFEeHxGGAqDgAQwB rdfs:label "Consumer App"@en .
+
+
+dataRelationView:IBvGfxGGAqDgAS9J rdfs:label "API Entity"@en .
+
+
+processView:fEohHxGGAqDgAQzc rdfs:label "Partner"@en .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi

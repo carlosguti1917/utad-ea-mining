@@ -1,0 +1,535 @@
+<?xml version="1.0"?>
+<rdf:RDF xmlns="http://apieamining.edu.pt#"
+     xml:base="http://apieamining.edu.pt"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:core="http://apieamining.edu.pt/core#"
+     xmlns:gufo="http://purl.org/nemo/gufo#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:aPICall="aPICall:"
+     xmlns:consumerApp="consumerApp:8"
+     xmlns:processView="http://apieamining.edu.pt/process-view#"
+     xmlns:consumerApp1="consumerApp:"
+     xmlns:dataRelationView="http://apieamining.edu.pt/data-relation-view#"
+     xmlns:dataObjectRelationView="http://apieamining.edu.pt/data-object-relation-view#">
+    <owl:Ontology rdf:about="http://apieamining.edu.pt"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotation properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://purl.org/nemo/gufo#isDerivedFrom -->
+
+    <owl:AnnotationProperty rdf:about="http://purl.org/nemo/gufo#isDerivedFrom"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Object Properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- aPIResource:OR1BHxGGAqDgAQyZ -->
+
+    <owl:ObjectProperty rdf:about="aPIResource:OR1BHxGGAqDgAQyZ">
+        <rdfs:domain rdf:resource="http://apieamining.edu.pt/core#OztW7xGGAqDgAQtd"/>
+        <rdfs:label xml:lang="en">data</rdfs:label>
+    </owl:ObjectProperty>
+    
+
+
+    <!-- http://purl.org/nemo/gufo#isEventProperPartOf -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/nemo/gufo#isEventProperPartOf"/>
+    
+
+
+    <!-- http://purl.org/nemo/gufo#participatedIn -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/nemo/gufo#participatedIn"/>
+    
+
+
+    <!-- http://purl.org/nemo/gufo#wasCreatedIn -->
+
+    <owl:ObjectProperty rdf:about="http://purl.org/nemo/gufo#wasCreatedIn"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Data properties
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- aPICall:AOtJHxGGAqDgAQ3i -->
+
+    <owl:DatatypeProperty rdf:about="aPICall:AOtJHxGGAqDgAQ3i">
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/nemo/gufo#hasQualityValue"/>
+        <rdfs:domain rdf:resource="http://apieamining.edu.pt/core#Z5VA7xGGAqDgAQmP"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <rdfs:label xml:lang="en">result_status</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- aPICall:DfdJHxGGAqDgAQ3l -->
+
+    <owl:DatatypeProperty rdf:about="aPICall:DfdJHxGGAqDgAQ3l">
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/nemo/gufo#hasQualityValue"/>
+        <rdfs:domain rdf:resource="http://apieamining.edu.pt/core#Z5VA7xGGAqDgAQmP"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">uri</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- aPICall:GP1JHxGGAqDgAQ3f -->
+
+    <owl:DatatypeProperty rdf:about="aPICall:GP1JHxGGAqDgAQ3f">
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/nemo/gufo#hasQualityValue"/>
+        <rdfs:domain rdf:resource="http://apieamining.edu.pt/core#Z5VA7xGGAqDgAQmP"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <rdfs:label xml:lang="en">request_time</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- aPICall:GqbnPxGGAqDgAQpq -->
+
+    <owl:DatatypeProperty rdf:about="aPICall:GqbnPxGGAqDgAQpq">
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/nemo/gufo#hasQualityValue"/>
+        <rdfs:domain rdf:resource="http://apieamining.edu.pt/core#Z5VA7xGGAqDgAQmP"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#int"/>
+        <rdfs:label xml:lang="en">response_time</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- aPICall:be9JHxGGAqDgAQ3o -->
+
+    <owl:DatatypeProperty rdf:about="aPICall:be9JHxGGAqDgAQ3o">
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/nemo/gufo#hasQualityValue"/>
+        <rdfs:domain rdf:resource="http://apieamining.edu.pt/core#Z5VA7xGGAqDgAQmP"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">api_name</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- aPIOperation:0kbVVpGAUZhKlhOr -->
+
+    <owl:DatatypeProperty rdf:about="aPIOperation:0kbVVpGAUZhKlhOr">
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/nemo/gufo#hasQualityValue"/>
+        <rdfs:domain rdf:resource="http://apieamining.edu.pt/core#rzeI7xGGAqDgAQm3"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">method</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- aPIResource:QClBHxGGAqDgAQyW -->
+
+    <owl:DatatypeProperty rdf:about="aPIResource:QClBHxGGAqDgAQyW">
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/nemo/gufo#hasQualityValue"/>
+        <rdfs:domain rdf:resource="http://apieamining.edu.pt/core#OztW7xGGAqDgAQtd"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">name</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- aPIResource:x0OcVJGGAqDgAUUd -->
+
+    <owl:DatatypeProperty rdf:about="aPIResource:x0OcVJGGAqDgAUUd">
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/nemo/gufo#hasQualityValue"/>
+        <rdfs:domain rdf:resource="http://apieamining.edu.pt/core#OztW7xGGAqDgAQtd"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">uri</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- attribute:Qwu0tpGAUZhKlhTm -->
+
+    <owl:DatatypeProperty rdf:about="attribute:Qwu0tpGAUZhKlhTm">
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/nemo/gufo#hasValueComponent"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">name</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- attribute:6SR0tpGAUZhKlhTo -->
+
+    <owl:DatatypeProperty rdf:about="attribute:6SR0tpGAUZhKlhTo">
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/nemo/gufo#hasValueComponent"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">value</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- consumerApp:IZ3TvxGGAqDgAS6e -->
+
+    <owl:DatatypeProperty rdf:about="consumerApp:IZ3TvxGGAqDgAS6e">
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/nemo/gufo#hasQualityValue"/>
+        <rdfs:domain rdf:resource="http://apieamining.edu.pt/core#zFEeHxGGAqDgAQwB"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">app_name</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- consumerApp:8CP1HxGGAqDgARCw -->
+
+    <owl:DatatypeProperty rdf:about="consumerApp:8CP1HxGGAqDgARCw">
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/nemo/gufo#hasQualityValue"/>
+        <rdfs:domain rdf:resource="http://apieamining.edu.pt/core#zFEeHxGGAqDgAQwB"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">client_id</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- correlatedDataObjects:aNaWBpGGAqDgATcb -->
+
+    <owl:DatatypeProperty rdf:about="correlatedDataObjects:aNaWBpGGAqDgATcb">
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/nemo/gufo#hasQualityValue"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">entity_name</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- http://purl.org/nemo/gufo#hasQualityValue -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/nemo/gufo#hasQualityValue"/>
+    
+
+
+    <!-- http://purl.org/nemo/gufo#hasValueComponent -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/nemo/gufo#hasValueComponent"/>
+    
+
+
+    <!-- service:dzANHxGGAqDgARC7 -->
+
+    <owl:DatatypeProperty rdf:about="service:dzANHxGGAqDgARC7">
+        <rdfs:subPropertyOf rdf:resource="http://purl.org/nemo/gufo#hasQualityValue"/>
+        <rdfs:domain rdf:resource="http://apieamining.edu.pt/core#bN_o7xGGAqDgAQqB"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+        <rdfs:label xml:lang="en">endpoint_route</rdfs:label>
+    </owl:DatatypeProperty>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Classes
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://apieamining.edu.pt/core#OztW7xGGAqDgAQtd -->
+
+    <owl:Class rdf:about="http://apieamining.edu.pt/core#OztW7xGGAqDgAQtd">
+        <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#FunctionalComplex"/>
+    </owl:Class>
+    
+
+
+    <!-- http://apieamining.edu.pt/core#Z5VA7xGGAqDgAQmP -->
+
+    <owl:Class rdf:about="http://apieamining.edu.pt/core#Z5VA7xGGAqDgAQmP">
+        <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#Event"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty rdf:resource="http://purl.org/nemo/gufo#participatedIn"/>
+                <owl:someValuesFrom rdf:resource="http://apieamining.edu.pt/core#5.lI7xGGAqDgAQnI"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#wasCreatedIn"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://apieamining.edu.pt/core#zFEeHxGGAqDgAQwB"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://apieamining.edu.pt/core#bN_o7xGGAqDgAQqB -->
+
+    <owl:Class rdf:about="http://apieamining.edu.pt/core#bN_o7xGGAqDgAQqB">
+        <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#FunctionalComplex"/>
+    </owl:Class>
+    
+
+
+    <!-- http://apieamining.edu.pt/core#rzeI7xGGAqDgAQm3 -->
+
+    <owl:Class rdf:about="http://apieamining.edu.pt/core#rzeI7xGGAqDgAQm3">
+        <rdfs:subClassOf rdf:resource="http://apieamining.edu.pt/core#bN_o7xGGAqDgAQqB"/>
+        <rdfs:subClassOf>
+            <owl:Restriction>
+                <owl:onProperty>
+                    <rdf:Description>
+                        <owl:inverseOf rdf:resource="http://purl.org/nemo/gufo#participatedIn"/>
+                    </rdf:Description>
+                </owl:onProperty>
+                <owl:qualifiedCardinality rdf:datatype="http://www.w3.org/2001/XMLSchema#nonNegativeInteger">1</owl:qualifiedCardinality>
+                <owl:onClass rdf:resource="http://apieamining.edu.pt/core#Z5VA7xGGAqDgAQmP"/>
+            </owl:Restriction>
+        </rdfs:subClassOf>
+    </owl:Class>
+    
+
+
+    <!-- http://apieamining.edu.pt/core#zFEeHxGGAqDgAQwB -->
+
+    <owl:Class rdf:about="http://apieamining.edu.pt/core#zFEeHxGGAqDgAQwB">
+        <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#FunctionalComplex"/>
+    </owl:Class>
+    
+
+
+    <!-- http://apieamining.edu.pt/core#5.lI7xGGAqDgAQnI -->
+
+    <owl:Class rdf:about="http://apieamining.edu.pt/core#5.lI7xGGAqDgAQnI">
+        <rdfs:subClassOf rdf:resource="http://apieamining.edu.pt/core#bN_o7xGGAqDgAQqB"/>
+    </owl:Class>
+    
+
+
+    <!-- http://apieamining.edu.pt/data-relation-view#IBvGfxGGAqDgAS9J -->
+
+    <owl:Class rdf:about="http://apieamining.edu.pt/data-relation-view#IBvGfxGGAqDgAS9J">
+        <rdfs:subClassOf rdf:resource="http://apieamining.edu.pt/core#OztW7xGGAqDgAQtd"/>
+    </owl:Class>
+    
+
+
+    <!-- http://apieamining.edu.pt/process-view#fEohHxGGAqDgAQzc -->
+
+    <owl:Class rdf:about="http://apieamining.edu.pt/process-view#fEohHxGGAqDgAQzc">
+        <rdfs:subClassOf rdf:resource="http://apieamining.edu.pt/core#zFEeHxGGAqDgAQwB"/>
+    </owl:Class>
+    
+
+
+    <!-- http://purl.org/nemo/gufo#Event -->
+
+    <owl:Class rdf:about="http://purl.org/nemo/gufo#Event"/>
+    
+
+
+    <!-- http://purl.org/nemo/gufo#EventType -->
+
+    <owl:Class rdf:about="http://purl.org/nemo/gufo#EventType"/>
+    
+
+
+    <!-- http://purl.org/nemo/gufo#FunctionalComplex -->
+
+    <owl:Class rdf:about="http://purl.org/nemo/gufo#FunctionalComplex"/>
+    
+
+
+    <!-- http://purl.org/nemo/gufo#Kind -->
+
+    <owl:Class rdf:about="http://purl.org/nemo/gufo#Kind"/>
+    
+
+
+    <!-- http://purl.org/nemo/gufo#Role -->
+
+    <owl:Class rdf:about="http://purl.org/nemo/gufo#Role"/>
+    
+
+
+    <!-- http://purl.org/nemo/gufo#SubKind -->
+
+    <owl:Class rdf:about="http://purl.org/nemo/gufo#SubKind"/>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Individuals
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    
+
+
+    <!-- http://apieamining.edu.pt#APICall1 -->
+
+    <owl:NamedIndividual rdf:about="http://apieamining.edu.pt#APICall1">
+        <rdf:type rdf:resource="http://apieamining.edu.pt/core#Z5VA7xGGAqDgAQmP"/>
+        <gufo:wasCreatedIn rdf:resource="http://apieamining.edu.pt#Consumer001"/>
+        <aPICall:AOtJHxGGAqDgAQ3i rdf:datatype="http://www.w3.org/2001/XMLSchema#string">200</aPICall:AOtJHxGGAqDgAQ3i>
+        <aPICall:DfdJHxGGAqDgAQ3l rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://api.mydomain.com/ecommerce/v1/carts</aPICall:DfdJHxGGAqDgAQ3l>
+        <aPICall:GP1JHxGGAqDgAQ3f rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2023-10-06T16:20:50-03:00</aPICall:GP1JHxGGAqDgAQ3f>
+        <aPICall:GqbnPxGGAqDgAQpq rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTimeStamp">2023-10-06T16:20:50-04:01</aPICall:GqbnPxGGAqDgAQpq>
+        <aPICall:be9JHxGGAqDgAQ3o rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ecommerce/v1</aPICall:be9JHxGGAqDgAQ3o>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://apieamining.edu.pt#APICall2 -->
+
+    <owl:NamedIndividual rdf:about="http://apieamining.edu.pt#APICall2">
+        <rdf:type rdf:resource="http://apieamining.edu.pt/core#Z5VA7xGGAqDgAQmP"/>
+        <aPICall:AOtJHxGGAqDgAQ3i rdf:datatype="http://www.w3.org/2001/XMLSchema#string">200</aPICall:AOtJHxGGAqDgAQ3i>
+        <aPICall:DfdJHxGGAqDgAQ3l rdf:datatype="http://www.w3.org/2001/XMLSchema#string">http://api.mydomain.com/ecommerce/v1/carts/{id}</aPICall:DfdJHxGGAqDgAQ3l>
+        <aPICall:GP1JHxGGAqDgAQ3f rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2023-10-06T16:20:50-05:00</aPICall:GP1JHxGGAqDgAQ3f>
+        <aPICall:GqbnPxGGAqDgAQpq rdf:datatype="http://www.w3.org/2001/XMLSchema#string">2023-10-06T16:20:50-06:01</aPICall:GqbnPxGGAqDgAQpq>
+        <aPICall:be9JHxGGAqDgAQ3o rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ecommerce/v1</aPICall:be9JHxGGAqDgAQ3o>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://apieamining.edu.pt#Consumer001 -->
+
+    <owl:NamedIndividual rdf:about="http://apieamining.edu.pt#Consumer001">
+        <rdf:type rdf:resource="http://apieamining.edu.pt/core#zFEeHxGGAqDgAQwB"/>
+        <owl:sameAs rdf:resource="http://apieamining.edu.pt#Partner001"/>
+        <consumerApp1:IZ3TvxGGAqDgAS6e rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Consumer001 Name</consumerApp1:IZ3TvxGGAqDgAS6e>
+        <consumerApp:CP1HxGGAqDgARCw rdf:datatype="http://www.w3.org/2001/XMLSchema#string">001</consumerApp:CP1HxGGAqDgARCw>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://apieamining.edu.pt#Consumer002 -->
+
+    <owl:NamedIndividual rdf:about="http://apieamining.edu.pt#Consumer002">
+        <rdf:type rdf:resource="http://apieamining.edu.pt/core#zFEeHxGGAqDgAQwB"/>
+        <consumerApp1:IZ3TvxGGAqDgAS6e rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Consumer 002 Name</consumerApp1:IZ3TvxGGAqDgAS6e>
+        <consumerApp:CP1HxGGAqDgARCw rdf:datatype="http://www.w3.org/2001/XMLSchema#string">002</consumerApp:CP1HxGGAqDgARCw>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://apieamining.edu.pt#Partner001 -->
+
+    <owl:NamedIndividual rdf:about="http://apieamining.edu.pt#Partner001">
+        <rdf:type rdf:resource="http://apieamining.edu.pt/process-view#fEohHxGGAqDgAQzc"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://apieamining.edu.pt/core#OztW7xGGAqDgAQtd -->
+
+    <owl:NamedIndividual rdf:about="http://apieamining.edu.pt/core#OztW7xGGAqDgAQtd">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#Kind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://apieamining.edu.pt/core#Z5VA7xGGAqDgAQmP -->
+
+    <owl:NamedIndividual rdf:about="http://apieamining.edu.pt/core#Z5VA7xGGAqDgAQmP">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#EventType"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://apieamining.edu.pt/core#rzeI7xGGAqDgAQm3 -->
+
+    <owl:NamedIndividual rdf:about="http://apieamining.edu.pt/core#rzeI7xGGAqDgAQm3">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#SubKind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://apieamining.edu.pt/core#zFEeHxGGAqDgAQwB -->
+
+    <owl:NamedIndividual rdf:about="http://apieamining.edu.pt/core#zFEeHxGGAqDgAQwB">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#Kind"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://apieamining.edu.pt/data-relation-view#IBvGfxGGAqDgAS9J -->
+
+    <owl:NamedIndividual rdf:about="http://apieamining.edu.pt/data-relation-view#IBvGfxGGAqDgAS9J">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#Role"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://apieamining.edu.pt/process-view#fEohHxGGAqDgAQzc -->
+
+    <owl:NamedIndividual rdf:about="http://apieamining.edu.pt/process-view#fEohHxGGAqDgAQzc">
+        <rdf:type rdf:resource="http://purl.org/nemo/gufo#Role"/>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="http://apieamining.edu.pt/core#OztW7xGGAqDgAQtd">
+        <rdfs:label xml:lang="en">API Resource</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://apieamining.edu.pt/core#Z5VA7xGGAqDgAQmP">
+        <rdfs:label xml:lang="en">API Call</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://apieamining.edu.pt/core#rzeI7xGGAqDgAQm3">
+        <rdfs:label xml:lang="en">API Operation</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://apieamining.edu.pt/core#zFEeHxGGAqDgAQwB">
+        <rdfs:label xml:lang="en">Consumer App</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://apieamining.edu.pt/data-relation-view#IBvGfxGGAqDgAS9J">
+        <rdfs:label xml:lang="en">API Entity</rdfs:label>
+    </rdf:Description>
+    <rdf:Description rdf:about="http://apieamining.edu.pt/process-view#fEohHxGGAqDgAQzc">
+        <rdfs:label xml:lang="en">Partner</rdfs:label>
+    </rdf:Description>
+</rdf:RDF>
+
+
+
+<!-- Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi -->
+
