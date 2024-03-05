@@ -74,6 +74,7 @@ try:
 
     #onto.save("ontoeamining3.owl") # só ser for salvar um novo
     
+    
 except Exception as error:
     print('Ocorreu problema {} '.format(error.__class__))
     print("mensagem", str(error))

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
+    <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
+        <uri id="Automatically generated entry, Timestamp=1709402654244" name="duplicate:http://apieamining.edu.pt" uri="Onto%20EA%20Mining%20v0.1-RDFXML%20copy.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1709402654244" name="duplicate:http://apieamining.edu.pt" uri="Onto%20EA%20Mining%20v0.1-RDFXML.nt"/>
+        <uri id="Automatically generated entry, Timestamp=1709402654244" name="duplicate:http://apieamining.edu.pt" uri="Onto%20EA%20Mining%20v0.1-RDFXML.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1709402654244" name="http://eamining.edu.pt" uri="ontoreasoner.owl"/>
+    </group>
+</catalog>
