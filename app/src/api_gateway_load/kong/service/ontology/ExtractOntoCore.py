@@ -37,10 +37,10 @@ def get_onto_attributes_from_json(api_resource, json_obj, key_hierarchy):
                     attr = ns_core.Attribute()
                     if key_hierarchy == "":
                         #attr.name.append(key) #key= [key]
-                        attr.name = key #key= (key) #key= [key]
+                        attr.attribute_name = key #key= (key) #key= [key]
                     else:
-                        attr.name = key_hierarchy + "." + key
-                    attr.value.append(value) 
+                        attr.attribute_name = key_hierarchy + "." + key
+                    attr.attribute_value.append(value) 
                     api_resource.data.append(attr)  
                 #api_resource.hasValueComponent.append(attr)
                 #owl2ready.setProperty(api_resource, "http://purl.org/nemo/gufo#hasValueComponent", attr)                   
@@ -179,7 +179,9 @@ with onto:
                     # Request Data
                     if "request" in call["_source"] and "uri" in call["_source"]["request"]:
                         resource_uri = call["_source"]["request"]["uri"]
+                        #TODO verificar se o recurso existe
                         api_resource = ns_core.APIResource(resource_uri)
+                        #TODO atribuir o resource_name
                         #api_resource.API_Resource.uri.append(call["_source"]["request"]["uri"])
                         api_resource.resource_uri.append(resource_uri)
                         api_operation.modifies.append(api_resource) # API operation modifies API resource
