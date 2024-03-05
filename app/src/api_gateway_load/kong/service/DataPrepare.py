@@ -41,8 +41,11 @@ class DataPrepare:
         aux_path_key = {} # inicializando aux  vazia, aux representa a hierarquia de um atributo
         try:
             for call in api_calls:
-                cleaned_call = self.cleanIgnoredAttributes(call, aux_path_key.copy())
-                self.collection_call_cleaned.insert_one(cleaned_call)
+                #remove calls with empty Consummer 
+                if "_source" in call and "consumer" in call["_source"] and "id" in call["_source"]["consumer"]:               
+                    # remove useless kong attributes 
+                    cleaned_call = self.cleanIgnoredAttributes(call, aux_path_key.copy())
+                    self.collection_call_cleaned.insert_one(cleaned_call)
             return cleaned_api_calls
         except Exception as error:
             print('Ocorreu problema {} '.format(error.__class__))

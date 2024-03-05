@@ -1,0 +1,885 @@
+@prefix : <http://eamining.edu.pt#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix core: <http://eamining.edu.pt/core#> .
+@prefix gufo: <http://purl.org/nemo/gufo#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix processView: <http://eamining.edu.pt/process-view#> .
+@prefix dataRelationView: <http://eamining.edu.pt/data-relation-view#> .
+@base <http://eamining.edu.pt#> .
+
+<http://eamining.edu.pt> rdf:type owl:Ontology .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/nemo/gufo#isDerivedFrom
+gufo:isDerivedFrom rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  aPIResource:data
+<aPIResource:data> rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf gufo:hasReifiedQualityValue ;
+                   rdfs:domain core:APIResource ;
+                   rdfs:range core:Attribute ;
+                   rdfs:label "data"@en .
+
+
+###  attributePair:attribute_name_a
+<attributePair:attribute_name_a> rdf:type owl:ObjectProperty ;
+                                 rdfs:domain :AttributePair ;
+                                 rdfs:range core:Attribute ;
+                                 rdfs:label "attribute_name_a"@en .
+
+
+###  attributePair:attribute_name_b
+<attributePair:attribute_name_b> rdf:type owl:ObjectProperty ;
+                                 rdfs:domain :AttributePair ;
+                                 rdfs:range core:Attribute ;
+                                 rdfs:label "attribute_name_b"@en .
+
+
+###  frequentTemporalCorrelation:repeatead_attributes
+<frequentTemporalCorrelation:repeatead_attributes> rdf:type owl:ObjectProperty ;
+                                                   rdfs:subPropertyOf gufo:hasReifiedQualityValue ;
+                                                   rdfs:domain processView:FrequentTemporalCorrelation ;
+                                                   rdfs:range :AttributePair ;
+                                                   rdfs:label "repeatead_attributes"@en .
+
+
+###  http://eamining.edu.pt/core#AttributesEquality
+core:AttributesEquality rdf:type owl:ObjectProperty ;
+                        rdfs:domain core:APIResource ;
+                        rdfs:range core:APIResource .
+
+
+###  http://eamining.edu.pt/core#belongsTo
+core:belongsTo rdf:type owl:ObjectProperty ;
+               rdfs:domain core:APIDocumentation ;
+               rdfs:range dataRelationView:APIDomain .
+
+
+###  http://eamining.edu.pt/core#isDocumentedBy
+core:isDocumentedBy rdf:type owl:ObjectProperty ;
+                    rdfs:domain core:APIResource ;
+                    rdfs:range core:APIDocumentation .
+
+
+###  http://eamining.edu.pt/core#modifies
+core:modifies rdf:type owl:ObjectProperty ;
+              rdfs:domain core:APIOperation ;
+              rdfs:range core:APIResource .
+
+
+###  http://eamining.edu.pt/data-relation-view#CorrelatedDomain
+dataRelationView:CorrelatedDomain rdf:type owl:ObjectProperty ;
+                                  rdfs:domain dataRelationView:CorrelatedDataObjects ;
+                                  rdfs:range dataRelationView:DataDomain ;
+                                  rdfs:label "CorrelatedDomain"@en .
+
+
+###  http://eamining.edu.pt/data-relation-view#CorrelatedEntity
+dataRelationView:CorrelatedEntity rdf:type owl:ObjectProperty ;
+                                  rdfs:domain dataRelationView:CorrelatedDataObjects ;
+                                  rdfs:range dataRelationView:APIEntity ;
+                                  rdfs:label "CorrelatedEntity"@en .
+
+
+###  http://eamining.edu.pt/data-relation-view#pertainsTo
+dataRelationView:pertainsTo rdf:type owl:ObjectProperty ;
+                            rdfs:domain dataRelationView:APIEntity ;
+                            rdfs:range dataRelationView:DataDomain .
+
+
+###  http://eamining.edu.pt/process-view#ProcessElementView_1
+processView:ProcessElementView_1 rdf:type owl:ObjectProperty ;
+                                 rdfs:domain processView:Process ;
+                                 rdfs:range processView:EAProcessesViewElements .
+
+
+###  http://purl.org/nemo/gufo#hasReifiedQualityValue
+gufo:hasReifiedQualityValue rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/nemo/gufo#historicallyDependsOn
+gufo:historicallyDependsOn rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/nemo/gufo#isEventProperPartOf
+gufo:isEventProperPartOf rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/nemo/gufo#mediates
+gufo:mediates rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/nemo/gufo#participatedIn
+gufo:participatedIn rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  aPICall:api_name
+<aPICall:api_name> rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf gufo:hasQualityValue ;
+                   rdfs:domain core:APICall ;
+                   rdfs:range xsd:string ;
+                   rdfs:label "api_name"@en .
+
+
+###  aPICall:api_uri
+<aPICall:api_uri> rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf gufo:hasQualityValue ;
+                  rdfs:domain core:APICall ;
+                  rdfs:range xsd:string ;
+                  rdfs:label "api_uri"@en .
+
+
+###  aPICall:request_time
+<aPICall:request_time> rdf:type owl:DatatypeProperty ;
+                       rdfs:subPropertyOf gufo:hasQualityValue ;
+                       rdfs:domain core:APICall ;
+                       rdfs:range xsd:dateTimeStamp ;
+                       rdfs:label "request_time"@en .
+
+
+###  aPICall:response_time
+<aPICall:response_time> rdf:type owl:DatatypeProperty ;
+                        rdfs:subPropertyOf gufo:hasQualityValue ;
+                        rdfs:domain core:APICall ;
+                        rdfs:range xsd:dateTimeStamp ;
+                        rdfs:label "response_time"@en .
+
+
+###  aPICall:result_status
+<aPICall:result_status> rdf:type owl:DatatypeProperty ;
+                        rdfs:subPropertyOf gufo:hasQualityValue ;
+                        rdfs:domain core:APICall ;
+                        rdfs:range xsd:int ;
+                        rdfs:label "result_status"@en .
+
+
+###  aPIDocumentation:api_documentation_url
+<aPIDocumentation:api_documentation_url> rdf:type owl:DatatypeProperty ;
+                                         rdfs:subPropertyOf gufo:hasQualityValue ;
+                                         rdfs:domain core:APIDocumentation ;
+                                         rdfs:range xsd:string ;
+                                         rdfs:label "api_documentation_url"@en .
+
+
+###  aPIDocumentation:data_schema
+<aPIDocumentation:data_schema> rdf:type owl:DatatypeProperty ;
+                               rdfs:subPropertyOf gufo:hasQualityValue ;
+                               rdfs:domain core:APIDocumentation ;
+                               rdfs:range xsd:string ;
+                               rdfs:label "data_schema"@en .
+
+
+###  aPIOperation:method
+<aPIOperation:method> rdf:type owl:DatatypeProperty ;
+                      rdfs:subPropertyOf gufo:hasQualityValue ;
+                      rdfs:domain core:APIOperation ;
+                      rdfs:range xsd:string ;
+                      rdfs:label "method"@en .
+
+
+###  aPIResource:name
+<aPIResource:name> rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf gufo:hasQualityValue ;
+                   rdfs:domain core:APIResource ;
+                   rdfs:range xsd:string ;
+                   rdfs:label "name"@en .
+
+
+###  aPIResource:resource_uri
+<aPIResource:resource_uri> rdf:type owl:DatatypeProperty ;
+                           rdfs:subPropertyOf gufo:hasQualityValue ;
+                           rdfs:domain core:APIResource ;
+                           rdfs:range xsd:string ;
+                           rdfs:label "resource_uri"@en .
+
+
+###  attribute:name
+<attribute:name> rdf:type owl:DatatypeProperty ;
+                 rdfs:subPropertyOf gufo:hasValueComponent ;
+                 rdfs:domain core:Attribute ;
+                 rdfs:range xsd:string ;
+                 rdfs:label "name"@en .
+
+
+###  attribute:value
+<attribute:value> rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf gufo:hasValueComponent ;
+                  rdfs:domain core:Attribute ;
+                  rdfs:range xsd:string ;
+                  rdfs:label "value"@en .
+
+
+###  consumerApp:app_name
+<consumerApp:app_name> rdf:type owl:DatatypeProperty ;
+                       rdfs:subPropertyOf gufo:hasQualityValue ;
+                       rdfs:domain core:ConsumerApp ;
+                       rdfs:range xsd:string ;
+                       rdfs:label "app_name"@en .
+
+
+###  consumerApp:client_id
+<consumerApp:client_id> rdf:type owl:DatatypeProperty ;
+                        rdfs:subPropertyOf gufo:hasQualityValue ;
+                        rdfs:domain core:ConsumerApp ;
+                        rdfs:range xsd:string ;
+                        rdfs:label "client_id"@en .
+
+
+###  correlatedDataObjects:domain_name
+<correlatedDataObjects:domain_name> rdf:type owl:DatatypeProperty ;
+                                    rdfs:subPropertyOf gufo:hasQualityValue ;
+                                    rdfs:domain dataRelationView:CorrelatedDataObjects ;
+                                    rdfs:range xsd:string ;
+                                    rdfs:label "domain_name"@en .
+
+
+###  correlatedDataObjects:entity_name
+<correlatedDataObjects:entity_name> rdf:type owl:DatatypeProperty ;
+                                    rdfs:subPropertyOf gufo:hasQualityValue ;
+                                    rdfs:domain dataRelationView:CorrelatedDataObjects ;
+                                    rdfs:range xsd:string ;
+                                    rdfs:label "entity_name"@en .
+
+
+###  http://purl.org/nemo/gufo#hasQualityValue
+gufo:hasQualityValue rdf:type owl:DatatypeProperty .
+
+
+###  http://purl.org/nemo/gufo#hasValueComponent
+gufo:hasValueComponent rdf:type owl:DatatypeProperty .
+
+
+###  process:begin_first_activity
+<process:begin_first_activity> rdf:type owl:DatatypeProperty ;
+                               rdfs:subPropertyOf gufo:hasQualityValue ;
+                               rdfs:domain processView:Process ;
+                               rdfs:range xsd:dateTimeStamp ;
+                               rdfs:label "begin_first_activity"@en .
+
+
+###  process:case_id
+<process:case_id> rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf gufo:hasQualityValue ;
+                  rdfs:domain processView:Process ;
+                  rdfs:label "case_id"@en .
+
+
+###  process:end_last_activity
+<process:end_last_activity> rdf:type owl:DatatypeProperty ;
+                            rdfs:subPropertyOf gufo:hasQualityValue ;
+                            rdfs:domain processView:Process ;
+                            rdfs:range xsd:dateTimeStamp ;
+                            rdfs:label "end_last_activity"@en .
+
+
+###  service:endpoint_route
+<service:endpoint_route> rdf:type owl:DatatypeProperty ;
+                         rdfs:subPropertyOf gufo:hasQualityValue ;
+                         rdfs:domain core:Service ;
+                         rdfs:range xsd:string ;
+                         rdfs:label "endpoint_route"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://eamining.edu.pt#AttributePair
+:AttributePair rdf:type owl:Class ;
+               rdfs:subClassOf gufo:QualityValue .
+
+
+###  http://eamining.edu.pt/core#APICall
+core:APICall rdf:type owl:Class ;
+             rdfs:subClassOf gufo:Event ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty gufo:participatedIn ;
+                               owl:someValuesFrom core:ServiceDestination
+                             ] ,
+                             [ rdf:type owl:Restriction ;
+                               owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                              ] ;
+                               owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                               owl:onClass core:ConsumerApp
+                             ] .
+
+
+###  http://eamining.edu.pt/core#APIDocumentation
+core:APIDocumentation rdf:type owl:Class ;
+                      rdfs:subClassOf gufo:FunctionalComplex ,
+                                      [ rdf:type owl:Restriction ;
+                                        owl:onProperty [ owl:inverseOf gufo:mediates
+                                                       ] ;
+                                        owl:someValuesFrom core:DocumentedAPI
+                                      ] .
+
+
+###  http://eamining.edu.pt/core#APIOperation
+core:APIOperation rdf:type owl:Class ;
+                  rdfs:subClassOf core:Service ,
+                                  [ rdf:type owl:Restriction ;
+                                    owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                                   ] ;
+                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                    owl:onClass core:APICall
+                                  ] .
+
+
+###  http://eamining.edu.pt/core#APIResource
+core:APIResource rdf:type owl:Class ;
+                 rdfs:subClassOf gufo:FunctionalComplex .
+
+
+###  http://eamining.edu.pt/core#Attribute
+core:Attribute rdf:type owl:Class ;
+               rdfs:subClassOf gufo:QualityValue .
+
+
+###  http://eamining.edu.pt/core#ConsumerApp
+core:ConsumerApp rdf:type owl:Class ;
+                 rdfs:subClassOf gufo:FunctionalComplex .
+
+
+###  http://eamining.edu.pt/core#DocumentedAPI
+core:DocumentedAPI rdf:type owl:Class ;
+                   rdfs:subClassOf gufo:Relator ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty gufo:mediates ;
+                                     owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onClass core:APIDocumentation
+                                   ] ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty gufo:mediates ;
+                                     owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onClass core:APIResource
+                                   ] .
+
+
+###  http://eamining.edu.pt/core#OperationExecuted
+core:OperationExecuted rdf:type owl:Class ;
+                       rdfs:subClassOf gufo:Relator ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty gufo:mediates ;
+                                         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                         owl:onClass core:APIOperation
+                                       ] ,
+                                       [ rdf:type owl:Restriction ;
+                                         owl:onProperty gufo:mediates ;
+                                         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                         owl:onClass core:APIResource
+                                       ] .
+
+
+###  http://eamining.edu.pt/core#Service
+core:Service rdf:type owl:Class ;
+             rdfs:subClassOf gufo:FunctionalComplex .
+
+
+###  http://eamining.edu.pt/core#ServiceDestination
+core:ServiceDestination rdf:type owl:Class ;
+                        rdfs:subClassOf core:Service .
+
+
+###  http://eamining.edu.pt/data-relation-view#APIDomain
+dataRelationView:APIDomain rdf:type owl:Class ;
+                           rdfs:subClassOf gufo:FunctionalComplex ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty [ owl:inverseOf gufo:mediates
+                                                            ] ;
+                                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                             owl:onClass dataRelationView:APIDomainMap
+                                           ] .
+
+
+###  http://eamining.edu.pt/data-relation-view#APIDomainMap
+dataRelationView:APIDomainMap rdf:type owl:Class ;
+                              rdfs:subClassOf gufo:Relator ,
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty gufo:mediates ;
+                                                owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                owl:onClass core:APIDocumentation
+                                              ] ,
+                                              [ rdf:type owl:Restriction ;
+                                                owl:onProperty gufo:mediates ;
+                                                owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                owl:onClass dataRelationView:APIDomain
+                                              ] .
+
+
+###  http://eamining.edu.pt/data-relation-view#APIEntity
+dataRelationView:APIEntity rdf:type owl:Class ;
+                           rdfs:subClassOf core:APIResource ,
+                                           [ rdf:type owl:Restriction ;
+                                             owl:onProperty [ owl:inverseOf gufo:mediates
+                                                            ] ;
+                                             owl:someValuesFrom dataRelationView:FrequentDataDomainCorrelation
+                                           ] .
+
+
+###  http://eamining.edu.pt/data-relation-view#CorrelatedDataObjects
+dataRelationView:CorrelatedDataObjects rdf:type owl:Class ;
+                                       rdfs:subClassOf gufo:FunctionalComplex .
+
+
+###  http://eamining.edu.pt/data-relation-view#DataDomain
+dataRelationView:DataDomain rdf:type owl:Class ;
+                            rdfs:subClassOf dataRelationView:APIDomain .
+
+
+###  http://eamining.edu.pt/data-relation-view#EADataObjectsRelationView
+dataRelationView:EADataObjectsRelationView rdf:type owl:Class ;
+                                           rdfs:subClassOf gufo:VariableCollection .
+
+
+###  http://eamining.edu.pt/data-relation-view#FrequentDataDomainCorrelation
+dataRelationView:FrequentDataDomainCorrelation rdf:type owl:Class ;
+                                               rdfs:subClassOf gufo:Relator ,
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty gufo:mediates ;
+                                                                 owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                 owl:onClass dataRelationView:APIEntity
+                                                               ] ,
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty gufo:mediates ;
+                                                                 owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                 owl:onClass dataRelationView:DataDomain
+                                                               ] .
+
+
+###  http://eamining.edu.pt/process-view#APIActivitiesConnection
+processView:APIActivitiesConnection rdf:type owl:Class ;
+                                    rdfs:subClassOf gufo:Event ,
+                                                    [ rdf:type owl:Restriction ;
+                                                      owl:onProperty gufo:historicallyDependsOn ;
+                                                      owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                      owl:onClass processView:Process
+                                                    ] .
+
+
+###  http://eamining.edu.pt/process-view#APIAntecedentActivity
+processView:APIAntecedentActivity rdf:type owl:Class ;
+                                  rdfs:subClassOf core:APICall ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                                                   ] ;
+                                                    owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                    owl:onClass processView:Partner
+                                                  ] ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty [ owl:inverseOf gufo:isEventProperPartOf
+                                                                   ] ;
+                                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                    owl:onClass processView:APIActivitiesConnection
+                                                  ] .
+
+
+###  http://eamining.edu.pt/process-view#APIConsequentActivity
+processView:APIConsequentActivity rdf:type owl:Class ;
+                                  rdfs:subClassOf core:APICall ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty [ owl:inverseOf gufo:mediates
+                                                                   ] ;
+                                                    owl:someValuesFrom processView:FrequentTemporalCorrelation
+                                                  ] ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                                                   ] ;
+                                                    owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                    owl:onClass processView:Partner
+                                                  ] ,
+                                                  [ rdf:type owl:Restriction ;
+                                                    owl:onProperty [ owl:inverseOf gufo:isEventProperPartOf
+                                                                   ] ;
+                                                    owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                    owl:onClass processView:APIActivitiesConnection
+                                                  ] .
+
+
+###  http://eamining.edu.pt/process-view#EAProcessesViewElements
+processView:EAProcessesViewElements rdf:type owl:Class ;
+                                    rdfs:subClassOf gufo:FunctionalComplex .
+
+
+###  http://eamining.edu.pt/process-view#FrequentTemporalCorrelation
+processView:FrequentTemporalCorrelation rdf:type owl:Class ;
+                                        rdfs:subClassOf gufo:Relator ,
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty gufo:mediates ;
+                                                          owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                          owl:onClass processView:APIAntecedentActivity
+                                                        ] ,
+                                                        [ rdf:type owl:Restriction ;
+                                                          owl:onProperty gufo:mediates ;
+                                                          owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                          owl:onClass processView:APIConsequentActivity
+                                                        ] .
+
+
+###  http://eamining.edu.pt/process-view#Partner
+processView:Partner rdf:type owl:Class ;
+                    rdfs:subClassOf core:ConsumerApp ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty gufo:participatedIn ;
+                                      owl:someValuesFrom processView:APIAntecedentActivity
+                                    ] .
+
+
+###  http://eamining.edu.pt/process-view#Process
+processView:Process rdf:type owl:Class ;
+                    rdfs:subClassOf gufo:Event ,
+                                    [ rdf:type owl:Restriction ;
+                                      owl:onProperty [ owl:inverseOf gufo:historicallyDependsOn
+                                                     ] ;
+                                      owl:someValuesFrom processView:APIActivitiesConnection
+                                    ] .
+
+
+###  http://eamining.edu.pt/process-view#ProcessElementView
+processView:ProcessElementView rdf:type owl:Class ;
+                               rdfs:subClassOf gufo:Relator ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty gufo:mediates ;
+                                                 owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                 owl:onClass processView:EAProcessesViewElements
+                                               ] ,
+                                               [ rdf:type owl:Restriction ;
+                                                 owl:onProperty gufo:mediates ;
+                                                 owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                 owl:onClass processView:Process
+                                               ] .
+
+
+###  http://purl.org/nemo/gufo#AbstractIndividualType
+gufo:AbstractIndividualType rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#ComparativeRelationshipType
+gufo:ComparativeRelationshipType rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#Event
+gufo:Event rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#EventType
+gufo:EventType rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#FunctionalComplex
+gufo:FunctionalComplex rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#Kind
+gufo:Kind rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#MaterialRelationshipType
+gufo:MaterialRelationshipType rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#QualityValue
+gufo:QualityValue rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#Relator
+gufo:Relator rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#Role
+gufo:Role rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#SubKind
+gufo:SubKind rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#VariableCollection
+gufo:VariableCollection rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://eamining.edu.pt#AttributePair
+:AttributePair rdf:type owl:NamedIndividual ,
+                        gufo:AbstractIndividualType .
+
+
+###  http://eamining.edu.pt/core#APICall
+core:APICall rdf:type owl:NamedIndividual ,
+                      gufo:EventType .
+
+
+###  http://eamining.edu.pt/core#APIDocumentation
+core:APIDocumentation rdf:type owl:NamedIndividual ,
+                               gufo:Kind .
+
+
+###  http://eamining.edu.pt/core#APIOperation
+core:APIOperation rdf:type owl:NamedIndividual ,
+                           gufo:SubKind .
+
+
+###  http://eamining.edu.pt/core#APIResource
+core:APIResource rdf:type owl:NamedIndividual ,
+                          gufo:Kind .
+
+
+###  http://eamining.edu.pt/core#Attribute
+core:Attribute rdf:type owl:NamedIndividual ,
+                        gufo:AbstractIndividualType .
+
+
+###  http://eamining.edu.pt/core#AttributesEquality
+core:AttributesEquality rdf:type owl:NamedIndividual ,
+                                 gufo:ComparativeRelationshipType .
+
+
+###  http://eamining.edu.pt/core#ConsumerApp
+core:ConsumerApp rdf:type owl:NamedIndividual ,
+                          gufo:Kind .
+
+
+###  http://eamining.edu.pt/core#DocumentedAPI
+core:DocumentedAPI rdf:type owl:NamedIndividual ,
+                            gufo:Kind .
+
+
+###  http://eamining.edu.pt/core#OperationExecuted
+core:OperationExecuted rdf:type owl:NamedIndividual ,
+                                gufo:Kind .
+
+
+###  http://eamining.edu.pt/core#Service
+core:Service rdf:type owl:NamedIndividual ,
+                      gufo:Kind .
+
+
+###  http://eamining.edu.pt/core#ServiceDestination
+core:ServiceDestination rdf:type owl:NamedIndividual ,
+                                 gufo:SubKind .
+
+
+###  http://eamining.edu.pt/core#belongsTo
+core:belongsTo rdf:type owl:NamedIndividual ,
+                        gufo:MaterialRelationshipType .
+
+
+###  http://eamining.edu.pt/core#isDocumentedBy
+core:isDocumentedBy rdf:type owl:NamedIndividual ,
+                             gufo:MaterialRelationshipType .
+
+
+###  http://eamining.edu.pt/core#modifies
+core:modifies rdf:type owl:NamedIndividual ,
+                       gufo:MaterialRelationshipType .
+
+
+###  http://eamining.edu.pt/data-relation-view#APIDomain
+dataRelationView:APIDomain rdf:type owl:NamedIndividual ,
+                                    gufo:Kind .
+
+
+###  http://eamining.edu.pt/data-relation-view#APIDomainMap
+dataRelationView:APIDomainMap rdf:type owl:NamedIndividual ,
+                                       gufo:Kind .
+
+
+###  http://eamining.edu.pt/data-relation-view#APIEntity
+dataRelationView:APIEntity rdf:type owl:NamedIndividual ,
+                                    gufo:Role .
+
+
+###  http://eamining.edu.pt/data-relation-view#CorrelatedDataObjects
+dataRelationView:CorrelatedDataObjects rdf:type owl:NamedIndividual ,
+                                                gufo:Kind .
+
+
+###  http://eamining.edu.pt/data-relation-view#DataDomain
+dataRelationView:DataDomain rdf:type owl:NamedIndividual ,
+                                     gufo:Role .
+
+
+###  http://eamining.edu.pt/data-relation-view#EADataObjectsRelationView
+dataRelationView:EADataObjectsRelationView rdf:type owl:NamedIndividual ,
+                                                    gufo:Kind .
+
+
+###  http://eamining.edu.pt/data-relation-view#FrequentDataDomainCorrelation
+dataRelationView:FrequentDataDomainCorrelation rdf:type owl:NamedIndividual ,
+                                                        gufo:Kind .
+
+
+###  http://eamining.edu.pt/data-relation-view#pertainsTo
+dataRelationView:pertainsTo rdf:type owl:NamedIndividual ,
+                                     gufo:MaterialRelationshipType .
+
+
+###  http://eamining.edu.pt/process-view#APIActivitiesConnection
+processView:APIActivitiesConnection rdf:type owl:NamedIndividual ,
+                                             gufo:EventType .
+
+
+###  http://eamining.edu.pt/process-view#APIAntecedentActivity
+processView:APIAntecedentActivity rdf:type owl:NamedIndividual ,
+                                           gufo:EventType .
+
+
+###  http://eamining.edu.pt/process-view#APIConsequentActivity
+processView:APIConsequentActivity rdf:type owl:NamedIndividual ,
+                                           gufo:EventType .
+
+
+###  http://eamining.edu.pt/process-view#EAProcessesViewElements
+processView:EAProcessesViewElements rdf:type owl:NamedIndividual ,
+                                             gufo:Kind .
+
+
+###  http://eamining.edu.pt/process-view#FrequentTemporalCorrelation
+processView:FrequentTemporalCorrelation rdf:type owl:NamedIndividual ,
+                                                 gufo:Kind .
+
+
+###  http://eamining.edu.pt/process-view#Partner
+processView:Partner rdf:type owl:NamedIndividual ,
+                             gufo:Role .
+
+
+###  http://eamining.edu.pt/process-view#Process
+processView:Process rdf:type owl:NamedIndividual ,
+                             gufo:EventType .
+
+
+###  http://eamining.edu.pt/process-view#ProcessElementView
+processView:ProcessElementView rdf:type owl:NamedIndividual ,
+                                        gufo:Kind .
+
+
+###  http://eamining.edu.pt/process-view#ProcessElementView_1
+processView:ProcessElementView_1 rdf:type owl:NamedIndividual ,
+                                          gufo:MaterialRelationshipType .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+:AttributePair rdfs:label "Attribute Pair"@en .
+
+
+core:APICall rdfs:label "API Call"@en .
+
+
+core:APIDocumentation rdfs:label "API Documentation"@en .
+
+
+core:APIOperation rdfs:label "API Operation"@en .
+
+
+core:APIResource rdfs:label "API Resource"@en .
+
+
+core:Attribute rdfs:label "Attribute"@en .
+
+
+core:AttributesEquality rdfs:label "Attributes Equality"@en .
+
+
+core:ConsumerApp rdfs:label "Consumer App"@en .
+
+
+core:DocumentedAPI gufo:isDerivedFrom core:isDocumentedBy ;
+                   rdfs:label "Documented API"@en .
+
+
+core:OperationExecuted rdfs:label "Operation Executed"@en .
+
+
+core:Service rdfs:label "Service"@en .
+
+
+core:ServiceDestination rdfs:label "Service Destination"@en .
+
+
+core:belongsTo rdfs:label "belongs to"@en .
+
+
+core:isDocumentedBy rdfs:label "is documented by"@en .
+
+
+core:modifies gufo:isDerivedFrom core:OperationExecuted ;
+              rdfs:label "modifies"@en .
+
+
+dataRelationView:APIDomain rdfs:label "API Domain"@en .
+
+
+dataRelationView:APIDomainMap gufo:isDerivedFrom core:belongsTo ;
+                              rdfs:label "API Domain Map"@en .
+
+
+dataRelationView:APIEntity rdfs:label "API Entity"@en .
+
+
+dataRelationView:CorrelatedDataObjects rdfs:label "Correlated Data Objects"@en .
+
+
+dataRelationView:DataDomain rdfs:label "Data Domain"@en .
+
+
+dataRelationView:EADataObjectsRelationView rdfs:label "EA Data Objects Relation View"@en .
+
+
+dataRelationView:FrequentDataDomainCorrelation gufo:isDerivedFrom dataRelationView:pertainsTo ;
+                                               rdfs:label "Frequent Data Domain Correlation"@en .
+
+
+dataRelationView:pertainsTo rdfs:label "pertains to"@en .
+
+
+processView:APIActivitiesConnection rdfs:label "API Activities Connection"@en .
+
+
+processView:APIAntecedentActivity rdfs:label "API Antecedent Activity"@en .
+
+
+processView:APIConsequentActivity rdfs:label "API Consequent Activity"@en .
+
+
+processView:EAProcessesViewElements rdfs:label "EA Processes View Elements"@en .
+
+
+processView:FrequentTemporalCorrelation gufo:isDerivedFrom processView:apiConsequentActivityHistoricallyDependsOnApiAntecedentActivity ;
+                                        rdfs:label "Frequent Temporal Correlation"@en .
+
+
+processView:Partner rdfs:label "Partner"@en .
+
+
+processView:Process rdfs:label "Process"@en .
+
+
+processView:ProcessElementView gufo:isDerivedFrom processView:ProcessElementView_1 ;
+                               rdfs:label "Process Element View"@en .
+
+
+processView:ProcessElementView_1 rdfs:label "Process Element View"@en .
+
+
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi
