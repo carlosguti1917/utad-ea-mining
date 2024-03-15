@@ -45,7 +45,10 @@ class DataPrepare:
                 if "_source" in call and "consumer" in call["_source"] and "id" in call["_source"]["consumer"]:               
                     # remove useless kong attributes 
                     cleaned_call = self.cleanIgnoredAttributes(call, aux_path_key.copy())
-                    self.collection_call_cleaned.insert_one(cleaned_call)
+                    # ignore if the key already exists in self.collection_call_cleaned
+                    existing_doc = self.collection_call_cleaned.find_one({ "_id": cleaned_call["_id"] })
+                    if existing_doc is None:
+                        self.collection_call_cleaned.insert_one(cleaned_call)
             return cleaned_api_calls
         except Exception as error:
             print('Ocorreu problema {} '.format(error.__class__))

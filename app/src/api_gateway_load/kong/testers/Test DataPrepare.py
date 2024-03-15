@@ -5,7 +5,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
 from service import DataPrepare
 
-beginDate = "2023-02-07T09:36:56.042Z"
+beginDate = "2024-03-14T09:36:56.042Z"
 
 # Create an instance of DataPrepare
 # Replace 'your_begindate_here' with the actual value

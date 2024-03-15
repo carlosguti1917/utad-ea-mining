@@ -1,0 +1,394 @@
+@prefix : <http://eamining.edu.pt#>.
+@prefix core: <http://eamining.edu.pt/core#>.
+@prefix processView: <http://eamining.edu.pt/process-view#>.
+@prefix dataRelationView: <http://eamining.edu.pt/data-relation-view#>.
+@prefix gufo: <http://purl.org/nemo/gufo#>.
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
+@prefix owl: <http://www.w3.org/2002/07/owl#>.
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#>.
+
+<http://eamining.edu.pt> rdf:type owl:Ontology;
+    owl:imports gufo:.
+:AttributePair rdf:type owl:Class, gufo:AbstractIndividualType, owl:NamedIndividual;
+    rdfs:subClassOf gufo:QualityValue;
+    rdfs:label "Attribute Pair"@en.
+core:APICall rdf:type owl:Class, gufo:EventType, owl:NamedIndividual;
+    rdfs:subClassOf gufo:Event;
+    rdfs:label "API Call"@en.
+core:APIOperation rdf:type owl:Class, gufo:SubKind, owl:NamedIndividual;
+    rdfs:label "API Operation"@en.
+core:ServiceDestination rdf:type owl:Class, gufo:SubKind, owl:NamedIndividual;
+    rdfs:label "Service Destination"@en.
+core:Service rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:FunctionalComplex;
+    rdfs:label "Service"@en.
+core:APIResource rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:FunctionalComplex;
+    rdfs:label "API Resource"@en.
+core:APIDocumentation rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:FunctionalComplex;
+    rdfs:label "API Documentation"@en.
+core:ConsumerApp rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:FunctionalComplex;
+    rdfs:label "Consumer App"@en.
+core:DocumentedAPI rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:Relator;
+    rdfs:label "Documented API"@en.
+core:Attribute rdf:type owl:Class, gufo:AbstractIndividualType, owl:NamedIndividual;
+    rdfs:subClassOf gufo:QualityValue;
+    rdfs:label "Attribute"@en.
+core:OperationExecuted rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:Relator;
+    rdfs:label "Operation Executed"@en.
+processView:Partner rdf:type owl:Class, gufo:Role, owl:NamedIndividual;
+    rdfs:label "Partner"@en.
+processView:APIAntecedentActivity rdf:type owl:Class, gufo:EventType, owl:NamedIndividual;
+    rdfs:label "API Antecedent Activity"@en.
+processView:APIConsequentActivity rdf:type owl:Class, gufo:EventType, owl:NamedIndividual;
+    rdfs:label "API Consequent Activity"@en.
+processView:APIActivitiesConnection rdf:type owl:Class, gufo:EventType, owl:NamedIndividual;
+    rdfs:subClassOf gufo:Event;
+    rdfs:label "API Activities Connection"@en.
+processView:FrequentTemporalCorrelation rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:Relator;
+    rdfs:label "Frequent Temporal Correlation"@en.
+processView:Process rdf:type owl:Class, gufo:EventType, owl:NamedIndividual;
+    rdfs:subClassOf gufo:Event;
+    rdfs:label "Process"@en.
+processView:EAProcessesViewElements rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:FunctionalComplex;
+    rdfs:label "EA Processes View Elements"@en.
+processView:ProcessElementView rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:Relator;
+    rdfs:label "Process Element View"@en.
+dataRelationView:APIEntity rdf:type owl:Class, gufo:Role, owl:NamedIndividual;
+    rdfs:label "API Entity"@en.
+dataRelationView:DataDomain rdf:type owl:Class, gufo:Role, owl:NamedIndividual;
+    rdfs:label "Data Domain"@en.
+dataRelationView:FrequentDataDomainCorrelation rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:Relator;
+    rdfs:label "Frequent Data Domain Correlation"@en.
+dataRelationView:CorrelatedDataObjects rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:FunctionalComplex;
+    rdfs:label "Correlated Data Objects"@en.
+dataRelationView:EADataObjectsRelationView rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:VariableCollection;
+    rdfs:label "EA Data Objects Relation View"@en.
+dataRelationView:APIDomainMap rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:Relator;
+    rdfs:label "API Domain Map"@en.
+dataRelationView:APIDomain rdf:type owl:Class, gufo:Kind, owl:NamedIndividual;
+    rdfs:subClassOf gufo:FunctionalComplex;
+    rdfs:label "API Domain"@en.
+core:APIOperation rdfs:subClassOf core:Service.
+core:ServiceDestination rdfs:subClassOf core:Service.
+processView:Partner rdfs:subClassOf core:ConsumerApp.
+processView:APIConsequentActivity rdfs:subClassOf core:APICall.
+processView:APIAntecedentActivity rdfs:subClassOf core:APICall.
+dataRelationView:APIEntity rdfs:subClassOf core:APIResource.
+dataRelationView:DataDomain rdfs:subClassOf dataRelationView:APIDomain.
+<aPICall:request_time> rdfs:domain core:APICall;
+    rdfs:range xsd:dateTimeStamp;
+    rdf:type owl:DatatypeProperty;
+    rdfs:subPropertyOf gufo:hasQualityValue;
+    rdfs:label "request_time"@en.
+<aPICall:response_time> rdfs:domain core:APICall;
+    rdfs:range xsd:dateTimeStamp;
+    rdf:type owl:DatatypeProperty;
+    rdfs:subPropertyOf gufo:hasQualityValue;
+    rdfs:label "response_time"@en.
+<aPICall:result_status> rdfs:domain core:APICall;
+    rdfs:range xsd:int;
+    rdf:type owl:DatatypeProperty;
+    rdfs:subPropertyOf gufo:hasQualityValue;
+    rdfs:label "result_status"@en.
+<aPICall:api_uri> rdfs:domain core:APICall;
+    rdfs:range xsd:string;
+    rdf:type owl:DatatypeProperty;
+    rdfs:subPropertyOf gufo:hasQualityValue;
+    rdfs:label "api_uri"@en.
+<aPICall:api_name> rdfs:domain core:APICall;
+    rdfs:range xsd:string;
+    rdf:type owl:DatatypeProperty;
+    rdfs:subPropertyOf gufo:hasQualityValue;
+    rdfs:label "api_name"@en.
+<aPIOperation:method> rdfs:domain core:APIOperation;
+    rdfs:range xsd:string;
+    rdf:type owl:DatatypeProperty;
+    rdfs:subPropertyOf gufo:hasQualityValue;
+    rdfs:label "method"@en.
+<service:endpoint_route> rdfs:domain core:Service;
+    rdfs:range xsd:string;
+    rdf:type owl:DatatypeProperty;
+    rdfs:subPropertyOf gufo:hasQualityValue;
+    rdfs:label "endpoint_route"@en.
+<aPIResource:resource_name> rdfs:domain core:APIResource;
+    rdfs:range xsd:string;
+    rdf:type owl:DatatypeProperty;
+    rdfs:subPropertyOf gufo:hasQualityValue;
+    rdfs:label "resource_name"@en.
+<aPIResource:resource_uri> rdfs:domain core:APIResource;
+    rdfs:range xsd:string;
+    rdf:type owl:DatatypeProperty;
+    rdfs:subPropertyOf gufo:hasQualityValue;
+    rdfs:label "resource_uri"@en.
+<aPIResource:resource_data> rdfs:domain core:APIResource;
+    rdfs:range core:Attribute;
+    rdf:type owl:ObjectProperty;
+    rdfs:subPropertyOf gufo:hasReifiedQualityValue;
+    rdfs:label "resource_data"@en.
+<aPIDocumentation:api_documentation_url> rdfs:domain core:APIDocumentation;
+    rdfs:range xsd:string;
+    rdf:type owl:DatatypeProperty;
+    rdfs:subPropertyOf gufo:hasQualityValue;
+    rdfs:label "api_documentation_url"@en.
+<aPIDocumentation:data_schema> rdfs:domain core:APIDocumentation;
+    rdfs:range xsd:string;
+    rdf:type owl:DatatypeProperty;
+    rdfs:subPropertyOf gufo:hasQualityValue;
+    rdfs:label "data_schema"@en.
+<consumerApp:client_id> rdfs:domain core:ConsumerApp;
+    rdfs:range xsd:string;
+    rdf:type owl:DatatypeProperty;
+    rdfs:subPropertyOf gufo:hasQualityValue;
+    rdfs:label "client_id"@en.
+<consumerApp:app_name> rdfs:domain core:ConsumerApp;
+    rdfs:range xsd:string;
+    rdf:type owl:DatatypeProperty;
+    rdfs:subPropertyOf gufo:hasQualityValue;
+    rdfs:label "app_name"@en.
+<attribute:attribute_name> rdfs:domain core:Attribute;
+    rdfs:range xsd:string;
+    rdf:type owl:DatatypeProperty;
+    rdfs:subPropertyOf gufo:hasValueComponent;
+    rdfs:label "attribute_name"@en.
+<attribute:attribute_value> rdfs:domain core:Attribute;
+    rdfs:range xsd:string;
+    rdf:type owl:DatatypeProperty;
+    rdfs:subPropertyOf gufo:hasValueComponent;
+    rdfs:label "attribute_value"@en.
+<frequentTemporalCorrelation:repeatead_attributes> rdfs:domain processView:FrequentTemporalCorrelation;
+    rdfs:range :AttributePair;
+    rdf:type owl:ObjectProperty;
+    rdfs:subPropertyOf gufo:hasReifiedQualityValue;
+    rdfs:label "repeatead_attributes"@en.
+<process:case_id> rdfs:domain processView:Process;
+    rdf:type owl:DatatypeProperty;
+    rdfs:subPropertyOf gufo:hasQualityValue;
+    rdfs:label "case_id"@en.
+<process:begin_first_activity> rdfs:domain processView:Process;
+    rdfs:range xsd:dateTimeStamp;
+    rdf:type owl:DatatypeProperty;
+    rdfs:subPropertyOf gufo:hasQualityValue;
+    rdfs:label "begin_first_activity"@en.
+<process:end_last_activity> rdfs:domain processView:Process;
+    rdfs:range xsd:dateTimeStamp;
+    rdf:type owl:DatatypeProperty;
+    rdfs:subPropertyOf gufo:hasQualityValue;
+    rdfs:label "end_last_activity"@en.
+<correlatedDataObjects:domain_name> rdfs:domain dataRelationView:CorrelatedDataObjects;
+    rdfs:range xsd:string;
+    rdf:type owl:DatatypeProperty;
+    rdfs:subPropertyOf gufo:hasQualityValue;
+    rdfs:label "domain_name"@en.
+<correlatedDataObjects:entity_name> rdfs:domain dataRelationView:CorrelatedDataObjects;
+    rdfs:range xsd:string;
+    rdf:type owl:DatatypeProperty;
+    rdfs:subPropertyOf gufo:hasQualityValue;
+    rdfs:label "entity_name"@en.
+<attributePair:attribute_name_a> rdfs:domain :AttributePair;
+    rdfs:range core:Attribute;
+    rdf:type owl:ObjectProperty;
+    rdfs:label "attribute_name_a"@en.
+<attributePair:attribute_name_b> rdfs:domain :AttributePair;
+    rdfs:range core:Attribute;
+    rdf:type owl:ObjectProperty;
+    rdfs:label "attribute_name_b"@en.
+core:modifies gufo:isDerivedFrom core:OperationExecuted.
+core:belongsTo rdf:type owl:ObjectProperty;
+    rdfs:domain core:APIDocumentation;
+    rdfs:range dataRelationView:APIDomain;
+    rdfs:label "belongs to"@en;
+    rdf:type gufo:MaterialRelationshipType.
+core:isDocumentedBy rdf:type owl:ObjectProperty;
+    rdfs:domain core:APIResource;
+    rdfs:range core:APIDocumentation;
+    rdfs:label "is documented by"@en;
+    rdf:type gufo:MaterialRelationshipType.
+core:AttributesEquality rdf:type owl:ObjectProperty;
+    rdfs:domain core:APIResource;
+    rdfs:range core:APIResource;
+    rdfs:label "Attributes Equality"@en;
+    rdf:type gufo:ComparativeRelationshipType.
+core:modifies rdf:type owl:ObjectProperty;
+    rdfs:domain core:APIOperation;
+    rdfs:range core:APIResource;
+    rdfs:label "modifies"@en;
+    rdf:type gufo:MaterialRelationshipType.
+core:DocumentedAPI gufo:isDerivedFrom core:isDocumentedBy.
+processView:ProcessElementView_1 rdf:type owl:ObjectProperty;
+    rdfs:domain processView:Process;
+    rdfs:range processView:EAProcessesViewElements;
+    rdfs:label "Process Element View"@en;
+    rdf:type gufo:MaterialRelationshipType.
+processView:FrequentTemporalCorrelation gufo:isDerivedFrom processView:apiConsequentActivityHistoricallyDependsOnApiAntecedentActivity.
+processView:ProcessElementView gufo:isDerivedFrom processView:ProcessElementView_1.
+dataRelationView:pertainsTo rdf:type owl:ObjectProperty;
+    rdfs:domain dataRelationView:APIEntity;
+    rdfs:range dataRelationView:DataDomain;
+    rdfs:label "pertains to"@en;
+    rdf:type gufo:MaterialRelationshipType.
+dataRelationView:CorrelatedEntity rdf:type owl:ObjectProperty;
+    rdfs:domain dataRelationView:CorrelatedDataObjects;
+    rdfs:range dataRelationView:APIEntity;
+    rdfs:label "CorrelatedEntity"@en.
+dataRelationView:CorrelatedDomain rdf:type owl:ObjectProperty;
+    rdfs:domain dataRelationView:CorrelatedDataObjects;
+    rdfs:range dataRelationView:DataDomain;
+    rdfs:label "CorrelatedDomain"@en.
+dataRelationView:APIDomainMap gufo:isDerivedFrom core:belongsTo.
+dataRelationView:FrequentDataDomainCorrelation gufo:isDerivedFrom dataRelationView:pertainsTo.
+core:APIOperation rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:participatedIn ];
+  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass core:APICall
+].
+core:APICall rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:participatedIn;
+  owl:someValuesFrom core:ServiceDestination
+], [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:participatedIn ];
+  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass core:ConsumerApp
+].
+core:APIDocumentation rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:mediates ];
+  owl:someValuesFrom core:DocumentedAPI
+].
+core:DocumentedAPI rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:mediates;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass core:APIDocumentation
+], [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:mediates;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass core:APIResource
+].
+core:OperationExecuted rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:mediates;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass core:APIOperation
+], [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:mediates;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass core:APIResource
+].
+processView:APIAntecedentActivity rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:participatedIn ];
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass processView:Partner
+].
+processView:Partner rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:participatedIn;
+  owl:someValuesFrom processView:APIAntecedentActivity
+].
+processView:APIConsequentActivity rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:mediates ];
+  owl:someValuesFrom processView:FrequentTemporalCorrelation
+].
+processView:FrequentTemporalCorrelation rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:mediates;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass processView:APIConsequentActivity
+], [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:mediates;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass processView:APIAntecedentActivity
+].
+processView:APIConsequentActivity rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:participatedIn ];
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass processView:Partner
+], [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:isEventProperPartOf ];
+  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass processView:APIActivitiesConnection
+].
+processView:APIAntecedentActivity rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:isEventProperPartOf ];
+  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass processView:APIActivitiesConnection
+].
+processView:Process rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:historicallyDependsOn ];
+  owl:someValuesFrom processView:APIActivitiesConnection
+].
+processView:APIActivitiesConnection rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:historicallyDependsOn;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass processView:Process
+].
+processView:ProcessElementView rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:mediates;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass processView:Process
+], [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:mediates;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass processView:EAProcessesViewElements
+].
+dataRelationView:FrequentDataDomainCorrelation rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:mediates;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass dataRelationView:DataDomain
+].
+dataRelationView:APIEntity rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:mediates ];
+  owl:someValuesFrom dataRelationView:FrequentDataDomainCorrelation
+].
+dataRelationView:FrequentDataDomainCorrelation rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:mediates;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass dataRelationView:APIEntity
+].
+dataRelationView:APIDomain rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty [ owl:inverseOf gufo:mediates ];
+  owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass dataRelationView:APIDomainMap
+].
+dataRelationView:APIDomainMap rdfs:subClassOf [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:mediates;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass dataRelationView:APIDomain
+], [
+  rdf:type owl:Restriction;
+  owl:onProperty gufo:mediates;
+  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger;
+  owl:onClass core:APIDocumentation
+].

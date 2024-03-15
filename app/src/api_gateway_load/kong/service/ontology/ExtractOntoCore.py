@@ -1,10 +1,12 @@
 import json
 from owlready2 import *
+from datetime import datetime
 #from owlready2 import Reasoner
 import sys
 import os
 import os.path
 import pymongo
+from rdflib import XSD
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', "..")))
 from api_gateway_load import configs
 
@@ -36,14 +38,12 @@ def get_onto_attributes_from_json(api_resource, json_obj, key_hierarchy):
                 elif value:
                     attr = ns_core.Attribute()
                     if key_hierarchy == "":
-                        #attr.name.append(key) #key= [key]
-                        attr.attribute_name = key #key= (key) #key= [key]
+                        attr.attribute_name.append(key) 
+                        attr.label.append(key)
                     else:
-                        attr.attribute_name = key_hierarchy + "." + key
-                    attr.attribute_value.append(value) 
-                    api_resource.data.append(attr)  
-                #api_resource.hasValueComponent.append(attr)
-                #owl2ready.setProperty(api_resource, "http://purl.org/nemo/gufo#hasValueComponent", attr)                   
+                        attr.attribute_name.append(key_hierarchy + "." + key) 
+                        attr.label.append(key_hierarchy + "." + key)
+                    attr.attribute_value.append(str(value))
         elif isinstance(json_obj, list):
             for item in json_obj:
                 if item:
@@ -63,13 +63,15 @@ def get_individual(onto_class, individual_name):
     """
     try:
         #with onto:
-        individuals = onto.search(type=onto_class, iri="*"+ individual_name)
+        #individuals = onto.search(type=onto_class, iri="*"+ individual_name) #funciona mas pega mais por causa do *
+        #individuals = onto.search(type=onto_class, iri="http://eamining.edu.pt#acmeapp") 
+        individuals = onto.search(type=onto_class, iri="http://eamining.edu.pt#"+individual_name+"")     
         # Check if the individual exists
         if individuals and len(individuals) == 1:
             return individuals[0] 
             # Access individual properties or perform further operations
         elif individuals and len(individuals) > 1:
-            raise Exception(f"More than one individual '{individual_name}' of class '{onto_class}' was found.")
+            raise Exception(f"More than one individual '{individual_name}' of class '{onto_class}' was found.")          
         return None    
     except Exception as error:
         print('An error occurred: {} '.format(error.__class__))
@@ -128,12 +130,10 @@ with onto:
                 cls_consumer_app = ns_core.ConsumerApp
                 consumer_app = get_individual(cls_consumer_app, Consumer_app_name)
                 if consumer_app is None:
-                    #consumer_app = onto.ConsumerApp(Consumer_app_name)
-                    #consumer_app = ConsumerApp(Consumer_app_name)  
                     consumer_app = cls_consumer_app(Consumer_app_name)
+                    consumer_app.label.append(Consumer_app_name)
                     consumer_app.client_id.append(Consumer_app_id)
-                    consumer_app.app_name.append(Consumer_app_name)
-            
+                    consumer_app.app_name.append(Consumer_app_name)       
                     
                 #API Call.request_time
                 # create the individuo for ontology classe API Call, and set its properties started=at as request_time and @timestamp as response_time
@@ -142,11 +142,20 @@ with onto:
                 # TODO tem que verificar se a chamada já não existe
                 # onto_api_call = get_individual(cls, Consumer_app_name)
                 if "@timestamp" in call["_source"]:
-                    api_call = cls_api_call()
-                    api_call.request_time.append(call["_source"]["@timestamp"])
-                    #TODO confirmar o response_time
+                    # o nome da classe e label da API Call é o request_id
+                    if "request" in call["_source"]:
+                        request_id = call["_source"]["request"]["id"]
+                    api_call = cls_api_call(request_id)
+                    api_call.label.append(request_id)
+                    #api_call.request_time.append(call["_source"]["@timestamp"])
+                    parsed_datetime = datetime.fromisoformat(call["_source"]["@timestamp"])
+                    #xsd_timestamp = datetime(parsed_datetime)
+                    api_call.request_time.append(parsed_datetime)
+                    # #TODO confirmar o response_time
                     if "response" in call["_source"] and "headers" in call["_source"]["response"] and "date" in call["_source"]["response"]["headers"]:
-                        api_call.response_time.append(call["_source"]["response"]["headers"]["date"])                      
+                        parsed_datetime = datetime.strptime(call["_source"]["response"]["headers"]["date"], '%a, %d %b %Y %H:%M:%S %Z')
+                        xsd_timestamp = parsed_datetime.isoformat() + 'Z'
+                        #api_call.response_time.append(xsd_timestamp)                      
                     if "response" in call["_source"] and "status" in call["_source"]["response"]:
                         api_call.result_status.append(call["_source"]["response"]["status"])               
                     if "request" in call["_source"] and "uri" in call["_source"]["request"]:
@@ -156,13 +165,14 @@ with onto:
                         api_call.api_name.append(call["_source"]["route"]["name"])   
                         #  ConsumerApp participation  in Property participadIn with API Call
                         consumer_app.participatedIn.append(api_call)
-                                                    
+                    #sync_reasoner()                                
                     #ApiOperation.method
                     if "request" in call["_source"] and "method" in call["_source"]["request"] and "request" in call["_source"] and "url" in call["_source"]["request"]:
                         operation_route = call["_source"]["request"]["method"] + "_" + call["_source"]["request"]["url"]
                         api_operation = get_individual(ns_core.APIOperation, operation_route)
                         if api_operation is None:
                             api_operation = ns_core.APIOperation(operation_route)
+                            api_operation.label.append(operation_route)
                             api_operation.endpoint_route.append(operation_route) 
                             api_operation.method.append(call["_source"]["request"]["method"])               
                         api_call.participatedIn.append(api_operation)
@@ -172,45 +182,66 @@ with onto:
                         api_destination = get_individual(ns_core.APIOperation, api_destination_route)                        
                         if api_destination is None:
                             api_destination = ns_core.ServiceDestination(api_destination_route)
+                            api_destination.label.append(api_destination_route)
                             api_destination.endpoint_route.append(api_destination_route)
                         api_destination.participatedIn.append(api_call)
-                        
+                    #sync_reasoner()    
                     #API Resource Resouce.uri Resource.data
                     # Request Data
                     if "request" in call["_source"] and "uri" in call["_source"]["request"]:
                         resource_uri = call["_source"]["request"]["uri"]
-                        #TODO verificar se o recurso existe
+                        #Não dá para verificar se o recurso existe pois precisa guardar os dados
                         api_resource = ns_core.APIResource(resource_uri)
-                        #TODO atribuir o resource_name
-                        #api_resource.API_Resource.uri.append(call["_source"]["request"]["uri"])
                         api_resource.resource_uri.append(resource_uri)
-                        api_operation.modifies.append(api_resource) # API operation modifies API resource
-                        
-                    #TODO tranformar body em datatype Attribute (array de par name - value)
-                    if "request" in call["_source"] and "body" in call["_source"]["request"]:
-                        request_body = call["_source"]["request"]["body"]
-                        request_body_json = json.loads(request_body)
-                        get_onto_attributes_from_json(api_resource, request_body_json, "")
-
+                        api_resource.label.append(resource_uri)
+                        #atribuir o resource_name 
+                        #Define the updated pattern
+                        pattern = r"/v\d+/(.*?)/(\d+)"
+                        match = re.search(pattern, resource_uri)
+                        if match:
+                           resource_name = match.group(1)
+                           api_resource.resource_name.append(resource_name)                                              
+                        # Transform the body into a datatype Attribute (array of name-value pairs)
+                        if "request" in call["_source"] and "body" in call["_source"]["request"]:
+                            request_body = call["_source"]["request"]["body"]
+                            request_body_json = json.loads(request_body)
+                            get_onto_attributes_from_json(api_resource, request_body_json, "")
+                    #sync_reasoner()
                     # Response data
-                    #api_resource.data.append(call["_source"]["request"]["body"])                        
-                        
-                    #save the individuals
+                    #api_resource.data.append(call["_source"]["request"]["body"])     
+                    if "response" in call["_source"] and "body" in call["_source"]["response"]:
+                        #Não dá para verificar se o recurso existe pois precisa guardar os dados
+                        #api_operation.modifies.append(api_resource) # API operation modifies API resource                                               
+                        # Transform the body into a datatype Attribute (array of name-value pairs)
+                        response_body = call["_source"]["response"]["body"]
+                        response_body_json = json.loads(response_body)
+                        get_onto_attributes_from_json(api_resource, response_body_json, "") 
                     
-                    #check de ontology consistency before saving
-                    sync_reasoner()
-                    inconsistent_cls_list = list(default_world.inconsistent_classes())
-                    for il in inconsistent_cls_list:
-                        print(il)
-                        print('inconsistency_list', il)      
-                        raise Exception(f"Ontology inconsistency found: {il}")                      
+                    # Api Operation Modifies API Resource
+                    if api_operation and api_resource:
+                        relator_operation_executed = ns_core.OperationExecuted()
+                        relator_operation_executed.mediates.append(api_operation)
+                        relator_operation_executed.mediates.append(api_resource)
+                        # Não consegui atribuir o a associação
+                        #modify = ns_core.modifies()
+                        #modify.append(api_operation, api_resource)
+                        
+                        #TODO Tem que criar um API Documentation e criar a relação material is documented by
                     try:
+                        #save the individuals                  
+                        #check de ontology consistency before saving                        
+                        sync_reasoner()
                         onto.save(format="rdfxml")
+                        #pass
                     except Exception as error:
+                        inconsistent_cls_list = list(default_world.inconsistent_classes())
+                        for il in inconsistent_cls_list:
+                            print(il)
+                            print('inconsistency_list', il)                                                 
                         print('Ocorreu problema {} '.format(error.__class__))
                         print("mensagem", str(error))
                         print("In extractAPIConcepts module :", __name__)  
-                        raise error              
+                        raise Exception(f"Ontology inconsistency found: {il}")  
                 #self.saveOntology(onto)              
 
         # save the whole new classes ontologies       

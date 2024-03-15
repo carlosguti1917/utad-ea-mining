@@ -27,7 +27,10 @@ ns = onto.get_namespace("http://apieamining.edu.pt/core#")
 cls = ns.API_Call
 inst = ns.APICall1
 #individuals = onto.search(type=IRIS["http://apieamining.edu.pt/core#API_Call"], iri="*APICall1") # Isso funciona
-individuals = onto.search(type=cls, iri="*"+ individual_name)
+#individuals = onto.search(type=cls, iri="*"+ individual_name)
+#individuals = onto.search(type=cls, label=individual_name)
+individuals = onto.search(type=IRIS["http://apieamining.edu.pt/core#API_Call"], iri="http://apieamining.edu.pt#APICall1") # Isso funciona
+
 print("individuals = ", individuals)
 
 # Check if the individual exists

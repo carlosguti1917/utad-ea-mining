@@ -950,6 +950,7 @@
     <!-- http://apieamining.edu.pt#APICall1 -->
 
     <owl:NamedIndividual rdf:about="http://apieamining.edu.pt#APICall1">
+        <rdfs:label xml:lang="en">APICall1</rdfs:label>
         <rdf:type rdf:resource="http://apieamining.edu.pt/core#API_Call"/>
         <gufo:wasCreatedIn rdf:resource="http://apieamining.edu.pt#Consumer001"/>
         <aPICall:AOtJHxGGAqDgAQ3i>200</aPICall:AOtJHxGGAqDgAQ3i>
