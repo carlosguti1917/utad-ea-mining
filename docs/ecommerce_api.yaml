@@ -1,0 +1,173 @@
+openapi: 3.0.0
+info:
+  title: Ecommerce User Journey API
+  description: API endpoints for the ecommerce user journey
+  version: 1.0.0
+servers:
+  - url: https://api.example.com/v1
+paths:
+  /products:
+    get:
+      summary: Get products based on search
+      responses:
+        '200':
+          description: Successful response with product list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'
+  /cart:
+    post:
+      summary: Create a shopping cart
+      responses:
+        '201':
+          description: Successful response with product list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'      
+  /cart/add:
+    post:
+      summary: Add a product to the cart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddToCartRequest'
+      responses:
+        '200':
+          description: Product added successfully
+        '400':
+          description: Bad request, invalid input
+  /cart/remove:
+    post:
+      summary: Remove a product from the cart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RemoveFromCartRequest'
+      responses:
+        '200':
+          description: Product removed successfully
+        '400':
+          description: Bad request, invalid input
+  /cart/checkout:
+    post:
+      summary: Check out the shopping cart
+      responses:
+        '200':
+          description: Checkout successful
+  /user/login:
+    post:
+      summary: User login
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginRequest'
+      responses:
+        '200':
+          description: Successful response with product list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'              
+  /user/register:
+    post:
+      summary: User registration
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterRequest'
+      responses:
+        '200':
+          description: Successful response with product list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Product'              
+  /payment:
+    post:
+      summary: Process the payment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentRequest'
+      responses:
+        '200':
+          description: Payment processed successfully
+        '400':
+          description: Payment failed
+  /order:
+    post:
+      summary: Create an order
+      responses:
+        '200':
+          description: Order created successfully
+  /order/send:
+    post:
+      summary: Send order to logistic system or partner
+      responses:
+        '200':
+          description: Order sent successfully
+
+components:
+  schemas:
+    Product:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        price:
+          type: number
+    AddToCartRequest:
+      type: object
+      properties:
+        productId:
+          type: integer
+        quantity:
+          type: integer
+    RemoveFromCartRequest:
+      type: object
+      properties:
+        productId:
+          type: integer
+    LoginRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        password:
+          type: string
+    RegisterRequest:
+      type: object
+      properties:
+        username:
+          type: string
+        email:
+          type: string
+        password:
+          type: string
+    PaymentRequest:
+      type: object
+      properties:
+        amount:
+          type: number
