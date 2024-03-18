@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ff1a2cf0-9723-471c-b8aa-4cc7acbc858c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/testers/Test_find_repeated_attributes.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/.idea/src.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/api_gateway_load/Main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/api_gateway_load/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/api_gateway_load/config.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/api_gateway_load/ignore.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/src/api_gateway_load/kong adapter/LoaderCalls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/API Gatetay Load/.idea/API Gatetay Load.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/API Gatetay Load/.idea/API Gatetay Load.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/API Gatetay Load/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/API Gatetay Load/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/API Gatetay Load/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/API Gatetay Load/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/API Gatetay Load/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/API Gatetay Load/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/API Gatetay Load/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/API Gatetay Load/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/API Gatetay Load/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/API Gatetay Load/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/API Gatetay Load/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/API Gatetay Load/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/.idea/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/.idea/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/.idea/API Gatetay Load.iml" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/.idea/API Gatetay Load.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/.idea/inspectionProfiles/profiles_settings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/Loader Logs/LoaderCalls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/Loader Logs/LoaderCalls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/Main.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/Main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/Service/EventBuildArango.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/Service/EventBuildArango.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/Service/EventBuildMySQL.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/Service/EventBuildMySQL.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/Service/GraphBuild.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/Service/GraphBuild.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/Studies/API Load Calls-Details.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/Studies/API Load Calls-Details.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/Studies/API Load.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/Studies/API Load.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/Studies/API Load_Calls.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/Studies/API Load_Calls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/Studies/API Relationship.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/Studies/API Relationship.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/Studies/API Relationship_v2.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/Studies/API Relationship_v2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/Studies/API Relationship_v3.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/Studies/API Relationship_v3.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/Studies/Apriori.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/Studies/Apriori.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/Studies/BodyTrace_Converter.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/Studies/BodyTrace_Converter.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/Studies/FPGrowth.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/Studies/FPGrowth.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/Studies/Pm4pyStudies.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/Studies/Pm4pyStudies.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/Studies/trace_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/Studies/trace_parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/config.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/domain/CaseNumber.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/domain/CaseNumber.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/domain/Correlation.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/domain/Correlation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/domain/OperationUriCorrelation.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/domain/OperationUriCorrelation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/domain/RepeatedAttributes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/domain/RepeatedAttributes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/domain/Uri.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/domain/Uri.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/ignore.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/ignore.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/repository/ArangodbRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/repository/ArangodbRepository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/repository/MongoDbRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/repository/MongoDbRepository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/repository/MySqlRepository.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/repository/MySqlRepository.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/testers/ArangoDbTest.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/testers/ArangoDbTest.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/testers/ArangoRDFExport.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/testers/ArangoRDFExport.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/testers/MySqlRepositoryTester.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/testers/MySqlRepositoryTester.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/testers/RegularExpressions.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/testers/RegularExpressions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/testers/RepositoryTU.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/testers/RepositoryTU.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/testers/Test Database.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/testers/Test Database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/testers/Test_FindOperationPath.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/testers/Test_FindOperationPath.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/testers/Test_FindOperationUriCorrelation.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/testers/Test_FindOperationUriCorrelation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/testers/Test_find_destination_in_trace.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/testers/Test_find_destination_in_trace.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/testers/Test_find_repeated_attributes.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/testers/Test_get_correlation_repeated_attributes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/testers/Test_get_correlation_repeated_attributes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/testers/Test_updateRepeatedAttributes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/testers/Test_updateRepeatedAttributes.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/APIGatewayLoad/testers/testeMySQL.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/APIGatewayLoad/testers/testeMySQL.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/UMLTeste.uxf" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/UMLTeste.uxf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/swaggers/commerceapi.json" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/swaggers/commerceapi.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/swaggers/commerceapi.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/swaggers/commerceapi.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/venv/Scripts/Activate.ps1" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/venv/Scripts/Activate.ps1" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/venv/Scripts/activate" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/venv/Scripts/activate" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/venv/Scripts/activate.bat" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/venv/Scripts/activate.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/venv/Scripts/deactivate.bat" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/venv/Scripts/deactivate.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/venv/Scripts/pip.exe" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/venv/Scripts/pip.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/venv/Scripts/pip3.10.exe" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/venv/Scripts/pip3.10.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/venv/Scripts/pip3.exe" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/venv/Scripts/pip3.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/venv/Scripts/python.exe" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/venv/Scripts/python.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/venv/Scripts/pythonw.exe" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/venv/Scripts/pythonw.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/venv/pyvenv.cfg" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/venv/pyvenv.cfg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/code/POC/workspace.code-workspace" beforeDir="false" afterPath="$PROJECT_DIR$/app/POC/workspace.code-workspace" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2c09Nx63QI1qcR1zFvCKh53Q6jG" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Python.LoaderCalls.executor": "Debug",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "desktop",
+    "last_opened_file_path": "C:/gitHub/utad/utad-ea-mining/code",
+    "settings.editor.selected.configurable": "preferences.pathVariables"
+  }
+}]]></component>
+  <component name="PyConsoleOptionsProvider">
+    <option name="myPythonConsoleState">
+      <console-settings module-name="utad-ea-mining" is-module-sdk="true">
+        <option name="myUseModuleSdk" value="true" />
+        <option name="myModuleName" value="utad-ea-mining" />
+      </console-settings>
+    </option>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\gitHub\utad\utad-ea-mining\code" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\gitHub\utad\utad-ea-mining\code\src\api-gateway-load" />
+      <recent name="C:\gitHub\utad\utad-ea-mining\code\POC\APIGatewayLoad\Loader Logs" />
+      <recent name="C:\gitHub\utad\utad-ea-mining\code\POC\APIGatewayLoad" />
+    </key>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-5a2391486177-d3b881c8e49f-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-233.13763.11" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ff1a2cf0-9723-471c-b8aa-4cc7acbc858c" name="Changes" comment="" />
+      <created>1707237592912</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1707237592912</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/src/api_gateway_load/kong adapter/LoaderCalls.py</url>
+          <line>30</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/src/api_gateway_load/kong adapter/LoaderCalls.py</url>
+          <line>32</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/POC/APIGatewayLoad/Loader Logs/LoaderCalls.py</url>
+          <line>34</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/POC/APIGatewayLoad/Loader Logs/LoaderCalls.py</url>
+          <line>36</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/POC/APIGatewayLoad/Loader Logs/LoaderCalls.py</url>
+          <line>23</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/POC/APIGatewayLoad/Loader Logs/LoaderCalls.py</url>
+          <line>11</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/src/api_gateway_load/kong adapter/LoaderCalls.py</url>
+          <line>12</line>
+          <option name="timeStamp" value="11" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/src/api_gateway_load/kong adapter/LoaderCalls.py</url>
+          <line>16</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/src/api_gateway_load/kong adapter/LoaderCalls.py</url>
+          <line>11</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/src/api_gateway_load/kong adapter/LoaderCalls.py</url>
+          <line>35</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
