@@ -90,7 +90,7 @@ class LoaderCalls:
                         ]
                         }
                     },
-                    #"size": 100,
+                    "size": 10000,
                     #"from": 0,
                     "_source": [
                         "*"
@@ -99,6 +99,6 @@ class LoaderCalls:
         return json.dumps(retorno)
 
 # Executa rotina de loader
-beginDate = "2024-02-14T09:00:56.042Z"
-x = LoaderCalls(beginDate)
+#beginDate = "2024-02-14T09:00:56.042Z"
+#x = LoaderCalls(beginDate)
 # TODO evitar gravar novo registro, para isso verificar se o id do request já não está gravado

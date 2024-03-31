@@ -28,12 +28,12 @@ class DataPrepare:
         self.mydb = self.myclient[configs.MONGO_DB_SERVER["databasename"]]
         self.collection_call_detail = self.mydb["kong-api-call-details"]
         self.collection_call_cleaned = self.mydb["kong-api-call-cleaned"]
-        x = self.getApiCallsDetails()   
+        x = self.getApiCallsDetails(begindate)   
         y = self.removeNoise(x)
 
 
-    def getApiCallsDetails(self):
-        api_calls = list(self.collection_call_detail.find())
+    def getApiCallsDetails(self, begindate):
+        api_calls = list(self.collection_call_detail.find({"_source.@timestamp": {"$gt": begindate}}))
         return api_calls
 
     def removeNoise(self, api_calls):
