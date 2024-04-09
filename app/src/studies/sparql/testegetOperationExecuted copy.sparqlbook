@@ -1,0 +1,20 @@
+[
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\r\n\r\nSELECT ?x\r\nWHERE { ?x  <http://www.w3.org/2000/01/rdf-schema#label>  \"a14c887c27c00a55cc96c25157ed0f2c\" }",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\n\r\nSELECT ?operationExecuted\r\nWHERE {\r\n    ?operationExecuted rdf:type ns_core:OperationExecuted .\r\n    ?operationExecuted gufo:mediates <http://eamining.edu.pt#/sandbox/ecommerce/v1/carts/575/paymentmethod> .\r\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\n\r\nSELECT ?operationExecuted\r\nWHERE {\r\n    ?operationExecuted rdf:type ns_core:OperationExecuted .\r\n    ?operationExecuted gufo:mediates <http://eamining.edu.pt#POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/575/paymentmethod> .\r\n}",
+    "metadata": {}
+  }
+]

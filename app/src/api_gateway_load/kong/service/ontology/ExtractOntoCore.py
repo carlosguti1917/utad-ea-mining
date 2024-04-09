@@ -36,7 +36,7 @@ class ExtractOntoCore:
         api_calls = api_calls = list(collection_call_cleaned.find({"_source.@timestamp": {"$gt": begindate}}))
         tranform_to_ontology(api_calls)
 
-def get_onto_attributes_from_json(api_resource, json_obj, key_hierarchy):
+def get_onto_resource_attributes_from_json(api_resource, json_obj, key_hierarchy):
         if isinstance(json_obj, dict):
             for key, value in json_obj.items():
                 if isinstance(value, dict):
@@ -44,14 +44,14 @@ def get_onto_attributes_from_json(api_resource, json_obj, key_hierarchy):
                         key_hierarchy = key_hierarchy + key
                     else:
                         key_hierarchy = key_hierarchy + "." + key                    
-                    get_onto_attributes_from_json(api_resource, value, key_hierarchy)
+                    get_onto_resource_attributes_from_json(api_resource, value, key_hierarchy)
                 elif isinstance(value, list):
                     if key_hierarchy == "":
                         key_hierarchy = key_hierarchy + key
                     else:
                         key_hierarchy = key_hierarchy + "." + key
                     for item in value:
-                        get_onto_attributes_from_json(api_resource, item, key_hierarchy)
+                        get_onto_resource_attributes_from_json(api_resource, item, key_hierarchy)
                 elif value:
                     attr = ns_core.Attribute()
                     if key_hierarchy == "":
@@ -61,10 +61,11 @@ def get_onto_attributes_from_json(api_resource, json_obj, key_hierarchy):
                         attr.attribute_name.append(key_hierarchy + "." + key) 
                         attr.label.append(key_hierarchy + "." + key)
                     attr.attribute_value.append(str(value))
+                    api_resource.resource_data.append(attr)
         elif isinstance(json_obj, list):
             for item in json_obj:
                 if item:
-                    get_onto_attributes_from_json(api_resource, json_obj) 
+                    get_onto_resource_attributes_from_json(api_resource, json_obj) 
 
 def get_individual(onto_class, individual_name):
     """
@@ -81,7 +82,6 @@ def get_individual(onto_class, individual_name):
     try:
         #with onto:
         #individuals = onto.search(type=onto_class, iri="*"+ individual_name) #funciona mas pega mais por causa do *
-        #individuals = onto.search(type=onto_class, iri="http://eamining.edu.pt#acmeapp") 
         individuals = onto.search(type=onto_class, iri="http://eamining.edu.pt#"+individual_name+"")     
         # Check if the individual exists
         if individuals and len(individuals) == 1:
@@ -111,7 +111,7 @@ def tranform_to_ontology(api_calls):
     sync_reasoner()
 
     with onto:
-        #try:      
+        try:      
             for call in api_calls:
                 Consumer_app_id = None
                 Consumer_app_name = None
@@ -212,7 +212,7 @@ def tranform_to_ontology(api_calls):
                             if "request" in call["_source"] and "body" in call["_source"]["request"]:
                                 request_body = call["_source"]["request"]["body"]
                                 request_body_json = json.loads(request_body)
-                                get_onto_attributes_from_json(api_resource, request_body_json, "")
+                                get_onto_resource_attributes_from_json(api_resource, request_body_json, "")
                         #sync_reasoner()
                         # Response data
                         #api_resource.data.append(call["_source"]["request"]["body"])     
@@ -221,14 +221,14 @@ def tranform_to_ontology(api_calls):
                             # Transform the body into a datatype Attribute (array of name-value pairs)
                             response_body = call["_source"]["response"]["body"]
                             response_body_json = json.loads(response_body)
-                            get_onto_attributes_from_json(api_resource, response_body_json, "") 
+                            get_onto_resource_attributes_from_json(api_resource, response_body_json, "") 
                         
                         # Api Operation Modifies API Resource
                         if api_operation and api_resource:
                             relator_operation_executed = ns_core.OperationExecuted()
                             relator_operation_executed.mediates.append(api_operation)
                             relator_operation_executed.mediates.append(api_resource)                       
-                            #api_operation.modifies.append(api_resource)
+                            api_operation.modifies.append(api_resource)
                             # Não consegui atribuir o a associação
                             #modify = ns_core.modifies()
                             #modify.append(api_operation, api_resource)
@@ -249,10 +249,10 @@ def tranform_to_ontology(api_calls):
                             print("mensagem", str(error))
                             print("In extractAPIConcepts module :", __name__)  
                             raise Exception(f"Ontology inconsistency found: {il}")  
-        # except Exception as error:
-        #     print('Ocorreu problema {} '.format(error.__class__))
-        #     print("mensagem", str(error))
-        #     print("In extractAPIConcepts module :", __name__)                           
+        except Exception as error:
+             print('Ocorreu problema {} '.format(error.__class__))
+             print("mensagem", str(error))
+             print("In extractAPIConcepts module :", __name__)                           
 
 
     

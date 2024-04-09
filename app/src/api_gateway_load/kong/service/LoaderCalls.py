@@ -15,7 +15,8 @@ from api_gateway_load import configs
 from api_gateway_load.kong.repository.MongoDbRepository4Kong import MongoDbRepository4Kong
 
 class LoaderCalls:
-
+    #TODO talvez um nome melhor seria API Scrapping e pssar para uma pasta scrapping
+    
     def __init__(self, begindate):
         call_list = []
         call_list = self.getCalls(begindate)
