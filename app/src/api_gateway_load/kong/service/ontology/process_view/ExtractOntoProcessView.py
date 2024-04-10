@@ -9,8 +9,9 @@ import csv
 from rdflib import Graph
 import pandas as pd
 from spmf import Spmf
-import sys  # Add missing import statement for sys module
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', "..")))
+import sys # Add missing import statement for sys module
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', "..", "..")))
+from api_gateway_load.utils import spmf_converter
 
 onto_path.append("app/src/api_gateway_load/repository/")  # Set the path to load the ontology
 onto = get_ontology("EA Mining OntoUML Teste V1_1.owl").load()
@@ -30,7 +31,7 @@ Considering the ontology onto, the following steps should be performed:
 4- For each resource_data, query the attribute_name and attribute_value -ok
 5- For each attribute_name, check if it is low dimension by querying the values in the APICall collection with the same attribute_name and using the rare item mining algorithm
 7- If it is high dimension or rare, keep it in the list of attributes to be processed, otherwise discard it
-9- save the result in a text file separated by tab witn the APICall and the resulting list of attributes for further processing
+9- save the result in a text file separated by tab witn the APICall and the resulting list of attributes for further processing - ok
 
 
 1-Selecionar os consummers / partners - ok
@@ -51,80 +52,97 @@ Nova interação para obter os candidatos ao Activiti Connection
     2.5 A partir desta sequência extrair para o xml do archimate
 '''
 
-def verify_attribute_utility(attribute_name, resource_name, api_call_name, onto):
-#Calcula o quanto o atributo varia em relação aos demais recursos da mesma chamada de API ou seja para APIs do mesmo nome   
-    util = False
-    try:
-        query = f"""
-            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-            PREFIX gufo: <http://purl.org/nemo/gufo#>
-            PREFIX ns_core: <http://eamining.edu.pt/core#>
-            PREFIX attr: <http://eamining.edu.pt/core#Attribute>
-            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-            PREFIX aPIC: <aPICall:>
-            PREFIX attr2: <attribute:> 
-
-            SELECT ?attribute 
-            WHERE {{         
-                ?api_call rdf:type ns_core:APICall .
-                ?api_call aPIC:api_name "{api_call_name}" .
-                ?resource rdf:type ns_core:APIResource .
-                ?attribute rdf:type <http://eamining.edu.pt/core#Attribute> .        
-                ?attribute attr2:attribute_name "{attribute_name}" .             
-            }}
-            """
-        print(query)
-        
-        attributes = list(default_world.sparql(query))
-        # for calculate the weight of each attribute_value in the whole attributes collection.
-        
-        attribute_list = []
-        for attribute_tuple in attributes:
-            attibute_value = attribute_tuple[0].attribute_value[0]
-            attribute_list.append((attibute_value)) 
-       
-        file_nm = f"api_resource_data_attribute_{attribute_name}.txt"
-        file_path = './temp/'
-        save_result_to_file(attribute_list, file_path, file_nm, None)
-        
-        # Mining Perfectly Rare Itemsets Using The AprioriInverse Algorithm (SPMF Documentation) https://www.philippe-fournier-viger.com/spmf/AprioriInverse.php       
-        # spmf = Spmf("AprioriInverse", input_file_path="./file_nm",
-        #             output_file_path="output.txt", 
-        #             spmf_jar_location_dir="./spmf.jar")
-
-        #smpfa = Spmf(spmf_bin_location_dir="c:/gitHub/utad/utad-ea-mining/app/src/studies/spmf/spmf.jar",
-        input_file_full_name = os.path.join(file_path, file_nm)
-        output_file_nm = f"api_resource_data_attribute_{attribute_name}.out"
-        output_file_full_name = os.path.join(file_path, output_file_nm)
-        smpfa = Spmf(spmf_bin_location_dir="c:/gitHub/utad/utad-ea-mining/app/src/studies/spmf",
-                    algorithm_name="AprioriInverse", 
-                    input_filename=input_file_full_name,
-                    output_filename=output_file_full_name, 
-                    arguments=[0.1, 0.6])
-        smpfa.run()
-        
-        # Read the output file line by line. If any pattern is found, then the attribute is considered useful
-        outFile = open(output_file_full_name,'r', encoding='utf-8')
-        for string in outFile:
-            print(string)
-            util = True
-            break
-        outFile.close() 
-              
-        #pd_rare = smpfa.to_pandas_dataframe(pickle=True)      
-        #smpfa.to_csv(f"AprioriInverse{attribute_name}.csv")  
-        
-        return util
-        
+ 
+def add_ignored_attribute_to_file(attribute_name, file_path, file_name):
+    """
+    open the json file
+    set the json object to a variable
+    Add a new attribute_ to the json file with the list of ignored attribute
+    save the json file
+    close the json file
+    update the json object variable with the new attribute
+    return de json object variable
+    """
+    #data = []
+    try:    
+        if os.path.exists(file_path + file_name):
+            with open(file_path + file_name, 'r') as file:
+                data = file.read()
+                #check if the attribute is already in the list, if not, add it
+                if attribute_name not in data:
+                    with open(file_path + file_name, 'a') as file:
+                        file.write(attribute_name + '\n')
+                        file.close()
+        else:
+            with open(file_path + file_name, 'w') as file:
+                file.write(attribute_name + '\n')
+                file.close()
+        #return data
     except Exception as error:
         print('Ocorreu problema {} '.format(error.__class__))
         print("mensagem", str(error))
-        print("In calculate_attribute_variation module :", __name__)
-        raise error
-
-     
-         
+        print(f"In add_ignored_attribute_to_json_file module({attribute_name}, {file_path}, {file_name}) :", __name__)        
+        raise error      
     
+def check_api_resource_correlation(api_call_id_a, api_call_resource_a, api_call_id_b, api_call_resource_b):
+    # Prepare data
+    line_data = []
+    # Find all ConsumerApp 
+    for attribute_a in api_call_resource_a.resource_data:
+        attribute_a_name = attribute_a.attribute_name
+        if attribute_a_name in get_ignored_attributes_from_file('./temp/', 'frequent_attributes.ignore'):
+            break
+        else:
+            # search in other API calls and resources for the same attribute value
+            for attribute_b in api_call_resource_b.resource_data:
+                print(attribute_a.attribute_name, attribute_a.attribute_value, attribute_b.attribute_name, attribute_b.attribute_value)
+                if attribute_b.attribute_value == attribute_a.attribute_value:
+                    line_data.append([api_call_id_a, api_call_id_b, attribute_a, attribute_b])
+                    
+    return line_data
+            # search in other API calls and resources for the same attribute value
+            # inner_api_calls = sorted([inner_api_call for inner_api_call in consumer_app.participatedIn if inner_api_call.request_time > api_call.request_time], key=lambda x: x.request_time)
+    
+
+def export_to_file(line_data, file_path, file_name, headers):
+# Export to CSV
+    # csv_file = 'api_resource_data.csv'
+    # with open(csv_file, 'w', newline='', encoding='utf-8') as file:
+    #     writer = csv.writer(file)
+    #     writer.writerow(headers)
+    #     for row in line_data:
+    #         writer.writerow(row)
+
+    # Export to txt
+    file_full_name = os.path.join(file_path, file_name)
+    with open(file_full_name, 'w', encoding='utf-8') as file:
+        # Write headers
+        if headers is not None:
+            file.write('\t'.join(headers) + '\n')
+        # Write data rows
+        for row in line_data:
+            file.write('\t'.join(map(str, row)) + '\n')         
+
+    print(f'Data exported to {file_full_name}')    
+
+
+def get_ignored_attributes_from_file(file_path, file_name):
+    
+    data = []
+    try:    
+        if os.path.exists(file_path + file_name):
+            with open(file_path + file_name, 'r') as file:
+                data = file.read()
+                #check if the attribute is already in the list, if not, add it
+                data = data.splitlines()
+                file.close()
+        return data
+    except Exception as error:
+        print('Ocorreu problema {} '.format(error.__class__))
+        print("mensagem", str(error))
+        print(f"In get_ignored_attributes_from_file({file_path}, {file_name}) :", __name__)        
+        raise error     
+
 
 def remove_frequent_items(onto):
     
@@ -196,23 +214,271 @@ def remove_frequent_items(onto):
                             attribute_name = attribute.attribute_name[0]
                             attribute_value = attribute.attribute_value[0]
                             api_name = api_call.api_name[0]
-                            print(attribute_name, ":", attribute_value, ":", api_name) 
+                            freq_attr_file_name = f"{api_name}_frequent_attributes.ignore"
+                            # verify it the attribute sould be ignored
+                            if attribute_name in get_ignored_attributes_from_file('./temp/', freq_attr_file_name):
+                                break
                             # calculate the the variation of attribute_values in the other resources of the same api_call.name
-                            attribute_is_util = verify_attribute_utility(attribute_name, attribute_value, api_name, onto)
+                            attribute_is_util = verify_attribute_utility(attribute_name, api_name)
                             if attribute_is_util:
                                 attributes.append((attribute_name, attribute_value))
                             else:
+                                add_ignored_attribute_to_file(attribute_name, './temp/', freq_attr_file_name)
                                 
-                            # poderia gerar uma lista de atributos e valores a serem ignorados, ou seja, que não serão considerados na análise de correlação
-
-
-
-
-    # Step 9: save the result in a text file separated by tab with the APICall and the resulting list of attributes for further processing
-    #save_result_to_file(result_data, file_path, file_name)
-
 
 def mining_frequent_temporal_correlations(onto):
+    # Prepare data
+    line_data = []
+    # Find all ConsumerApp 
+    consumer_apps = [individual for individual in onto.individuals() if individual.is_a[0] == ns_core.ConsumerApp]
+    for consumer_app in consumer_apps:
+        # Find API Calls associated with ConsumerApp and sort them by request_time
+        api_calls = sorted(list(consumer_app.participatedIn), key=lambda x: x.request_time)
+        #api_calls = iter(apps_api_calls)
+        for api_call in api_calls:
+            # Only instancs of API_Call
+            if not ns_core.APICall in api_call.is_a:
+                continue
+            # Find API Resources associated with API Call
+            api_operations = list(api_call.participatedIn)     
+            for api_operation in api_operations:
+                query = f"""PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                            PREFIX gufo: <http://purl.org/nemo/gufo#>
+                            PREFIX ns_core: <http://eamining.edu.pt/core#>
+                            SELECT ?operationExecuted
+                            WHERE {{
+                                ?operationExecuted rdf:type ns_core:OperationExecuted .
+                                ?operationExecuted gufo:mediates <{api_operation.iri}> .
+                            }}
+                        """                       
+                # Execute the query
+                operations_executed = list(default_world.sparql(query))
+                for operation_executed_tuple in operations_executed:
+                    operation_executed = operation_executed_tuple[0]  # Get the individual from the tuple
+                    resources = list(operation_executed.mediates)
+                    for resource in resources:
+                            # Check if resource is an instance of ns_core.APIResource
+                            if ns_core.APIResource in resource.is_a:
+                                #attribute_values = [attr.attribute_value for attr in resource.resource_data] 
+                                attributes = []
+                                for attribute in resource.resource_data:
+                                    attribute_name = attribute.attribute_name
+                                    attribute_value = attribute.attribute_value
+                                    print(attribute_name, attribute_value)
+                                    # search in other API calls and resources for the same attribute value
+                                    inner_api_calls = sorted([inner_api_call for inner_api_call in consumer_app.participatedIn if inner_api_call.request_time > api_call.request_time], key=lambda x: x.request_time)
+                                    for inner_api_call in inner_api_calls:
+                                        if inner_api_call != api_call:
+                                            inner_operations = inner_api_call.participatedIn
+                                            for inner_operation in inner_operations:
+                                                inner_query = f"""PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                                                            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                                                            PREFIX gufo: <http://purl.org/nemo/gufo#>
+                                                            PREFIX ns_core: <http://eamining.edu.pt/core#>
+                                                            SELECT ?operationExecuted
+                                                            WHERE {{
+                                                                ?operationExecuted rdf:type ns_core:OperationExecuted .
+                                                                ?operationExecuted gufo:mediates <{inner_operation.iri}> .
+                                                            }}
+                                                        """ 
+                                                inner_operations_executed = list(default_world.sparql(inner_query))
+                                                for inner_operation_executed_tuple in inner_operations_executed:
+                                                    inner_operation_executed = inner_operation_executed_tuple[0]  # Get the individual from the tuple
+                                                    inner_resources = list(inner_operation_executed.mediates) 
+                                                    for inner_resource in inner_resources:
+                                                        if ns_core.APIResource in inner_resource.is_a:
+                                                            api_correlations = check_api_resource_correlation(api_call, resource, inner_api_call, inner_resource)
+                                                            #salva cada correlação individualmente em um relator FTC?
+                                                            #if api_correlations is not None, then calcul the temporal dependency between api_call and inner_api_call
+                                                            #record the younger as Antecedent Activity and the older as Consequent Activity
+                                                            #create the historicalDependsOn relation between the two activities
+                                                            #create the relator Frequente Temporal Correlation (FTC) between the two activities
+                                                            #create the mediation between the FTC do each of Activities
+                                                            #record the attributes that are correlated in the api_correlations to reapeated_attributes in FTC
+                                                                                                   
+
+                    #Append to CSV data
+                    #line_data.append([api_call, attributes])
+                    #print("line_data", line_data)
+
+def navigate_and_export_ontology(onto):
+    # Prepare data
+    line_data = []
+    headers = ['API Call', 'Resource Data Attributes']
+    # Find ConsumerApp by client_id
+    #consumer_apps = onto.search(type=onto.ConsumerApp, client_id=client_id_value)
+    consumer_apps = onto.search(type=ns_core.ConsumerApp)
+    #TODO tem que pegar só os ConsumerApp sem as subclasses. Está retornando o Partner.
+    for consumer_app in consumer_apps:
+        # Find API Calls associated with ConsumerApp
+        # api_calls = onto.search(type=ns_core.APICall, participatedIn=consumer_app) . Isso aqui teria que ser por sparql, pois não existe o param object property
+        api_calls = list(consumer_app.participatedIn)
+        for api_call in api_calls:
+            # Find API Resources associated with API Call
+            api_operations = list(api_call.participatedIn)
+            #classe = ns_core.OperationExecuted           
+            for api_operation in api_operations:
+                #g = Graph()
+                # Parse in an RDF file hosted at some location
+                query = f"""PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                            PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                            PREFIX gufo: <http://purl.org/nemo/gufo#>
+                            PREFIX ns_core: <http://eamining.edu.pt/core#>
+                            SELECT ?operationExecuted
+                            WHERE {{
+                                ?operationExecuted rdf:type ns_core:OperationExecuted .
+                                ?operationExecuted gufo:mediates <{api_operation.iri}> .
+                            }}
+                        """                       
+                # Execute the query
+                operations_executed = list(default_world.sparql(query))
+                for operation_executed_tuple in operations_executed:
+                    operation_executed = operation_executed_tuple[0]  # Get the individual from the tuple
+                    resources = list(operation_executed.mediates)
+                    for resource in resources:
+                            # Check if resource is an instance of ns_core.APIResource
+                            if ns_core.APIResource in resource.is_a:
+                                #attribute_values = [attr.attribute_value for attr in resource.resource_data] 
+                                attribute_values = []
+                                for att in resource.resource_data:
+                                    for value in att.attribute_value:
+                                        at = value
+                                    attribute_values.append(value)
+                                print(attribute_values)
+                    #Append to CSV data
+                    line_data.append([api_call, attribute_values])
+    export_to_file(line_data, '.', 'api_resource_data.txt', headers)                    
+
+            
+
+
+def save_result_to_file(result_data, file_path, file_name, headers):
+    # Prepare data
+  
+    # Convert result_data to line_data format
+    #line_data = []    
+    # for api_call, attributes in result_data.items():
+    #     line_data.append([api_call, ', '.join(attributes)])
+    
+    # Export to txt
+    file_full_name = os.path.join(file_path, file_name)
+    with open(file_full_name, 'w', encoding='utf-8') as file:
+        # Write headers
+        if headers is not None:
+            file.write('\t'.join(headers) + '\n')
+        # Write data rows
+        for r in result_data:
+            file.write(r + '\n')         
+
+    print(f'Data exported to {file_full_name}')
+
+
+
+
+def verify_attribute_utility(attribute_name, api_call_name):
+#Verifica se atributo é útil. Um atributo é útil se ele é raro, ou seja, se ele é um atributo que não é comum em todos os recursos de uma chamada de API.	
+   
+    util = False
+    try:
+        query = f"""
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX gufo: <http://purl.org/nemo/gufo#>
+            PREFIX ns_core: <http://eamining.edu.pt/core#>
+            PREFIX attr: <http://eamining.edu.pt/core#Attribute>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+            PREFIX aPIC: <aPICall:>
+            PREFIX attr2: <attribute:> 
+
+            SELECT ?attribute 
+            WHERE {{         
+                ?api_call rdf:type ns_core:APICall .
+                ?api_call aPIC:api_name "{api_call_name}" .
+                ?resource rdf:type ns_core:APIResource .
+                ?attribute rdf:type <http://eamining.edu.pt/core#Attribute> .        
+                ?attribute attr2:attribute_name "{attribute_name}" .             
+            }}
+            """
+        print(query)
+        
+        attributes = list(default_world.sparql(query))
+        # for calculate the weight of each attribute_value in the whole attributes collection.
+        
+        attribute_list = []
+        for attribute_tuple in attributes:
+            attribute_value = attribute_tuple[0].attribute_value[0]
+            attribute_list.append((attribute_value)) 
+       
+        file_nm = f"api_resource_data_attribute_{attribute_name}.txt"
+        file_path = './temp/'
+        save_result_to_file(attribute_list, file_path, file_nm, None)
+        ## if the attribute is text, then we need to convert it to a number
+        #try:
+        value = attribute_list[1]
+        attribute_type = type(value)        
+        print(attribute_name, attribute_type, value)
+        #if attribute_type is int or float, then pass
+        if attribute_type is int:
+            pass
+        else:
+            try:
+                # Try converting the value to an integer, if works, then it is a number
+                value = int(value)
+            except ValueError:
+                try:
+                    # If conversion to int fails, try converting to float, if does not work, then tranform to integer
+                    value = float(value)
+                    converter = spmf_converter.SPMFConverter()
+                    file_nm = converter.convert_floats_to_number_items(file_path, file_nm)
+                except ValueError:
+                    # If conversion to int and float fails, then it is a string 
+                    converter = spmf_converter.SPMFConverter()
+                    file_nm = converter.convert_text_to_identified_items(file_path, file_nm)
+
+            #int(attribute_list[1])
+            #float(attribute_list[1])
+        # except ValueError:
+        #     converter = spmf_converter.SPMFConverter()
+        #     file_nm = converter.convert_text_to_identified_items(file_path, file_nm)
+        #     pass
+                
+        # Mining Perfectly Rare Itemsets Using The AprioriInverse Algorithm (SPMF Documentation) https://www.philippe-fournier-viger.com/spmf/AprioriInverse.php       
+        # spmf = Spmf("AprioriInverse", input_file_path="./file_nm",
+        #             output_file_path="output.txt", 
+        #             spmf_jar_location_dir="./spmf.jar")
+
+        #smpfa = Spmf(spmf_bin_location_dir="c:/gitHub/utad/utad-ea-mining/app/src/studies/spmf/spmf.jar",
+        input_file_full_name = os.path.join(file_path, file_nm)
+        output_file_nm = f"api_resource_data_attribute_{attribute_name}.out"
+        output_file_full_name = os.path.join(file_path, output_file_nm)
+        smpfa = Spmf(spmf_bin_location_dir="c:/gitHub/utad/utad-ea-mining/app/src/studies/spmf",
+                    algorithm_name="AprioriInverse", 
+                    input_filename=input_file_full_name,
+                    output_filename=output_file_full_name, 
+                    arguments=[0.1, 0.6])
+        smpfa.run()
+        
+        # Read the output file line by line. If any pattern is found, then the attribute is considered useful
+        outFile = open(output_file_full_name,'r', encoding='utf-8')
+        for string in outFile:
+            print(string)
+            util = True
+            break
+        outFile.close() 
+              
+        #pd_rare = smpfa.to_pandas_dataframe(pickle=True)      
+        #smpfa.to_csv(f"AprioriInverse{attribute_name}.csv")  
+        
+        return util
+        
+    except Exception as error:
+        print('Ocorreu problema {} '.format(error.__class__))
+        print("mensagem", str(error))
+        local_idenfication = f"verify_attribute_utility({attribute_name}, {api_call_name}) :"
+        print(local_idenfication, __name__)
+        raise error
+
+def old_mining_frequent_temporal_correlations(onto):
     # Prepare data
     line_data = []
     # Find ConsumerApp by client_id
@@ -288,100 +554,13 @@ def mining_frequent_temporal_correlations(onto):
                     line_data.append([api_call, attributes])
                     print("line_data", line_data)
 
-def navigate_and_export_ontology(onto):
-    # Prepare data
-    line_data = []
-    headers = ['API Call', 'Resource Data Attributes']
-    # Find ConsumerApp by client_id
-    #consumer_apps = onto.search(type=onto.ConsumerApp, client_id=client_id_value)
-    consumer_apps = onto.search(type=ns_core.ConsumerApp)
-    #TODO tem que pegar só os ConsumerApp sem as subclasses. Está retornando o Partner.
-    for consumer_app in consumer_apps:
-        # Find API Calls associated with ConsumerApp
-        # api_calls = onto.search(type=ns_core.APICall, participatedIn=consumer_app) . Isso aqui teria que ser por sparql, pois não existe o param object property
-        api_calls = list(consumer_app.participatedIn)
-        for api_call in api_calls:
-            # Find API Resources associated with API Call
-            api_operations = list(api_call.participatedIn)
-            #classe = ns_core.OperationExecuted           
-            for api_operation in api_operations:
-                #g = Graph()
-                # Parse in an RDF file hosted at some location
-                query = f"""PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-                            PREFIX owl: <http://www.w3.org/2002/07/owl#>
-                            PREFIX gufo: <http://purl.org/nemo/gufo#>
-                            PREFIX ns_core: <http://eamining.edu.pt/core#>
-                            SELECT ?operationExecuted
-                            WHERE {{
-                                ?operationExecuted rdf:type ns_core:OperationExecuted .
-                                ?operationExecuted gufo:mediates <{api_operation.iri}> .
-                            }}
-                        """                       
-                # Execute the query
-                operations_executed = list(default_world.sparql(query))
-                for operation_executed_tuple in operations_executed:
-                    operation_executed = operation_executed_tuple[0]  # Get the individual from the tuple
-                    resources = list(operation_executed.mediates)
-                    for resource in resources:
-                            # Check if resource is an instance of ns_core.APIResource
-                            if ns_core.APIResource in resource.is_a:
-                                #attribute_values = [attr.attribute_value for attr in resource.resource_data] 
-                                attribute_values = []
-                                for att in resource.resource_data:
-                                    for value in att.attribute_value:
-                                        at = value
-                                    attribute_values.append(value)
-                                print(attribute_values)
-                    #Append to CSV data
-                    line_data.append([api_call, attribute_values])
-    export_to_file(line_data, '.', 'api_resource_data.txt', headers)                    
-
-            
-def export_to_file(line_data, file_path, file_name, headers):
-# Export to CSV
-    # csv_file = 'api_resource_data.csv'
-    # with open(csv_file, 'w', newline='', encoding='utf-8') as file:
-    #     writer = csv.writer(file)
-    #     writer.writerow(headers)
-    #     for row in line_data:
-    #         writer.writerow(row)
-
-    # Export to txt
-    file_full_name = os.path.join(file_path, file_name)
-    with open(file_full_name, 'w', encoding='utf-8') as file:
-        # Write headers
-        if headers is not None:
-            file.write('\t'.join(headers) + '\n')
-        # Write data rows
-        for row in line_data:
-            file.write('\t'.join(map(str, row)) + '\n')         
-
-    print(f'Data exported to {file_full_name}')
-
-def save_result_to_file(result_data, file_path, file_name, headers):
-    # Prepare data
-  
-    # Convert result_data to line_data format
-    #line_data = []    
-    # for api_call, attributes in result_data.items():
-    #     line_data.append([api_call, ', '.join(attributes)])
-    
-    # Export to txt
-    file_full_name = os.path.join(file_path, file_name)
-    with open(file_full_name, 'w', encoding='utf-8') as file:
-        # Write headers
-        if headers is not None:
-            file.write('\t'.join(headers) + '\n')
-        # Write data rows
-        for r in result_data:
-            file.write(r + '\n')         
-
-    print(f'Data exported to {file_full_name}')
-
-
 # Example usage:
-remove_frequent_items(onto)
-# mining_frequent_temporal_correlations(onto)
-                 
+#remove_frequent_items(onto)
+mining_frequent_temporal_correlations(onto)
+#verify_attribute_utility("produt_price", "ecommerce-carts") 
+#add_ignored_attribute_to_file("produt_test1", "./temp/", "arm_attributes.ignore")
+# teste = get_ignored_attributes_from_file("./temp/", "arm_attributes.ignore")
+# if ('produt_test2' in teste):
+#     print("produt_test1 está na lista")
    
 print("ExtractOntoProcessView Chegou ao final com sucesso")

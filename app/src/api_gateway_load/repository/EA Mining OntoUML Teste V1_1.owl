@@ -1205,7 +1205,7 @@
     <owl:NamedIndividual rdf:about="http://eamining.edu.pt#attribute103">
         <rdf:type rdf:resource="http://eamining.edu.pt/core#Attribute"/>
         <attr2:attribute_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">cliente.products.produto</attr2:attribute_name>
-        <attr2:attribute_value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Panela de Barro</attr2:attribute_value>
+        <attr2:attribute_value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Panela de Barro one</attr2:attribute_value>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">cliente.products.produto</rdfs:label>
     </owl:NamedIndividual>
     
@@ -1766,7 +1766,7 @@
     <owl:NamedIndividual rdf:about="http://eamining.edu.pt#attribute15">
         <rdf:type rdf:resource="http://eamining.edu.pt/core#Attribute"/>
         <attr2:attribute_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">produto</attr2:attribute_name>
-        <attr2:attribute_value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Panela de Barro</attr2:attribute_value>
+        <attr2:attribute_value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Panela de Barro One</attr2:attribute_value>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">produto</rdfs:label>
     </owl:NamedIndividual>
     
@@ -2866,7 +2866,7 @@
     <owl:NamedIndividual rdf:about="http://eamining.edu.pt#attribute24">
         <rdf:type rdf:resource="http://eamining.edu.pt/core#Attribute"/>
         <attr2:attribute_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">cliente.produto.produto</attr2:attribute_name>
-        <attr2:attribute_value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Panela de Barro</attr2:attribute_value>
+        <attr2:attribute_value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Panela de Barro One</attr2:attribute_value>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">cliente.produto.produto</rdfs:label>
     </owl:NamedIndividual>
     
@@ -3427,7 +3427,7 @@
     <owl:NamedIndividual rdf:about="http://eamining.edu.pt#attribute286">
         <rdf:type rdf:resource="http://eamining.edu.pt/core#Attribute"/>
         <attr2:attribute_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">product_name</attr2:attribute_name>
-        <attr2:attribute_value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Handcrafted Metal Towels</attr2:attribute_value>
+        <attr2:attribute_value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Handcrafted Metal Towels One</attr2:attribute_value>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">product_name</rdfs:label>
     </owl:NamedIndividual>
     
@@ -4329,7 +4329,7 @@
     <owl:NamedIndividual rdf:about="http://eamining.edu.pt#attribute36">
         <rdf:type rdf:resource="http://eamining.edu.pt/core#Attribute"/>
         <attr2:attribute_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">cliente.produto.produto</attr2:attribute_name>
-        <attr2:attribute_value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Panela de Barro</attr2:attribute_value>
+        <attr2:attribute_value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Panela de Barro Two</attr2:attribute_value>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">cliente.produto.produto</rdfs:label>
     </owl:NamedIndividual>
     
@@ -4967,7 +4967,7 @@
     <owl:NamedIndividual rdf:about="http://eamining.edu.pt#attribute55">
         <rdf:type rdf:resource="http://eamining.edu.pt/core#Attribute"/>
         <attr2:attribute_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">cliente.products.produto</attr2:attribute_name>
-        <attr2:attribute_value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Panela de Barro</attr2:attribute_value>
+        <attr2:attribute_value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Panela de Barro two</attr2:attribute_value>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">cliente.products.produto</rdfs:label>
     </owl:NamedIndividual>
     
@@ -5220,7 +5220,7 @@
     <owl:NamedIndividual rdf:about="http://eamining.edu.pt#attribute76">
         <rdf:type rdf:resource="http://eamining.edu.pt/core#Attribute"/>
         <attr2:attribute_name rdf:datatype="http://www.w3.org/2001/XMLSchema#string">product_name</attr2:attribute_name>
-        <attr2:attribute_value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rustic Plastic Mouse</attr2:attribute_value>
+        <attr2:attribute_value rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Rustic Plastic Mouse One</attr2:attribute_value>
         <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">product_name</rdfs:label>
     </owl:NamedIndividual>
     
