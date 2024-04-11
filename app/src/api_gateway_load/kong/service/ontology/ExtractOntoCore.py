@@ -61,7 +61,15 @@ def get_onto_resource_attributes_from_json(api_resource, json_obj, key_hierarchy
                         attr.attribute_name.append(key_hierarchy + "." + key) 
                         attr.label.append(key_hierarchy + "." + key)
                     attr.attribute_value.append(str(value))
-                    api_resource.resource_data.append(attr)
+                    ## As the value may repeat in the request and respose of the same API Call, it is necessary to check if the attribute already exists
+                    attribute_exists = False
+                    for resource_data in api_resource.resource_data:
+                        if resource_data.attribute_name[0] == attr.attribute_name[0] and resource_data.attribute_value[0] == attr.attribute_value[0]:
+                            attribute_exists = True
+                            break
+                        if attribute_exists == False:
+                            api_resource.resource_data.append(attr)
+                        
         elif isinstance(json_obj, list):
             for item in json_obj:
                 if item:
@@ -249,6 +257,7 @@ def tranform_to_ontology(api_calls):
                             print("mensagem", str(error))
                             print("In extractAPIConcepts module :", __name__)  
                             raise Exception(f"Ontology inconsistency found: {il}")  
+                        
         except Exception as error:
              print('Ocorreu problema {} '.format(error.__class__))
              print("mensagem", str(error))

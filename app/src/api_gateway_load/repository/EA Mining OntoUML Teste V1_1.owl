@@ -5518,6 +5518,7 @@
 
     <owl:NamedIndividual rdf:about="http://eamining.edu.pt#consequent1">
         <rdf:type rdf:resource="http://eamining.edu.pt/process-view#APIConsequentActivity"/>
+        <gufo:historicallyDependsOn rdf:resource="http://eamining.edu.pt#antecedent1"/>
     </owl:NamedIndividual>
     
 

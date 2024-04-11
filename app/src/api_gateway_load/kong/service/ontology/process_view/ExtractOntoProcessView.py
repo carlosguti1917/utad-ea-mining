@@ -12,6 +12,7 @@ from spmf import Spmf
 import sys # Add missing import statement for sys module
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', "..", "..")))
 from api_gateway_load.utils import spmf_converter
+from api_gateway_load.utils import onto_util
 
 onto_path.append("app/src/api_gateway_load/repository/")  # Set the path to load the ontology
 onto = get_ontology("EA Mining OntoUML Teste V1_1.owl").load()
@@ -87,18 +88,22 @@ def add_ignored_attribute_to_file(attribute_name, file_path, file_name):
 def check_api_resource_correlation(api_call_id_a, api_call_resource_a, api_call_id_b, api_call_resource_b):
     # Prepare data
     line_data = []
-    # Find all ConsumerApp 
+    # Find all attributes 
     for attribute_a in api_call_resource_a.resource_data:
         attribute_a_name = attribute_a.attribute_name
         if attribute_a_name in get_ignored_attributes_from_file('./temp/', 'frequent_attributes.ignore'):
-            break
+            continue
         else:
             # search in other API calls and resources for the same attribute value
             for attribute_b in api_call_resource_b.resource_data:
-                print(attribute_a.attribute_name, attribute_a.attribute_value, attribute_b.attribute_name, attribute_b.attribute_value)
+                #print(attribute_a.attribute_name, attribute_a.attribute_value, attribute_b.attribute_name, attribute_b.attribute_value)
                 if attribute_b.attribute_value == attribute_a.attribute_value:
                     line_data.append([api_call_id_a, api_call_id_b, attribute_a, attribute_b])
-                    
+                    # so verificar se há repetição
+                    teste = line_data.count([api_call_id_a, api_call_id_b, attribute_a, attribute_b])
+                    #print(f"{attribute_a.name}  --> {attribute_b.name}  :  {teste}")
+                    #print(f"{attribute_a.attribute_name}={attribute_a.attribute_value}  --> {attribute_b.attribute_name}={attribute_b.attribute_value}")
+                        
     return line_data
             # search in other API calls and resources for the same attribute value
             # inner_api_calls = sorted([inner_api_call for inner_api_call in consumer_app.participatedIn if inner_api_call.request_time > api_call.request_time], key=lambda x: x.request_time)
@@ -269,7 +274,7 @@ def mining_frequent_temporal_correlations(onto):
                                     # search in other API calls and resources for the same attribute value
                                     inner_api_calls = sorted([inner_api_call for inner_api_call in consumer_app.participatedIn if inner_api_call.request_time > api_call.request_time], key=lambda x: x.request_time)
                                     for inner_api_call in inner_api_calls:
-                                        if inner_api_call != api_call:
+                                        if inner_api_call != api_call and inner_api_call.api_uri != api_call.api_uri:
                                             inner_operations = inner_api_call.participatedIn
                                             for inner_operation in inner_operations:
                                                 inner_query = f"""PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
@@ -289,18 +294,112 @@ def mining_frequent_temporal_correlations(onto):
                                                     for inner_resource in inner_resources:
                                                         if ns_core.APIResource in inner_resource.is_a:
                                                             api_correlations = check_api_resource_correlation(api_call, resource, inner_api_call, inner_resource)
-                                                            #salva cada correlação individualmente em um relator FTC?
-                                                            #if api_correlations is not None, then calcul the temporal dependency between api_call and inner_api_call
-                                                            #record the younger as Antecedent Activity and the older as Consequent Activity
-                                                            #create the historicalDependsOn relation between the two activities
-                                                            #create the relator Frequente Temporal Correlation (FTC) between the two activities
-                                                            #create the mediation between the FTC do each of Activities
-                                                            #record the attributes that are correlated in the api_correlations to reapeated_attributes in FTC
+                                                            if api_correlations is not None:
+                                                                save_frequent_temporal_correlation(onto, api_call, inner_api_call, api_correlations)
                                                                                                    
 
                     #Append to CSV data
                     #line_data.append([api_call, attributes])
                     #print("line_data", line_data)
+                    
+def save_frequent_temporal_correlation(onto, api_call_a, api_call_b, correlated_attributes):      
+    """
+    calc the temporal dependency between api_call and inner_api_call based on the request_
+    record the younger as Antecedent Activity and the older as Consequent Activity
+    create the historicalDependsOn relation between the two activities
+    create the relator Frequente Temporal Correlation (FTC) between the two activities
+    create the mediation between the FTC do each of Activities
+    record the attributes that are correlated in the api_correlations to reapeated_attributes in FTC
+    """
+
+    # calc the temporal dependency between api_call and inner_api_call based on the property request_time of the api_call
+    # record the younger as API Antecedent Activity and the older as API Consequent Activity in the ontology onto
+    # create the historicalDependsOn relation between the API Antecedent Activity and the API Consequent Activity
+    # create the relator Frequente Temporal Correlation and create the property mediates between this relator to the API Antecedent Activity and to the API Consequent Activity
+    # record the attributes that are correlated in the correlated_attributes to reapeated_attributes in the created Frequente Temporal Correlation
+    
+    partner = None
+    with onto:
+        sync_reasoner()
+        if api_call_a.api_uri != api_call_b.api_uri:
+            try:
+                if api_call_a.request_time < api_call_b.request_time:   
+                    api_antecedent_activity = ns_process_view.APIAntecedentActivity(api_call_a)
+                    api_consequent_activity = ns_process_view.APIConsequentActivity(api_call_b)
+                else:
+                    api_antecedent_activity = ns_process_view.APIAntecedentActivity(api_call_b)
+                    api_consequent_activity = ns_process_view.APIAntecedentActivity(api_call_a)   
+
+                # Get the Consumer App related to api_call_a based on the inverse participatedIn property
+                cls_consumer_app = ns_core.ConsumerApp
+                cls_partner = ns_process_view.Partner
+                #consumer_app = api_call_a.INVERSE_participatedIn[0]
+                inverse_participations_a = api_call_a.INVERSE_participatedIn
+                inverse_participations_b = api_call_b.INVERSE_participatedIn
+                for inverse_participation_a in inverse_participations_a:
+                    if cls_partner in inverse_participation_a.is_a or cls_consumer_app in inverse_participation_a.is_a:
+                        consumer_app_a = inverse_participation_a
+                    for inverse_participation_b in inverse_participations_b:
+                        if cls_partner in inverse_participation_b.is_a or cls_consumer_app in inverse_participation_b.is_a:
+                            consumer_app_b = inverse_participation_b
+                        if consumer_app_a == consumer_app_b:
+                                #verify if the partner is already exists and is related the antecedent activity and consequent activity
+                                if consumer_app_a not in api_antecedent_activity.participatedIn and consumer_app_a not in api_consequent_activity.participatedIn:
+                                    #partner = onto_util.get_individual(onto, ns_process_view.Partner, consumer_app._name)
+                                    #partner = ns_process_view.Partner()
+                                    #partner.equivalent_to.append(consumer_app_a)
+                                    #partner.participatedIn.append(api_antecedent_activity)
+                                    #partner.participatedIn.append(api_consequent_activity) 
+                                    pass
+                                       
+                    # Create the temporal dependency between the API Antecedent Activity and the API Consequent Activity
+                    api_consequent_activity.historicallyDependsOn.append(api_antecedent_activity)
+                                        
+                    # Create the relator Frequente Temporal Correlation
+                    ftc = ns_process_view.FrequentTemporalCorrelation()
+
+                    # Create the property mediates between the Frequente Temporal Correlation and the API Antecedent Activity
+                    ftc.mediates.append(api_antecedent_activity)
+                    ftc.mediates.append(api_consequent_activity)
+                    
+                    # Record the attributes that are correlated in the correlated_attributes to repeated_attributes in the created Frequente Temporal Correlation
+                    for attribute in correlated_attributes:
+                        #verify the attribute order. If attribute[0] is from api_call_a, then it is the Antecedent Activity (attribute_name_a), otherwise it is the Consequent Activity (attribute_name_b)
+                        if attribute[0] == api_call_a:
+                            attribute_name_a = attribute[2]
+                            attribute_name_b = attribute[3]
+                        else:
+                            attribute_name_a = attribute[3]
+                            attribute_name_b = attribute[2]
+                        #attribute_a = ns_core.Attribute(attribute_name_a)
+                        #attribute_b = ns_core.Attribute(attribute_name_b)
+                        attribute_pair = onto.AttributePair()
+                        attribute_pair.attribute_name_a.append(attribute_name_a)
+                        attribute_pair.attribute_name_b.append(attribute_name_b)                          
+                        # TODO concertar na ontologia, pois está com erro de grafia - repeatead_attributes
+                        #ftc.repeated_attributes.append(attribute_pair)
+                        ftc.repeatead_attributes.append(attribute_pair)
+
+                        try:
+                            #save the individuals                  
+                            #check de ontology consistency before saving                        
+                            sync_reasoner()
+                            onto.save(format="rdfxml")
+                        except Exception as error:
+                            inconsistent_cls_list = list(default_world.inconsistent_classes())
+                            for il in inconsistent_cls_list:
+                                print(il)
+                                print('inconsistency_list', il)                                                 
+                            print('Ocorreu problema {} '.format(error.__class__))
+                            print("mensagem", str(error))
+                            print("In extractAPIConcepts module :", __name__)  
+                            raise Exception(f"Ontology inconsistency found: {il}")                          
+                    return ftc
+            except Exception as error:
+                print('Ocorreu problema {} '.format(error.__class__))
+                print("mensagem", str(error))
+                print(f"In save_frequent_temporal_correlation({api_call_a}, {api_call_b}) :", __name__)        
+                raise error     
 
 def navigate_and_export_ontology(onto):
     # Prepare data
@@ -552,7 +651,7 @@ def old_mining_frequent_temporal_correlations(onto):
 
                     #Append to CSV data
                     line_data.append([api_call, attributes])
-                    print("line_data", line_data)
+                    #print("line_data", line_data)
 
 # Example usage:
 #remove_frequent_items(onto)
