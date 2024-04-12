@@ -15,7 +15,7 @@ from api_gateway_load.utils import spmf_converter
 from api_gateway_load.utils import onto_util
 
 onto_path.append("app/src/api_gateway_load/repository/")  # Set the path to load the ontology
-onto = get_ontology("EA Mining OntoUML Teste V1_1.owl").load()
+onto = get_ontology("EA Mining OntoUML Teste V1_3.owl").load()
 ns_gufo = onto.get_namespace("http://purl.org/nemo/gufo#")
 ns_core = onto.get_namespace("http://eamining.edu.pt/core#")
 ns_process_view = onto.get_namespace("http://eamining.edu.pt/process-view#")
@@ -232,9 +232,8 @@ def remove_frequent_items(onto):
                                 
 
 def mining_frequent_temporal_correlations(onto):
-    # Prepare data
-    line_data = []
     # Find all ConsumerApp 
+    #TODO Funciona, mas talvez seja mais performático usar sparql
     consumer_apps = [individual for individual in onto.individuals() if individual.is_a[0] == ns_core.ConsumerApp]
     for consumer_app in consumer_apps:
         # Find API Calls associated with ConsumerApp and sort them by request_time
@@ -318,7 +317,6 @@ def save_frequent_temporal_correlation(onto, api_call_a, api_call_b, correlated_
     # create the relator Frequente Temporal Correlation and create the property mediates between this relator to the API Antecedent Activity and to the API Consequent Activity
     # record the attributes that are correlated in the correlated_attributes to reapeated_attributes in the created Frequente Temporal Correlation
     
-    partner = None
     with onto:
         sync_reasoner()
         if api_call_a.api_uri != api_call_b.api_uri:
@@ -359,32 +357,37 @@ def save_frequent_temporal_correlation(onto, api_call_a, api_call_b, correlated_
                     ftc = ns_process_view.FrequentTemporalCorrelation()
 
                     # Create the property mediates between the Frequente Temporal Correlation and the API Antecedent Activity
-                    ftc.mediates.append(api_antecedent_activity)
-                    ftc.mediates.append(api_consequent_activity)
+                    #ftc.mediates.append(api_antecedent_activity)
+                    #ftc.mediates.append(api_consequent_activity)
                     
                     # Record the attributes that are correlated in the correlated_attributes to repeated_attributes in the created Frequente Temporal Correlation
                     for attribute in correlated_attributes:
                         #verify the attribute order. If attribute[0] is from api_call_a, then it is the Antecedent Activity (attribute_name_a), otherwise it is the Consequent Activity (attribute_name_b)
                         if attribute[0] == api_call_a:
-                            attribute_name_a = attribute[2]
-                            attribute_name_b = attribute[3]
+                            attribute_a = attribute[2]
+                            attribute_b = attribute[3]
                         else:
-                            attribute_name_a = attribute[3]
-                            attribute_name_b = attribute[2]
+                            attribute_a = attribute[3]
+                            attribute_b = attribute[2]
                         #attribute_a = ns_core.Attribute(attribute_name_a)
                         #attribute_b = ns_core.Attribute(attribute_name_b)
-                        attribute_pair = onto.AttributePair()
-                        attribute_pair.attribute_name_a.append(attribute_name_a)
-                        attribute_pair.attribute_name_b.append(attribute_name_b)                          
+                        attribute_pair = ns_core.AttributePair()
+                        attribute_pair.attribute_a.append(attribute_a)
+                        attribute_pair.attribute_b.append(attribute_b)                          
                         # TODO concertar na ontologia, pois está com erro de grafia - repeatead_attributes
+                        # TODO também attribute_name_a e attribute_name_b não parecem o mais adequado, há que ligam objetos da classe Attribute
                         #ftc.repeated_attributes.append(attribute_pair)
-                        ftc.repeatead_attributes.append(attribute_pair)
+                        ftc.repeated_attributes.append(attribute_pair)
 
                         try:
                             #save the individuals                  
                             #check de ontology consistency before saving                        
                             sync_reasoner()
                             onto.save(format="rdfxml")
+                        
+                        except RecursionError as error:
+                            print(f"RecursionError for entity: {error}")
+                            return str(error)   
                         except Exception as error:
                             inconsistent_cls_list = list(default_world.inconsistent_classes())
                             for il in inconsistent_cls_list:
@@ -393,7 +396,8 @@ def save_frequent_temporal_correlation(onto, api_call_a, api_call_b, correlated_
                             print('Ocorreu problema {} '.format(error.__class__))
                             print("mensagem", str(error))
                             print("In extractAPIConcepts module :", __name__)  
-                            raise Exception(f"Ontology inconsistency found: {il}")                          
+                            raise Exception(f"Ontology inconsistency found: {il}")  
+  
                     return ftc
             except Exception as error:
                 print('Ocorreu problema {} '.format(error.__class__))
@@ -618,7 +622,7 @@ def old_mining_frequent_temporal_correlations(onto):
                                 for attribute in resource.resource_data:
                                     attribute_name = attribute.attribute_name
                                     attribute_value = attribute.attribute_value
-                                    print(attribute_name, attribute_value)
+                                    #print(attribute_name, attribute_value)
                                     # search in other API calls and resources for the same attribute value
                                     inner_api_calls = sorted([inner_api_call for inner_api_call in consumer_app.participatedIn if inner_api_call.request_time > api_call.request_time], key=lambda x: x.request_time)
                                     for inner_api_call in inner_api_calls:
@@ -643,9 +647,9 @@ def old_mining_frequent_temporal_correlations(onto):
                                                         if ns_core.APIResource in inner_resource.is_a:
                                                             for inner_attribute in inner_resource.resource_data:
                                                                 if inner_attribute.attribute_value == attribute_value:
-                                                                    api_call_x = api_call.api_uri
+                                                                    #api_call_x = api_call.api_uri
                                                                     #api_call_y = inner_resource.parent.parent.parent.API_Call.api_uri
-                                                                    api_call_y = inner_api_call.api_uri
+                                                                    #api_call_y = inner_api_call.api_uri
                                                                     attributes.append((api_call, inner_api_call, attribute_name, attribute_value, inner_attribute.attribute_name, inner_attribute.attribute_value)) 
                                                                                                    
 

@@ -13,7 +13,7 @@ from api_gateway_load import configs
 #onto = get_ontology("app/src/api_gateway_load/repository/Onto EA Mining v0.1-RDFXML.owl").load()
 onto_path.append("app/src/api_gateway_load/repository/")  # Set the path to load the ontology
 #onto = get_ontology("Onto EA Mining v0.1-RDFXML.owl").load()
-onto = get_ontology("EA Mining OntoUML Teste V1_1.owl").load()
+onto = get_ontology("EA Mining OntoUML Teste V1_3.rdf").load()
 #ns_core = onto.get_namespace("http://apieamining.edu.pt/core#")
 ns_core = onto.get_namespace("http://eamining.edu.pt/core#")
 
@@ -33,7 +33,7 @@ class ExtractOntoCore:
         # self.myclient = pymongo.MongoClient(configs.MONGO_DB_SERVER["host"])
         # self.mydb = self.myclient[configs.MONGO_DB_SERVER["databasename"]]
         # self.collection_call_cleaned = self.mydb["kong-api-call-cleaned"]
-        api_calls = api_calls = list(collection_call_cleaned.find({"_source.@timestamp": {"$gt": begindate}}))
+        api_calls = list(collection_call_cleaned.find({"_source.@timestamp": {"$gt": begindate}}))
         tranform_to_ontology(api_calls)
 
 def get_onto_resource_attributes_from_json(api_resource, json_obj, key_hierarchy):
@@ -63,12 +63,15 @@ def get_onto_resource_attributes_from_json(api_resource, json_obj, key_hierarchy
                     attr.attribute_value.append(str(value))
                     ## As the value may repeat in the request and respose of the same API Call, it is necessary to check if the attribute already exists
                     attribute_exists = False
-                    for resource_data in api_resource.resource_data:
-                        if resource_data.attribute_name[0] == attr.attribute_name[0] and resource_data.attribute_value[0] == attr.attribute_value[0]:
-                            attribute_exists = True
-                            break
-                        if attribute_exists == False:
-                            api_resource.resource_data.append(attr)
+                    if api_resource.resource_data.__len__() > 0:
+                        for resource_data in api_resource.resource_data:
+                            if resource_data.attribute_name[0] == attr.attribute_name[0] and resource_data.attribute_value[0] == attr.attribute_value[0]:
+                                attribute_exists = True
+                                print("Attribute already exists: ", attr.attribute_name[0], " = ", attr.attribute_value[0])
+                                break
+                    if not attribute_exists:
+                        api_resource.resource_data.append(attr)
+                        print("Attribute added: ", attr.attribute_name[0], " = ", attr.attribute_value[0])
                         
         elif isinstance(json_obj, list):
             for item in json_obj:
@@ -236,10 +239,8 @@ def tranform_to_ontology(api_calls):
                             relator_operation_executed = ns_core.OperationExecuted()
                             relator_operation_executed.mediates.append(api_operation)
                             relator_operation_executed.mediates.append(api_resource)                       
-                            api_operation.modifies.append(api_resource)
+                            #api_operation.modifies.append(api_resource)
                             # Não consegui atribuir o a associação
-                            #modify = ns_core.modifies()
-                            #modify.append(api_operation, api_resource)
                         
                         try:
                             #save the individuals                  

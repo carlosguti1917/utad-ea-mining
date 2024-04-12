@@ -6,7 +6,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from service.ontology import ExtractOntoCore
 
 
-beginDate = "2023-02-07T09:36:56.042Z"
+beginDate = "2024-03-07T09:36:56.042Z"
 
 extract_onto_core = ExtractOntoCore.ExtractOntoCore(beginDate)
 #onto = ExtractOntoCore.ExtractOntoCore.onto
