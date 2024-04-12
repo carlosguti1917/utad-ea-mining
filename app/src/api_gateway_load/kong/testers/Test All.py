@@ -31,7 +31,7 @@ extract_onto_core = ExtractOntoCore.ExtractOntoCore(beginDate)
 print("Extration of Core Ontology with success")
 
 #remove_frequent_items(onto)
-ExtractOntoProcessView.remove_frequent_items(onto)  
+#ExtractOntoProcessView.remove_frequent_items(onto)  
 print("Remove Frequent Items with success")
 
 ExtractOntoProcessView.mining_frequent_temporal_correlations(onto)
