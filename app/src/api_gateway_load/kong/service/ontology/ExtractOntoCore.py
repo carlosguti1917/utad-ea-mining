@@ -9,12 +9,13 @@ import pymongo
 from rdflib import XSD
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', "..")))
 from api_gateway_load import configs
+from api_gateway_load.utils import onto_util
 
 #onto = get_ontology("app/src/api_gateway_load/repository/Onto EA Mining v0.1-RDFXML.owl").load()
 onto_path.append("app/src/api_gateway_load/repository/")  # Set the path to load the ontology
 #onto = get_ontology("Onto EA Mining v0.1-RDFXML.owl").load()
-onto = get_ontology("EA Mining OntoUML Teste V1_3.rdf").load()
-#ns_core = onto.get_namespace("http://apieamining.edu.pt/core#")
+#onto = get_ontology("EA Mining OntoUML Teste V1_3.rdf").load()
+onto = get_ontology(configs.OWL_FILE["file_name"]).load()
 ns_core = onto.get_namespace("http://eamining.edu.pt/core#")
 
 # Connect to MongoDB
@@ -77,36 +78,7 @@ def get_onto_resource_attributes_from_json(api_resource, json_obj, key_hierarchy
             for item in json_obj:
                 if item:
                     get_onto_resource_attributes_from_json(api_resource, json_obj) 
-
-def get_individual(onto_class, individual_name):
-    """
-    Retrieves individuals from the ontology based on the provided class name and individual name.
-
-    Args:
-        onto: The ontology to query.
-        class_name: The name of the class to query for.
-        individual_name: The name of the individual to query for.
-
-    Returns:
-        list: A list of individuals that match the query.
-    """
-    try:
-        #with onto:
-        #individuals = onto.search(type=onto_class, iri="*"+ individual_name) #funciona mas pega mais por causa do *
-        individuals = onto.search(type=onto_class, iri="http://eamining.edu.pt#"+individual_name+"")     
-        # Check if the individual exists
-        if individuals and len(individuals) == 1:
-            return individuals[0] 
-            # Access individual properties or perform further operations
-        elif individuals and len(individuals) > 1:
-            raise Exception(f"More than one individual '{individual_name}' of class '{onto_class}' was found.")          
-        return None    
-    except Exception as error:
-        print('An error occurred: {} '.format(error.__class__))
-        print("Message:", str(error))
-        print("In get_individuals module :", __name__)
-        raise error
-                              
+                             
 def setOntolgyIndividuals(self, onto, className, individuoName):
     try:
         onto[className] = individuoName
@@ -141,14 +113,14 @@ def tranform_to_ontology(api_calls):
             
                 if request_id is None and Consumer_app_id is None and Consumer_app_name is None:
                     continue
-                if get_individual(cls_api_call, request_id):
+                if onto_util.get_individual(onto, cls_api_call, 'http://eamining.edu.pt/', request_id):
                     continue
                 
                 #Consumer App
                 if Consumer_app_id is not None and Consumer_app_name is not None:
                     #cls = onto["http://eamining.edu.pt/core#ConsumerApp"]
                     cls_consumer_app = ns_core.ConsumerApp
-                    consumer_app = get_individual(cls_consumer_app, Consumer_app_name)
+                    consumer_app = onto_util.get_individual(onto, cls_consumer_app, 'http://eamining.edu.pt/', Consumer_app_name)
                     if consumer_app is None:
                         consumer_app = cls_consumer_app(Consumer_app_name)
                         consumer_app.label.append(Consumer_app_name)
@@ -187,7 +159,7 @@ def tranform_to_ontology(api_calls):
                         #ApiOperation.method
                         if "request" in call["_source"] and "method" in call["_source"]["request"] and "request" in call["_source"] and "url" in call["_source"]["request"]:
                             operation_route = call["_source"]["request"]["method"] + "_" + call["_source"]["request"]["url"]
-                            api_operation = get_individual(ns_core.APIOperation, operation_route)
+                            api_operation = onto_util.get_individual(onto, ns_core.APIOperation, 'http://eamining.edu.pt/', operation_route)
                             if api_operation is None:
                                 api_operation = ns_core.APIOperation(operation_route)
                                 api_operation.label.append(operation_route)
@@ -197,7 +169,7 @@ def tranform_to_ontology(api_calls):
                         #ServiceDestination.endpoint_route
                         if "service" in call["_source"] and "host" in call["_source"]["service"] and "path" in call["_source"]["service"]:
                             api_destination_route = call["_source"]["service"]["host"] + call["_source"]["service"]["path"]
-                            api_destination = get_individual(ns_core.APIOperation, api_destination_route)                        
+                            api_destination = onto_util.get_individual(onto, ns_core.APIOperation, 'http://eamining.edu.pt/', api_destination_route)                        
                             if api_destination is None:
                                 api_destination = ns_core.ServiceDestination(api_destination_route)
                                 api_destination.label.append(api_destination_route)

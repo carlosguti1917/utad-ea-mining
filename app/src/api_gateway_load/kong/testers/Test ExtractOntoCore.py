@@ -9,9 +9,10 @@ from service.ontology import ExtractOntoCore
 beginDate = "2024-03-07T09:36:56.042Z"
 
 extract_onto_core = ExtractOntoCore.ExtractOntoCore(beginDate)
+
 #onto = ExtractOntoCore.ExtractOntoCore.onto
 #exists = extract_onto_core.individual_exists(onto, "API_Call", "APICall1")
-print("ExtractOntoCore exists")
+#print("ExtractOntoCore exists")
 
 
 # Print the result

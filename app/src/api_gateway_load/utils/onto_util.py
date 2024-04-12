@@ -14,22 +14,12 @@ from api_gateway_load import configs
 # onto_path.append("app/src/api_gateway_load/repository/")  # Set the path to load the ontology
 # #onto = get_ontology("Onto EA Mining v0.1-RDFXML.owl").load()
 # onto = get_ontology("EA Mining OntoUML Teste V1_1.owl").load()
-# #ns_core = onto.get_namespace("http://apieamining.edu.pt/core#")
 # ns_core = onto.get_namespace("http://eamining.edu.pt/core#")
-
-# Connect to MongoDB
-# myclient = pymongo.MongoClient(configs.MONGO_DB_SERVER["host"])
-# mydb = myclient[configs.MONGO_DB_SERVER["databasename"]]
-# collection_call_cleaned = mydb["kong-api-call-cleaned"]
-
-           
-# iterar no MongoDB
-#Registrar classes na ontologia.  
 
 #print("classes = ",list(onto.classes()))
 
 
-def get_individual(onto, onto_class, individual_name):
+def get_individual(onto, onto_class, iri_base, individual_name):
     """
     Retrieves individuals from the ontology based on the provided class name and individual name.
 
@@ -44,7 +34,7 @@ def get_individual(onto, onto_class, individual_name):
     try:
         #with onto:
         #individuals = onto.search(type=onto_class, iri="*"+ individual_name) #funciona mas pega mais por causa do *
-        individuals = onto.search(type=onto_class, iri="http://eamining.edu.pt#"+individual_name+"")     
+        individuals = onto.search(type=onto_class, iri=f"{iri_base}{individual_name}")     
         # Check if the individual exists
         if individuals and len(individuals) == 1:
             return individuals[0] 

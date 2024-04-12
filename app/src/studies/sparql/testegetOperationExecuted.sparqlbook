@@ -44,7 +44,13 @@
   {
     "kind": 2,
     "language": "sparql",
-    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\n\r\nSELECT ?resource\r\nWHERE {\r\n    ?operationExecuted rdf:type ns_core:OperationExecuted .\r\n    ?operationExecuted gufo:mediates ?resource .\r\n    ?resource rdf:type ns_core:APIResource .\r\n    ?operationExecuted gufo:mediates <http://eamining.edu.pt#GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/1> .\r\n}",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\n\r\nSELECT ?resource\r\nWHERE {\r\n    ?operationExecuted rdf:type ns_core:OperationExecuted .\r\n    ?operationExecuted gufo:mediates ?resource .\r\n    ?resource rdf:type ns_core:APIResource .\r\n    ?operationExecuted gufo:mediates <http://eamining.edu.pt#GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/1> .\r\n}\r\n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\n\r\nSELECT ?consumerApp\r\nWHERE {\r\n    ?consumerApp rdf:type ns_core:ConsumerApp .\r\n}\r\n",
     "metadata": {}
   }
 ]

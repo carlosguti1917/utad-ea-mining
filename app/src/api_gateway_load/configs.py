@@ -37,3 +37,8 @@ KONG = {
 ELASTIC = {
   "kong_log": "https://192.168.0.15:9200/konglog*/_search",
 }
+
+# it only works with file .owl
+OWL_FILE = {
+  "file_name": "EA Mining OntoUML Teste V1_3.owl",
+}

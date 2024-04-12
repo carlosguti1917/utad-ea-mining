@@ -11,11 +11,13 @@ import pandas as pd
 from spmf import Spmf
 import sys # Add missing import statement for sys module
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', "..", "..")))
+from api_gateway_load import configs
 from api_gateway_load.utils import spmf_converter
 from api_gateway_load.utils import onto_util
 
 onto_path.append("app/src/api_gateway_load/repository/")  # Set the path to load the ontology
-onto = get_ontology("EA Mining OntoUML Teste V1_3.owl").load()
+#onto = get_ontology("EA Mining OntoUML Teste V1_3.owl").load()
+onto = get_ontology(configs.OWL_FILE["file_name"]).load()
 ns_gufo = onto.get_namespace("http://purl.org/nemo/gufo#")
 ns_core = onto.get_namespace("http://eamining.edu.pt/core#")
 ns_process_view = onto.get_namespace("http://eamining.edu.pt/process-view#")
@@ -234,7 +236,17 @@ def remove_frequent_items(onto):
 def mining_frequent_temporal_correlations(onto):
     # Find all ConsumerApp 
     #TODO Funciona, mas talvez seja mais performático usar sparql
-    consumer_apps = [individual for individual in onto.individuals() if individual.is_a[0] == ns_core.ConsumerApp]
+    #consumer_apps = [individual for individual in onto.individuals() if individual.is_a[0] == ns_core.ConsumerApp]
+    query = """
+        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+        PREFIX ns_core: <http://eamining.edu.pt/core#>
+        SELECT ?consumerApp
+        WHERE {
+            ?consumerApp rdf:type ns_core:ConsumerApp .
+        }
+        """
+    consumer_apps = list(default_world.sparql(query))       
+
     for consumer_app in consumer_apps:
         # Find API Calls associated with ConsumerApp and sort them by request_time
         api_calls = sorted(list(consumer_app.participatedIn), key=lambda x: x.request_time)
@@ -322,11 +334,16 @@ def save_frequent_temporal_correlation(onto, api_call_a, api_call_b, correlated_
         if api_call_a.api_uri != api_call_b.api_uri:
             try:
                 if api_call_a.request_time < api_call_b.request_time:   
-                    api_antecedent_activity = ns_process_view.APIAntecedentActivity(api_call_a)
-                    api_consequent_activity = ns_process_view.APIConsequentActivity(api_call_b)
+                    api_antecedent_activity = ns_process_view.APIAntecedentActivity(api_call_a.name)
+                    api_antecedent_activity.equivalent_to.append(api_call_a)
+                    api_consequent_activity = ns_process_view.APIConsequentActivity(api_call_b.name)
+                    api_consequent_activity.equivalent_to.append(api_call_b)
                 else:
-                    api_antecedent_activity = ns_process_view.APIAntecedentActivity(api_call_b)
-                    api_consequent_activity = ns_process_view.APIAntecedentActivity(api_call_a)   
+                    api_antecedent_activity = ns_process_view.APIAntecedentActivity(api_call_b.name)
+                    api_antecedent_activity.equivalent_to.append(api_call_b)
+                    api_consequent_activity = ns_process_view.APIAntecedentActivity(api_call_a.name)
+                    api_consequent_activity.equivalent_to.append(api_call_a)
+                    
 
                 # Get the Consumer App related to api_call_a based on the inverse participatedIn property
                 cls_consumer_app = ns_core.ConsumerApp
@@ -343,22 +360,22 @@ def save_frequent_temporal_correlation(onto, api_call_a, api_call_b, correlated_
                         if consumer_app_a == consumer_app_b:
                                 #verify if the partner is already exists and is related the antecedent activity and consequent activity
                                 if consumer_app_a not in api_antecedent_activity.participatedIn and consumer_app_a not in api_consequent_activity.participatedIn:
-                                    #partner = onto_util.get_individual(onto, ns_process_view.Partner, consumer_app._name)
-                                    #partner = ns_process_view.Partner()
-                                    #partner.equivalent_to.append(consumer_app_a)
-                                    #partner.participatedIn.append(api_antecedent_activity)
-                                    #partner.participatedIn.append(api_consequent_activity) 
-                                    pass
+                                    partner = onto_util.get_individual(onto, ns_process_view.Partner, "http://eamining.edu.pt/", consumer_app_a._name)
+                                    if partner is None:
+                                        partner = ns_process_view.Partner(consumer_app_a._name)
+                                        partner.equivalent_to.append(consumer_app_a)
+                                        partner.participatedIn.append(api_antecedent_activity)
+                                        partner.participatedIn.append(api_consequent_activity) 
+
+                    # Create the relator Frequente Temporal Correlation
+                    ftc = ns_process_view.FrequentTemporalCorrelation()
                                        
                     # Create the temporal dependency between the API Antecedent Activity and the API Consequent Activity
                     api_consequent_activity.historicallyDependsOn.append(api_antecedent_activity)
                                         
-                    # Create the relator Frequente Temporal Correlation
-                    ftc = ns_process_view.FrequentTemporalCorrelation()
-
                     # Create the property mediates between the Frequente Temporal Correlation and the API Antecedent Activity
-                    #ftc.mediates.append(api_antecedent_activity)
-                    #ftc.mediates.append(api_consequent_activity)
+                    ftc.mediates.append(api_antecedent_activity)
+                    ftc.mediates.append(api_consequent_activity)
                     
                     # Record the attributes that are correlated in the correlated_attributes to repeated_attributes in the created Frequente Temporal Correlation
                     for attribute in correlated_attributes:
@@ -369,14 +386,11 @@ def save_frequent_temporal_correlation(onto, api_call_a, api_call_b, correlated_
                         else:
                             attribute_a = attribute[3]
                             attribute_b = attribute[2]
-                        #attribute_a = ns_core.Attribute(attribute_name_a)
-                        #attribute_b = ns_core.Attribute(attribute_name_b)
+                        # Create the attribute pair
                         attribute_pair = ns_core.AttributePair()
                         attribute_pair.attribute_a.append(attribute_a)
                         attribute_pair.attribute_b.append(attribute_b)                          
-                        # TODO concertar na ontologia, pois está com erro de grafia - repeatead_attributes
-                        # TODO também attribute_name_a e attribute_name_b não parecem o mais adequado, há que ligam objetos da classe Attribute
-                        #ftc.repeated_attributes.append(attribute_pair)
+                        # Add the attribute pair to the repeated_attributes property of the Frequente Temporal Correlation
                         ftc.repeated_attributes.append(attribute_pair)
 
                         try:
@@ -581,81 +595,6 @@ def verify_attribute_utility(attribute_name, api_call_name):
         print(local_idenfication, __name__)
         raise error
 
-def old_mining_frequent_temporal_correlations(onto):
-    # Prepare data
-    line_data = []
-    # Find ConsumerApp by client_id
-    #consumer_apps = onto.search(type=onto.ConsumerApp, client_id=client_id_value)
-    #consumer_apps = onto.search(type=ns_core.ConsumerApp)
-    consumer_apps = [individual for individual in onto.individuals() if individual.is_a[0] == ns_core.ConsumerApp]
-    for consumer_app in consumer_apps:
-        # Find API Calls associated with ConsumerApp
-        api_calls = sorted(list(consumer_app.participatedIn), key=lambda x: x.request_time)
-        #api_calls = iter(apps_api_calls)
-        for api_call in api_calls:
-            # Only instancs of API_Call
-            if not ns_core.APICall in api_call.is_a:
-                continue
-            # Find API Resources associated with API Call
-            api_operations = list(api_call.participatedIn)     
-            for api_operation in api_operations:
-                query = f"""PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-                            PREFIX owl: <http://www.w3.org/2002/07/owl#>
-                            PREFIX gufo: <http://purl.org/nemo/gufo#>
-                            PREFIX ns_core: <http://eamining.edu.pt/core#>
-                            SELECT ?operationExecuted
-                            WHERE {{
-                                ?operationExecuted rdf:type ns_core:OperationExecuted .
-                                ?operationExecuted gufo:mediates <{api_operation.iri}> .
-                            }}
-                        """                       
-                # Execute the query
-                operations_executed = list(default_world.sparql(query))
-                for operation_executed_tuple in operations_executed:
-                    operation_executed = operation_executed_tuple[0]  # Get the individual from the tuple
-                    resources = list(operation_executed.mediates)
-                    for resource in resources:
-                            # Check if resource is an instance of ns_core.APIResource
-                            if ns_core.APIResource in resource.is_a:
-                                #attribute_values = [attr.attribute_value for attr in resource.resource_data] 
-                                attributes = []
-                                for attribute in resource.resource_data:
-                                    attribute_name = attribute.attribute_name
-                                    attribute_value = attribute.attribute_value
-                                    #print(attribute_name, attribute_value)
-                                    # search in other API calls and resources for the same attribute value
-                                    inner_api_calls = sorted([inner_api_call for inner_api_call in consumer_app.participatedIn if inner_api_call.request_time > api_call.request_time], key=lambda x: x.request_time)
-                                    for inner_api_call in inner_api_calls:
-                                        if inner_api_call != api_call:
-                                            inner_operations = inner_api_call.participatedIn
-                                            for inner_operation in inner_operations:
-                                                inner_query = f"""PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-                                                            PREFIX owl: <http://www.w3.org/2002/07/owl#>
-                                                            PREFIX gufo: <http://purl.org/nemo/gufo#>
-                                                            PREFIX ns_core: <http://eamining.edu.pt/core#>
-                                                            SELECT ?operationExecuted
-                                                            WHERE {{
-                                                                ?operationExecuted rdf:type ns_core:OperationExecuted .
-                                                                ?operationExecuted gufo:mediates <{inner_operation.iri}> .
-                                                            }}
-                                                        """ 
-                                                inner_operations_executed = list(default_world.sparql(inner_query))
-                                                for inner_operation_executed_tuple in inner_operations_executed:
-                                                    inner_operation_executed = inner_operation_executed_tuple[0]  # Get the individual from the tuple
-                                                    inner_resources = list(inner_operation_executed.mediates) 
-                                                    for inner_resource in inner_resources:
-                                                        if ns_core.APIResource in inner_resource.is_a:
-                                                            for inner_attribute in inner_resource.resource_data:
-                                                                if inner_attribute.attribute_value == attribute_value:
-                                                                    #api_call_x = api_call.api_uri
-                                                                    #api_call_y = inner_resource.parent.parent.parent.API_Call.api_uri
-                                                                    #api_call_y = inner_api_call.api_uri
-                                                                    attributes.append((api_call, inner_api_call, attribute_name, attribute_value, inner_attribute.attribute_name, inner_attribute.attribute_value)) 
-                                                                                                   
-
-                    #Append to CSV data
-                    line_data.append([api_call, attributes])
-                    #print("line_data", line_data)
 
 # Example usage:
 #remove_frequent_items(onto)
