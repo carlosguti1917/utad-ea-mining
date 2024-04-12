@@ -42,3 +42,7 @@ ELASTIC = {
 OWL_FILE = {
   "file_name": "EA Mining OntoUML Teste V1_3.owl",
 }
+
+FREQUENT_API_ATTRIBUTES = {
+  "file_name": "frequent_attributes.ignore",
+}

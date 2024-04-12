@@ -19,6 +19,60 @@ from api_gateway_load import configs
 #print("classes = ",list(onto.classes()))
 
 
+def add_ignored_attribute_to_file(attribute_name, file_path, api_name):
+    # add to the list of ignored attributes for the API from the file of ignored attributes    
+    """
+    open the json file
+    set the json object to a variable
+    Add a new attribute_ to the json file with the list of ignored attribute
+    save the json file
+    close the json file
+    update the json object variable with the new attribute
+    return de json object variable
+    """
+    #data = []
+    try:
+        file_name = configs.FREQUENT_API_ATTRIBUTES["file_name"]
+        full_file_name = f"{api_name}_{file_name}.ignore"
+        if os.path.exists(file_path + file_name):
+            with open(file_path + full_file_name, 'r') as file:
+                data = file.read()
+                #check if the attribute is already in the list, if not, add it
+                if attribute_name not in data:
+                    with open(file_path + full_file_name, 'a') as file:
+                        file.write(attribute_name + '\n')
+                        file.close()
+        else:
+            with open(file_path + full_file_name, 'w') as file:
+                file.write(attribute_name + '\n')
+                file.close()
+        #return data
+    except Exception as error:
+        print('Ocorreu problema {} '.format(error.__class__))
+        print("mensagem", str(error))
+        print(f"In add_ignored_attribute_to_json_file module({attribute_name}, {file_path}, {file_name}) :", __name__)        
+        raise error      
+    
+
+def get_ignored_attributes_from_file(file_path, api_name):
+    # get the list of ignored attributes for the API from the file of ignored attributes
+    data = []
+    try: 
+        file_name = configs.FREQUENT_API_ATTRIBUTES["file_name"]
+        full_file_name = f"{api_name}_{file_name}.ignore"
+        if os.path.exists(file_path + full_file_name):
+            with open(file_path + full_file_name, 'r') as file:
+                data = file.read()
+                #check if the attribute is already in the list, if not, add it
+                data = data.splitlines()
+                file.close()
+        return data
+    except Exception as error:
+        print('Ocorreu problema {} '.format(error.__class__))
+        print("mensagem", str(error))
+        print(f"In get_ignored_attributes_from_file({file_path}, {file_name}) :", __name__)        
+        raise error      
+
 def get_individual(onto, onto_class, iri_base, individual_name):
     """
     Retrieves individuals from the ontology based on the provided class name and individual name.
@@ -57,5 +111,25 @@ def setOntolgyIndividuals(self, onto, className, individuoName):
         print("In setOntolgyIndividuals module :", __name__)
         raise error
  
+def export_to_file(line_data, file_path, file_name, headers):
+# Export to CSV
+    # csv_file = 'api_resource_data.csv'
+    # with open(csv_file, 'w', newline='', encoding='utf-8') as file:
+    #     writer = csv.writer(file)
+    #     writer.writerow(headers)
+    #     for row in line_data:
+    #         writer.writerow(row)
+
+    # Export to txt
+    file_full_name = os.path.join(file_path, file_name)
+    with open(file_full_name, 'w', encoding='utf-8') as file:
+        # Write headers
+        if headers is not None:
+            file.write('\t'.join(headers) + '\n')
+        # Write data rows
+        for row in line_data:
+            file.write('\t'.join(map(str, row)) + '\n')         
+
+    print(f'Data exported to {file_full_name}')    
    
 #print("ExtractOntoCore Chegou ao final com sucesso")
