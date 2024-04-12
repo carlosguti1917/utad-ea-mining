@@ -14,12 +14,6 @@
   {
     "kind": 2,
     "language": "sparql",
-    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\n\r\nSELECT ?operationExecuted\r\nWHERE {\r\n    ?operationExecuted rdf:type ns_core:OperationExecuted .\r\n    ?operationExecuted gufo:mediates <http://eamining.edu.pt#POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/575/paymentmethod> .\r\n}\r\n",
-    "metadata": {}
-  },
-  {
-    "kind": 2,
-    "language": "sparql",
     "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\n\r\nSELECT (COUNT(?x) AS ?count)\r\nWHERE {\r\n    ?operationExecuted rdf:type ns_core:OperationExecuted .\r\n}\r\n",
     "metadata": {}
   },
@@ -32,7 +26,13 @@
   {
     "kind": 2,
     "language": "sparql",
-    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX attr: <http://eamining.edu.pt/core#Attribute>\r\nPREFIX aPIR: <http://eamining.edu.pt/core#aPIR>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX aPIC: <aPICall:>\r\n\r\n\r\nSELECT ?api_call ?resource ?attribute \r\nWHERE {\r\n    #?attribute_name ns_core:attribute_name ?attribute .\r\n    ?api_call rdf:type ns_core:APICall .\r\n    ?api_call aPIC:api_name \"ecommerce-carts\" .\r\n    ?resource rdf:type ns_core:APIResource .\r\n    ?attribute rdf:type <http://eamining.edu.pt/core#Attribute> .\r\n    #?attribute rdfs:label \"itens.produto\" .\r\n    #?attribute_name ns_core:resource_data ?attribute .\r\n    #?attribute_name attribute:attribute_name  .\r\n    #?attribute attr2:attribute_value ?attributeValue .\r\n}\r\nLIMIT 10\r\n",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX attr: <http://eamining.edu.pt/core#Attribute>\r\nPREFIX aPIR: <http://eamining.edu.pt/core#aPIR>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX aPIC: <aPICall:>\r\n\r\n\r\nSELECT ?api_call ?resource ?attribute \r\nWHERE {\r\n    #?attribute_name ns_core:attribute_name ?attribute .\r\n    ?api_call rdf:type ns_core:APICall .\r\n    ?api_call aPIC:api_name \"ecommerce-carts\" .\r\n    ?resource rdf:type ns_core:APIResource .\r\n    #?attribute rdf:type <http://eamining.edu.pt/core#Attribute> .\r\n    #?attribute rdfs:label \"itens.produto\" .\r\n    #?attribute_name ns_core:resource_data ?attribute .\r\n    #?attribute_name attribute:attribute_name  .\r\n    #?attribute attr2:attribute_value ?attributeValue .\r\n}\r\nLIMIT 10\r\n\r\n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\n\r\nSELECT distinct ?operationExecuted ?resource \r\nWHERE {\r\n    ?operationExecuted rdf:type ns_core:OperationExecuted .\r\n    ?operationExecuted gufo:mediates ?resource .\r\n    ?operationExecuted gufo:mediates <http://eamining.edu.pt#/sandbox/ecommerce/v1/carts/562> .\r\n    ?resource rdf:type ns_core:APIResource .\r\n\r\n}\r\n",
     "metadata": {}
   },
   {
@@ -44,13 +44,13 @@
   {
     "kind": 2,
     "language": "sparql",
-    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\n\r\nSELECT ?resource\r\nWHERE {\r\n    ?operationExecuted rdf:type ns_core:OperationExecuted .\r\n    ?operationExecuted gufo:mediates ?resource .\r\n    ?resource rdf:type ns_core:APIResource .\r\n    ?operationExecuted gufo:mediates <http://eamining.edu.pt#GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/1> .\r\n}\r\n",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\n\r\nSELECT ?resource\r\nWHERE {\r\n    ?operationExecuted rdf:type ns_core:OperationExecuted .\r\n    ?operationExecuted gufo:mediates ?resource .\r\n    ?resource rdf:type ns_core:APIResource .\r\n    ?operationExecuted gufo:mediates <http://eamining.edu.pt#/sandbox/ecommerce/v1/carts/562> .\r\n}\r\n",
     "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\n\r\nSELECT ?consumerApp\r\nWHERE {\r\n    ?consumerApp rdf:type ns_core:ConsumerApp .\r\n}\r\n",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX ns_process_view: <http://eamining.edu.pt/process-view#>\r\n\r\nSELECT DISTINCT ?consumerApp\r\nWHERE {\r\n    ?consumerApp rdf:type ns_core:ConsumerApp .\r\n    FILTER NOT EXISTS {\r\n        ?subclass rdf:type ns_process_view:Partner .\r\n        ?subclass rdfs:subClassOf ?consumerApp .\r\n        FILTER (?subclass != ?consumerApp)\r\n    }\r\n}\r\n\r\n",
     "metadata": {}
   }
 ]

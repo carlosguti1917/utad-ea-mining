@@ -55,37 +55,6 @@ Nova interação para obter os candidatos ao Activiti Connection
     2.5 A partir desta sequência extrair para o xml do archimate
 '''
 
- 
-def add_ignored_attribute_to_file(attribute_name, file_path, file_name):
-    """
-    open the json file
-    set the json object to a variable
-    Add a new attribute_ to the json file with the list of ignored attribute
-    save the json file
-    close the json file
-    update the json object variable with the new attribute
-    return de json object variable
-    """
-    #data = []
-    try:    
-        if os.path.exists(file_path + file_name):
-            with open(file_path + file_name, 'r') as file:
-                data = file.read()
-                #check if the attribute is already in the list, if not, add it
-                if attribute_name not in data:
-                    with open(file_path + file_name, 'a') as file:
-                        file.write(attribute_name + '\n')
-                        file.close()
-        else:
-            with open(file_path + file_name, 'w') as file:
-                file.write(attribute_name + '\n')
-                file.close()
-        #return data
-    except Exception as error:
-        print('Ocorreu problema {} '.format(error.__class__))
-        print("mensagem", str(error))
-        print(f"In add_ignored_attribute_to_json_file module({attribute_name}, {file_path}, {file_name}) :", __name__)        
-        raise error      
     
 def check_api_resource_correlation(api_call_id_a, api_call_resource_a, api_call_id_b, api_call_resource_b):
     # Prepare data
@@ -93,7 +62,8 @@ def check_api_resource_correlation(api_call_id_a, api_call_resource_a, api_call_
     # Find all attributes 
     for attribute_a in api_call_resource_a.resource_data:
         attribute_a_name = attribute_a.attribute_name
-        if attribute_a_name in get_ignored_attributes_from_file('./temp/', 'frequent_attributes.ignore'):
+        api_name = api_call_id_a.api_name
+        if attribute_a_name in onto_util.get_ignored_attributes_from_file('./temp/', api_name):
             continue
         else:
             # search in other API calls and resources for the same attribute value
@@ -110,45 +80,7 @@ def check_api_resource_correlation(api_call_id_a, api_call_resource_a, api_call_
             # search in other API calls and resources for the same attribute value
             # inner_api_calls = sorted([inner_api_call for inner_api_call in consumer_app.participatedIn if inner_api_call.request_time > api_call.request_time], key=lambda x: x.request_time)
     
-
-def export_to_file(line_data, file_path, file_name, headers):
-# Export to CSV
-    # csv_file = 'api_resource_data.csv'
-    # with open(csv_file, 'w', newline='', encoding='utf-8') as file:
-    #     writer = csv.writer(file)
-    #     writer.writerow(headers)
-    #     for row in line_data:
-    #         writer.writerow(row)
-
-    # Export to txt
-    file_full_name = os.path.join(file_path, file_name)
-    with open(file_full_name, 'w', encoding='utf-8') as file:
-        # Write headers
-        if headers is not None:
-            file.write('\t'.join(headers) + '\n')
-        # Write data rows
-        for row in line_data:
-            file.write('\t'.join(map(str, row)) + '\n')         
-
-    print(f'Data exported to {file_full_name}')    
-
-
-def get_ignored_attributes_from_file(file_path, file_name):
-    
-    data = []
-    try:    
-        if os.path.exists(file_path + file_name):
-            with open(file_path + file_name, 'r') as file:
-                data = file.read()
-                #check if the attribute is already in the list, if not, add it
-                data = data.splitlines()
-                file.close()
-        return data
-    except Exception as error:
-        print('Ocorreu problema {} '.format(error.__class__))
-        print("mensagem", str(error))
-        print(f"In get_ignored_attributes_from_file({file_path}, {file_name}) :", __name__)        
-        raise error     
+   
 
 
 def remove_frequent_items(onto):
@@ -221,16 +153,16 @@ def remove_frequent_items(onto):
                             attribute_name = attribute.attribute_name[0]
                             attribute_value = attribute.attribute_value[0]
                             api_name = api_call.api_name[0]
-                            freq_attr_file_name = f"{api_name}_frequent_attributes.ignore"
+                            #freq_attr_file_name = "frequent_attributes.ignore"
                             # verify it the attribute sould be ignored
-                            if attribute_name in get_ignored_attributes_from_file('./temp/', freq_attr_file_name):
+                            if attribute_name in onto_util.get_ignored_attributes_from_file('./temp/', api_name):
                                 break
                             # calculate the the variation of attribute_values in the other resources of the same api_call.name
                             attribute_is_util = verify_attribute_utility(attribute_name, api_name)
                             if attribute_is_util:
                                 attributes.append((attribute_name, attribute_value))
                             else:
-                                add_ignored_attribute_to_file(attribute_name, './temp/', freq_attr_file_name)
+                                onto_util.add_ignored_attribute_to_file(attribute_name, './temp/', api_name)
                                 
 
 def mining_frequent_temporal_correlations(onto):
@@ -238,75 +170,104 @@ def mining_frequent_temporal_correlations(onto):
     #TODO Funciona, mas talvez seja mais performático usar sparql
     #consumer_apps = [individual for individual in onto.individuals() if individual.is_a[0] == ns_core.ConsumerApp]
     query = """
-        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-        PREFIX ns_core: <http://eamining.edu.pt/core#>
-        SELECT ?consumerApp
-        WHERE {
-            ?consumerApp rdf:type ns_core:ConsumerApp .
-        }
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+            PREFIX ns_core: <http://eamining.edu.pt/core#>
+            PREFIX ns_process_view: <http://eamining.edu.pt/process-view#>
+
+            SELECT DISTINCT ?consumerApp
+            WHERE {
+                ?consumerApp rdf:type ns_core:ConsumerApp .
+                FILTER NOT EXISTS {
+                    ?subclass rdf:type ns_process_view:Partner .
+                    ?subclass rdfs:subClassOf ?consumerApp .
+                    FILTER (?subclass != ?consumerApp)
+                }
+            }
         """
     consumer_apps = list(default_world.sparql(query))       
 
-    for consumer_app in consumer_apps:
+    for consumer_app_tuple in consumer_apps:
+        consumer_app = consumer_app_tuple[0]
         # Find API Calls associated with ConsumerApp and sort them by request_time
         api_calls = sorted(list(consumer_app.participatedIn), key=lambda x: x.request_time)
         #api_calls = iter(apps_api_calls)
+        conta_api_calls = len(api_calls)
+        conta_api_call = 0
         for api_call in api_calls:
+            print(f"conta_api_call: {conta_api_call} de {conta_api_calls}")
+            conta_api_call += 1
             # Only instancs of API_Call
             if not ns_core.APICall in api_call.is_a:
                 continue
             # Find API Resources associated with API Call
             api_operations = list(api_call.participatedIn)     
             for api_operation in api_operations:
-                query = f"""PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-                            PREFIX owl: <http://www.w3.org/2002/07/owl#>
-                            PREFIX gufo: <http://purl.org/nemo/gufo#>
-                            PREFIX ns_core: <http://eamining.edu.pt/core#>
-                            SELECT ?operationExecuted
-                            WHERE {{
-                                ?operationExecuted rdf:type ns_core:OperationExecuted .
-                                ?operationExecuted gufo:mediates <{api_operation.iri}> .
-                            }}
+                query = f"""
+                        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                        PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                        PREFIX gufo: <http://purl.org/nemo/gufo#>
+                        PREFIX ns_core: <http://eamining.edu.pt/core#>
+
+                        SELECT distinct ?operationExecuted ?resource 
+                        WHERE {{
+                            ?operationExecuted rdf:type ns_core:OperationExecuted .
+                            ?operationExecuted gufo:mediates ?resource .
+                            ?operationExecuted gufo:mediates <{api_operation.iri}> .
+                            ?resource rdf:type ns_core:APIResource .
+                        }}
                         """                       
                 # Execute the query
                 operations_executed = list(default_world.sparql(query))
                 for operation_executed_tuple in operations_executed:
-                    operation_executed = operation_executed_tuple[0]  # Get the individual from the tuple
-                    resources = list(operation_executed.mediates)
-                    for resource in resources:
-                            # Check if resource is an instance of ns_core.APIResource
-                            if ns_core.APIResource in resource.is_a:
-                                #attribute_values = [attr.attribute_value for attr in resource.resource_data] 
-                                attributes = []
-                                for attribute in resource.resource_data:
-                                    attribute_name = attribute.attribute_name
-                                    attribute_value = attribute.attribute_value
-                                    print(attribute_name, attribute_value)
-                                    # search in other API calls and resources for the same attribute value
-                                    inner_api_calls = sorted([inner_api_call for inner_api_call in consumer_app.participatedIn if inner_api_call.request_time > api_call.request_time], key=lambda x: x.request_time)
-                                    for inner_api_call in inner_api_calls:
-                                        if inner_api_call != api_call and inner_api_call.api_uri != api_call.api_uri:
-                                            inner_operations = inner_api_call.participatedIn
-                                            for inner_operation in inner_operations:
-                                                inner_query = f"""PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-                                                            PREFIX owl: <http://www.w3.org/2002/07/owl#>
-                                                            PREFIX gufo: <http://purl.org/nemo/gufo#>
-                                                            PREFIX ns_core: <http://eamining.edu.pt/core#>
-                                                            SELECT ?operationExecuted
-                                                            WHERE {{
-                                                                ?operationExecuted rdf:type ns_core:OperationExecuted .
-                                                                ?operationExecuted gufo:mediates <{inner_operation.iri}> .
-                                                            }}
-                                                        """ 
-                                                inner_operations_executed = list(default_world.sparql(inner_query))
-                                                for inner_operation_executed_tuple in inner_operations_executed:
-                                                    inner_operation_executed = inner_operation_executed_tuple[0]  # Get the individual from the tuple
-                                                    inner_resources = list(inner_operation_executed.mediates) 
-                                                    for inner_resource in inner_resources:
-                                                        if ns_core.APIResource in inner_resource.is_a:
-                                                            api_correlations = check_api_resource_correlation(api_call, resource, inner_api_call, inner_resource)
-                                                            if api_correlations is not None:
-                                                                save_frequent_temporal_correlation(onto, api_call, inner_api_call, api_correlations)
+                    #operation_executed = operation_executed_tuple[0]  # Get the individual from the tuple
+                    #resources = list(operation_executed.mediates)
+                    resource = operation_executed_tuple[1]  # Get the individual resource from the tuple, the second element in the select of query
+                    #for resource in resources:
+                    # Check if resource is an instance of ns_core.APIResource
+                    #if ns_core.APIResource in resource.is_a:
+                        #attribute_values = [attr.attribute_value for attr in resource.resource_data] 
+                        #attributes = []
+                    conta_attritutos = len(resource.resource_data)
+                    conta_attributo = 0
+                    for attribute in resource.resource_data:
+                        print(f"conta_attributo: {conta_attributo} de {conta_attritutos}")
+                        conta_attributo += 1    
+                        attribute_name = attribute.attribute_name
+                        attribute_value = attribute.attribute_value
+                        print(attribute_name, attribute_value)
+                        # search in other API calls and resources for the same attribute value
+                        inner_api_calls = sorted([inner_api_call for inner_api_call in consumer_app.participatedIn if inner_api_call.request_time > api_call.request_time], key=lambda x: x.request_time)
+                        conta_inner_api_calls = len(inner_api_calls)
+                        conta_inner_api_call = 0
+                        for inner_api_call in inner_api_calls:
+                            print(f"conta_inner_api_call: {conta_inner_api_call}  de {conta_inner_api_calls}")
+                            conta_inner_api_call += 1
+                            if inner_api_call != api_call and inner_api_call.api_uri != api_call.api_uri:
+                                inner_operations = inner_api_call.participatedIn
+                                for inner_operation in inner_operations:
+                                    inner_query = f"""
+                                                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                                                PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                                                PREFIX gufo: <http://purl.org/nemo/gufo#>
+                                                PREFIX ns_core: <http://eamining.edu.pt/core#>
+                                                SELECT ?operationExecuted ?resource 
+                                                WHERE {{
+                                                    ?operationExecuted rdf:type ns_core:OperationExecuted .
+                                                    ?operationExecuted gufo:mediates ?resource .
+                                                    ?operationExecuted gufo:mediates <{inner_operation.iri}> .
+                                                    ?resource rdf:type ns_core:APIResource .
+                                                }}
+                                            """ 
+                                    inner_operations_executed = list(default_world.sparql(inner_query))
+                                    for inner_operation_executed_tuple in inner_operations_executed:
+                                        #inner_operation_executed = inner_operation_executed_tuple[0]  # Get the individual from the tuple
+                                        #inner_resources = list(inner_operation_executed.mediates) 
+                                        inner_resource = inner_operation_executed_tuple[1]  # Get the individual resource from the tuple, the second element in the select of query
+                                        #for inner_resource in inner_resources:
+                                        api_correlations = check_api_resource_correlation(api_call, resource, inner_api_call, inner_resource)
+                                        if api_correlations is not None:
+                                            save_frequent_temporal_correlation(onto, api_call, inner_api_call, api_correlations)
                                                                                                    
 
                     #Append to CSV data
@@ -330,9 +291,9 @@ def save_frequent_temporal_correlation(onto, api_call_a, api_call_b, correlated_
     # record the attributes that are correlated in the correlated_attributes to reapeated_attributes in the created Frequente Temporal Correlation
     
     with onto:
-        sync_reasoner()
         if api_call_a.api_uri != api_call_b.api_uri:
             try:
+                sync_reasoner()
                 if api_call_a.request_time < api_call_b.request_time:   
                     api_antecedent_activity = ns_process_view.APIAntecedentActivity(api_call_a.name)
                     api_antecedent_activity.equivalent_to.append(api_call_a)
@@ -393,24 +354,24 @@ def save_frequent_temporal_correlation(onto, api_call_a, api_call_b, correlated_
                         # Add the attribute pair to the repeated_attributes property of the Frequente Temporal Correlation
                         ftc.repeated_attributes.append(attribute_pair)
 
-                        try:
-                            #save the individuals                  
-                            #check de ontology consistency before saving                        
-                            sync_reasoner()
-                            onto.save(format="rdfxml")
-                        
-                        except RecursionError as error:
-                            print(f"RecursionError for entity: {error}")
-                            return str(error)   
-                        except Exception as error:
-                            inconsistent_cls_list = list(default_world.inconsistent_classes())
-                            for il in inconsistent_cls_list:
-                                print(il)
-                                print('inconsistency_list', il)                                                 
-                            print('Ocorreu problema {} '.format(error.__class__))
-                            print("mensagem", str(error))
-                            print("In extractAPIConcepts module :", __name__)  
-                            raise Exception(f"Ontology inconsistency found: {il}")  
+                    try:                
+                        #check de ontology consistency before saving               
+                        #save the individual Freqeuente Temporal Correlation in the ontology                        
+                        sync_reasoner()
+                        onto.save(format="rdfxml")
+                    
+                    except RecursionError as error:
+                        print(f"RecursionError for entity: {error}")
+                        return str(error)   
+                    except Exception as error:
+                        inconsistent_cls_list = list(default_world.inconsistent_classes())
+                        for il in inconsistent_cls_list:
+                            print(il)
+                            print('inconsistency_list', il)                                                 
+                        print('Ocorreu problema {} '.format(error.__class__))
+                        print("mensagem", str(error))
+                        print("In extractAPIConcepts module :", __name__)  
+                        raise Exception(f"Ontology inconsistency found: {il}")  
   
                     return ftc
             except Exception as error:
@@ -465,7 +426,7 @@ def navigate_and_export_ontology(onto):
                                 print(attribute_values)
                     #Append to CSV data
                     line_data.append([api_call, attribute_values])
-    export_to_file(line_data, '.', 'api_resource_data.txt', headers)                    
+    onto_util.export_to_file(line_data, '.', 'api_resource_data.txt', headers)                    
 
             
 
@@ -516,8 +477,7 @@ def verify_attribute_utility(attribute_name, api_call_name):
                 ?attribute attr2:attribute_name "{attribute_name}" .             
             }}
             """
-        print(query)
-        
+                   
         attributes = list(default_world.sparql(query))
         # for calculate the weight of each attribute_value in the whole attributes collection.
         
@@ -533,7 +493,7 @@ def verify_attribute_utility(attribute_name, api_call_name):
         #try:
         value = attribute_list[1]
         attribute_type = type(value)        
-        print(attribute_name, attribute_type, value)
+        #print(attribute_name, attribute_type, value)
         #if attribute_type is int or float, then pass
         if attribute_type is int:
             pass
