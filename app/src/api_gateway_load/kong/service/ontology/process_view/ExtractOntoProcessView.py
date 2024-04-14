@@ -56,33 +56,32 @@ Nova interação para obter os candidatos ao Activiti Connection
 '''
 
     
-def check_api_resource_correlation(api_call_id_a, api_call_resource_a, api_call_id_b, api_call_resource_b):
+def check_api_resource_correlation(api_call_a, api_call_resource_a, api_call_b, api_call_resource_b):
     # Prepare data
-    line_data = []
+    correlations_list = []
     # Find all attributes 
     for attribute_a in api_call_resource_a.resource_data:
-        attribute_a_name = attribute_a.attribute_name
-        api_name = api_call_id_a.api_name
-        if attribute_a_name in onto_util.get_ignored_attributes_from_file('./temp/', api_name):
+        attribute_a_name = attribute_a.attribute_name[0]
+        api_name_a = api_call_a.api_name[0]
+        if attribute_a_name in onto_util.get_ignored_attributes_from_file('./temp/', api_name_a):
             continue
         else:
             # search in other API calls and resources for the same attribute value
             for attribute_b in api_call_resource_b.resource_data:
-                #print(attribute_a.attribute_name, attribute_a.attribute_value, attribute_b.attribute_name, attribute_b.attribute_value)
-                if attribute_b.attribute_value == attribute_a.attribute_value:
-                    line_data.append([api_call_id_a, api_call_id_b, attribute_a, attribute_b])
-                    # so verificar se há repetição
-                    teste = line_data.count([api_call_id_a, api_call_id_b, attribute_a, attribute_b])
-                    #print(f"{attribute_a.name}  --> {attribute_b.name}  :  {teste}")
-                    #print(f"{attribute_a.attribute_name}={attribute_a.attribute_value}  --> {attribute_b.attribute_name}={attribute_b.attribute_value}")
-                        
-    return line_data
-            # search in other API calls and resources for the same attribute value
-            # inner_api_calls = sorted([inner_api_call for inner_api_call in consumer_app.participatedIn if inner_api_call.request_time > api_call.request_time], key=lambda x: x.request_time)
+                attribute_b_name = attribute_b.attribute_name[0]
+                api_name_b = api_call_b.api_name[0]
+                if attribute_b_name in onto_util.get_ignored_attributes_from_file('./temp/', api_name_b):
+                    continue
+                else:
+                    if attribute_b.attribute_value[0] == attribute_a.attribute_value[0]:
+                        print(f"attribute correlation identified {attribute_a.attribute_name} : {attribute_a.attribute_value} ->  {attribute_b.attribute_name}, {attribute_b.attribute_value}")                        
+                        correlations_list.append([api_call_a, api_call_b, attribute_a, attribute_b])  
+                        #TODO talvez registrar na ontologia resouce equality . Algo como api_resource.AttributesEquality.append(attribute_name)                    
+    return correlations_list
+    # search in other API calls and resources for the same attribute value
+    # inner_api_calls = sorted([inner_api_call for inner_api_call in consumer_app.participatedIn if inner_api_call.request_time > api_call.request_time], key=lambda x: x.request_time)
     
    
-
-
 def remove_frequent_items(onto):
     
     attributes_to_ignore = []
@@ -156,19 +155,23 @@ def remove_frequent_items(onto):
                             #freq_attr_file_name = "frequent_attributes.ignore"
                             # verify it the attribute sould be ignored
                             if attribute_name in onto_util.get_ignored_attributes_from_file('./temp/', api_name):
-                                break
+                                continue
                             # calculate the the variation of attribute_values in the other resources of the same api_call.name
                             attribute_is_util = verify_attribute_utility(attribute_name, api_name)
                             if attribute_is_util:
                                 attributes.append((attribute_name, attribute_value))
+                                #TODO registrar na ontologia resouce_equality . Algo como api_resource.AttributesEquality.append(attribute_name)
+                                # Mas tem uma questão na ontologia, pois quem é o primeiro recursou que vai ser comparado com os demais?
                             else:
                                 onto_util.add_ignored_attribute_to_file(attribute_name, './temp/', api_name)
                                 
 
 def mining_frequent_temporal_correlations(onto):
     # Find all ConsumerApp 
-    #TODO Funciona, mas talvez seja mais performático usar sparql
     #consumer_apps = [individual for individual in onto.individuals() if individual.is_a[0] == ns_core.ConsumerApp]
+    
+    ftc_list = []
+    
     query = """
             PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
@@ -186,6 +189,9 @@ def mining_frequent_temporal_correlations(onto):
             }
         """
     consumer_apps = list(default_world.sparql(query))       
+
+    # before start the mining, chech the ontology consistency
+    sync_reasoner()
 
     for consumer_app_tuple in consumer_apps:
         consumer_app = consumer_app_tuple[0]
@@ -219,7 +225,11 @@ def mining_frequent_temporal_correlations(onto):
                         """                       
                 # Execute the query
                 operations_executed = list(default_world.sparql(query))
+                conta_operations_executed = len(operations_executed)
+                conta_operation_executed = 0                
                 for operation_executed_tuple in operations_executed:
+                    print(f"conta_api_call: {conta_api_call} de {conta_api_calls} -> conta_operation_executed: {conta_operation_executed} de {conta_operations_executed}")
+                    conta_operation_executed += 1
                     #operation_executed = operation_executed_tuple[0]  # Get the individual from the tuple
                     #resources = list(operation_executed.mediates)
                     resource = operation_executed_tuple[1]  # Get the individual resource from the tuple, the second element in the select of query
@@ -231,7 +241,7 @@ def mining_frequent_temporal_correlations(onto):
                     conta_attritutos = len(resource.resource_data)
                     conta_attributo = 0
                     for attribute in resource.resource_data:
-                        print(f"conta_attributo: {conta_attributo} de {conta_attritutos}")
+                        print(f"conta_api_call: {conta_api_call} de {conta_api_calls} -> conta_operation_executed: {conta_operation_executed} de {conta_operations_executed} -> conta_attributo: {conta_attributo} de {conta_attritutos}")
                         conta_attributo += 1    
                         attribute_name = attribute.attribute_name
                         attribute_value = attribute.attribute_value
@@ -241,7 +251,7 @@ def mining_frequent_temporal_correlations(onto):
                         conta_inner_api_calls = len(inner_api_calls)
                         conta_inner_api_call = 0
                         for inner_api_call in inner_api_calls:
-                            print(f"conta_inner_api_call: {conta_inner_api_call}  de {conta_inner_api_calls}")
+                            print(f"conta_api_call: {conta_api_call} de {conta_api_calls} -> conta_operation_executed: {conta_operation_executed} de {conta_operations_executed} -> conta_attributo: {conta_attributo} de {conta_attritutos} -> conta_inner_api_call: {conta_inner_api_call}  de {conta_inner_api_calls}")
                             conta_inner_api_call += 1
                             if inner_api_call != api_call and inner_api_call.api_uri != api_call.api_uri:
                                 inner_operations = inner_api_call.participatedIn
@@ -266,13 +276,27 @@ def mining_frequent_temporal_correlations(onto):
                                         inner_resource = inner_operation_executed_tuple[1]  # Get the individual resource from the tuple, the second element in the select of query
                                         #for inner_resource in inner_resources:
                                         api_correlations = check_api_resource_correlation(api_call, resource, inner_api_call, inner_resource)
-                                        if api_correlations is not None:
-                                            save_frequent_temporal_correlation(onto, api_call, inner_api_call, api_correlations)
-                                                                                                   
+                                        if api_correlations is not None and len(api_correlations) > 0:
+                                            ftc_list.append(save_frequent_temporal_correlation(onto, api_call, inner_api_call, api_correlations))
+    try:                
+        #check de ontology consistency before saving               
+        #save the ontology
+        if len(ftc_list) > 0:
+            sync_reasoner()
+            onto.save(format="rdfxml")
+    except RecursionError as error:
+        print(f"RecursionError for entity: {error}")
+        return str(error)   
+    except Exception as error:
+        inconsistent_cls_list = list(default_world.inconsistent_classes())
+        for il in inconsistent_cls_list:
+            print(il)
+            print('inconsistency_list', il)                                                 
+        print('Ocorreu problema {} '.format(error.__class__))
+        print("mensagem", str(error))
+        print("In extractAPIConcepts module :", __name__)  
+        raise Exception(f"Ontology inconsistency found: {il}")  
 
-                    #Append to CSV data
-                    #line_data.append([api_call, attributes])
-                    #print("line_data", line_data)
                     
 def save_frequent_temporal_correlation(onto, api_call_a, api_call_b, correlated_attributes):      
     """
@@ -293,7 +317,7 @@ def save_frequent_temporal_correlation(onto, api_call_a, api_call_b, correlated_
     with onto:
         if api_call_a.api_uri != api_call_b.api_uri:
             try:
-                sync_reasoner()
+                #sync_reasoner()
                 if api_call_a.request_time < api_call_b.request_time:   
                     api_antecedent_activity = ns_process_view.APIAntecedentActivity(api_call_a.name)
                     api_antecedent_activity.equivalent_to.append(api_call_a)
@@ -354,24 +378,24 @@ def save_frequent_temporal_correlation(onto, api_call_a, api_call_b, correlated_
                         # Add the attribute pair to the repeated_attributes property of the Frequente Temporal Correlation
                         ftc.repeated_attributes.append(attribute_pair)
 
-                    try:                
-                        #check de ontology consistency before saving               
-                        #save the individual Freqeuente Temporal Correlation in the ontology                        
-                        sync_reasoner()
-                        onto.save(format="rdfxml")
+                    # try:                
+                    #     #check de ontology consistency before saving               
+                    #     #save the individual Freqeuente Temporal Correlation in the ontology                        
+                    #     sync_reasoner()
+                    #     onto.save(format="rdfxml")
                     
-                    except RecursionError as error:
-                        print(f"RecursionError for entity: {error}")
-                        return str(error)   
-                    except Exception as error:
-                        inconsistent_cls_list = list(default_world.inconsistent_classes())
-                        for il in inconsistent_cls_list:
-                            print(il)
-                            print('inconsistency_list', il)                                                 
-                        print('Ocorreu problema {} '.format(error.__class__))
-                        print("mensagem", str(error))
-                        print("In extractAPIConcepts module :", __name__)  
-                        raise Exception(f"Ontology inconsistency found: {il}")  
+                    # except RecursionError as error:
+                    #     print(f"RecursionError for entity: {error}")
+                    #     return str(error)   
+                    # except Exception as error:
+                    #     inconsistent_cls_list = list(default_world.inconsistent_classes())
+                    #     for il in inconsistent_cls_list:
+                    #         print(il)
+                    #         print('inconsistency_list', il)                                                 
+                    #     print('Ocorreu problema {} '.format(error.__class__))
+                    #     print("mensagem", str(error))
+                    #     print("In extractAPIConcepts module :", __name__)  
+                    #     raise Exception(f"Ontology inconsistency found: {il}")  
   
                     return ftc
             except Exception as error:
@@ -447,11 +471,11 @@ def save_result_to_file(result_data, file_path, file_name, headers):
             file.write('\t'.join(headers) + '\n')
         # Write data rows
         for r in result_data:
-            file.write(r + '\n')         
+            file.write(r + '\n') 
+        
+        file.close()        
 
     print(f'Data exported to {file_full_name}')
-
-
 
 
 def verify_attribute_utility(attribute_name, api_call_name):
@@ -485,40 +509,27 @@ def verify_attribute_utility(attribute_name, api_call_name):
         for attribute_tuple in attributes:
             attribute_value = attribute_tuple[0].attribute_value[0]
             attribute_list.append((attribute_value)) 
+            #TODO verificar se o atributo numerico, se não for, criar um boolean indicando que atributos não são integer. Substituir a lógica a sontetesta o valor do atributo
        
         file_nm = f"api_resource_data_attribute_{attribute_name}.txt"
         file_path = './temp/'
         save_result_to_file(attribute_list, file_path, file_nm, None)
         ## if the attribute is text, then we need to convert it to a number
-        #try:
-        value = attribute_list[1]
-        attribute_type = type(value)        
-        #print(attribute_name, attribute_type, value)
-        #if attribute_type is int or float, then pass
-        if attribute_type is int:
-            pass
-        else:
+        value = attribute_list[1]      
+        try:
+            # Try converting the value to an integer, if works, then it is a number
+            value = int(value)
+        except ValueError:
             try:
-                # Try converting the value to an integer, if works, then it is a number
-                value = int(value)
+                # If conversion to int fails, try converting to float, if does not work, then tranform to integer
+                value = float(value)
+                converter = spmf_converter.SPMFConverter()
+                file_nm = converter.convert_floats_to_number_items(file_path, file_nm)
             except ValueError:
-                try:
-                    # If conversion to int fails, try converting to float, if does not work, then tranform to integer
-                    value = float(value)
-                    converter = spmf_converter.SPMFConverter()
-                    file_nm = converter.convert_floats_to_number_items(file_path, file_nm)
-                except ValueError:
-                    # If conversion to int and float fails, then it is a string 
-                    converter = spmf_converter.SPMFConverter()
-                    file_nm = converter.convert_text_to_identified_items(file_path, file_nm)
-
-            #int(attribute_list[1])
-            #float(attribute_list[1])
-        # except ValueError:
-        #     converter = spmf_converter.SPMFConverter()
-        #     file_nm = converter.convert_text_to_identified_items(file_path, file_nm)
-        #     pass
-                
+                # If conversion to int and float fails, then it is a string 
+                converter = spmf_converter.SPMFConverter()
+                file_nm = converter.convert_text_to_identified_items(file_path, file_nm)
+              
         # Mining Perfectly Rare Itemsets Using The AprioriInverse Algorithm (SPMF Documentation) https://www.philippe-fournier-viger.com/spmf/AprioriInverse.php       
         # spmf = Spmf("AprioriInverse", input_file_path="./file_nm",
         #             output_file_path="output.txt", 
@@ -532,7 +543,7 @@ def verify_attribute_utility(attribute_name, api_call_name):
                     algorithm_name="AprioriInverse", 
                     input_filename=input_file_full_name,
                     output_filename=output_file_full_name, 
-                    arguments=[0.1, 0.6])
+                    arguments=[0.01, 0.2])
         smpfa.run()
         
         # Read the output file line by line. If any pattern is found, then the attribute is considered useful
@@ -558,11 +569,11 @@ def verify_attribute_utility(attribute_name, api_call_name):
 
 # Example usage:
 #remove_frequent_items(onto)
-mining_frequent_temporal_correlations(onto)
+#mining_frequent_temporal_correlations(onto)
 #verify_attribute_utility("produt_price", "ecommerce-carts") 
 #add_ignored_attribute_to_file("produt_test1", "./temp/", "arm_attributes.ignore")
 # teste = get_ignored_attributes_from_file("./temp/", "arm_attributes.ignore")
 # if ('produt_test2' in teste):
 #     print("produt_test1 está na lista")
    
-print("ExtractOntoProcessView Chegou ao final com sucesso")
+#print("ExtractOntoProcessView Chegou ao final com sucesso")

@@ -15,7 +15,7 @@ from api_gateway_load.kong.service import DataPrepare
 from api_gateway_load.kong.service.ontology import ExtractOntoCore
 from api_gateway_load.kong.service.ontology.process_view import ExtractOntoProcessView
 
-beginDate = "2024-03-07T09:36:56.042Z"
+beginDate = "2024-03-30T09:36:56.042Z"
 
 #Loader Calls from Elastic
 #loader.LoaderCalls(beginDate) # Recupera as chamadas da API do Elastic
@@ -27,12 +27,12 @@ print("DataPrepare com sucesso")
 
 #Core extration to Ongology
 #extract_onto_core = ExtractOntoCore.ExtractOntoCore(beginDate) # Vale para versão final
-#exists = extract_onto_core.individual_exists(onto, "API_Call", "APICall1")
 print("Extration of Core Ontology with success")
 
-#remove_frequent_items(onto)
-#ExtractOntoProcessView.remove_frequent_items(onto)  
+#remove_frequent_items
+ExtractOntoProcessView.remove_frequent_items(onto)  # Vale para versão final
 print("Remove Frequent Items with success")
 
-ExtractOntoProcessView.mining_frequent_temporal_correlations(onto)
+#mining process view
+#ExtractOntoProcessView.mining_frequent_temporal_correlations(onto) # Vale para versão final
 print("Mining Frequent Temporal Correlations with success")

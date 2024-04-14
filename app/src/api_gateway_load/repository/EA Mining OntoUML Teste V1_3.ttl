@@ -1,0 +1,2986 @@
+@prefix : <http://eamining.edu.pt/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix aPIC: <aPICall:> .
+@prefix aPIO: <aPIOperation:> .
+@prefix aPIR: <aPIResource:> .
+@prefix attr: <attribute:> .
+@prefix cons: <consumerApp:> .
+@prefix gufo: <http://purl.org/nemo/gufo#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix serv: <service:> .
+@base <http://eamining.edu.pt/> .
+
+<http://eamining.edu.pt> rdf:type owl:Ontology .
+
+#################################################################
+#    Annotation properties
+#################################################################
+
+###  http://purl.org/nemo/gufo#isDerivedFrom
+gufo:isDerivedFrom rdf:type owl:AnnotationProperty .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  aPIResource:resource_data
+aPIR:resource_data rdf:type owl:ObjectProperty ;
+                   rdfs:subPropertyOf gufo:hasReifiedQualityValue ;
+                   rdfs:domain <http://eamining.edu.pt/core#APIResource> ;
+                   rdfs:range <http://eamining.edu.pt/core#Attribute> ;
+                   rdfs:label "resource_data"@en .
+
+
+###  attributePair:attribute_a
+<attributePair:attribute_a> rdf:type owl:ObjectProperty ;
+                            rdfs:domain <http://eamining.edu.pt/core#AttributePair> ;
+                            rdfs:range <http://eamining.edu.pt/core#Attribute> ;
+                            rdfs:label "attribute_a"@en .
+
+
+###  attributePair:attribute_b
+<attributePair:attribute_b> rdf:type owl:ObjectProperty ;
+                            rdfs:domain <http://eamining.edu.pt/core#AttributePair> ;
+                            rdfs:range <http://eamining.edu.pt/core#Attribute> ;
+                            rdfs:label "attribute_b"@en .
+
+
+###  frequentTemporalCorrelation:repeated_attributes
+<frequentTemporalCorrelation:repeated_attributes> rdf:type owl:ObjectProperty ;
+                                                  rdfs:subPropertyOf gufo:hasReifiedQualityValue ;
+                                                  rdfs:domain <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
+                                                  rdfs:range <http://eamining.edu.pt/core#AttributePair> ;
+                                                  rdfs:label "repeated_attributes"@en .
+
+
+###  http://eamining.edu.pt/core#AttributesEquality
+<http://eamining.edu.pt/core#AttributesEquality> rdf:type owl:ObjectProperty ;
+                                                 rdfs:domain <http://eamining.edu.pt/core#APIResource> ;
+                                                 rdfs:range <http://eamining.edu.pt/core#APIResource> .
+
+
+###  http://eamining.edu.pt/core#belongsTo
+<http://eamining.edu.pt/core#belongsTo> rdf:type owl:ObjectProperty ;
+                                        rdfs:domain <http://eamining.edu.pt/core#APIDocumentation> ;
+                                        rdfs:range <http://eamining.edu.pt/data-relation-view#APIDomain> .
+
+
+###  http://eamining.edu.pt/core#isDocumentedBy
+<http://eamining.edu.pt/core#isDocumentedBy> rdf:type owl:ObjectProperty ;
+                                             rdfs:domain <http://eamining.edu.pt/core#APIResource> ;
+                                             rdfs:range <http://eamining.edu.pt/core#APIDocumentation> .
+
+
+###  http://eamining.edu.pt/core#modifies
+<http://eamining.edu.pt/core#modifies> rdf:type owl:ObjectProperty ;
+                                       rdfs:domain <http://eamining.edu.pt/core#APIOperation> ;
+                                       rdfs:range <http://eamining.edu.pt/core#APIResource> .
+
+
+###  http://eamining.edu.pt/data-relation-view#CorrelatedDomain
+<http://eamining.edu.pt/data-relation-view#CorrelatedDomain> rdf:type owl:ObjectProperty ;
+                                                             rdfs:domain <http://eamining.edu.pt/data-relation-view#CorrelatedDataObjects> ;
+                                                             rdfs:range <http://eamining.edu.pt/data-relation-view#DataDomain> ;
+                                                             rdfs:label "CorrelatedDomain"@en .
+
+
+###  http://eamining.edu.pt/data-relation-view#CorrelatedEntity
+<http://eamining.edu.pt/data-relation-view#CorrelatedEntity> rdf:type owl:ObjectProperty ;
+                                                             rdfs:domain <http://eamining.edu.pt/data-relation-view#CorrelatedDataObjects> ;
+                                                             rdfs:range <http://eamining.edu.pt/data-relation-view#APIEntity> ;
+                                                             rdfs:label "CorrelatedEntity"@en .
+
+
+###  http://eamining.edu.pt/data-relation-view#pertainsTo
+<http://eamining.edu.pt/data-relation-view#pertainsTo> rdf:type owl:ObjectProperty ;
+                                                       rdfs:domain <http://eamining.edu.pt/data-relation-view#APIEntity> ;
+                                                       rdfs:range <http://eamining.edu.pt/data-relation-view#DataDomain> .
+
+
+###  http://eamining.edu.pt/process-view#ProcessElementView_1
+<http://eamining.edu.pt/process-view#ProcessElementView_1> rdf:type owl:ObjectProperty ;
+                                                           rdfs:domain <http://eamining.edu.pt/process-view#Process> ;
+                                                           rdfs:range <http://eamining.edu.pt/process-view#EAProcessesView> .
+
+
+###  http://purl.org/nemo/gufo#hasReifiedQualityValue
+gufo:hasReifiedQualityValue rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/nemo/gufo#historicallyDependsOn
+gufo:historicallyDependsOn rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/nemo/gufo#isEventProperPartOf
+gufo:isEventProperPartOf rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/nemo/gufo#mediates
+gufo:mediates rdf:type owl:ObjectProperty .
+
+
+###  http://purl.org/nemo/gufo#participatedIn
+gufo:participatedIn rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  aPICall:api_name
+aPIC:api_name rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf gufo:hasQualityValue ;
+              rdfs:domain <http://eamining.edu.pt/core#APICall> ;
+              rdfs:range xsd:string ;
+              rdfs:label "api_name"@en .
+
+
+###  aPICall:api_uri
+aPIC:api_uri rdf:type owl:DatatypeProperty ;
+             rdfs:subPropertyOf gufo:hasQualityValue ;
+             rdfs:domain <http://eamining.edu.pt/core#APICall> ;
+             rdfs:range xsd:string ;
+             rdfs:label "api_uri"@en .
+
+
+###  aPICall:request_time
+aPIC:request_time rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf gufo:hasQualityValue ;
+                  rdfs:domain <http://eamining.edu.pt/core#APICall> ;
+                  rdfs:range xsd:dateTimeStamp ;
+                  rdfs:label "request_time"@en .
+
+
+###  aPICall:response_time
+aPIC:response_time rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf gufo:hasQualityValue ;
+                   rdfs:domain <http://eamining.edu.pt/core#APICall> ;
+                   rdfs:range xsd:dateTimeStamp ;
+                   rdfs:label "response_time"@en .
+
+
+###  aPICall:result_status
+aPIC:result_status rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf gufo:hasQualityValue ;
+                   rdfs:domain <http://eamining.edu.pt/core#APICall> ;
+                   rdfs:range xsd:int ;
+                   rdfs:label "result_status"@en .
+
+
+###  aPIDocumentation:api_documentation_url
+<aPIDocumentation:api_documentation_url> rdf:type owl:DatatypeProperty ;
+                                         rdfs:subPropertyOf gufo:hasQualityValue ;
+                                         rdfs:domain <http://eamining.edu.pt/core#APIDocumentation> ;
+                                         rdfs:range xsd:string ;
+                                         rdfs:label "api_documentation_url"@en .
+
+
+###  aPIDocumentation:data_schema
+<aPIDocumentation:data_schema> rdf:type owl:DatatypeProperty ;
+                               rdfs:subPropertyOf gufo:hasQualityValue ;
+                               rdfs:domain <http://eamining.edu.pt/core#APIDocumentation> ;
+                               rdfs:range xsd:string ;
+                               rdfs:label "data_schema"@en .
+
+
+###  aPIOperation:method
+aPIO:method rdf:type owl:DatatypeProperty ;
+            rdfs:subPropertyOf gufo:hasQualityValue ;
+            rdfs:domain <http://eamining.edu.pt/core#APIOperation> ;
+            rdfs:range xsd:string ;
+            rdfs:label "method"@en .
+
+
+###  aPIResource:resource_name
+aPIR:resource_name rdf:type owl:DatatypeProperty ;
+                   rdfs:subPropertyOf gufo:hasQualityValue ;
+                   rdfs:domain <http://eamining.edu.pt/core#APIResource> ;
+                   rdfs:range xsd:string ;
+                   rdfs:label "resource_name"@en .
+
+
+###  aPIResource:resource_uri
+aPIR:resource_uri rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf gufo:hasQualityValue ;
+                  rdfs:domain <http://eamining.edu.pt/core#APIResource> ;
+                  rdfs:range xsd:string ;
+                  rdfs:label "resource_uri"@en .
+
+
+###  attribute:attribute_name
+attr:attribute_name rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf gufo:hasValueComponent ;
+                    rdfs:domain <http://eamining.edu.pt/core#Attribute> ;
+                    rdfs:range xsd:string ;
+                    rdfs:label "attribute_name"@en .
+
+
+###  attribute:attribute_value
+attr:attribute_value rdf:type owl:DatatypeProperty ;
+                     rdfs:subPropertyOf gufo:hasValueComponent ;
+                     rdfs:domain <http://eamining.edu.pt/core#Attribute> ;
+                     rdfs:range xsd:string ;
+                     rdfs:label "attribute_value"@en .
+
+
+###  consumerApp:app_name
+cons:app_name rdf:type owl:DatatypeProperty ;
+              rdfs:subPropertyOf gufo:hasQualityValue ;
+              rdfs:domain <http://eamining.edu.pt/core#ConsumerApp> ;
+              rdfs:range xsd:string ;
+              rdfs:label "app_name"@en .
+
+
+###  consumerApp:client_id
+cons:client_id rdf:type owl:DatatypeProperty ;
+               rdfs:subPropertyOf gufo:hasQualityValue ;
+               rdfs:domain <http://eamining.edu.pt/core#ConsumerApp> ;
+               rdfs:range xsd:string ;
+               rdfs:label "client_id"@en .
+
+
+###  correlatedDataObjects:domain_name
+<correlatedDataObjects:domain_name> rdf:type owl:DatatypeProperty ;
+                                    rdfs:subPropertyOf gufo:hasQualityValue ;
+                                    rdfs:domain <http://eamining.edu.pt/data-relation-view#CorrelatedDataObjects> ;
+                                    rdfs:range xsd:string ;
+                                    rdfs:label "domain_name"@en .
+
+
+###  correlatedDataObjects:entity_name
+<correlatedDataObjects:entity_name> rdf:type owl:DatatypeProperty ;
+                                    rdfs:subPropertyOf gufo:hasQualityValue ;
+                                    rdfs:domain <http://eamining.edu.pt/data-relation-view#CorrelatedDataObjects> ;
+                                    rdfs:range xsd:string ;
+                                    rdfs:label "entity_name"@en .
+
+
+###  http://purl.org/nemo/gufo#hasQualityValue
+gufo:hasQualityValue rdf:type owl:DatatypeProperty .
+
+
+###  http://purl.org/nemo/gufo#hasValueComponent
+gufo:hasValueComponent rdf:type owl:DatatypeProperty .
+
+
+###  process:begin_first_activity
+<process:begin_first_activity> rdf:type owl:DatatypeProperty ;
+                               rdfs:subPropertyOf gufo:hasQualityValue ;
+                               rdfs:domain <http://eamining.edu.pt/process-view#Process> ;
+                               rdfs:range xsd:dateTimeStamp ;
+                               rdfs:label "begin_first_activity"@en .
+
+
+###  process:case_id
+<process:case_id> rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf gufo:hasQualityValue ;
+                  rdfs:domain <http://eamining.edu.pt/process-view#Process> ;
+                  rdfs:label "case_id"@en .
+
+
+###  process:end_last_activity
+<process:end_last_activity> rdf:type owl:DatatypeProperty ;
+                            rdfs:subPropertyOf gufo:hasQualityValue ;
+                            rdfs:domain <http://eamining.edu.pt/process-view#Process> ;
+                            rdfs:range xsd:dateTimeStamp ;
+                            rdfs:label "end_last_activity"@en .
+
+
+###  service:endpoint_route
+serv:endpoint_route rdf:type owl:DatatypeProperty ;
+                    rdfs:subPropertyOf gufo:hasQualityValue ;
+                    rdfs:domain <http://eamining.edu.pt/core#Service> ;
+                    rdfs:range xsd:string ;
+                    rdfs:label "endpoint_route"@en .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://eamining.edu.pt/core#APICall
+<http://eamining.edu.pt/core#APICall> rdf:type owl:Class ;
+                                      rdfs:subClassOf gufo:Event ,
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty gufo:participatedIn ;
+                                                        owl:someValuesFrom <http://eamining.edu.pt/core#ServiceDestination>
+                                                      ] ,
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                                                       ] ;
+                                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                        owl:onClass <http://eamining.edu.pt/core#ConsumerApp>
+                                                      ] .
+
+
+###  http://eamining.edu.pt/core#APIDocumentation
+<http://eamining.edu.pt/core#APIDocumentation> rdf:type owl:Class ;
+                                               rdfs:subClassOf gufo:FunctionalComplex ,
+                                                               [ rdf:type owl:Restriction ;
+                                                                 owl:onProperty [ owl:inverseOf gufo:mediates
+                                                                                ] ;
+                                                                 owl:someValuesFrom <http://eamining.edu.pt/core#DocumentedAPI>
+                                                               ] .
+
+
+###  http://eamining.edu.pt/core#APIOperation
+<http://eamining.edu.pt/core#APIOperation> rdf:type owl:Class ;
+                                           rdfs:subClassOf <http://eamining.edu.pt/core#Service> ,
+                                                           [ rdf:type owl:Restriction ;
+                                                             owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                                                            ] ;
+                                                             owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                             owl:onClass <http://eamining.edu.pt/core#APICall>
+                                                           ] .
+
+
+###  http://eamining.edu.pt/core#APIResource
+<http://eamining.edu.pt/core#APIResource> rdf:type owl:Class ;
+                                          rdfs:subClassOf gufo:FunctionalComplex .
+
+
+###  http://eamining.edu.pt/core#Attribute
+<http://eamining.edu.pt/core#Attribute> rdf:type owl:Class ;
+                                        rdfs:subClassOf gufo:QualityValue .
+
+
+###  http://eamining.edu.pt/core#AttributePair
+<http://eamining.edu.pt/core#AttributePair> rdf:type owl:Class ;
+                                            rdfs:subClassOf gufo:QualityValue .
+
+
+###  http://eamining.edu.pt/core#ConsumerApp
+<http://eamining.edu.pt/core#ConsumerApp> rdf:type owl:Class ;
+                                          rdfs:subClassOf gufo:FunctionalComplex .
+
+
+###  http://eamining.edu.pt/core#DocumentedAPI
+<http://eamining.edu.pt/core#DocumentedAPI> rdf:type owl:Class ;
+                                            rdfs:subClassOf gufo:Relator ,
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty gufo:mediates ;
+                                                              owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                              owl:onClass <http://eamining.edu.pt/core#APIDocumentation>
+                                                            ] ,
+                                                            [ rdf:type owl:Restriction ;
+                                                              owl:onProperty gufo:mediates ;
+                                                              owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                              owl:onClass <http://eamining.edu.pt/core#APIResource>
+                                                            ] .
+
+
+###  http://eamining.edu.pt/core#OperationExecuted
+<http://eamining.edu.pt/core#OperationExecuted> rdf:type owl:Class ;
+                                                rdfs:subClassOf gufo:Relator ,
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty gufo:mediates ;
+                                                                  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                  owl:onClass <http://eamining.edu.pt/core#APIOperation>
+                                                                ] ,
+                                                                [ rdf:type owl:Restriction ;
+                                                                  owl:onProperty gufo:mediates ;
+                                                                  owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                  owl:onClass <http://eamining.edu.pt/core#APIResource>
+                                                                ] .
+
+
+###  http://eamining.edu.pt/core#Service
+<http://eamining.edu.pt/core#Service> rdf:type owl:Class ;
+                                      rdfs:subClassOf gufo:FunctionalComplex .
+
+
+###  http://eamining.edu.pt/core#ServiceDestination
+<http://eamining.edu.pt/core#ServiceDestination> rdf:type owl:Class ;
+                                                 rdfs:subClassOf <http://eamining.edu.pt/core#Service> .
+
+
+###  http://eamining.edu.pt/data-relation-view#APIDomain
+<http://eamining.edu.pt/data-relation-view#APIDomain> rdf:type owl:Class ;
+                                                      rdfs:subClassOf gufo:FunctionalComplex ,
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty [ owl:inverseOf gufo:mediates
+                                                                                       ] ;
+                                                                        owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                        owl:onClass <http://eamining.edu.pt/data-relation-view#APIDomainMap>
+                                                                      ] .
+
+
+###  http://eamining.edu.pt/data-relation-view#APIDomainMap
+<http://eamining.edu.pt/data-relation-view#APIDomainMap> rdf:type owl:Class ;
+                                                         rdfs:subClassOf gufo:Relator ,
+                                                                         [ rdf:type owl:Restriction ;
+                                                                           owl:onProperty gufo:mediates ;
+                                                                           owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                           owl:onClass <http://eamining.edu.pt/core#APIDocumentation>
+                                                                         ] ,
+                                                                         [ rdf:type owl:Restriction ;
+                                                                           owl:onProperty gufo:mediates ;
+                                                                           owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                           owl:onClass <http://eamining.edu.pt/data-relation-view#APIDomain>
+                                                                         ] .
+
+
+###  http://eamining.edu.pt/data-relation-view#APIEntity
+<http://eamining.edu.pt/data-relation-view#APIEntity> rdf:type owl:Class ;
+                                                      rdfs:subClassOf <http://eamining.edu.pt/core#APIResource> ,
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty [ owl:inverseOf gufo:mediates
+                                                                                       ] ;
+                                                                        owl:someValuesFrom <http://eamining.edu.pt/data-relation-view#FrequentDataDomainCorrelation>
+                                                                      ] .
+
+
+###  http://eamining.edu.pt/data-relation-view#CorrelatedDataObjects
+<http://eamining.edu.pt/data-relation-view#CorrelatedDataObjects> rdf:type owl:Class ;
+                                                                  rdfs:subClassOf gufo:FunctionalComplex .
+
+
+###  http://eamining.edu.pt/data-relation-view#DataDomain
+<http://eamining.edu.pt/data-relation-view#DataDomain> rdf:type owl:Class ;
+                                                       rdfs:subClassOf <http://eamining.edu.pt/data-relation-view#APIDomain> .
+
+
+###  http://eamining.edu.pt/data-relation-view#EADataObjectsRelationView
+<http://eamining.edu.pt/data-relation-view#EADataObjectsRelationView> rdf:type owl:Class ;
+                                                                      rdfs:subClassOf gufo:VariableCollection .
+
+
+###  http://eamining.edu.pt/data-relation-view#FrequentDataDomainCorrelation
+<http://eamining.edu.pt/data-relation-view#FrequentDataDomainCorrelation> rdf:type owl:Class ;
+                                                                          rdfs:subClassOf gufo:Relator ,
+                                                                                          [ rdf:type owl:Restriction ;
+                                                                                            owl:onProperty gufo:mediates ;
+                                                                                            owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                            owl:onClass <http://eamining.edu.pt/data-relation-view#APIEntity>
+                                                                                          ] ,
+                                                                                          [ rdf:type owl:Restriction ;
+                                                                                            owl:onProperty gufo:mediates ;
+                                                                                            owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                            owl:onClass <http://eamining.edu.pt/data-relation-view#DataDomain>
+                                                                                          ] .
+
+
+###  http://eamining.edu.pt/process-view#APIActivitiesConnection
+<http://eamining.edu.pt/process-view#APIActivitiesConnection> rdf:type owl:Class ;
+                                                              rdfs:subClassOf gufo:Event ,
+                                                                              [ rdf:type owl:Restriction ;
+                                                                                owl:onProperty gufo:historicallyDependsOn ;
+                                                                                owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                owl:onClass <http://eamining.edu.pt/process-view#Process>
+                                                                              ] ,
+                                                                              [ rdf:type owl:Restriction ;
+                                                                                owl:onProperty gufo:isEventProperPartOf ;
+                                                                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                owl:onClass <http://eamining.edu.pt/process-view#APIAntecedentActivity>
+                                                                              ] ,
+                                                                              [ rdf:type owl:Restriction ;
+                                                                                owl:onProperty gufo:isEventProperPartOf ;
+                                                                                owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                owl:onClass <http://eamining.edu.pt/process-view#APIConsequentActivity>
+                                                                              ] .
+
+
+###  http://eamining.edu.pt/process-view#APIAntecedentActivity
+<http://eamining.edu.pt/process-view#APIAntecedentActivity> rdf:type owl:Class ;
+                                                            rdfs:subClassOf <http://eamining.edu.pt/core#APICall> ,
+                                                                            [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty [ owl:inverseOf gufo:isEventProperPartOf
+                                                                                             ] ;
+                                                                              owl:someValuesFrom <http://eamining.edu.pt/process-view#APIActivitiesConnection>
+                                                                            ] ,
+                                                                            [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                                                                             ] ;
+                                                                              owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                              owl:onClass <http://eamining.edu.pt/process-view#Partner>
+                                                                            ] .
+
+
+###  http://eamining.edu.pt/process-view#APIConsequentActivity
+<http://eamining.edu.pt/process-view#APIConsequentActivity> rdf:type owl:Class ;
+                                                            rdfs:subClassOf <http://eamining.edu.pt/core#APICall> ,
+                                                                            [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty gufo:historicallyDependsOn ;
+                                                                              owl:someValuesFrom <http://eamining.edu.pt/process-view#APIAntecedentActivity>
+                                                                            ] ,
+                                                                            [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty [ owl:inverseOf gufo:isEventProperPartOf
+                                                                                             ] ;
+                                                                              owl:someValuesFrom <http://eamining.edu.pt/process-view#APIActivitiesConnection>
+                                                                            ] ,
+                                                                            [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty [ owl:inverseOf gufo:mediates
+                                                                                             ] ;
+                                                                              owl:someValuesFrom <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation>
+                                                                            ] ,
+                                                                            [ rdf:type owl:Restriction ;
+                                                                              owl:onProperty [ owl:inverseOf gufo:participatedIn
+                                                                                             ] ;
+                                                                              owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                              owl:onClass <http://eamining.edu.pt/process-view#Partner>
+                                                                            ] .
+
+
+###  http://eamining.edu.pt/process-view#EAProcessesView
+<http://eamining.edu.pt/process-view#EAProcessesView> rdf:type owl:Class ;
+                                                      rdfs:subClassOf gufo:FunctionalComplex .
+
+
+###  http://eamining.edu.pt/process-view#FrequentTemporalCorrelation
+<http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> rdf:type owl:Class ;
+                                                                  rdfs:subClassOf gufo:Relator ,
+                                                                                  [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty gufo:mediates ;
+                                                                                    owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                    owl:onClass <http://eamining.edu.pt/process-view#APIAntecedentActivity>
+                                                                                  ] ,
+                                                                                  [ rdf:type owl:Restriction ;
+                                                                                    owl:onProperty gufo:mediates ;
+                                                                                    owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                    owl:onClass <http://eamining.edu.pt/process-view#APIConsequentActivity>
+                                                                                  ] .
+
+
+###  http://eamining.edu.pt/process-view#Partner
+<http://eamining.edu.pt/process-view#Partner> rdf:type owl:Class ;
+                                              rdfs:subClassOf <http://eamining.edu.pt/core#ConsumerApp> ,
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty gufo:participatedIn ;
+                                                                owl:someValuesFrom <http://eamining.edu.pt/process-view#APIAntecedentActivity>
+                                                              ] .
+
+
+###  http://eamining.edu.pt/process-view#Process
+<http://eamining.edu.pt/process-view#Process> rdf:type owl:Class ;
+                                              rdfs:subClassOf gufo:Event ,
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty [ owl:inverseOf gufo:historicallyDependsOn
+                                                                               ] ;
+                                                                owl:someValuesFrom <http://eamining.edu.pt/process-view#APIActivitiesConnection>
+                                                              ] .
+
+
+###  http://eamining.edu.pt/process-view#ProcessElementView
+<http://eamining.edu.pt/process-view#ProcessElementView> rdf:type owl:Class ;
+                                                         rdfs:subClassOf gufo:Relator ,
+                                                                         [ rdf:type owl:Restriction ;
+                                                                           owl:onProperty gufo:mediates ;
+                                                                           owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                           owl:onClass <http://eamining.edu.pt/process-view#EAProcessesView>
+                                                                         ] ,
+                                                                         [ rdf:type owl:Restriction ;
+                                                                           owl:onProperty gufo:mediates ;
+                                                                           owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                           owl:onClass <http://eamining.edu.pt/process-view#Process>
+                                                                         ] .
+
+
+###  http://purl.org/nemo/gufo#AbstractIndividualType
+gufo:AbstractIndividualType rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#ComparativeRelationshipType
+gufo:ComparativeRelationshipType rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#Event
+gufo:Event rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#EventType
+gufo:EventType rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#FunctionalComplex
+gufo:FunctionalComplex rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#Kind
+gufo:Kind rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#MaterialRelationshipType
+gufo:MaterialRelationshipType rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#QualityValue
+gufo:QualityValue rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#Relator
+gufo:Relator rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#Role
+gufo:Role rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#SubKind
+gufo:SubKind rdf:type owl:Class .
+
+
+###  http://purl.org/nemo/gufo#VariableCollection
+gufo:VariableCollection rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562
+<GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562> rdf:type owl:NamedIndividual ,
+                                                                       <http://eamining.edu.pt/core#APIOperation> ;
+                                                              aPIO:method "GET" ;
+                                                              serv:endpoint_route "GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562" ;
+                                                              rdfs:label "GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562" .
+
+
+###  GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727
+<GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727> rdf:type owl:NamedIndividual ,
+                                                                       <http://eamining.edu.pt/core#APIOperation> ;
+                                                              aPIO:method "GET" ;
+                                                              serv:endpoint_route "GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727" ;
+                                                              rdfs:label "GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727" .
+
+
+###  POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts
+<POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts> rdf:type owl:NamedIndividual ,
+                                                                    <http://eamining.edu.pt/core#APIOperation> ;
+                                                           aPIO:method "POST" ;
+                                                           serv:endpoint_route "POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts" ;
+                                                           rdfs:label "POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts" .
+
+
+###  POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/orders
+<POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/orders> rdf:type owl:NamedIndividual ,
+                                                                     <http://eamining.edu.pt/core#APIOperation> ;
+                                                            aPIO:method "POST" ;
+                                                            serv:endpoint_route "POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/orders" ;
+                                                            rdfs:label "POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/orders" .
+
+
+###  POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562/deliveryaddress
+<POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562/deliveryaddress> rdf:type owl:NamedIndividual ,
+                                                                                        <http://eamining.edu.pt/core#APIOperation> ;
+                                                                               aPIO:method "POST" ;
+                                                                               serv:endpoint_route "POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562/deliveryaddress" ;
+                                                                               rdfs:label "POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562/deliveryaddress" .
+
+
+###  POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562/itens
+<POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562/itens> rdf:type owl:NamedIndividual ,
+                                                                              <http://eamining.edu.pt/core#APIOperation> ;
+                                                                     aPIO:method "POST" ;
+                                                                     serv:endpoint_route "POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562/itens" ;
+                                                                     rdfs:label "POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562/itens" .
+
+
+###  POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562/paymentmethod
+<POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562/paymentmethod> rdf:type owl:NamedIndividual ,
+                                                                                      <http://eamining.edu.pt/core#APIOperation> ;
+                                                                             aPIO:method "POST" ;
+                                                                             serv:endpoint_route "POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562/paymentmethod" ;
+                                                                             rdfs:label "POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562/paymentmethod" .
+
+
+###  POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727/deliveryaddress
+<POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727/deliveryaddress> rdf:type owl:NamedIndividual ,
+                                                                                        <http://eamining.edu.pt/core#APIOperation> ;
+                                                                               aPIO:method "POST" ;
+                                                                               serv:endpoint_route "POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727/deliveryaddress" ;
+                                                                               rdfs:label "POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727/deliveryaddress" .
+
+
+###  POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727/itens
+<POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727/itens> rdf:type owl:NamedIndividual ,
+                                                                              <http://eamining.edu.pt/core#APIOperation> ;
+                                                                     aPIO:method "POST" ;
+                                                                     serv:endpoint_route "POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727/itens" ;
+                                                                     rdfs:label "POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727/itens" .
+
+
+###  POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727/paymentmethod
+<POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727/paymentmethod> rdf:type owl:NamedIndividual ,
+                                                                                      <http://eamining.edu.pt/core#APIOperation> ;
+                                                                             aPIO:method "POST" ;
+                                                                             serv:endpoint_route "POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727/paymentmethod" ;
+                                                                             rdfs:label "POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727/paymentmethod" .
+
+
+###  http://eamining.edu.pt/a02a7a587059e77c9a21a2746a20fe56
+:a02a7a587059e77c9a21a2746a20fe56 rdf:type owl:NamedIndividual ,
+                                           <http://eamining.edu.pt/core#APICall> ;
+                                  gufo:participatedIn <POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727/itens> ;
+                                  aPIC:api_name "ecommerce-carts" ;
+                                  aPIC:api_uri "/sandbox/ecommerce/v1/carts/727/itens" ;
+                                  aPIC:request_time "2024-03-31T15:05:42.259+00:00"^^xsd:dateTime ;
+                                  aPIC:result_status 200 ;
+                                  rdfs:label "a02a7a587059e77c9a21a2746a20fe56" .
+
+
+###  http://eamining.edu.pt/a14c887c27c00a55cc96c25157ed0f2c
+:a14c887c27c00a55cc96c25157ed0f2c rdf:type owl:NamedIndividual ,
+                                           <http://eamining.edu.pt/core#APICall> ;
+                                  aPIC:api_name "ecommerce-carts" ;
+                                  aPIC:api_uri "/sandbox/ecommerce/v1/carts/562/itens" ;
+                                  aPIC:request_time "2024-03-31T14:57:42.754+00:00"^^xsd:dateTime ;
+                                  aPIC:result_status 200 ;
+                                  rdfs:label "a14c887c27c00a55cc96c25157ed0f2c" .
+
+
+###  http://eamining.edu.pt/a416b13c63e27054ce2e0f261367be76
+:a416b13c63e27054ce2e0f261367be76 rdf:type owl:NamedIndividual ,
+                                           <http://eamining.edu.pt/core#APICall> ;
+                                  gufo:participatedIn <GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562> ;
+                                  aPIC:api_name "ecommerce-carts" ;
+                                  aPIC:api_uri "/sandbox/ecommerce/v1/carts/562" ;
+                                  aPIC:request_time "2024-03-31T14:57:43.929+00:00"^^xsd:dateTime ;
+                                  aPIC:result_status 200 ;
+                                  rdfs:label "a416b13c63e27054ce2e0f261367be76" .
+
+
+###  http://eamining.edu.pt/a91edb77c8b79d4f3b4bd60f735a4513
+:a91edb77c8b79d4f3b4bd60f735a4513 rdf:type owl:NamedIndividual ,
+                                           <http://eamining.edu.pt/core#APICall> ;
+                                  gufo:participatedIn <POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562/itens> ;
+                                  aPIC:api_name "ecommerce-carts" ;
+                                  aPIC:api_uri "/sandbox/ecommerce/v1/carts/562/itens" ;
+                                  aPIC:request_time "2024-03-31T14:57:42.434+00:00"^^xsd:dateTime ;
+                                  aPIC:result_status 200 ;
+                                  rdfs:label "a91edb77c8b79d4f3b4bd60f735a4513" .
+
+
+###  http://eamining.edu.pt/acmeapp
+:acmeapp rdf:type owl:NamedIndividual ,
+                  <http://eamining.edu.pt/core#ConsumerApp> ;
+         gufo:participatedIn :a02a7a587059e77c9a21a2746a20fe56 ,
+                             :a14c887c27c00a55cc96c25157ed0f2c ,
+                             :a416b13c63e27054ce2e0f261367be76 ,
+                             :a91edb77c8b79d4f3b4bd60f735a4513 ,
+                             :bc1c980c112ea1025bbd6e33a4311b49 ,
+                             :d3d7533f5685c022211f954c7804214c ,
+                             :d9430d628d4bff3c53ddf32d545b9a1c ,
+                             :dfaae161ce07112d7a1f7904fc268668 ,
+                             :e7115b04470a8c4b96afb96bbbbbd603 ,
+                             :ed342c23f8bc3d6af7916d3f2a5aee3f ,
+                             :f1e6335d5527457f233f813d97f44e42 ,
+                             :f6e5405730ab5506b7f9f95ac1f55660 ,
+                             :fbeb6468ddb82b581d750a3be2fdbf6c ,
+                             <http://eamining.edu.pt/24c3b723b424c4269db99670c4ed317c> ,
+                             <http://eamining.edu.pt/5432514ee473ff1de9296c59fd502c46> ,
+                             <http://eamining.edu.pt/604ee939ff0a0c4fc0347e6051351d17> ;
+         cons:app_name "acmeapp" ;
+         cons:client_id "69be440d-5a95-4eda-abd0-0924e4e2f957" ;
+         rdfs:label "acmeapp" .
+
+
+###  http://eamining.edu.pt/attribute1
+:attribute1 rdf:type owl:NamedIndividual ,
+                     <http://eamining.edu.pt/core#Attribute> ;
+            attr:attribute_name "client.code" ;
+            attr:attribute_value "344" ;
+            rdfs:label "client.code" .
+
+
+###  http://eamining.edu.pt/attribute10
+:attribute10 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.codigo" ;
+             attr:attribute_value "12345" ;
+             rdfs:label "cliente.codigo" .
+
+
+###  http://eamining.edu.pt/attribute100
+:attribute100 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "client.product.value" ;
+              attr:attribute_value "157.22" ;
+              rdfs:label "client.product.value" .
+
+
+###  http://eamining.edu.pt/attribute101
+:attribute101 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cartid" ;
+              attr:attribute_value "751" ;
+              rdfs:label "cartid" .
+
+
+###  http://eamining.edu.pt/attribute102
+:attribute102 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cart_id" ;
+              attr:attribute_value "727" ;
+              rdfs:label "cart_id" .
+
+
+###  http://eamining.edu.pt/attribute103
+:attribute103 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "client" ;
+              attr:attribute_value "394" ;
+              rdfs:label "client" .
+
+
+###  http://eamining.edu.pt/attribute104
+:attribute104 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "product_sku" ;
+              attr:attribute_value "973" ;
+              rdfs:label "product_sku" .
+
+
+###  http://eamining.edu.pt/attribute105
+:attribute105 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "product_name" ;
+              attr:attribute_value "Handcrafted Metal Towels" ;
+              rdfs:label "product_name" .
+
+
+###  http://eamining.edu.pt/attribute106
+:attribute106 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "produt_price" ;
+              attr:attribute_value "845.64" ;
+              rdfs:label "produt_price" .
+
+
+###  http://eamining.edu.pt/attribute107
+:attribute107 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "quantity" ;
+              attr:attribute_value "1" ;
+              rdfs:label "quantity" .
+
+
+###  http://eamining.edu.pt/attribute108
+:attribute108 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "origem" ;
+              attr:attribute_value "1" ;
+              rdfs:label "origem" .
+
+
+###  http://eamining.edu.pt/attribute109
+:attribute109 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cart" ;
+              attr:attribute_value "3456" ;
+              rdfs:label "cart" .
+
+
+###  http://eamining.edu.pt/attribute11
+:attribute11 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.nome" ;
+             attr:attribute_value "Teste" ;
+             rdfs:label "cliente.nome" .
+
+
+###  http://eamining.edu.pt/attribute110
+:attribute110 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "orderDate" ;
+              attr:attribute_value "2020-07-06T12:59:59.550-03:00" ;
+              rdfs:label "orderDate" .
+
+
+###  http://eamining.edu.pt/attribute111
+:attribute111 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.codigo" ;
+              attr:attribute_value "12345" ;
+              rdfs:label "cliente.codigo" .
+
+
+###  http://eamining.edu.pt/attribute112
+:attribute112 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.name" ;
+              attr:attribute_value "Carlos Pinheiro" ;
+              rdfs:label "cliente.name" .
+
+
+###  http://eamining.edu.pt/attribute113
+:attribute113 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.document" ;
+              attr:attribute_value "123456789-1" ;
+              rdfs:label "cliente.document" .
+
+
+###  http://eamining.edu.pt/attribute114
+:attribute114 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.products.produto" ;
+              attr:attribute_value "Panela de Barro" ;
+              rdfs:label "cliente.products.produto" .
+
+
+###  http://eamining.edu.pt/attribute115
+:attribute115 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.products.sku" ;
+              attr:attribute_value "123" ;
+              rdfs:label "cliente.products.sku" .
+
+
+###  http://eamining.edu.pt/attribute116
+:attribute116 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.products.valor" ;
+              attr:attribute_value "99.99" ;
+              rdfs:label "cliente.products.valor" .
+
+
+###  http://eamining.edu.pt/attribute117
+:attribute117 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.products.statusPedidos.code" ;
+              attr:attribute_value "1" ;
+              rdfs:label "cliente.products.statusPedidos.code" .
+
+
+###  http://eamining.edu.pt/attribute118
+:attribute118 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.products.statusPedidos.description" ;
+              attr:attribute_value "waiting payment" ;
+              rdfs:label "cliente.products.statusPedidos.description" .
+
+
+###  http://eamining.edu.pt/attribute119
+:attribute119 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.products.statusPedidos.origem" ;
+              attr:attribute_value "e-commerce" ;
+              rdfs:label "cliente.products.statusPedidos.origem" .
+
+
+###  http://eamining.edu.pt/attribute12
+:attribute12 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.chanelSource" ;
+             attr:attribute_value "e-commerce" ;
+             rdfs:label "cliente.chanelSource" .
+
+
+###  http://eamining.edu.pt/attribute120
+:attribute120 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "product_sku" ;
+              attr:attribute_value "584" ;
+              rdfs:label "product_sku" .
+
+
+###  http://eamining.edu.pt/attribute121
+:attribute121 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "product_name" ;
+              attr:attribute_value "Practical Concrete Computer" ;
+              rdfs:label "product_name" .
+
+
+###  http://eamining.edu.pt/attribute122
+:attribute122 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "produt_price" ;
+              attr:attribute_value "816.82" ;
+              rdfs:label "produt_price" .
+
+
+###  http://eamining.edu.pt/attribute123
+:attribute123 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "product_sku" ;
+              attr:attribute_value "580" ;
+              rdfs:label "product_sku" .
+
+
+###  http://eamining.edu.pt/attribute124
+:attribute124 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "product_name" ;
+              attr:attribute_value "Licensed Wooden Bike" ;
+              rdfs:label "product_name" .
+
+
+###  http://eamining.edu.pt/attribute125
+:attribute125 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "produt_price" ;
+              attr:attribute_value "88.17" ;
+              rdfs:label "produt_price" .
+
+
+###  http://eamining.edu.pt/attribute126
+:attribute126 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "quantity" ;
+              attr:attribute_value "2" ;
+              rdfs:label "quantity" .
+
+
+###  http://eamining.edu.pt/attribute127
+:attribute127 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cartid" ;
+              attr:attribute_value "3456" ;
+              rdfs:label "cartid" .
+
+
+###  http://eamining.edu.pt/attribute128
+:attribute128 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente" ;
+              attr:attribute_value "12345" ;
+              rdfs:label "cliente" .
+
+
+###  http://eamining.edu.pt/attribute129
+:attribute129 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "itens.sku" ;
+              attr:attribute_value "12" ;
+              rdfs:label "itens.sku" .
+
+
+###  http://eamining.edu.pt/attribute13
+:attribute13 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cart_id" ;
+             attr:attribute_value "562" ;
+             rdfs:label "cart_id" .
+
+
+###  http://eamining.edu.pt/attribute130
+:attribute130 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "itens.produto" ;
+              attr:attribute_value "Produto 1" ;
+              rdfs:label "itens.produto" .
+
+
+###  http://eamining.edu.pt/attribute131
+:attribute131 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "itens.sku" ;
+              attr:attribute_value "34" ;
+              rdfs:label "itens.sku" .
+
+
+###  http://eamining.edu.pt/attribute132
+:attribute132 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "itens.produto" ;
+              attr:attribute_value "Produto 2" ;
+              rdfs:label "itens.produto" .
+
+
+###  http://eamining.edu.pt/attribute133
+:attribute133 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "itens.sku" ;
+              attr:attribute_value "35" ;
+              rdfs:label "itens.sku" .
+
+
+###  http://eamining.edu.pt/attribute134
+:attribute134 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cart" ;
+              attr:attribute_value "727" ;
+              rdfs:label "cart" .
+
+
+###  http://eamining.edu.pt/attribute135
+:attribute135 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.codigo" ;
+              attr:attribute_value "394" ;
+              rdfs:label "cliente.codigo" .
+
+
+###  http://eamining.edu.pt/attribute136
+:attribute136 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.name" ;
+              attr:attribute_value "Colleen Bartell" ;
+              rdfs:label "cliente.name" .
+
+
+###  http://eamining.edu.pt/attribute137
+:attribute137 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.deliveryAddress.cep" ;
+              attr:attribute_value "25963026" ;
+              rdfs:label "cliente.deliveryAddress.cep" .
+
+
+###  http://eamining.edu.pt/attribute138
+:attribute138 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.deliveryAddress.end" ;
+              attr:attribute_value "Avenida Feliciano Sodré" ;
+              rdfs:label "cliente.deliveryAddress.end" .
+
+
+###  http://eamining.edu.pt/attribute139
+:attribute139 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.deliveryAddress.numero" ;
+              attr:attribute_value "334" ;
+              rdfs:label "cliente.deliveryAddress.numero" .
+
+
+###  http://eamining.edu.pt/attribute14
+:attribute14 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "client" ;
+             attr:attribute_value "344" ;
+             rdfs:label "client" .
+
+
+###  http://eamining.edu.pt/attribute140
+:attribute140 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.deliveryAddress.bairro" ;
+              attr:attribute_value "Várzea" ;
+              rdfs:label "cliente.deliveryAddress.bairro" .
+
+
+###  http://eamining.edu.pt/attribute141
+:attribute141 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.deliveryAddress.cidade" ;
+              attr:attribute_value "Teresópolis" ;
+              rdfs:label "cliente.deliveryAddress.cidade" .
+
+
+###  http://eamining.edu.pt/attribute142
+:attribute142 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.deliveryAddress.uf" ;
+              attr:attribute_value "RJ" ;
+              rdfs:label "cliente.deliveryAddress.uf" .
+
+
+###  http://eamining.edu.pt/attribute143
+:attribute143 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.deliveryAddress.origem" ;
+              attr:attribute_value "e-commerce" ;
+              rdfs:label "cliente.deliveryAddress.origem" .
+
+
+###  http://eamining.edu.pt/attribute144
+:attribute144 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cart" ;
+              attr:attribute_value "727" ;
+              rdfs:label "cart" .
+
+
+###  http://eamining.edu.pt/attribute145
+:attribute145 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.codigo" ;
+              attr:attribute_value "394" ;
+              rdfs:label "cliente.codigo" .
+
+
+###  http://eamining.edu.pt/attribute146
+:attribute146 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.name" ;
+              attr:attribute_value "Colleen Bartell" ;
+              rdfs:label "cliente.name" .
+
+
+###  http://eamining.edu.pt/attribute147
+:attribute147 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.paymentMethod.method" ;
+              attr:attribute_value "credit_card" ;
+              rdfs:label "cliente.paymentMethod.method" .
+
+
+###  http://eamining.edu.pt/attribute148
+:attribute148 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.paymentMethod.cardHolder" ;
+              attr:attribute_value "Colleen Bartell" ;
+              rdfs:label "cliente.paymentMethod.cardHolder" .
+
+
+###  http://eamining.edu.pt/attribute149
+:attribute149 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.paymentMethod.cardNumber" ;
+              attr:attribute_value "7432" ;
+              rdfs:label "cliente.paymentMethod.cardNumber" .
+
+
+###  http://eamining.edu.pt/attribute15
+:attribute15 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "product_sku" ;
+             attr:attribute_value "165" ;
+             rdfs:label "product_sku" .
+
+
+###  http://eamining.edu.pt/attribute150
+:attribute150 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.paymentMethod.dueDate" ;
+              attr:attribute_value "99/9318" ;
+              rdfs:label "cliente.paymentMethod.dueDate" .
+
+
+###  http://eamining.edu.pt/attribute151
+:attribute151 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.paymentMethod.cvv" ;
+              attr:attribute_value "676" ;
+              rdfs:label "cliente.paymentMethod.cvv" .
+
+
+###  http://eamining.edu.pt/attribute152
+:attribute152 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.paymentMethod.totalValue" ;
+              attr:attribute_value "null" ;
+              rdfs:label "cliente.paymentMethod.totalValue" .
+
+
+###  http://eamining.edu.pt/attribute153
+:attribute153 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cart" ;
+              attr:attribute_value "3456" ;
+              rdfs:label "cart" .
+
+
+###  http://eamining.edu.pt/attribute154
+:attribute154 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "orderDate" ;
+              attr:attribute_value "2020-07-06T12:59:59.550-03:00" ;
+              rdfs:label "orderDate" .
+
+
+###  http://eamining.edu.pt/attribute155
+:attribute155 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.codigo" ;
+              attr:attribute_value "12345" ;
+              rdfs:label "cliente.codigo" .
+
+
+###  http://eamining.edu.pt/attribute156
+:attribute156 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.name" ;
+              attr:attribute_value "Carlos Pinheiro" ;
+              rdfs:label "cliente.name" .
+
+
+###  http://eamining.edu.pt/attribute157
+:attribute157 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.paymentMethod.cardHolder" ;
+              attr:attribute_value "Carlos Pinheiro" ;
+              rdfs:label "cliente.paymentMethod.cardHolder" .
+
+
+###  http://eamining.edu.pt/attribute158
+:attribute158 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.paymentMethod.cardNumber" ;
+              attr:attribute_value "4561" ;
+              rdfs:label "cliente.paymentMethod.cardNumber" .
+
+
+###  http://eamining.edu.pt/attribute159
+:attribute159 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.paymentMethod.dueDate" ;
+              attr:attribute_value "02/2025" ;
+              rdfs:label "cliente.paymentMethod.dueDate" .
+
+
+###  http://eamining.edu.pt/attribute16
+:attribute16 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "product_name" ;
+             attr:attribute_value "Sleek Soft Hat" ;
+             rdfs:label "product_name" .
+
+
+###  http://eamining.edu.pt/attribute160
+:attribute160 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.paymentMethod.cvv" ;
+              attr:attribute_value "111" ;
+              rdfs:label "cliente.paymentMethod.cvv" .
+
+
+###  http://eamining.edu.pt/attribute161
+:attribute161 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.paymentMethod.totalValue" ;
+              attr:attribute_value "150.00" ;
+              rdfs:label "cliente.paymentMethod.totalValue" .
+
+
+###  http://eamining.edu.pt/attribute162
+:attribute162 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.paymentMethod.status" ;
+              attr:attribute_value "aproved" ;
+              rdfs:label "cliente.paymentMethod.status" .
+
+
+###  http://eamining.edu.pt/attribute163
+:attribute163 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cart" ;
+              attr:attribute_value "727" ;
+              rdfs:label "cart" .
+
+
+###  http://eamining.edu.pt/attribute164
+:attribute164 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "orderDate" ;
+              attr:attribute_value "Sun Mar 31 2024 05:40:45 GMT-0300 (Horário Padrão de Brasília)" ;
+              rdfs:label "orderDate" .
+
+
+###  http://eamining.edu.pt/attribute165
+:attribute165 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.codigo" ;
+              attr:attribute_value "394" ;
+              rdfs:label "cliente.codigo" .
+
+
+###  http://eamining.edu.pt/attribute166
+:attribute166 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.name" ;
+              attr:attribute_value "Colleen Bartell" ;
+              rdfs:label "cliente.name" .
+
+
+###  http://eamining.edu.pt/attribute167
+:attribute167 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.documento" ;
+              attr:attribute_value "375" ;
+              rdfs:label "cliente.documento" .
+
+
+###  http://eamining.edu.pt/attribute168
+:attribute168 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.products.produto" ;
+              attr:attribute_value "Handcrafted Metal Towels" ;
+              rdfs:label "cliente.products.produto" .
+
+
+###  http://eamining.edu.pt/attribute169
+:attribute169 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.products.sku" ;
+              attr:attribute_value "973" ;
+              rdfs:label "cliente.products.sku" .
+
+
+###  http://eamining.edu.pt/attribute17
+:attribute17 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "produt_price" ;
+             attr:attribute_value "530.58" ;
+             rdfs:label "produt_price" .
+
+
+###  http://eamining.edu.pt/attribute170
+:attribute170 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.products.valor" ;
+              attr:attribute_value "845.64" ;
+              rdfs:label "cliente.products.valor" .
+
+
+###  http://eamining.edu.pt/attribute171
+:attribute171 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.products.produto" ;
+              attr:attribute_value "Practical Concrete Computer" ;
+              rdfs:label "cliente.products.produto" .
+
+
+###  http://eamining.edu.pt/attribute172
+:attribute172 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.products.sku" ;
+              attr:attribute_value "584" ;
+              rdfs:label "cliente.products.sku" .
+
+
+###  http://eamining.edu.pt/attribute173
+:attribute173 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.products.valor" ;
+              attr:attribute_value "816.82" ;
+              rdfs:label "cliente.products.valor" .
+
+
+###  http://eamining.edu.pt/attribute174
+:attribute174 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.products.produto" ;
+              attr:attribute_value "Licensed Wooden Bike" ;
+              rdfs:label "cliente.products.produto" .
+
+
+###  http://eamining.edu.pt/attribute175
+:attribute175 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.products.sku" ;
+              attr:attribute_value "580" ;
+              rdfs:label "cliente.products.sku" .
+
+
+###  http://eamining.edu.pt/attribute176
+:attribute176 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "cliente.products.valor" ;
+              attr:attribute_value "88.17" ;
+              rdfs:label "cliente.products.valor" .
+
+
+###  http://eamining.edu.pt/attribute177
+:attribute177 rdf:type owl:NamedIndividual ,
+                       <http://eamining.edu.pt/core#Attribute> ;
+              attr:attribute_name "order_id" ;
+              attr:attribute_value "52" ;
+              rdfs:label "order_id" .
+
+
+###  http://eamining.edu.pt/attribute18
+:attribute18 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "quantity" ;
+             attr:attribute_value "1" ;
+             rdfs:label "quantity" .
+
+
+###  http://eamining.edu.pt/attribute19
+:attribute19 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "origem" ;
+             attr:attribute_value "1" ;
+             rdfs:label "origem" .
+
+
+###  http://eamining.edu.pt/attribute2
+:attribute2 rdf:type owl:NamedIndividual ,
+                     <http://eamining.edu.pt/core#Attribute> ;
+            attr:attribute_name "client.name" ;
+            attr:attribute_value "James Powlowski" ;
+            rdfs:label "client.name" .
+
+
+###  http://eamining.edu.pt/attribute20
+:attribute20 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cart" ;
+             attr:attribute_value "3456" ;
+             rdfs:label "cart" .
+
+
+###  http://eamining.edu.pt/attribute21
+:attribute21 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "orderDate" ;
+             attr:attribute_value "2020-07-06T12:59:59.550-03:00" ;
+             rdfs:label "orderDate" .
+
+
+###  http://eamining.edu.pt/attribute22
+:attribute22 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.codigo" ;
+             attr:attribute_value "12345" ;
+             rdfs:label "cliente.codigo" .
+
+
+###  http://eamining.edu.pt/attribute23
+:attribute23 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.name" ;
+             attr:attribute_value "Carlos Pinheiro" ;
+             rdfs:label "cliente.name" .
+
+
+###  http://eamining.edu.pt/attribute24
+:attribute24 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.document" ;
+             attr:attribute_value "123456789-1" ;
+             rdfs:label "cliente.document" .
+
+
+###  http://eamining.edu.pt/attribute25
+:attribute25 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.products.produto" ;
+             attr:attribute_value "Panela de Barro" ;
+             rdfs:label "cliente.products.produto" .
+
+
+###  http://eamining.edu.pt/attribute26
+:attribute26 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.products.sku" ;
+             attr:attribute_value "123" ;
+             rdfs:label "cliente.products.sku" .
+
+
+###  http://eamining.edu.pt/attribute27
+:attribute27 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.products.valor" ;
+             attr:attribute_value "99.99" ;
+             rdfs:label "cliente.products.valor" .
+
+
+###  http://eamining.edu.pt/attribute28
+:attribute28 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.products.statusPedidos.code" ;
+             attr:attribute_value "1" ;
+             rdfs:label "cliente.products.statusPedidos.code" .
+
+
+###  http://eamining.edu.pt/attribute29
+:attribute29 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.products.statusPedidos.description" ;
+             attr:attribute_value "waiting payment" ;
+             rdfs:label "cliente.products.statusPedidos.description" .
+
+
+###  http://eamining.edu.pt/attribute3
+:attribute3 rdf:type owl:NamedIndividual ,
+                     <http://eamining.edu.pt/core#Attribute> ;
+            attr:attribute_name "client.product.sku" ;
+            attr:attribute_value "832" ;
+            rdfs:label "client.product.sku" .
+
+
+###  http://eamining.edu.pt/attribute30
+:attribute30 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.products.statusPedidos.origem" ;
+             attr:attribute_value "e-commerce" ;
+             rdfs:label "cliente.products.statusPedidos.origem" .
+
+
+###  http://eamining.edu.pt/attribute31
+:attribute31 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "product_sku" ;
+             attr:attribute_value "90" ;
+             rdfs:label "product_sku" .
+
+
+###  http://eamining.edu.pt/attribute32
+:attribute32 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "product_name" ;
+             attr:attribute_value "Refined Rubber Mouse" ;
+             rdfs:label "product_name" .
+
+
+###  http://eamining.edu.pt/attribute33
+:attribute33 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "produt_price" ;
+             attr:attribute_value "300.81" ;
+             rdfs:label "produt_price" .
+
+
+###  http://eamining.edu.pt/attribute34
+:attribute34 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "product_sku" ;
+             attr:attribute_value "475" ;
+             rdfs:label "product_sku" .
+
+
+###  http://eamining.edu.pt/attribute35
+:attribute35 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "product_name" ;
+             attr:attribute_value "Rustic Fresh Chips" ;
+             rdfs:label "product_name" .
+
+
+###  http://eamining.edu.pt/attribute36
+:attribute36 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "produt_price" ;
+             attr:attribute_value "223.45" ;
+             rdfs:label "produt_price" .
+
+
+###  http://eamining.edu.pt/attribute37
+:attribute37 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "quantity" ;
+             attr:attribute_value "2" ;
+             rdfs:label "quantity" .
+
+
+###  http://eamining.edu.pt/attribute38
+:attribute38 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cartid" ;
+             attr:attribute_value "3456" ;
+             rdfs:label "cartid" .
+
+
+###  http://eamining.edu.pt/attribute39
+:attribute39 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente" ;
+             attr:attribute_value "12345" ;
+             rdfs:label "cliente" .
+
+
+###  http://eamining.edu.pt/attribute4
+:attribute4 rdf:type owl:NamedIndividual ,
+                     <http://eamining.edu.pt/core#Attribute> ;
+            attr:attribute_name "client.product.name" ;
+            attr:attribute_value "Gorgeous Fresh Pants" ;
+            rdfs:label "client.product.name" .
+
+
+###  http://eamining.edu.pt/attribute40
+:attribute40 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "itens.sku" ;
+             attr:attribute_value "12" ;
+             rdfs:label "itens.sku" .
+
+
+###  http://eamining.edu.pt/attribute41
+:attribute41 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "itens.produto" ;
+             attr:attribute_value "Produto 1" ;
+             rdfs:label "itens.produto" .
+
+
+###  http://eamining.edu.pt/attribute42
+:attribute42 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "itens.sku" ;
+             attr:attribute_value "34" ;
+             rdfs:label "itens.sku" .
+
+
+###  http://eamining.edu.pt/attribute43
+:attribute43 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "itens.produto" ;
+             attr:attribute_value "Produto 2" ;
+             rdfs:label "itens.produto" .
+
+
+###  http://eamining.edu.pt/attribute44
+:attribute44 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "itens.sku" ;
+             attr:attribute_value "35" ;
+             rdfs:label "itens.sku" .
+
+
+###  http://eamining.edu.pt/attribute45
+:attribute45 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cart" ;
+             attr:attribute_value "562" ;
+             rdfs:label "cart" .
+
+
+###  http://eamining.edu.pt/attribute46
+:attribute46 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.codigo" ;
+             attr:attribute_value "344" ;
+             rdfs:label "cliente.codigo" .
+
+
+###  http://eamining.edu.pt/attribute47
+:attribute47 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.name" ;
+             attr:attribute_value "James Powlowski" ;
+             rdfs:label "cliente.name" .
+
+
+###  http://eamining.edu.pt/attribute48
+:attribute48 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.deliveryAddress.cep" ;
+             attr:attribute_value "24457050" ;
+             rdfs:label "cliente.deliveryAddress.cep" .
+
+
+###  http://eamining.edu.pt/attribute49
+:attribute49 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.deliveryAddress.end" ;
+             attr:attribute_value "Rua Rio de Janeiro" ;
+             rdfs:label "cliente.deliveryAddress.end" .
+
+
+###  http://eamining.edu.pt/attribute5
+:attribute5 rdf:type owl:NamedIndividual ,
+                     <http://eamining.edu.pt/core#Attribute> ;
+            attr:attribute_name "client.product.value" ;
+            attr:attribute_value "770.99" ;
+            rdfs:label "client.product.value" .
+
+
+###  http://eamining.edu.pt/attribute50
+:attribute50 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.deliveryAddress.numero" ;
+             attr:attribute_value "624" ;
+             rdfs:label "cliente.deliveryAddress.numero" .
+
+
+###  http://eamining.edu.pt/attribute51
+:attribute51 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.deliveryAddress.bairro" ;
+             attr:attribute_value "Trindade" ;
+             rdfs:label "cliente.deliveryAddress.bairro" .
+
+
+###  http://eamining.edu.pt/attribute52
+:attribute52 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.deliveryAddress.cidade" ;
+             attr:attribute_value "São Gonçalo" ;
+             rdfs:label "cliente.deliveryAddress.cidade" .
+
+
+###  http://eamining.edu.pt/attribute53
+:attribute53 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.deliveryAddress.uf" ;
+             attr:attribute_value "RJ" ;
+             rdfs:label "cliente.deliveryAddress.uf" .
+
+
+###  http://eamining.edu.pt/attribute54
+:attribute54 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.deliveryAddress.origem" ;
+             attr:attribute_value "e-commerce" ;
+             rdfs:label "cliente.deliveryAddress.origem" .
+
+
+###  http://eamining.edu.pt/attribute55
+:attribute55 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cart" ;
+             attr:attribute_value "562" ;
+             rdfs:label "cart" .
+
+
+###  http://eamining.edu.pt/attribute56
+:attribute56 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.codigo" ;
+             attr:attribute_value "344" ;
+             rdfs:label "cliente.codigo" .
+
+
+###  http://eamining.edu.pt/attribute57
+:attribute57 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.name" ;
+             attr:attribute_value "James Powlowski" ;
+             rdfs:label "cliente.name" .
+
+
+###  http://eamining.edu.pt/attribute58
+:attribute58 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.paymentMethod.method" ;
+             attr:attribute_value "credit_card" ;
+             rdfs:label "cliente.paymentMethod.method" .
+
+
+###  http://eamining.edu.pt/attribute59
+:attribute59 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.paymentMethod.cardHolder" ;
+             attr:attribute_value "James Powlowski" ;
+             rdfs:label "cliente.paymentMethod.cardHolder" .
+
+
+###  http://eamining.edu.pt/attribute6
+:attribute6 rdf:type owl:NamedIndividual ,
+                     <http://eamining.edu.pt/core#Attribute> ;
+            attr:attribute_name "client.product.origem.code" ;
+            attr:attribute_value "1" ;
+            rdfs:label "client.product.origem.code" .
+
+
+###  http://eamining.edu.pt/attribute60
+:attribute60 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.paymentMethod.cardNumber" ;
+             attr:attribute_value "5723" ;
+             rdfs:label "cliente.paymentMethod.cardNumber" .
+
+
+###  http://eamining.edu.pt/attribute61
+:attribute61 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.paymentMethod.dueDate" ;
+             attr:attribute_value "92/5566" ;
+             rdfs:label "cliente.paymentMethod.dueDate" .
+
+
+###  http://eamining.edu.pt/attribute62
+:attribute62 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.paymentMethod.cvv" ;
+             attr:attribute_value "938" ;
+             rdfs:label "cliente.paymentMethod.cvv" .
+
+
+###  http://eamining.edu.pt/attribute63
+:attribute63 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.paymentMethod.totalValue" ;
+             attr:attribute_value "null" ;
+             rdfs:label "cliente.paymentMethod.totalValue" .
+
+
+###  http://eamining.edu.pt/attribute64
+:attribute64 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cart" ;
+             attr:attribute_value "3456" ;
+             rdfs:label "cart" .
+
+
+###  http://eamining.edu.pt/attribute65
+:attribute65 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "orderDate" ;
+             attr:attribute_value "2020-07-06T12:59:59.550-03:00" ;
+             rdfs:label "orderDate" .
+
+
+###  http://eamining.edu.pt/attribute66
+:attribute66 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.codigo" ;
+             attr:attribute_value "12345" ;
+             rdfs:label "cliente.codigo" .
+
+
+###  http://eamining.edu.pt/attribute67
+:attribute67 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.name" ;
+             attr:attribute_value "Carlos Pinheiro" ;
+             rdfs:label "cliente.name" .
+
+
+###  http://eamining.edu.pt/attribute68
+:attribute68 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.paymentMethod.cardHolder" ;
+             attr:attribute_value "Carlos Pinheiro" ;
+             rdfs:label "cliente.paymentMethod.cardHolder" .
+
+
+###  http://eamining.edu.pt/attribute69
+:attribute69 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.paymentMethod.cardNumber" ;
+             attr:attribute_value "4561" ;
+             rdfs:label "cliente.paymentMethod.cardNumber" .
+
+
+###  http://eamining.edu.pt/attribute7
+:attribute7 rdf:type owl:NamedIndividual ,
+                     <http://eamining.edu.pt/core#Attribute> ;
+            attr:attribute_name "client.product.origem.description" ;
+            attr:attribute_value "APP ANDROID" ;
+            rdfs:label "client.product.origem.description" .
+
+
+###  http://eamining.edu.pt/attribute70
+:attribute70 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.paymentMethod.dueDate" ;
+             attr:attribute_value "02/2025" ;
+             rdfs:label "cliente.paymentMethod.dueDate" .
+
+
+###  http://eamining.edu.pt/attribute71
+:attribute71 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.paymentMethod.cvv" ;
+             attr:attribute_value "111" ;
+             rdfs:label "cliente.paymentMethod.cvv" .
+
+
+###  http://eamining.edu.pt/attribute72
+:attribute72 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.paymentMethod.totalValue" ;
+             attr:attribute_value "150.00" ;
+             rdfs:label "cliente.paymentMethod.totalValue" .
+
+
+###  http://eamining.edu.pt/attribute73
+:attribute73 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.paymentMethod.status" ;
+             attr:attribute_value "aproved" ;
+             rdfs:label "cliente.paymentMethod.status" .
+
+
+###  http://eamining.edu.pt/attribute74
+:attribute74 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cart" ;
+             attr:attribute_value "562" ;
+             rdfs:label "cart" .
+
+
+###  http://eamining.edu.pt/attribute75
+:attribute75 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "orderDate" ;
+             attr:attribute_value "Sun Mar 31 2024 06:28:20 GMT-0300 (Horário Padrão de Brasília)" ;
+             rdfs:label "orderDate" .
+
+
+###  http://eamining.edu.pt/attribute76
+:attribute76 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.codigo" ;
+             attr:attribute_value "344" ;
+             rdfs:label "cliente.codigo" .
+
+
+###  http://eamining.edu.pt/attribute77
+:attribute77 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.name" ;
+             attr:attribute_value "James Powlowski" ;
+             rdfs:label "cliente.name" .
+
+
+###  http://eamining.edu.pt/attribute78
+:attribute78 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.documento" ;
+             attr:attribute_value "834" ;
+             rdfs:label "cliente.documento" .
+
+
+###  http://eamining.edu.pt/attribute79
+:attribute79 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.products.produto" ;
+             attr:attribute_value "Sleek Soft Hat" ;
+             rdfs:label "cliente.products.produto" .
+
+
+###  http://eamining.edu.pt/attribute8
+:attribute8 rdf:type owl:NamedIndividual ,
+                     <http://eamining.edu.pt/core#Attribute> ;
+            attr:attribute_name "cartid" ;
+            attr:attribute_value "562" ;
+            rdfs:label "cartid" .
+
+
+###  http://eamining.edu.pt/attribute80
+:attribute80 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.products.sku" ;
+             attr:attribute_value "165" ;
+             rdfs:label "cliente.products.sku" .
+
+
+###  http://eamining.edu.pt/attribute81
+:attribute81 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.products.valor" ;
+             attr:attribute_value "530.58" ;
+             rdfs:label "cliente.products.valor" .
+
+
+###  http://eamining.edu.pt/attribute82
+:attribute82 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.products.produto" ;
+             attr:attribute_value "Refined Rubber Mouse" ;
+             rdfs:label "cliente.products.produto" .
+
+
+###  http://eamining.edu.pt/attribute83
+:attribute83 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.products.sku" ;
+             attr:attribute_value "90" ;
+             rdfs:label "cliente.products.sku" .
+
+
+###  http://eamining.edu.pt/attribute84
+:attribute84 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.products.valor" ;
+             attr:attribute_value "300.81" ;
+             rdfs:label "cliente.products.valor" .
+
+
+###  http://eamining.edu.pt/attribute85
+:attribute85 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.products.produto" ;
+             attr:attribute_value "Rustic Fresh Chips" ;
+             rdfs:label "cliente.products.produto" .
+
+
+###  http://eamining.edu.pt/attribute86
+:attribute86 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.products.sku" ;
+             attr:attribute_value "475" ;
+             rdfs:label "cliente.products.sku" .
+
+
+###  http://eamining.edu.pt/attribute87
+:attribute87 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.products.valor" ;
+             attr:attribute_value "223.45" ;
+             rdfs:label "cliente.products.valor" .
+
+
+###  http://eamining.edu.pt/attribute88
+:attribute88 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.products.statusPedidos.code" ;
+             attr:attribute_value "1" ;
+             rdfs:label "cliente.products.statusPedidos.code" .
+
+
+###  http://eamining.edu.pt/attribute89
+:attribute89 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.products.statusPedidos.description" ;
+             attr:attribute_value "waiting payment" ;
+             rdfs:label "cliente.products.statusPedidos.description" .
+
+
+###  http://eamining.edu.pt/attribute9
+:attribute9 rdf:type owl:NamedIndividual ,
+                     <http://eamining.edu.pt/core#Attribute> ;
+            attr:attribute_name "client_id" ;
+            attr:attribute_value "287ec8b9-f794-39d6-ab38-1329b647e9db" ;
+            rdfs:label "client_id" .
+
+
+###  http://eamining.edu.pt/attribute90
+:attribute90 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente.products.statusPedidos.origem" ;
+             attr:attribute_value "e-commerce" ;
+             rdfs:label "cliente.products.statusPedidos.origem" .
+
+
+###  http://eamining.edu.pt/attribute91
+:attribute91 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "order_id" ;
+             attr:attribute_value "177" ;
+             rdfs:label "order_id" .
+
+
+###  http://eamining.edu.pt/attribute92
+:attribute92 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cliente" ;
+             attr:attribute_value "12345" ;
+             rdfs:label "cliente" .
+
+
+###  http://eamining.edu.pt/attribute93
+:attribute93 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "statusPedidos" ;
+             attr:attribute_value "CREATED" ;
+             rdfs:label "statusPedidos" .
+
+
+###  http://eamining.edu.pt/attribute94
+:attribute94 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "origem" ;
+             attr:attribute_value "e-commerce" ;
+             rdfs:label "origem" .
+
+
+###  http://eamining.edu.pt/attribute95
+:attribute95 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "cart_id" ;
+             attr:attribute_value "1" ;
+             rdfs:label "cart_id" .
+
+
+###  http://eamining.edu.pt/attribute96
+:attribute96 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "client.code" ;
+             attr:attribute_value "394" ;
+             rdfs:label "client.code" .
+
+
+###  http://eamining.edu.pt/attribute97
+:attribute97 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "client.name" ;
+             attr:attribute_value "Colleen Bartell" ;
+             rdfs:label "client.name" .
+
+
+###  http://eamining.edu.pt/attribute98
+:attribute98 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "client.product.sku" ;
+             attr:attribute_value "938" ;
+             rdfs:label "client.product.sku" .
+
+
+###  http://eamining.edu.pt/attribute99
+:attribute99 rdf:type owl:NamedIndividual ,
+                      <http://eamining.edu.pt/core#Attribute> ;
+             attr:attribute_name "client.product.name" ;
+             attr:attribute_value "Sleek Concrete Shoes" ;
+             rdfs:label "client.product.name" .
+
+
+###  http://eamining.edu.pt/bc1c980c112ea1025bbd6e33a4311b49
+:bc1c980c112ea1025bbd6e33a4311b49 rdf:type owl:NamedIndividual ,
+                                           <http://eamining.edu.pt/core#APICall> ;
+                                  aPIC:api_name "ecommerce-carts" ;
+                                  aPIC:api_uri "/sandbox/ecommerce/v1/carts/562/itens" ;
+                                  aPIC:request_time "2024-03-31T14:57:43.051+00:00"^^xsd:dateTime ;
+                                  aPIC:result_status 200 ;
+                                  rdfs:label "bc1c980c112ea1025bbd6e33a4311b49" .
+
+
+###  http://eamining.edu.pt/d3d7533f5685c022211f954c7804214c
+:d3d7533f5685c022211f954c7804214c rdf:type owl:NamedIndividual ,
+                                           <http://eamining.edu.pt/core#APICall> ;
+                                  gufo:participatedIn <POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562/deliveryaddress> ;
+                                  aPIC:api_name "ecommerce-carts" ;
+                                  aPIC:api_uri "/sandbox/ecommerce/v1/carts/562/deliveryaddress" ;
+                                  aPIC:request_time "2024-03-31T14:57:44.683+00:00"^^xsd:dateTime ;
+                                  aPIC:result_status 201 ;
+                                  rdfs:label "d3d7533f5685c022211f954c7804214c" .
+
+
+###  http://eamining.edu.pt/d9430d628d4bff3c53ddf32d545b9a1c
+:d9430d628d4bff3c53ddf32d545b9a1c rdf:type owl:NamedIndividual ,
+                                           <http://eamining.edu.pt/core#APICall> ;
+                                  aPIC:api_name "ecommerce-carts" ;
+                                  aPIC:api_uri "/sandbox/ecommerce/v1/carts/727/itens" ;
+                                  aPIC:request_time "2024-03-31T15:05:43.817+00:00"^^xsd:dateTime ;
+                                  aPIC:result_status 200 ;
+                                  rdfs:label "d9430d628d4bff3c53ddf32d545b9a1c" .
+
+
+###  http://eamining.edu.pt/dfaae161ce07112d7a1f7904fc268668
+:dfaae161ce07112d7a1f7904fc268668 rdf:type owl:NamedIndividual ,
+                                           <http://eamining.edu.pt/core#APICall> ;
+                                  gufo:participatedIn <GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727> ;
+                                  aPIC:api_name "ecommerce-carts" ;
+                                  aPIC:api_uri "/sandbox/ecommerce/v1/carts/727" ;
+                                  aPIC:request_time "2024-03-31T15:05:45.075+00:00"^^xsd:dateTime ;
+                                  aPIC:result_status 200 ;
+                                  rdfs:label "dfaae161ce07112d7a1f7904fc268668" .
+
+
+###  http://eamining.edu.pt/e7115b04470a8c4b96afb96bbbbbd603
+:e7115b04470a8c4b96afb96bbbbbd603 rdf:type owl:NamedIndividual ,
+                                           <http://eamining.edu.pt/core#APICall> ;
+                                  aPIC:api_name "ecommerce-carts" ;
+                                  aPIC:api_uri "/sandbox/ecommerce/v1/carts" ;
+                                  aPIC:request_time "2024-03-31T15:05:41.530+00:00"^^xsd:dateTime ;
+                                  aPIC:result_status 201 ;
+                                  rdfs:label "e7115b04470a8c4b96afb96bbbbbd603" .
+
+
+###  http://eamining.edu.pt/ed342c23f8bc3d6af7916d3f2a5aee3f
+:ed342c23f8bc3d6af7916d3f2a5aee3f rdf:type owl:NamedIndividual ,
+                                           <http://eamining.edu.pt/core#APICall> ;
+                                  aPIC:api_name "ecommerce-carts" ;
+                                  aPIC:api_uri "/sandbox/ecommerce/v1/carts/727/itens" ;
+                                  aPIC:request_time "2024-03-31T15:05:43.031+00:00"^^xsd:dateTime ;
+                                  aPIC:result_status 200 ;
+                                  rdfs:label "ed342c23f8bc3d6af7916d3f2a5aee3f" .
+
+
+###  http://eamining.edu.pt/f1e6335d5527457f233f813d97f44e42
+:f1e6335d5527457f233f813d97f44e42 rdf:type owl:NamedIndividual ,
+                                           <http://eamining.edu.pt/core#APICall> ;
+                                  gufo:participatedIn <POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts> ;
+                                  aPIC:api_name "ecommerce-carts" ;
+                                  aPIC:api_uri "/sandbox/ecommerce/v1/carts" ;
+                                  aPIC:request_time "2024-03-31T14:57:42.035+00:00"^^xsd:dateTime ;
+                                  aPIC:result_status 201 ;
+                                  rdfs:label "f1e6335d5527457f233f813d97f44e42" .
+
+
+###  http://eamining.edu.pt/f6e5405730ab5506b7f9f95ac1f55660
+:f6e5405730ab5506b7f9f95ac1f55660 rdf:type owl:NamedIndividual ,
+                                           <http://eamining.edu.pt/core#APICall> ;
+                                  gufo:participatedIn <POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727/deliveryaddress> ;
+                                  aPIC:api_name "ecommerce-carts" ;
+                                  aPIC:api_uri "/sandbox/ecommerce/v1/carts/727/deliveryaddress" ;
+                                  aPIC:request_time "2024-03-31T15:05:45.835+00:00"^^xsd:dateTime ;
+                                  aPIC:result_status 201 ;
+                                  rdfs:label "f6e5405730ab5506b7f9f95ac1f55660" .
+
+
+###  http://eamining.edu.pt/fbeb6468ddb82b581d750a3be2fdbf6c
+:fbeb6468ddb82b581d750a3be2fdbf6c rdf:type owl:NamedIndividual ,
+                                           <http://eamining.edu.pt/core#APICall> ;
+                                  gufo:participatedIn <POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727/paymentmethod> ;
+                                  aPIC:api_name "ecommerce-carts" ;
+                                  aPIC:api_uri "/sandbox/ecommerce/v1/carts/727/paymentmethod" ;
+                                  aPIC:request_time "2024-03-31T15:05:46.147+00:00"^^xsd:dateTime ;
+                                  aPIC:result_status 202 ;
+                                  rdfs:label "fbeb6468ddb82b581d750a3be2fdbf6c" .
+
+
+###  http://eamining.edu.pt/operationexecuted1
+:operationexecuted1 rdf:type owl:NamedIndividual ,
+                             <http://eamining.edu.pt/core#OperationExecuted> ;
+                    gufo:mediates <POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts> ,
+                                  <http://eamining.edu.pt/sandbox/ecommerce/v1/carts> .
+
+
+###  http://eamining.edu.pt/operationexecuted10
+:operationexecuted10 rdf:type owl:NamedIndividual ,
+                              <http://eamining.edu.pt/core#OperationExecuted> ;
+                     gufo:mediates <POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727/itens> ,
+                                   <http://eamining.edu.pt/sandbox/ecommerce/v1/carts/727/itens> .
+
+
+###  http://eamining.edu.pt/operationexecuted11
+:operationexecuted11 rdf:type owl:NamedIndividual ,
+                              <http://eamining.edu.pt/core#OperationExecuted> ;
+                     gufo:mediates <POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727/itens> ,
+                                   <http://eamining.edu.pt/sandbox/ecommerce/v1/carts/727/itens> .
+
+
+###  http://eamining.edu.pt/operationexecuted12
+:operationexecuted12 rdf:type owl:NamedIndividual ,
+                              <http://eamining.edu.pt/core#OperationExecuted> ;
+                     gufo:mediates <POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727/itens> ,
+                                   <http://eamining.edu.pt/sandbox/ecommerce/v1/carts/727/itens> .
+
+
+###  http://eamining.edu.pt/operationexecuted13
+:operationexecuted13 rdf:type owl:NamedIndividual ,
+                              <http://eamining.edu.pt/core#OperationExecuted> ;
+                     gufo:mediates <GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727> ,
+                                   <http://eamining.edu.pt/sandbox/ecommerce/v1/carts/727> .
+
+
+###  http://eamining.edu.pt/operationexecuted14
+:operationexecuted14 rdf:type owl:NamedIndividual ,
+                              <http://eamining.edu.pt/core#OperationExecuted> ;
+                     gufo:mediates <POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727/deliveryaddress> ,
+                                   <http://eamining.edu.pt/sandbox/ecommerce/v1/carts/727/deliveryaddress> .
+
+
+###  http://eamining.edu.pt/operationexecuted15
+:operationexecuted15 rdf:type owl:NamedIndividual ,
+                              <http://eamining.edu.pt/core#OperationExecuted> ;
+                     gufo:mediates <POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/727/paymentmethod> ,
+                                   <http://eamining.edu.pt/sandbox/ecommerce/v1/carts/727/paymentmethod> .
+
+
+###  http://eamining.edu.pt/operationexecuted16
+:operationexecuted16 rdf:type owl:NamedIndividual ,
+                              <http://eamining.edu.pt/core#OperationExecuted> ;
+                     gufo:mediates <POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/orders> ,
+                                   <http://eamining.edu.pt/sandbox/ecommerce/v1/orders> .
+
+
+###  http://eamining.edu.pt/operationexecuted2
+:operationexecuted2 rdf:type owl:NamedIndividual ,
+                             <http://eamining.edu.pt/core#OperationExecuted> ;
+                    gufo:mediates <POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562/itens> ,
+                                  <http://eamining.edu.pt/sandbox/ecommerce/v1/carts/562/itens> .
+
+
+###  http://eamining.edu.pt/operationexecuted3
+:operationexecuted3 rdf:type owl:NamedIndividual ,
+                             <http://eamining.edu.pt/core#OperationExecuted> ;
+                    gufo:mediates <POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562/itens> ,
+                                  <http://eamining.edu.pt/sandbox/ecommerce/v1/carts/562/itens> .
+
+
+###  http://eamining.edu.pt/operationexecuted4
+:operationexecuted4 rdf:type owl:NamedIndividual ,
+                             <http://eamining.edu.pt/core#OperationExecuted> ;
+                    gufo:mediates <POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562/itens> ,
+                                  <http://eamining.edu.pt/sandbox/ecommerce/v1/carts/562/itens> .
+
+
+###  http://eamining.edu.pt/operationexecuted5
+:operationexecuted5 rdf:type owl:NamedIndividual ,
+                             <http://eamining.edu.pt/core#OperationExecuted> ;
+                    gufo:mediates <GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562> ,
+                                  <http://eamining.edu.pt/sandbox/ecommerce/v1/carts/562> .
+
+
+###  http://eamining.edu.pt/operationexecuted6
+:operationexecuted6 rdf:type owl:NamedIndividual ,
+                             <http://eamining.edu.pt/core#OperationExecuted> ;
+                    gufo:mediates <POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562/deliveryaddress> ,
+                                  <http://eamining.edu.pt/sandbox/ecommerce/v1/carts/562/deliveryaddress> .
+
+
+###  http://eamining.edu.pt/operationexecuted7
+:operationexecuted7 rdf:type owl:NamedIndividual ,
+                             <http://eamining.edu.pt/core#OperationExecuted> ;
+                    gufo:mediates <POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562/paymentmethod> ,
+                                  <http://eamining.edu.pt/sandbox/ecommerce/v1/carts/562/paymentmethod> .
+
+
+###  http://eamining.edu.pt/operationexecuted8
+:operationexecuted8 rdf:type owl:NamedIndividual ,
+                             <http://eamining.edu.pt/core#OperationExecuted> ;
+                    gufo:mediates <POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/orders> ,
+                                  <http://eamining.edu.pt/sandbox/ecommerce/v1/orders> .
+
+
+###  http://eamining.edu.pt/operationexecuted9
+:operationexecuted9 rdf:type owl:NamedIndividual ,
+                             <http://eamining.edu.pt/core#OperationExecuted> ;
+                    gufo:mediates <POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts> ,
+                                  <http://eamining.edu.pt/sandbox/ecommerce/v1/carts> .
+
+
+###  http://eamining.edu.pt/24c3b723b424c4269db99670c4ed317c
+<http://eamining.edu.pt/24c3b723b424c4269db99670c4ed317c> rdf:type owl:NamedIndividual ,
+                                                                   <http://eamining.edu.pt/core#APICall> ;
+                                                          aPIC:api_name "ecommerce-orders" ;
+                                                          aPIC:api_uri "/sandbox/ecommerce/v1/orders" ;
+                                                          aPIC:request_time "2024-03-31T15:05:46.472+00:00"^^xsd:dateTime ;
+                                                          aPIC:result_status 200 ;
+                                                          rdfs:label "24c3b723b424c4269db99670c4ed317c" .
+
+
+###  http://eamining.edu.pt/5432514ee473ff1de9296c59fd502c46
+<http://eamining.edu.pt/5432514ee473ff1de9296c59fd502c46> rdf:type owl:NamedIndividual ,
+                                                                   <http://eamining.edu.pt/core#APICall> ;
+                                                          gufo:participatedIn <POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/orders> ;
+                                                          aPIC:api_name "ecommerce-orders" ;
+                                                          aPIC:api_uri "/sandbox/ecommerce/v1/orders" ;
+                                                          aPIC:request_time "2024-03-31T14:57:45.359+00:00"^^xsd:dateTime ;
+                                                          aPIC:result_status 200 ;
+                                                          rdfs:label "5432514ee473ff1de9296c59fd502c46" .
+
+
+###  http://eamining.edu.pt/604ee939ff0a0c4fc0347e6051351d17
+<http://eamining.edu.pt/604ee939ff0a0c4fc0347e6051351d17> rdf:type owl:NamedIndividual ,
+                                                                   <http://eamining.edu.pt/core#APICall> ;
+                                                          gufo:participatedIn <POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/562/paymentmethod> ;
+                                                          aPIC:api_name "ecommerce-carts" ;
+                                                          aPIC:api_uri "/sandbox/ecommerce/v1/carts/562/paymentmethod" ;
+                                                          aPIC:request_time "2024-03-31T14:57:44.997+00:00"^^xsd:dateTime ;
+                                                          aPIC:result_status 202 ;
+                                                          rdfs:label "604ee939ff0a0c4fc0347e6051351d17" .
+
+
+###  http://eamining.edu.pt/9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts
+<http://eamining.edu.pt/9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts> rdf:type owl:NamedIndividual ,
+                                                                                           <http://eamining.edu.pt/core#ServiceDestination> ;
+                                                                                  gufo:participatedIn :a02a7a587059e77c9a21a2746a20fe56 ,
+                                                                                                      :a14c887c27c00a55cc96c25157ed0f2c ,
+                                                                                                      :a416b13c63e27054ce2e0f261367be76 ,
+                                                                                                      :a91edb77c8b79d4f3b4bd60f735a4513 ,
+                                                                                                      :bc1c980c112ea1025bbd6e33a4311b49 ,
+                                                                                                      :d3d7533f5685c022211f954c7804214c ,
+                                                                                                      :d9430d628d4bff3c53ddf32d545b9a1c ,
+                                                                                                      :dfaae161ce07112d7a1f7904fc268668 ,
+                                                                                                      :e7115b04470a8c4b96afb96bbbbbd603 ,
+                                                                                                      :ed342c23f8bc3d6af7916d3f2a5aee3f ,
+                                                                                                      :f1e6335d5527457f233f813d97f44e42 ,
+                                                                                                      :f6e5405730ab5506b7f9f95ac1f55660 ,
+                                                                                                      :fbeb6468ddb82b581d750a3be2fdbf6c ,
+                                                                                                      <http://eamining.edu.pt/604ee939ff0a0c4fc0347e6051351d17> ;
+                                                                                  serv:endpoint_route "9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts" ;
+                                                                                  rdfs:label "9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts" .
+
+
+###  http://eamining.edu.pt/9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/orders
+<http://eamining.edu.pt/9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/orders> rdf:type owl:NamedIndividual ,
+                                                                                            <http://eamining.edu.pt/core#ServiceDestination> ;
+                                                                                   gufo:participatedIn <http://eamining.edu.pt/24c3b723b424c4269db99670c4ed317c> ,
+                                                                                                       <http://eamining.edu.pt/5432514ee473ff1de9296c59fd502c46> ;
+                                                                                   serv:endpoint_route "9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/orders" ;
+                                                                                   rdfs:label "9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/orders" .
+
+
+###  http://eamining.edu.pt/core#APICall
+<http://eamining.edu.pt/core#APICall> rdf:type owl:NamedIndividual ,
+                                               gufo:EventType .
+
+
+###  http://eamining.edu.pt/core#APIDocumentation
+<http://eamining.edu.pt/core#APIDocumentation> rdf:type owl:NamedIndividual ,
+                                                        gufo:Kind .
+
+
+###  http://eamining.edu.pt/core#APIOperation
+<http://eamining.edu.pt/core#APIOperation> rdf:type owl:NamedIndividual ,
+                                                    gufo:SubKind .
+
+
+###  http://eamining.edu.pt/core#APIResource
+<http://eamining.edu.pt/core#APIResource> rdf:type owl:NamedIndividual ,
+                                                   gufo:Kind .
+
+
+###  http://eamining.edu.pt/core#Attribute
+<http://eamining.edu.pt/core#Attribute> rdf:type owl:NamedIndividual ,
+                                                 gufo:AbstractIndividualType .
+
+
+###  http://eamining.edu.pt/core#AttributePair
+<http://eamining.edu.pt/core#AttributePair> rdf:type owl:NamedIndividual ,
+                                                     gufo:AbstractIndividualType .
+
+
+###  http://eamining.edu.pt/core#AttributesEquality
+<http://eamining.edu.pt/core#AttributesEquality> rdf:type owl:NamedIndividual ,
+                                                          gufo:ComparativeRelationshipType .
+
+
+###  http://eamining.edu.pt/core#ConsumerApp
+<http://eamining.edu.pt/core#ConsumerApp> rdf:type owl:NamedIndividual ,
+                                                   gufo:Kind .
+
+
+###  http://eamining.edu.pt/core#DocumentedAPI
+<http://eamining.edu.pt/core#DocumentedAPI> rdf:type owl:NamedIndividual ,
+                                                     gufo:Kind .
+
+
+###  http://eamining.edu.pt/core#OperationExecuted
+<http://eamining.edu.pt/core#OperationExecuted> rdf:type owl:NamedIndividual ,
+                                                         gufo:Kind .
+
+
+###  http://eamining.edu.pt/core#Service
+<http://eamining.edu.pt/core#Service> rdf:type owl:NamedIndividual ,
+                                               gufo:Kind .
+
+
+###  http://eamining.edu.pt/core#ServiceDestination
+<http://eamining.edu.pt/core#ServiceDestination> rdf:type owl:NamedIndividual ,
+                                                          gufo:SubKind .
+
+
+###  http://eamining.edu.pt/core#belongsTo
+<http://eamining.edu.pt/core#belongsTo> rdf:type owl:NamedIndividual ,
+                                                 gufo:MaterialRelationshipType .
+
+
+###  http://eamining.edu.pt/core#isDocumentedBy
+<http://eamining.edu.pt/core#isDocumentedBy> rdf:type owl:NamedIndividual ,
+                                                      gufo:MaterialRelationshipType .
+
+
+###  http://eamining.edu.pt/core#modifies
+<http://eamining.edu.pt/core#modifies> rdf:type owl:NamedIndividual ,
+                                                gufo:MaterialRelationshipType .
+
+
+###  http://eamining.edu.pt/data-relation-view#APIDomain
+<http://eamining.edu.pt/data-relation-view#APIDomain> rdf:type owl:NamedIndividual ,
+                                                               gufo:Kind .
+
+
+###  http://eamining.edu.pt/data-relation-view#APIDomainMap
+<http://eamining.edu.pt/data-relation-view#APIDomainMap> rdf:type owl:NamedIndividual ,
+                                                                  gufo:Kind .
+
+
+###  http://eamining.edu.pt/data-relation-view#APIEntity
+<http://eamining.edu.pt/data-relation-view#APIEntity> rdf:type owl:NamedIndividual ,
+                                                               gufo:Role .
+
+
+###  http://eamining.edu.pt/data-relation-view#CorrelatedDataObjects
+<http://eamining.edu.pt/data-relation-view#CorrelatedDataObjects> rdf:type owl:NamedIndividual ,
+                                                                           gufo:Kind .
+
+
+###  http://eamining.edu.pt/data-relation-view#DataDomain
+<http://eamining.edu.pt/data-relation-view#DataDomain> rdf:type owl:NamedIndividual ,
+                                                                gufo:Role .
+
+
+###  http://eamining.edu.pt/data-relation-view#EADataObjectsRelationView
+<http://eamining.edu.pt/data-relation-view#EADataObjectsRelationView> rdf:type owl:NamedIndividual ,
+                                                                               gufo:Kind .
+
+
+###  http://eamining.edu.pt/data-relation-view#FrequentDataDomainCorrelation
+<http://eamining.edu.pt/data-relation-view#FrequentDataDomainCorrelation> rdf:type owl:NamedIndividual ,
+                                                                                   gufo:Kind .
+
+
+###  http://eamining.edu.pt/data-relation-view#pertainsTo
+<http://eamining.edu.pt/data-relation-view#pertainsTo> rdf:type owl:NamedIndividual ,
+                                                                gufo:MaterialRelationshipType .
+
+
+###  http://eamining.edu.pt/process-view#APIActivitiesConnection
+<http://eamining.edu.pt/process-view#APIActivitiesConnection> rdf:type owl:NamedIndividual ,
+                                                                       gufo:EventType .
+
+
+###  http://eamining.edu.pt/process-view#APIAntecedentActivity
+<http://eamining.edu.pt/process-view#APIAntecedentActivity> rdf:type owl:NamedIndividual ,
+                                                                     gufo:EventType .
+
+
+###  http://eamining.edu.pt/process-view#APIConsequentActivity
+<http://eamining.edu.pt/process-view#APIConsequentActivity> rdf:type owl:NamedIndividual ,
+                                                                     gufo:EventType .
+
+
+###  http://eamining.edu.pt/process-view#EAProcessesView
+<http://eamining.edu.pt/process-view#EAProcessesView> rdf:type owl:NamedIndividual ,
+                                                               gufo:Kind .
+
+
+###  http://eamining.edu.pt/process-view#FrequentTemporalCorrelation
+<http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> rdf:type owl:NamedIndividual ,
+                                                                           gufo:Kind .
+
+
+###  http://eamining.edu.pt/process-view#Partner
+<http://eamining.edu.pt/process-view#Partner> rdf:type owl:NamedIndividual ,
+                                                       gufo:Role .
+
+
+###  http://eamining.edu.pt/process-view#Process
+<http://eamining.edu.pt/process-view#Process> rdf:type owl:NamedIndividual ,
+                                                       gufo:EventType .
+
+
+###  http://eamining.edu.pt/process-view#ProcessElementView
+<http://eamining.edu.pt/process-view#ProcessElementView> rdf:type owl:NamedIndividual ,
+                                                                  gufo:Kind .
+
+
+###  http://eamining.edu.pt/process-view#ProcessElementView_1
+<http://eamining.edu.pt/process-view#ProcessElementView_1> rdf:type owl:NamedIndividual ,
+                                                                    gufo:MaterialRelationshipType .
+
+
+###  http://eamining.edu.pt/sandbox/ecommerce/v1/carts
+<http://eamining.edu.pt/sandbox/ecommerce/v1/carts> rdf:type owl:NamedIndividual ,
+                                                             <http://eamining.edu.pt/core#APIResource> ;
+                                                    aPIR:resource_data :attribute1 ,
+                                                                       :attribute10 ,
+                                                                       :attribute100 ,
+                                                                       :attribute101 ,
+                                                                       :attribute11 ,
+                                                                       :attribute12 ,
+                                                                       :attribute2 ,
+                                                                       :attribute3 ,
+                                                                       :attribute4 ,
+                                                                       :attribute5 ,
+                                                                       :attribute6 ,
+                                                                       :attribute7 ,
+                                                                       :attribute8 ,
+                                                                       :attribute9 ,
+                                                                       :attribute96 ,
+                                                                       :attribute97 ,
+                                                                       :attribute98 ,
+                                                                       :attribute99 ;
+                                                    aPIR:resource_uri "/sandbox/ecommerce/v1/carts" ;
+                                                    rdfs:label "/sandbox/ecommerce/v1/carts" .
+
+
+###  http://eamining.edu.pt/sandbox/ecommerce/v1/orders
+<http://eamining.edu.pt/sandbox/ecommerce/v1/orders> rdf:type owl:NamedIndividual ,
+                                                              <http://eamining.edu.pt/core#APIResource> ;
+                                                     aPIR:resource_data :attribute163 ,
+                                                                        :attribute164 ,
+                                                                        :attribute165 ,
+                                                                        :attribute166 ,
+                                                                        :attribute167 ,
+                                                                        :attribute168 ,
+                                                                        :attribute169 ,
+                                                                        :attribute170 ,
+                                                                        :attribute171 ,
+                                                                        :attribute172 ,
+                                                                        :attribute173 ,
+                                                                        :attribute174 ,
+                                                                        :attribute175 ,
+                                                                        :attribute176 ,
+                                                                        :attribute177 ,
+                                                                        :attribute74 ,
+                                                                        :attribute75 ,
+                                                                        :attribute76 ,
+                                                                        :attribute77 ,
+                                                                        :attribute78 ,
+                                                                        :attribute79 ,
+                                                                        :attribute80 ,
+                                                                        :attribute81 ,
+                                                                        :attribute82 ,
+                                                                        :attribute83 ,
+                                                                        :attribute84 ,
+                                                                        :attribute85 ,
+                                                                        :attribute86 ,
+                                                                        :attribute87 ,
+                                                                        :attribute88 ,
+                                                                        :attribute89 ,
+                                                                        :attribute90 ,
+                                                                        :attribute91 ,
+                                                                        :attribute92 ,
+                                                                        :attribute93 ,
+                                                                        :attribute94 ,
+                                                                        :attribute95 ;
+                                                     aPIR:resource_uri "/sandbox/ecommerce/v1/orders" ;
+                                                     rdfs:label "/sandbox/ecommerce/v1/orders" .
+
+
+###  http://eamining.edu.pt/sandbox/ecommerce/v1/carts/562
+<http://eamining.edu.pt/sandbox/ecommerce/v1/carts/562> rdf:type owl:NamedIndividual ,
+                                                                 <http://eamining.edu.pt/core#APIResource> ;
+                                                        aPIR:resource_data :attribute38 ,
+                                                                           :attribute39 ,
+                                                                           :attribute40 ,
+                                                                           :attribute41 ,
+                                                                           :attribute42 ,
+                                                                           :attribute43 ,
+                                                                           :attribute44 ;
+                                                        aPIR:resource_name "carts" ;
+                                                        aPIR:resource_uri "/sandbox/ecommerce/v1/carts/562" ;
+                                                        rdfs:label "/sandbox/ecommerce/v1/carts/562" .
+
+
+###  http://eamining.edu.pt/sandbox/ecommerce/v1/carts/562/deliveryaddress
+<http://eamining.edu.pt/sandbox/ecommerce/v1/carts/562/deliveryaddress> rdf:type owl:NamedIndividual ,
+                                                                                 <http://eamining.edu.pt/core#APIResource> ;
+                                                                        aPIR:resource_data :attribute45 ,
+                                                                                           :attribute46 ,
+                                                                                           :attribute47 ,
+                                                                                           :attribute48 ,
+                                                                                           :attribute49 ,
+                                                                                           :attribute50 ,
+                                                                                           :attribute51 ,
+                                                                                           :attribute52 ,
+                                                                                           :attribute53 ,
+                                                                                           :attribute54 ;
+                                                                        aPIR:resource_name "carts" ;
+                                                                        aPIR:resource_uri "/sandbox/ecommerce/v1/carts/562/deliveryaddress" ;
+                                                                        rdfs:label "/sandbox/ecommerce/v1/carts/562/deliveryaddress" .
+
+
+###  http://eamining.edu.pt/sandbox/ecommerce/v1/carts/562/itens
+<http://eamining.edu.pt/sandbox/ecommerce/v1/carts/562/itens> rdf:type owl:NamedIndividual ,
+                                                                       <http://eamining.edu.pt/core#APIResource> ;
+                                                              aPIR:resource_data :attribute13 ,
+                                                                                 :attribute14 ,
+                                                                                 :attribute15 ,
+                                                                                 :attribute16 ,
+                                                                                 :attribute17 ,
+                                                                                 :attribute18 ,
+                                                                                 :attribute19 ,
+                                                                                 :attribute20 ,
+                                                                                 :attribute21 ,
+                                                                                 :attribute22 ,
+                                                                                 :attribute23 ,
+                                                                                 :attribute24 ,
+                                                                                 :attribute25 ,
+                                                                                 :attribute26 ,
+                                                                                 :attribute27 ,
+                                                                                 :attribute28 ,
+                                                                                 :attribute29 ,
+                                                                                 :attribute30 ,
+                                                                                 :attribute31 ,
+                                                                                 :attribute32 ,
+                                                                                 :attribute33 ,
+                                                                                 :attribute34 ,
+                                                                                 :attribute35 ,
+                                                                                 :attribute36 ,
+                                                                                 :attribute37 ;
+                                                              aPIR:resource_name "carts" ;
+                                                              aPIR:resource_uri "/sandbox/ecommerce/v1/carts/562/itens" ;
+                                                              rdfs:label "/sandbox/ecommerce/v1/carts/562/itens" .
+
+
+###  http://eamining.edu.pt/sandbox/ecommerce/v1/carts/562/paymentmethod
+<http://eamining.edu.pt/sandbox/ecommerce/v1/carts/562/paymentmethod> rdf:type owl:NamedIndividual ,
+                                                                               <http://eamining.edu.pt/core#APIResource> ;
+                                                                      aPIR:resource_data :attribute55 ,
+                                                                                         :attribute56 ,
+                                                                                         :attribute57 ,
+                                                                                         :attribute58 ,
+                                                                                         :attribute59 ,
+                                                                                         :attribute60 ,
+                                                                                         :attribute61 ,
+                                                                                         :attribute62 ,
+                                                                                         :attribute63 ,
+                                                                                         :attribute64 ,
+                                                                                         :attribute65 ,
+                                                                                         :attribute66 ,
+                                                                                         :attribute67 ,
+                                                                                         :attribute68 ,
+                                                                                         :attribute69 ,
+                                                                                         :attribute70 ,
+                                                                                         :attribute71 ,
+                                                                                         :attribute72 ,
+                                                                                         :attribute73 ;
+                                                                      aPIR:resource_name "carts" ;
+                                                                      aPIR:resource_uri "/sandbox/ecommerce/v1/carts/562/paymentmethod" ;
+                                                                      rdfs:label "/sandbox/ecommerce/v1/carts/562/paymentmethod" .
+
+
+###  http://eamining.edu.pt/sandbox/ecommerce/v1/carts/727
+<http://eamining.edu.pt/sandbox/ecommerce/v1/carts/727> rdf:type owl:NamedIndividual ,
+                                                                 <http://eamining.edu.pt/core#APIResource> ;
+                                                        aPIR:resource_data :attribute127 ,
+                                                                           :attribute128 ,
+                                                                           :attribute129 ,
+                                                                           :attribute130 ,
+                                                                           :attribute131 ,
+                                                                           :attribute132 ,
+                                                                           :attribute133 ;
+                                                        aPIR:resource_name "carts" ;
+                                                        aPIR:resource_uri "/sandbox/ecommerce/v1/carts/727" ;
+                                                        rdfs:label "/sandbox/ecommerce/v1/carts/727" .
+
+
+###  http://eamining.edu.pt/sandbox/ecommerce/v1/carts/727/deliveryaddress
+<http://eamining.edu.pt/sandbox/ecommerce/v1/carts/727/deliveryaddress> rdf:type owl:NamedIndividual ,
+                                                                                 <http://eamining.edu.pt/core#APIResource> ;
+                                                                        aPIR:resource_data :attribute134 ,
+                                                                                           :attribute135 ,
+                                                                                           :attribute136 ,
+                                                                                           :attribute137 ,
+                                                                                           :attribute138 ,
+                                                                                           :attribute139 ,
+                                                                                           :attribute140 ,
+                                                                                           :attribute141 ,
+                                                                                           :attribute142 ,
+                                                                                           :attribute143 ;
+                                                                        aPIR:resource_name "carts" ;
+                                                                        aPIR:resource_uri "/sandbox/ecommerce/v1/carts/727/deliveryaddress" ;
+                                                                        rdfs:label "/sandbox/ecommerce/v1/carts/727/deliveryaddress" .
+
+
+###  http://eamining.edu.pt/sandbox/ecommerce/v1/carts/727/itens
+<http://eamining.edu.pt/sandbox/ecommerce/v1/carts/727/itens> rdf:type owl:NamedIndividual ,
+                                                                       <http://eamining.edu.pt/core#APIResource> ;
+                                                              aPIR:resource_data :attribute102 ,
+                                                                                 :attribute103 ,
+                                                                                 :attribute104 ,
+                                                                                 :attribute105 ,
+                                                                                 :attribute106 ,
+                                                                                 :attribute107 ,
+                                                                                 :attribute108 ,
+                                                                                 :attribute109 ,
+                                                                                 :attribute110 ,
+                                                                                 :attribute111 ,
+                                                                                 :attribute112 ,
+                                                                                 :attribute113 ,
+                                                                                 :attribute114 ,
+                                                                                 :attribute115 ,
+                                                                                 :attribute116 ,
+                                                                                 :attribute117 ,
+                                                                                 :attribute118 ,
+                                                                                 :attribute119 ,
+                                                                                 :attribute120 ,
+                                                                                 :attribute121 ,
+                                                                                 :attribute122 ,
+                                                                                 :attribute123 ,
+                                                                                 :attribute124 ,
+                                                                                 :attribute125 ,
+                                                                                 :attribute126 ;
+                                                              aPIR:resource_name "carts" ;
+                                                              aPIR:resource_uri "/sandbox/ecommerce/v1/carts/727/itens" ;
+                                                              rdfs:label "/sandbox/ecommerce/v1/carts/727/itens" .
+
+
+###  http://eamining.edu.pt/sandbox/ecommerce/v1/carts/727/paymentmethod
+<http://eamining.edu.pt/sandbox/ecommerce/v1/carts/727/paymentmethod> rdf:type owl:NamedIndividual ,
+                                                                               <http://eamining.edu.pt/core#APIResource> ;
+                                                                      aPIR:resource_data :attribute144 ,
+                                                                                         :attribute145 ,
+                                                                                         :attribute146 ,
+                                                                                         :attribute147 ,
+                                                                                         :attribute148 ,
+                                                                                         :attribute149 ,
+                                                                                         :attribute150 ,
+                                                                                         :attribute151 ,
+                                                                                         :attribute152 ,
+                                                                                         :attribute153 ,
+                                                                                         :attribute154 ,
+                                                                                         :attribute155 ,
+                                                                                         :attribute156 ,
+                                                                                         :attribute157 ,
+                                                                                         :attribute158 ,
+                                                                                         :attribute159 ,
+                                                                                         :attribute160 ,
+                                                                                         :attribute161 ,
+                                                                                         :attribute162 ;
+                                                                      aPIR:resource_name "carts" ;
+                                                                      aPIR:resource_uri "/sandbox/ecommerce/v1/carts/727/paymentmethod" ;
+                                                                      rdfs:label "/sandbox/ecommerce/v1/carts/727/paymentmethod" .
+
+
+#################################################################
+#    Annotations
+#################################################################
+
+<http://eamining.edu.pt/core#APICall> rdfs:label "API Call"@en .
+
+
+<http://eamining.edu.pt/core#APIDocumentation> rdfs:label "API Documentation"@en .
+
+
+<http://eamining.edu.pt/core#APIOperation> rdfs:label "API Operation"@en .
+
+
+<http://eamining.edu.pt/core#APIResource> rdfs:label "API Resource"@en .
+
+
+<http://eamining.edu.pt/core#Attribute> rdfs:label "Attribute"@en .
+
+
+<http://eamining.edu.pt/core#AttributePair> rdfs:label "Attribute Pair"@en .
+
+
+<http://eamining.edu.pt/core#AttributesEquality> rdfs:label "Attributes Equality"@en .
+
+
+<http://eamining.edu.pt/core#ConsumerApp> rdfs:label "Consumer App"@en .
+
+
+<http://eamining.edu.pt/core#DocumentedAPI> rdfs:label "Documented API"@en .
+
+
+<http://eamining.edu.pt/core#OperationExecuted> rdfs:label "Operation Executed"@en .
+
+
+<http://eamining.edu.pt/core#Service> rdfs:label "Service"@en .
+
+
+<http://eamining.edu.pt/core#ServiceDestination> rdfs:label "Service Destination"@en .
+
+
+<http://eamining.edu.pt/core#belongsTo> rdfs:label "belongs to"@en .
+
+
+<http://eamining.edu.pt/core#isDocumentedBy> rdfs:label "is documented by"@en .
+
+
+<http://eamining.edu.pt/core#modifies> gufo:isDerivedFrom <http://eamining.edu.pt/core#OperationExecuted> ;
+                                       rdfs:label "modifies"@en .
+
+
+<http://eamining.edu.pt/data-relation-view#APIDomain> rdfs:label "API Domain"@en .
+
+
+<http://eamining.edu.pt/data-relation-view#APIDomainMap> gufo:isDerivedFrom <http://eamining.edu.pt/core#belongsTo> ;
+                                                         rdfs:label "API Domain Map"@en .
+
+
+<http://eamining.edu.pt/data-relation-view#APIEntity> rdfs:label "API Entity"@en .
+
+
+<http://eamining.edu.pt/data-relation-view#CorrelatedDataObjects> rdfs:label "Correlated Data Objects"@en .
+
+
+<http://eamining.edu.pt/data-relation-view#DataDomain> rdfs:label "Data Domain"@en .
+
+
+<http://eamining.edu.pt/data-relation-view#EADataObjectsRelationView> rdfs:label "EA Data Objects Relation View"@en .
+
+
+<http://eamining.edu.pt/data-relation-view#FrequentDataDomainCorrelation> gufo:isDerivedFrom <http://eamining.edu.pt/data-relation-view#pertainsTo> ;
+                                                                          rdfs:label "Frequent Data Domain Correlation"@en .
+
+
+<http://eamining.edu.pt/data-relation-view#pertainsTo> rdfs:label "pertains to"@en .
+
+
+<http://eamining.edu.pt/process-view#APIActivitiesConnection> rdfs:label "API Activities Connection"@en .
+
+
+<http://eamining.edu.pt/process-view#APIAntecedentActivity> rdfs:label "API Antecedent Activity"@en .
+
+
+<http://eamining.edu.pt/process-view#APIConsequentActivity> rdfs:label "API Consequent Activity"@en .
+
+
+<http://eamining.edu.pt/process-view#EAProcessesView> rdfs:label "EA Processes View"@en .
+
+
+<http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> gufo:isDerivedFrom <http://eamining.edu.pt/process-view#apiConsequentActivityHistoricallyDependsOnApiAntecedentActivity> ;
+                                                                  rdfs:label "Frequent Temporal Correlation"@en .
+
+
+<http://eamining.edu.pt/process-view#Partner> rdfs:label "Partner"@en .
+
+
+<http://eamining.edu.pt/process-view#Process> rdfs:label "Process"@en .
+
+
+<http://eamining.edu.pt/process-view#ProcessElementView> gufo:isDerivedFrom <http://eamining.edu.pt/process-view#ProcessElementView_1> ;
+                                                         rdfs:label "Process Element View"@en .
+
+
+<http://eamining.edu.pt/process-view#ProcessElementView_1> rdfs:label "Process Element View"@en .
+
+
+###  Generated by the OWL API (version 4.5.26.2023-07-17T20:34:13Z) https://github.com/owlcs/owlapi

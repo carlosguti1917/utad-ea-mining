@@ -14,7 +14,19 @@
   {
     "kind": 2,
     "language": "sparql",
-    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\n\r\nSELECT (COUNT(?x) AS ?count)\r\nWHERE {\r\n    ?operationExecuted rdf:type ns_core:OperationExecuted .\r\n}\r\n",
+    "value": "# Check how much operation executed is in the model\r\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nSELECT (COUNT(?x) AS ?total_operations_executed) \r\nWHERE {\r\n    ?x rdf:type ns_core:OperationExecuted .\r\n}\r\n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "# Check how much operation executed is in the model\r\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nSELECT (COUNT(?y) AS ?total_atributes)\r\nWHERE {\r\n    ?y rdf:type ns_core:Attribute .\r\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "# Check how much frequet temporal correlation is in the model\r\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX ns_process_view: <http://eamining.edu.pt/process-view#>\r\n\r\nSELECT (COUNT(?x) AS ?count)\r\nWHERE {\r\n    ?x rdf:type ns_process_view:FrequentTemporalCorrelation .\r\n}",
     "metadata": {}
   },
   {
