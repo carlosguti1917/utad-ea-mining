@@ -37,47 +37,68 @@ class ExtractOntoCore:
         api_calls = list(collection_call_cleaned.find({"_source.@timestamp": {"$gt": begindate}}))
         tranform_to_ontology(api_calls)
 
-def get_onto_resource_attributes_from_json(api_resource, json_obj, key_hierarchy):
-        if isinstance(json_obj, dict):
-            for key, value in json_obj.items():
-                if isinstance(value, dict):
-                    if key_hierarchy == "":
-                        key_hierarchy = key_hierarchy + key
-                    else:
-                        key_hierarchy = key_hierarchy + "." + key                    
-                    get_onto_resource_attributes_from_json(api_resource, value, key_hierarchy)
-                elif isinstance(value, list):
-                    if key_hierarchy == "":
-                        key_hierarchy = key_hierarchy + key
-                    else:
-                        key_hierarchy = key_hierarchy + "." + key
-                    for item in value:
-                        get_onto_resource_attributes_from_json(api_resource, item, key_hierarchy)
-                elif value:
+def get_onto_resource_attributes_from_json(attributes_list, api_resource, json_obj, key_hierarchy):
+    if attributes_list is None:
+        attributes_list = []
+    attribute_name = None
+    attribute_value = None
+
+    if isinstance(json_obj, dict):
+        for key, value in json_obj.items():
+            if isinstance(value, dict):
+                if key_hierarchy == "":
+                    key_hierarchy = key_hierarchy + key
+                else:
+                    key_hierarchy = key_hierarchy + "." + key                    
+                get_onto_resource_attributes_from_json(attributes_list, api_resource, value, key_hierarchy)
+            elif isinstance(value, list):
+                if key_hierarchy == "":
+                    key_hierarchy = key_hierarchy + key
+                else:
+                    key_hierarchy = key_hierarchy + "." + key
+                for item in value:
+                    get_onto_resource_attributes_from_json(attributes_list, api_resource, item, key_hierarchy)
+            elif value:
+                # initializing the attribute_name and label
+                if key_hierarchy == "":
+                    attribute_name = key
+                else:
+                    attribute_name = key_hierarchy + "." + key
+                attribute_value = str(value)
+                ## As the value may repeat in the request and respose of the same API Call, it is necessary to check if the attribute already exists                
+                attribute_exists = False
+                for i in attributes_list:
+                    if i.attribute_name[0] == attribute_name and i.attribute_value[0] == attribute_value:
+                        #print("Attribute already exists in attributes_list: ", attribute_name, " = ", attribute_value)
+                        attribute_exists = True
+                        break                       
+                if not attribute_exists and api_resource.resource_data.__len__() > 0:
+                    for resource_data in api_resource.resource_data:
+                        if resource_data.attribute_name[0] == attribute_name and resource_data.attribute_value[0] == attribute_value:
+                            attribute_exists = True
+                            #print("Attribute already exists in api_resource.resource_data: ", resource_data.attribute_name[0], " = ", resource_data.attribute_value[0])
+                            break 
+                        
+                if not attribute_exists:                    
                     attr = ns_core.Attribute()
                     if key_hierarchy == "":
-                        attr.attribute_name.append(key) 
-                        attr.label.append(key)
+                        attr.attribute_name.append(attribute_name) 
+                        attr.label.append(attribute_name)
                     else:
-                        attr.attribute_name.append(key_hierarchy + "." + key) 
-                        attr.label.append(key_hierarchy + "." + key)
-                    attr.attribute_value.append(str(value))
-                    ## As the value may repeat in the request and respose of the same API Call, it is necessary to check if the attribute already exists
-                    attribute_exists = False
-                    if api_resource.resource_data.__len__() > 0:
-                        for resource_data in api_resource.resource_data:
-                            if resource_data.attribute_name[0] == attr.attribute_name[0] and resource_data.attribute_value[0] == attr.attribute_value[0]:
-                                attribute_exists = True
-                                print("Attribute already exists: ", attr.attribute_name[0], " = ", attr.attribute_value[0])
-                                break
-                    if not attribute_exists:
-                        api_resource.resource_data.append(attr)
-                        print("Attribute added: ", attr.attribute_name[0], " = ", attr.attribute_value[0])
-                        
-        elif isinstance(json_obj, list):
-            for item in json_obj:
-                if item:
-                    get_onto_resource_attributes_from_json(api_resource, json_obj) 
+                        attr.attribute_name.append(attribute_name) 
+                        attr.label.append(attribute_name)
+                    attr.attribute_value.append(attribute_value)  
+                                                              
+                    api_resource.resource_data.append(attr)
+                    attributes_list.append(attr)
+                    #print("Attribute added: ", attr.attribute_name[0], " = ", attr.attribute_value[0])
+                    
+    elif isinstance(json_obj, list):
+        for item in json_obj:
+            if item:
+                get_onto_resource_attributes_from_json(attributes_list, api_resource, json_obj)
+
+    return attributes_list
                              
 def setOntolgyIndividuals(self, onto, className, individuoName):
     try:
@@ -177,6 +198,8 @@ def tranform_to_ontology(api_calls):
                                 api_destination.participatedIn.append(api_call)
                         #sync_reasoner()    
                         #API Resource Resouce.uri Resource.data
+                        #inicializing the attributes_list
+                        attributes_list = []
                         # Request Data
                         if "request" in call["_source"] and "uri" in call["_source"]["request"]:
                             resource_uri = call["_source"]["request"]["uri"]
@@ -195,7 +218,7 @@ def tranform_to_ontology(api_calls):
                             if "request" in call["_source"] and "body" in call["_source"]["request"]:
                                 request_body = call["_source"]["request"]["body"]
                                 request_body_json = json.loads(request_body)
-                                get_onto_resource_attributes_from_json(api_resource, request_body_json, "")
+                                get_onto_resource_attributes_from_json(attributes_list, api_resource, request_body_json, "")
                         #sync_reasoner()
                         # Response data
                         #api_resource.data.append(call["_source"]["request"]["body"])     
@@ -204,7 +227,7 @@ def tranform_to_ontology(api_calls):
                             # Transform the body into a datatype Attribute (array of name-value pairs)
                             response_body = call["_source"]["response"]["body"]
                             response_body_json = json.loads(response_body)
-                            get_onto_resource_attributes_from_json(api_resource, response_body_json, "") 
+                            get_onto_resource_attributes_from_json(attributes_list, api_resource, response_body_json, "") 
                         
                         # Api Operation Modifies API Resource
                         if api_operation and api_resource:

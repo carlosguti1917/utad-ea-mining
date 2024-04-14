@@ -33,8 +33,8 @@ def add_ignored_attribute_to_file(attribute_name, file_path, api_name):
     #data = []
     try:
         file_name = configs.FREQUENT_API_ATTRIBUTES["file_name"]
-        full_file_name = f"{api_name}_{file_name}.ignore"
-        if os.path.exists(file_path + file_name):
+        full_file_name = f"{api_name}_{file_name}"
+        if os.path.exists(file_path + full_file_name):
             with open(file_path + full_file_name, 'r') as file:
                 data = file.read()
                 #check if the attribute is already in the list, if not, add it
@@ -59,7 +59,7 @@ def get_ignored_attributes_from_file(file_path, api_name):
     data = []
     try: 
         file_name = configs.FREQUENT_API_ATTRIBUTES["file_name"]
-        full_file_name = f"{api_name}_{file_name}.ignore"
+        full_file_name = f"{api_name}_{file_name}"
         if os.path.exists(file_path + full_file_name):
             with open(file_path + full_file_name, 'r') as file:
                 data = file.read()
