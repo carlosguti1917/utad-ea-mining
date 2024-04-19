@@ -1,0 +1,441 @@
+{
+	"info": {
+		"_postman_id": "d8f5d1c7-808a-440c-ae62-86d0517ddb97",
+		"name": "Sensedia-Metrics and Manager",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31557509",
+		"_collection_link": "https://backend-cea.postman.co/workspace/CommerceMock~d3c0cf1b-b00e-4fda-99e2-3a66161a2e0e/collection/3540883-d8f5d1c7-808a-440c-ae62-86d0517ddb97?action=share&source=collection_link&creator=31557509"
+	},
+	"item": [
+		{
+			"name": "Get Apps",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Sensedia-Auth",
+						"value": "306ae5fd-c4dc-3592-b12c-2b3f9a6e0e22",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://manager-apiplatform.sensedia.com/api-manager/api/v3/apps",
+					"protocol": "https",
+					"host": [
+						"manager-apiplatform",
+						"sensedia",
+						"com"
+					],
+					"path": [
+						"api-manager",
+						"api",
+						"v3",
+						"apps"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get App by id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Sensedia-Auth",
+						"value": "306ae5fd-c4dc-3592-b12c-2b3f9a6e0e22",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://manager-apiplatform.sensedia.com/api-manager/api/v3/apps",
+					"protocol": "https",
+					"host": [
+						"manager-apiplatform",
+						"sensedia",
+						"com"
+					],
+					"path": [
+						"api-manager",
+						"api",
+						"v3",
+						"apps"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Calls",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Sensedia-Auth",
+						"value": "306ae5fd-c4dc-3592-b12c-2b3f9a6e0e22",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://manager-apiplatform.sensedia.com/api-manager/api/v3/calls",
+					"protocol": "https",
+					"host": [
+						"manager-apiplatform",
+						"sensedia",
+						"com"
+					],
+					"path": [
+						"api-manager",
+						"api",
+						"v3",
+						"calls"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Calls 2",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Sensedia-Auth",
+						"value": "306ae5fd-c4dc-3592-b12c-2b3f9a6e0e22"
+					}
+				],
+				"url": {
+					"raw": "https://manager-apiplatform.sensedia.com/api-manager/api/v3/calls?uri=https%3A%2F%2Fapiplatform.sensedia.com%2Fsandbox%2Fcommerce%2Fv1%2Forders",
+					"protocol": "https",
+					"host": [
+						"manager-apiplatform",
+						"sensedia",
+						"com"
+					],
+					"path": [
+						"api-manager",
+						"api",
+						"v3",
+						"calls"
+					],
+					"query": [
+						{
+							"key": "uri",
+							"value": "https%3A%2F%2Fapiplatform.sensedia.com%2Fsandbox%2Fcommerce%2Fv1%2Forders"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Calls With Filters",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Sensedia-Auth",
+						"value": "306ae5fd-c4dc-3592-b12c-2b3f9a6e0e22"
+					}
+				],
+				"url": {
+					"raw": "https://manager-apiplatform.sensedia.com/api-manager/api/v3/calls?uri=https%3A%2F%2Fapiplatform.sensedia.com%2Fsandbox%2Fcommerce%2Fv1%2Forders",
+					"protocol": "https",
+					"host": [
+						"manager-apiplatform",
+						"sensedia",
+						"com"
+					],
+					"path": [
+						"api-manager",
+						"api",
+						"v3",
+						"calls"
+					],
+					"query": [
+						{
+							"key": "uri",
+							"value": "https%3A%2F%2Fapiplatform.sensedia.com%2Fsandbox%2Fcommerce%2Fv1%2Forders"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Calls With Filters Date",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Sensedia-Auth",
+						"value": "306ae5fd-c4dc-3592-b12c-2b3f9a6e0e22"
+					}
+				],
+				"url": {
+					"raw": "https://manager-apiplatform.sensedia.com/api-manager/api/v3/calls?uri=https%3A%2F%2Fapiplatform.sensedia.com%2Fsandbox%2Fcommerce%2Fv1%2Forders&beginDate=2022-06-27T00:00:00.015Z",
+					"protocol": "https",
+					"host": [
+						"manager-apiplatform",
+						"sensedia",
+						"com"
+					],
+					"path": [
+						"api-manager",
+						"api",
+						"v3",
+						"calls"
+					],
+					"query": [
+						{
+							"key": "uri",
+							"value": "https%3A%2F%2Fapiplatform.sensedia.com%2Fsandbox%2Fcommerce%2Fv1%2Forders"
+						},
+						{
+							"key": "beginDate",
+							"value": "2022-06-27T00:00:00.015Z"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Calls/id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Sensedia-Auth",
+						"value": "306ae5fd-c4dc-3592-b12c-2b3f9a6e0e22"
+					}
+				],
+				"url": {
+					"raw": "https://manager-apiplatform.sensedia.com/api-manager/api/v3/calls/mX08b3sBwlq4PK8igvHn",
+					"protocol": "https",
+					"host": [
+						"manager-apiplatform",
+						"sensedia",
+						"com"
+					],
+					"path": [
+						"api-manager",
+						"api",
+						"v3",
+						"calls",
+						"mX08b3sBwlq4PK8igvHn"
+					],
+					"query": [
+						{
+							"key": "uri",
+							"value": "https%3A%2F%2Fapiplatform.sensedia.com%2Fsandbox%2Fcommerce%2Fv1%2Forders",
+							"disabled": true
+						},
+						{
+							"key": "id",
+							"value": "2gwcb3sBwc1mYKz8eWBD",
+							"disabled": true
+						},
+						{
+							"key": "id",
+							"value": "2d65cac5-236e-4b2a-b52e-d2573b0ff0e6",
+							"disabled": true
+						},
+						{
+							"key": "id",
+							"value": "mX08b3sBwlq4PK8igvHn",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get APIs",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Sensedia-Auth",
+						"value": "306ae5fd-c4dc-3592-b12c-2b3f9a6e0e22",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "https://manager-apiplatform.sensedia.com/api-manager/api/v3/apps",
+					"protocol": "https",
+					"host": [
+						"manager-apiplatform",
+						"sensedia",
+						"com"
+					],
+					"path": [
+						"api-manager",
+						"api",
+						"v3",
+						"apps"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GET API by Id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Sensedia-Auth",
+						"value": "306ae5fd-c4dc-3592-b12c-2b3f9a6e0e22"
+					}
+				],
+				"url": {
+					"raw": "https://manager-apiplatform.sensedia.com/api-manager/api/v3/apis/1848",
+					"protocol": "https",
+					"host": [
+						"manager-apiplatform",
+						"sensedia",
+						"com"
+					],
+					"path": [
+						"api-manager",
+						"api",
+						"v3",
+						"apis",
+						"1848"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create API",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "application/json"
+					},
+					{
+						"key": "Sensedia-Auth",
+						"value": "306ae5fd-c4dc-3592-b12c-2b3f9a6e0e22"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\":1850,\r\n    \"name\":\"Teste do Thiago\",\r\n    \"description\":null,\r\n    \"version\":\"1.0\",\r\n    \"releaseNotes\":null,\r\n    \"creationDate\":1644347350000,\r\n    \"basePath\":\"/thiagosouza-teste2\",\r\n    \"icon\":null,\r\n    \"lastVersion\":false,\r\n    \"accessTokenExpiresIn\":null,\r\n    \"apiType\":\"REST\",\r\n    \"visibility\":{\r\n        \"type\":\"ORGANIZATION\",\r\n        \"visibilityUsers\":{\r\n            \r\n        },\r\n        \"teamName\":null\r\n    },\r\n    \"apiSwaggerConfiguration\":{\r\n        \"id\":21943,\r\n        \"showAppRegister\":true,\r\n        \"showApiBrowser\":true,\r\n        \"apiSwaggerConfigurationEnvironments\":{\r\n            \"0\":{\r\n                \"environmentId\":2,\r\n                \"revisionId\":null\r\n            }\r\n        }\r\n    },\r\n    \"apiIdentityConfiguration\":null,\r\n    \"internalInfo\":{\r\n        \r\n    },\r\n    \"internalAPI\":false,\r\n    \"apiResponsible\":{\r\n        \"id\":1395,\r\n        \"user\":{\r\n            \"id\":352,\r\n            \"name\":\"Thiago Veloso de Souza\",\r\n            \"login\":null,\r\n            \"password\":null,\r\n            \"passwordConfirm\":null,\r\n            \"email\":\"thiago.souza@sensedia.com\",\r\n            \"emailConfirm\":null,\r\n            \"roles\":{\r\n                \r\n            },\r\n            \"mfaSecret\":null,\r\n            \"timeZone\":null,\r\n            \"image\":null,\r\n            \"userType\":\"DATABASE\",\r\n            \"status\":null,\r\n            \"lastLogin\":null,\r\n            \"loginAttempts\":null\r\n        },\r\n        \"team\":null\r\n    },\r\n    \"attributeTags\":{\r\n        \r\n    },\r\n    \"identityApi\":false,\r\n    \"idAsString\":\"1848\",\r\n    \"lastRevisionNumber\":1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://manager-apiplatform.sensedia.com/api-manager/api/v3/apis/",
+					"protocol": "https",
+					"host": [
+						"manager-apiplatform",
+						"sensedia",
+						"com"
+					],
+					"path": [
+						"api-manager",
+						"api",
+						"v3",
+						"apis",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create a new API from Swagger",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Sensedia-Auth",
+						"value": "306ae5fd-c4dc-3592-b12c-2b3f9a6e0e22"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\":\"Teste do Thiago v2\",\r\n    \"swagger\":\"{ \\\"swagger\\\": \\\"2.0\\\", \\\"info\\\": { \\\"version\\\": \\\"1.0\\\", \\\"title\\\": \\\"Teste do Thiago v2\\\" }, \\\"host\\\": \\\"apiplatform.sensedia.com\\\", \\\"basePath\\\": \\\"/sandbox/thiagosouza-teste2\\\", \\\"schemes\\\": [ \\\"https\\\" ], \\\"paths\\\": { \\\"/teste\\\": { \\\"get\\\": { \\\"parameters\\\": [], \\\"responses\\\": { \\\"200\\\": { \\\"description\\\": \\\"OK\\\" } }, \\\"x-resource-name\\\": \\\"Teste\\\", \\\"x-destination\\\": null, \\\"x-timeout\\\": null, \\\"x-api-broken\\\": false, \\\"x-interceptors\\\": {} }, \\\"post\\\": { \\\"parameters\\\": [], \\\"responses\\\": { \\\"200\\\": { \\\"description\\\": \\\"OK\\\" } }, \\\"x-resource-name\\\": \\\"Teste\\\", \\\"x-destination\\\": null, \\\"x-timeout\\\": null, \\\"x-api-broken\\\": false, \\\"x-interceptors\\\": {} } } }, \\\"x-destination\\\": null, \\\"x-interceptors\\\": {}, \\\"x-life-cycle\\\": null, \\\"x-timeout\\\": null, \\\"x-access-token-expires-in\\\": null, \\\"x-resources\\\": { \\\"Teste\\\": { \\\"x-resource-description\\\": null, \\\"x-destination\\\": null, \\\"x-interceptors\\\": {}, \\\"x-timeout\\\": null, \\\"x-api-broken\\\": false } }, \\\"x-api-broken\\\": false, \\\"x-servers\\\": { \\\"2\\\": \\\"https://apiplatform.sensedia.com/sandbox/\\\" }}\",\r\n    \"version\":\"1.0.0\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://manager-apiplatform.sensedia.com/api-manager/api/v3/apis/swagger",
+					"protocol": "https",
+					"host": [
+						"manager-apiplatform",
+						"sensedia",
+						"com"
+					],
+					"path": [
+						"api-manager",
+						"api",
+						"v3",
+						"apis",
+						"swagger"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

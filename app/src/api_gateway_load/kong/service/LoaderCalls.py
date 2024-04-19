@@ -41,8 +41,6 @@ class LoaderCalls:
         req_body = LoaderCalls.getElasticRequestBody(begindate)
         req = requests.get(url, headers=my_headers, data=req_body, verify=False)
         resp_body = req.json()
-        #call_list = []
-        #print("qtde de calls", len(resp_body))
         jsonobj = json.dumps(resp_body)
         dicJsonResponse = json.loads(jsonobj)
         return dicJsonResponse

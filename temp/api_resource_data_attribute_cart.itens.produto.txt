@@ -1,0 +1,15 @@
+@CONVERTED_FROM_TEXT
+@ITEM=1=Produto 1
+@ITEM=2=Produto 2
+1
+2
+1
+2
+1
+2
+1
+2
+1
+2
+1
+2

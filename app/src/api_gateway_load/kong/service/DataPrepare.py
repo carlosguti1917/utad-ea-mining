@@ -11,13 +11,6 @@ from api_gateway_load.kong import ignore
 from api_gateway_load.utils import nested_dicts
 
 class DataPrepare:
-    def __init__(self):
-        self.myclient = pymongo.MongoClient(configs.MONGO_DB_SERVER["host"])
-        self.mydb = self.myclient[configs.MONGO_DB_SERVER["databasename"]]
-        self.collection_call_detail = self.mydb["kong-api-call-details"]
-        self.collection_call_cleaned = self.mydb["kong-api-call-cleaned"]
-        x = self.getApiCallsDetails()   
-        y = self.removeNoise(x)
 
     def __init__(self, begindate):
         """
@@ -48,7 +41,9 @@ class DataPrepare:
                     # ignore if the key already exists in self.collection_call_cleaned
                     existing_doc = self.collection_call_cleaned.find_one({ "_id": cleaned_call["_id"] })
                     if existing_doc is None:
+                        #save cleaned call in mongo collection
                         self.collection_call_cleaned.insert_one(cleaned_call)
+                        cleaned_api_calls.append(cleaned_call)
             return cleaned_api_calls
         except Exception as error:
             print('Ocorreu problema {} '.format(error.__class__))

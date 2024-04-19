@@ -2,55 +2,61 @@
   {
     "kind": 2,
     "language": "sparql",
-    "value": "PREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\r\n\r\nSELECT ?x\r\nWHERE { ?x  <http://www.w3.org/2000/01/rdf-schema#label>  \"a14c887c27c00a55cc96c25157ed0f2c\" }",
+    "value": "PREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>\r\n\r\nSELECT ?x\r\nWHERE { ?x  <http://www.w3.org/2000/01/rdf-schema#label>  \"a14c887c27c00a55cc96c25157ed0f2c\" }\r\n",
     "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\n\r\nSELECT ?operationExecuted\r\nWHERE {\r\n    ?operationExecuted rdf:type ns_core:OperationExecuted .\r\n    ?operationExecuted gufo:mediates <http://eamining.edu.pt#/sandbox/ecommerce/v1/carts/575/paymentmethod> .\r\n}",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX aPIC: <aPICall:>\r\n\r\nSELECT (count(?api_name) as ?totalcall)\r\nWHERE {\r\n    ?api_call rdf:type ns_core:APICall .\r\n    ?api_call aPIC:api_name ?api_name . \r\n    FILTER(?api_name = \"ecommerce-carts\" || ?api_name = \"ecommerce-orders\" || ?api_name = \"payments\")\r\n}",
     "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "# Check how much operation executed is in the model\r\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nSELECT (COUNT(?x) AS ?total_operations_executed) \r\nWHERE {\r\n    ?x rdf:type ns_core:OperationExecuted .\r\n}\r\n",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX aPIO: <aPIOperation:>\r\n\r\nSELECT distinct ?resource #?operationExecuted ?operation ?api_call\r\n#SELECT (COUNT(?operation) AS ?operation) \r\nWHERE {\r\n    ?operation a ns_core:APIOperation . \r\n    ?operation ^gufo:participatedIn ?api_call .\r\n    ?api_call a ns_core:APICall .\r\n    ?operation ^gufo:mediates ?operationExecuted .\r\n    ?operationExecuted a ns_core:OperationExecuted .\r\n    ?operationExecuted gufo:mediates ?resource .\r\n    ?resource gufo:participatedIn ?api_call .\r\n    ?resource a ns_core:APIResource . \r\n    FILTER(IRI(?operation) = <http://eamining.edu.pt/POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts>\r\n        && IRI(?api_call) = <http://eamining.edu.pt/1f61314f275fcc690049921bffac9314>\r\n    )\r\n}\r\nORDER BY ?operationExecuted\r\nLIMIT 100\r\n\r\n",
     "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "# Check how much operation executed is in the model\r\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nSELECT (COUNT(?y) AS ?total_atributes)\r\nWHERE {\r\n    ?y rdf:type ns_core:Attribute .\r\n}",
+    "value": "# V2 - obter os recusos que participam de uma chamada de API\r\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX aPIO: <aPIOperation:>\r\n\r\nSELECT distinct ?resource ?operation #?operationExecuted ?operation ?api_call\r\n#SELECT (COUNT(?operation) AS ?operation) \r\nWHERE {\r\n    ?operation a ns_core:APIOperation . \r\n    ?operation ^gufo:participatedIn ?api_call .\r\n    ?api_call a ns_core:APICall .\r\n    ?operation ^gufo:mediates ?operationExecuted .\r\n    ?operationExecuted a ns_core:OperationExecuted .\r\n    ?operationExecuted gufo:mediates ?resource .\r\n    ?resource gufo:participatedIn ?api_call .\r\n    ?resource a ns_core:APIResource . \r\n    FILTER(\r\n        #IRI(?api_call) = <http://eamining.edu.pt/1f61314f275fcc690049921bffac9314>\r\n        IRI(?api_call) = <http://eamining.edu.pt/db60373a949c022813e4e718dc353a56>\r\n    )\r\n}\r\nORDER BY ?resource\r\nLIMIT 100",
     "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "# Check how much frequet temporal correlation is in the model\r\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX ns_process_view: <http://eamining.edu.pt/process-view#>\r\n\r\nSELECT (COUNT(?x) AS ?count)\r\nWHERE {\r\n    ?x rdf:type ns_process_view:FrequentTemporalCorrelation .\r\n}",
+    "value": "# Check how much operation executed are in the model\r\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nSELECT (COUNT(?x) AS ?total_operations_executed) \r\nWHERE {\r\n    ?x rdf:type ns_core:OperationExecuted .\r\n}\r\n",
     "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX aPIC: <aPICall:>\r\n\r\nSELECT distinct ?api_name\r\nWHERE {\r\n    ?api_call rdf:type ns_core:APICall .\r\n    ?api_call aPIC:api_name ?api_name .\r\n    #FILTER(?api_name = \"ecommerce-carts\")\r\n}\r\n",
+    "value": "# Check how much attributes are in the model\r\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nSELECT (COUNT(?y) AS ?total_atributes)\r\nWHERE {\r\n    ?y rdf:type ns_core:Attribute .\r\n}",
     "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX attr: <http://eamining.edu.pt/core#Attribute>\r\nPREFIX aPIR: <http://eamining.edu.pt/core#aPIR>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX aPIC: <aPICall:>\r\n\r\n\r\nSELECT ?api_call ?resource ?attribute \r\nWHERE {\r\n    #?attribute_name ns_core:attribute_name ?attribute .\r\n    ?api_call rdf:type ns_core:APICall .\r\n    ?api_call aPIC:api_name \"ecommerce-carts\" .\r\n    ?resource rdf:type ns_core:APIResource .\r\n    #?attribute rdf:type <http://eamining.edu.pt/core#Attribute> .\r\n    #?attribute rdfs:label \"itens.produto\" .\r\n    #?attribute_name ns_core:resource_data ?attribute .\r\n    #?attribute_name attribute:attribute_name  .\r\n    #?attribute attr2:attribute_value ?attributeValue .\r\n}\r\nLIMIT 10\r\n\r\n",
+    "value": "# Check how much frequet temporal correlation are in the model\r\nPREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX ns_process_view: <http://eamining.edu.pt/process-view#>\r\n\r\nSELECT (COUNT(?x) AS ?count)\r\nWHERE {\r\n    ?x rdf:type ns_process_view:FrequentTemporalCorrelation .\r\n}",
     "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\n\r\nSELECT distinct ?operationExecuted ?resource \r\nWHERE {\r\n    ?operationExecuted rdf:type ns_core:OperationExecuted .\r\n    ?operationExecuted gufo:mediates ?resource .\r\n    ?operationExecuted gufo:mediates <http://eamining.edu.pt#/sandbox/ecommerce/v1/carts/562> .\r\n    ?resource rdf:type ns_core:APIResource .\r\n\r\n}\r\n",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX aPIC: <aPICall:>\r\n\r\nSELECT distinct ?api_name\r\nWHERE {\r\n    ?api_call rdf:type ns_core:APICall .\r\n    ?api_call aPIC:api_name ?api_name . #isso funciona\r\n    #?api_call aPIC:api_name \"ecommerce-carts\" . # não funciona\r\n    FILTER(?api_name = \"ecommerce-carts\")\r\n}\r\n",
     "metadata": {}
   },
   {
     "kind": 2,
     "language": "sparql",
-    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX attr: <http://eamining.edu.pt/core#Attribute>\r\nPREFIX aPIR: <http://eamining.edu.pt/core#aPIR>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX aPIC: <aPICall:>\r\nPREFIX attr2: <attribute:> \r\nSELECT  ?api_call ?resource ?attribute \r\nWHERE {\r\n    #?attribute_name ns_core:attribute_name ?attribute .\r\n    ?api_call rdf:type ns_core:APICall .\r\n    ?api_call aPIC:api_name \"ecommerce-carts\" .\r\n    ?resource rdf:type ns_core:APIResource .\r\n    ?attribute rdf:type <http://eamining.edu.pt/core#Attribute> .\r\n    ?attribute attr2:attribute_name \"cliente.products.produto\" .\r\n}\r\nLIMIT 10",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX attr: <http://eamining.edu.pt/core#Attribute>\r\nPREFIX aPIR: <http://eamining.edu.pt/core#aPIR>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX aPIC: <aPICall:>\r\n\r\n\r\nSELECT ?api_call ?resource ?attribute \r\nWHERE {\r\n    #?attribute_name ns_core:attribute_name ?attribute .\r\n    ?api_call rdf:type ns_core:APICall .\r\n    ?api_call aPIC:api_name \"ecommerce-carts\" .\r\n    ?resource rdf:type ns_core:APIResource .\r\n    ?attribute rdf:type <http://eamining.edu.pt/core#Attribute> .\r\n    ?attribute rdfs:label \"itens.produto\" .\r\n    ?attribute_name ns_core:resource_data ?attribute .\r\n    ?attribute_name attribute:attribute_name  .\r\n    ?attribute attr2:attribute_value ?attributeValue .\r\n}\r\nLIMIT 10\r\n\r\n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX aPIO: <aPIOperation:>\r\n\r\nSELECT ?resource \r\n#SELECT (COUNT(?resource) AS ?resource) \r\nWHERE {\r\n    ?operationExecuted rdf:type ns_core:OperationExecuted .\r\n    ?operationExecuted gufo:mediates ?resource .\r\n    ?resource rdf:type ns_core:APIResource .\r\n    ?operationExecuted gufo:mediates ?operation .\r\n    ?operation rdf:type ns_core:APIOperation .\r\n    ?operation rdfs:label ?operation_label .\r\n    FILTER(?operation_label = 'POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts')\r\n}\r\nLIMIT 10\r\n",
     "metadata": {}
   },
   {
@@ -63,6 +69,30 @@
     "kind": 2,
     "language": "sparql",
     "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX ns_process_view: <http://eamining.edu.pt/process-view#>\r\n\r\nSELECT DISTINCT ?consumerApp\r\nWHERE {\r\n    ?consumerApp rdf:type ns_core:ConsumerApp .\r\n    FILTER NOT EXISTS {\r\n        ?subclass rdf:type ns_process_view:Partner .\r\n        ?subclass rdfs:subClassOf ?consumerApp .\r\n        FILTER (?subclass != ?consumerApp)\r\n    }\r\n}\r\n\r\n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX attr: <http://eamining.edu.pt/core#Attribute>\r\nPREFIX aPIR: <http://eamining.edu.pt/core#aPIR>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX aPIC: <aPICall:>\r\nPREFIX attr2: <attribute:> \r\n#SELECT  (COUNT(?api_call) AS ?count_call) #(COUNT(?resource) AS ?resources) (COUNT(?resource) AS ?attributes)  \r\nSELECT  ?api_call ?operation #?resource #?attribute  \r\nWHERE {\r\n    #?attribute_name ns_core:attribute_name ?attribute .\r\n    ?operation rdf:type ns_core:APIOperation .\r\n    ?operation gufo:participedIn ?api_call .\r\n    ?api_call rdf:type ns_core:APICall .\r\n    ?api_call aPIC:api_name \"ecommerce-carts\" .\r\n    #?operationExecuted rdf:type ns_core:OperationExecuted .\r\n    #?operationExecuted gufo:mediates ?operation .\r\n    #?resource rdf:type ns_core:APIResource .\r\n    #?operationExecuted gufo:mediates ?resource .\r\n    #?resource rdf:type ns_core:APIResource .\r\n    #?attribute rdf:type <http://eamining.edu.pt/core#Attribute> .\r\n    #?attribute attr2:attribute_name \"cliente.products.produto\" .\r\n}\r\nLIMIT 10",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX attr2: <attribute:>\r\nPREFIX aPIC: <aPICall:>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX aPIR: <aPIResource:>\r\n\r\n#SELECT (COUNT(?operation) AS ?count_call) #(COUNT(?resource) AS ?resources) (COUNT(?resource) AS ?attributes)\r\n#SELECT (COUNT(?resource) AS ?resources) (COUNT(?resource) AS ?attributes)\r\nSELECT distinct ?attribute_name\r\n#SELECT distinct ?resource_name ?attribute\r\nWHERE {\r\n    #?api_call rdf:type ns_core:APICall .\r\n    #?api_call aPIC:api_name \"ecommerce-carts\" .\r\n    #?operation rdf:type ns_core:APIOperation .\r\n    #?operationExecuted rdf:type ns_core:OperationExecuted .\r\n    #?operationExecuted gufo:mediates ?operation .\r\n    #?api_call rdf:type ns_core:APICall .\r\n    #?api_call ^gufo:participedIn ?operation .\r\n    ?resource rdf:type ns_core:APIResource .\r\n    #?operationExecuted gufo:mediates ?resource .\r\n    ?resource aPIR:resource_name ?resource_name .\r\n    ?resource ns_core:resource_data ?attribute .\r\n    #?attribute <attribute:attribute_name> ?attribute_name .\r\n    ?attribute attr2:attribute_name ?attribute_name .\r\n    #?attribute ns_core:attribute_value ?attribute_value .\r\n    #FILTER(?resource_name = \"carts\" && ?attribute_name = \"client.name\")\r\n    #FILTER(?attribute_name = \"client.name\")\r\n    FILTER(?resource_name = \"carts\")\r\n\r\n}\r\nLIMIT 10\r\n\r\n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX owl: <http://www.w3.org/2002/07/owl#>\r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX aPIC: <aPICall:>\r\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\r\n\r\n\r\nSELECT distinct ?api_call ?request_time\r\nWHERE {\r\n    ?api_call a ns_core:APICall .\r\n    ?api_call aPIC:request_time ?request_time.\r\n    ?consummer_app gufo:participatedIn ?api_call .\r\n    ?consummer_app a ns_core:ConsumerApp .\r\n    FILTER(\r\n        IRI(?consummer_app) = <http://eamining.edu.pt/acmeapp>  \r\n        && xsd:dateTime(?request_time) > xsd:dateTime(\"2024-04-15T12:54:34Z\")\r\n    )          \r\n}  \r\norder by ?request_time  ",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\n            PREFIX owl: <http://www.w3.org/2002/07/owl#>\r\n            PREFIX gufo: <http://purl.org/nemo/gufo#>\r\n            PREFIX ns_core: <http://eamining.edu.pt/core#>\r\n            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\n            PREFIX aPIC: <aPICall:>\r\n            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\r\n            SELECT distinct ?api_call ?request_time\r\n            WHERE {\r\n                ?api_call a ns_core:APICall .\r\n                ?api_call aPIC:request_time ?request_time.\r\n                ?consummer_app gufo:participatedIn ?api_call .\r\n                ?consummer_app a ns_core:ConsumerApp .\r\n                FILTER(\r\n                    IRI(?consummer_app) = <http://eamining.edu.pt/acmeapp>  \r\n                    && xsd:dateTime(?request_time) > '2024-04-15T12:54:34.155000+00:00'^^xsd:dateTime\r\n                    && ?request_time > '2024-04-15T12:54:34.155000+00:00'^^xsd:dateTime\r\n                )          \r\n            }  \r\n            order by ?request_time",
     "metadata": {}
   }
 ]

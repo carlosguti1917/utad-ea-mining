@@ -1,0 +1,1456 @@
+{
+	"info": {
+		"_postman_id": "9ff48836-edf9-4f04-9574-85d2a0964851",
+		"name": "Sensedia Commerce Carlos",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31557509",
+		"_collection_link": "https://backend-cea.postman.co/workspace/CommerceMock~d3c0cf1b-b00e-4fda-99e2-3a66161a2e0e/collection/3540883-9ff48836-edf9-4f04-9574-85d2a0964851?action=share&source=collection_link&creator=31557509"
+	},
+	"item": [
+		{
+			"name": "Test Case 1",
+			"item": [
+				{
+					"name": "Create Cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//pm.environment.set(\"x-customer_id\", {});\r",
+									"//pm.variables.set(\"customer_id\", $randomInt)\r",
+									"\r",
+									"//var jsonData = JSON.parse(responseBody);\r",
+									"//pm.environment.set(\"cart_id\", jsonData.cartid);\r",
+									"\r",
+									"//const resquestJson = pm.request.toJSON();\r",
+									"var jsonData = JSON.parse(requestBody);\r",
+									"pm.variables.set(\"x-customer_id\", jsonData.cliente.codigo);\r",
+									"pm.variables.set(\"x-customer_id\", jsonData.cliente.name);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/ecmascript",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "a9e4186a-270e-3f97-b58e-6707e452f396",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cliente\": {\r\n        \"codigo\": {{$randomInt}},\r\n        \"name\" : \"{{$randomFullName}}\"\r\n    },\r\n    \"produto\": {\r\n        \"sku\" : 123456,\r\n        \"produto\" : \"Panela de Barro\",    \r\n        \"valor\": 99.99\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1,\r\n        \"descricao\" : \"APP ANDROID\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/carts",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"carts"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Item 1",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart_id\" : 3456,\r\n    \"client\":  12345,\r\n    \"product_sku\" : 123,\r\n    \"quantity\" : 1,\r\n    \"origem\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/carts/3456/itens?client_id={{client_id}}",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"carts",
+								"3456",
+								"itens"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Item 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "4f48e7a0-773b-35eb-b02d-3ac9f6bad35e",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart_id\" : 3456,\r\n    \"client\":  12345,\r\n    \"product_sku\" : 124,\r\n    \"quantity\" : 1,\r\n    \"origem\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/carts/3456/itens",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"carts",
+								"3456",
+								"itens"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Address by ZipCode",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/correios/v1/cep?cep=\"20031004\"",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"correios",
+								"v1",
+								"cep"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								},
+								{
+									"key": "cep",
+									"value": "\"20031004\""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Delivery Address",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart\": 3456,\r\n    \"orderDate\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"cliente\": {\r\n        \"codigo\": 12345,\r\n        \"name\": \"Carlos Pinheiro\"\r\n    },    \r\n    \"deliveryAddress\": {\r\n            \"bairro\": \"Centro\",\r\n            \"cep\": \"20031004\",\r\n            \"cidade\": \"Rio de Janeiro\",\r\n            \"complemento2\": \"- de 65 a 81 - lado ímpar\",\r\n            \"end\": \"Avenida Almirante Barroso\",\r\n            \"numero\" : 81,\r\n            \"complemento1\" : \"apto 1003\",\r\n            \"uf\": \"RJ\",\r\n            \"unidadesPostagem\": \"\"\r\n    },\r\n    \"statusPedidos\": {\r\n        \"code\": 1,\r\n        \"description\": \"waiting payment\"\r\n    },\r\n    \"origem\": \"e-commerce\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/carts/{id}/deliveryaddress",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"carts",
+								"{id}",
+								"deliveryaddress"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add payment method",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart\": 3456,\r\n    \"orderDate\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"cliente\": {\r\n        \"codigo\": 12345,\r\n        \"name\": \"Carlos Pinheiro\"\r\n    },\r\n    \"paymentMethod\" : {\r\n        \"method\" : \"credit_card\",\r\n        \"cardHolder\" : \"Carlos Pinheiro\",\r\n        \"cardNumber\" : \"4561\",\r\n        \"dueDate\" : \"02/2025\",\r\n        \"cvv\" : 111\r\n    },\r\n    \"totalValue\": \"150.00\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/carts/3456/paymentmethod",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"carts",
+								"3456",
+								"paymentmethod"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "orders",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart\": 3458,\r\n    \"orderDate\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"cliente\": {\r\n        \"codigo\": 22494449,\r\n        \"name\": \"Carlos Pinheiro\",\r\n        \"document\": \"123456789-1\"\r\n    },    \r\n    \"products\": [{\r\n            \"produto\" : \"Panela de Barro\",\r\n            \"sku\" : 123456,\r\n            \"valor\": 99.99\r\n        }\r\n    ],\r\n    \"statusPedidos\": {\r\n        \"code\": 1,\r\n        \"description\": \"waiting payment\"\r\n    },\r\n    \"origem\": \"e-commerce\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/orders",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "orders",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/orders",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "orders/1001",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/orders/12345-01?client_id={{client_id}}",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"orders",
+								"12345-01"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "orders/12345-01",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/orders/12345-01",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"orders",
+								"12345-01"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "carts/{1}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/carts/1",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"carts",
+								"1"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "carts/3456",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/carts/3456",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"carts",
+								"3456"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Automated Test Case",
+			"item": [
+				{
+					"name": "Create Cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//pm.environment.set(\"x-customer_id\", {});\r",
+									"//pm.variables.set(\"customer_id\", $randomInt)\r",
+									"\r",
+									"//var jsonData = JSON.parse(responseBody);\r",
+									"//pm.environment.set(\"cart_id\", jsonData.cartid);\r",
+									"\r",
+									"//const resquestJson = pm.request.toJSON();\r",
+									"//const resquestJson = pm.request.body.toJSON();\r",
+									"//var jsonData1 = JSON.parse(resquestJson);\r",
+									"//console.log(resquestJson);\r",
+									"//pm.variables.set(\"x-customer_id\", jsonData.cliente.codigo);\r",
+									"//pm.variables.set(\"x-customer_name\", jsonData.cliente.name);\r",
+									"\r",
+									"\r",
+									"data = pm.request.body;\r",
+									"body = data[data.mode];\r",
+									"jsonData = JSON.parse(body);\r",
+									"console.log(jsonData);\r",
+									"var v_client_id = jsonData.cliente.codigo;\r",
+									"console.log(v_client_id);\r",
+									"pm.environment.set(\"x-customer_id\", jsonData.cliente.codigo);\r",
+									"pm.environment.set(\"x-customer_name\", jsonData.cliente.name);\r",
+									"pm.environment.set(\"x-customer_id\", v_client_id);\r",
+									"pm.environment.set(\"x-customer_name\", jsonData.cliente.name);\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "a9e4186a-270e-3f97-b58e-6707e452f396",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cliente\": {\r\n        \"codigo\": \"{{$randomInt}}\",\r\n        \"name\" : \"{{$randomFullName}}\"\r\n    },\r\n    \"produto\": {\r\n        \"sku\" : 123456,\r\n        \"produto\" : \"Panela de Barro\",    \r\n        \"valor\": 99.99\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1,\r\n        \"descricao\" : \"APP ANDROID\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/carts",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"carts"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Item 1",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart_id\" : 3456,\r\n    \"client\":  12345,\r\n    \"product_sku\" : 123,\r\n    \"quantity\" : 1,\r\n    \"origem\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/carts/3456/itens",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"carts",
+								"3456",
+								"itens"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Item 2",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "4f48e7a0-773b-35eb-b02d-3ac9f6bad35e",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart_id\" : 3456,\r\n    \"client\":  12345,\r\n    \"product_sku\" : 124,\r\n    \"quantity\" : 1,\r\n    \"origem\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/carts/3456/itens",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"carts",
+								"3456",
+								"itens"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Address by ZipCode",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/correios/v1/cep?cep=\"20031004\"",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"correios",
+								"v1",
+								"cep"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								},
+								{
+									"key": "cep",
+									"value": "\"20031004\""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Delivery Address",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart\": 3456,\r\n    \"orderDate\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"cliente\": {\r\n        \"codigo\": 12345,\r\n        \"name\": \"Carlos Pinheiro\"\r\n    },    \r\n    \"deliveryAddress\": {\r\n            \"bairro\": \"Centro\",\r\n            \"cep\": \"20031004\",\r\n            \"cidade\": \"Rio de Janeiro\",\r\n            \"complemento2\": \"- de 65 a 81 - lado ímpar\",\r\n            \"end\": \"Avenida Almirante Barroso\",\r\n            \"numero\" : 81,\r\n            \"complemento1\" : \"apto 1003\",\r\n            \"uf\": \"RJ\",\r\n            \"unidadesPostagem\": \"\"\r\n    },\r\n    \"statusPedidos\": {\r\n        \"code\": 1,\r\n        \"description\": \"waiting payment\"\r\n    },\r\n    \"origem\": \"e-commerce\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/carts/{id}/deliveryaddress",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"carts",
+								"{id}",
+								"deliveryaddress"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add payment method",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart\": 3456,\r\n    \"orderDate\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"cliente\": {\r\n        \"codigo\": 12345,\r\n        \"name\": \"Carlos Pinheiro\"\r\n    },\r\n    \"paymentMethod\" : {\r\n        \"method\" : \"credit_card\",\r\n        \"cardHolder\" : \"Carlos Pinheiro\",\r\n        \"cardNumber\" : \"4561\",\r\n        \"dueDate\" : \"02/2025\",\r\n        \"cvv\" : 111\r\n    },\r\n    \"totalValue\": \"150.00\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/carts/3456/paymentmethod",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"carts",
+								"3456",
+								"paymentmethod"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "orders",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart\": 3458,\r\n    \"orderDate\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"cliente\": {\r\n        \"codigo\": 22494449,\r\n        \"name\": \"Carlos Pinheiro\",\r\n        \"document\": \"123456789-1\"\r\n    },    \r\n    \"products\": [{\r\n            \"produto\" : \"Panela de Barro\",\r\n            \"sku\" : 123456,\r\n            \"valor\": 99.99\r\n        }\r\n    ],\r\n    \"statusPedidos\": {\r\n        \"code\": 1,\r\n        \"description\": \"waiting payment\"\r\n    },\r\n    \"origem\": \"e-commerce\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/orders",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "orders",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/orders",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "orders/1001",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/orders/1001",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"orders",
+								"1001"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "orders/12345-01",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/orders/12345-01",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"orders",
+								"12345-01"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "carts/{1}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/carts/1",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"carts",
+								"1"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "carts/3456",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/carts/3456",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"carts",
+								"3456"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
