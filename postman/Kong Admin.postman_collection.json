@@ -1,0 +1,1836 @@
+{
+	"info": {
+		"_postman_id": "f4be520e-d426-4a17-83fc-6e787a5163e8",
+		"name": "Kong Admin",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31557509",
+		"_collection_link": "https://backend-cea.postman.co/workspace/CommerceMock~d3c0cf1b-b00e-4fda-99e2-3a66161a2e0e/collection/3540883-f4be520e-d426-4a17-83fc-6e787a5163e8?action=share&source=collection_link&creator=31557509"
+	},
+	"item": [
+		{
+			"name": "Configurations",
+			"item": [
+				{
+					"name": "Plugins",
+					"item": [
+						{
+							"name": "Get All Plugins",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{kong-address}}:8001/plugins/91a0f101-0f95-4899-958c-d35a8788fcf8",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"plugins",
+										"91a0f101-0f95-4899-958c-d35a8788fcf8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UDP Log Plugin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "udp-log",
+											"type": "text"
+										},
+										{
+											"key": "config.host",
+											"value": "logstash01",
+											"type": "text"
+										},
+										{
+											"key": "config.port",
+											"value": "514",
+											"type": "text"
+										},
+										{
+											"key": "config.timeout",
+											"value": "10000",
+											"type": "text"
+										},
+										{
+											"key": "config.custom_fields_by_lua.access",
+											"value": "kong.log.set_serialize_value(\"request.body\", kong.request.get_raw_body())",
+											"type": "text"
+										},
+										{
+											"key": "config.custom_fields_by_lua.body_filter",
+											"value": "kong.log.set_serialize_value(\"response.body\", kong.response.get_raw_body())",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/plugins/",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"plugins",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UDP Log Plugin",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "udp-log",
+											"type": "text"
+										},
+										{
+											"key": "config.host",
+											"value": "logstash01",
+											"type": "text"
+										},
+										{
+											"key": "config.port",
+											"value": "514",
+											"type": "text"
+										},
+										{
+											"key": "config.timeout",
+											"value": "10000",
+											"type": "text"
+										},
+										{
+											"key": "config.request_body",
+											"value": "true",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/plugins/15154eea-34ca-45b5-aee7-d67a2ce29ee5",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"plugins",
+										"15154eea-34ca-45b5-aee7-d67a2ce29ee5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "UDP Log Plugin",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "udp-log",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "config.host",
+											"value": "logstash01",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "config.port",
+											"value": "514",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "config.timeout",
+											"value": "10000",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "config.custom_fields_by_lua.access",
+											"value": "kong.log.set_serialize_value(\"request.body\", kong.request.get_raw_body())",
+											"type": "text"
+										},
+										{
+											"key": "config.custom_fields_by_lua.body_filter",
+											"value": "kong.log.set_serialize_value(\"response.body\", kong.response.get_raw_body())",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/plugins/15154eea-34ca-45b5-aee7-d67a2ce29ee5",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"plugins",
+										"15154eea-34ca-45b5-aee7-d67a2ce29ee5"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TCP Log Plugin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "tcp-log",
+											"type": "text"
+										},
+										{
+											"key": "config.host",
+											"value": "logstash01",
+											"type": "text"
+										},
+										{
+											"key": "config.port",
+											"value": "5000",
+											"type": "text"
+										},
+										{
+											"key": "config.access",
+											"value": "kong.log.set_serialize_value(\"request.body\", kong.request.get_raw_body())",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "config.body_filter",
+											"value": "kong.log.set_serialize_value(\"response.body\", kong.response.get_raw_body())",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "protocols",
+											"value": "http,https",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/plugins/",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"plugins",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "TCP Log Plugin",
+							"request": {
+								"method": "PATCH",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "udp-log",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "config.host",
+											"value": "logstash01",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "config.port",
+											"value": "5000",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "config.timeout",
+											"value": "10000",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "config.custom_fields_by_lua.access",
+											"value": "kong.log.set_serialize_value(\"request.body\", kong.request.get_raw_body())",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "config.custom_fields_by_lua.body_filter",
+											"value": "kong.log.set_serialize_value(\"response.body\", kong.response.get_raw_body())",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "config.custom_fields_by_lua.access",
+											"value": "kong.request.get_raw_body()",
+											"type": "text"
+										},
+										{
+											"key": "config.custom_fields_by_lua.body_filter",
+											"value": "kong.response.get_raw_body()",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/plugins/91a0f101-0f95-4899-958c-d35a8788fcf8",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"plugins",
+										"91a0f101-0f95-4899-958c-d35a8788fcf8"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "HTTP Log Plugin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "http-log",
+											"type": "text"
+										},
+										{
+											"key": "config.http_endpoint",
+											"value": "https://commecemock.free.beeceptor.com/log",
+											"type": "text"
+										},
+										{
+											"key": "config.method",
+											"value": "POST",
+											"type": "text"
+										},
+										{
+											"key": "config.timeout",
+											"value": "1000",
+											"type": "text"
+										},
+										{
+											"key": "config.keepalive",
+											"value": "1000",
+											"type": "text"
+										},
+										{
+											"key": "config.flush_timeout",
+											"value": "5",
+											"type": "text"
+										},
+										{
+											"key": "config.retry_count",
+											"value": "15",
+											"type": "text"
+										},
+										{
+											"key": "config.custom_fields_by_lua.access",
+											"value": "kong.log.set_serialize_value(\"request.body\", kong.request.get_raw_body())",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "config.custom_fields_by_lua.body_filter",
+											"value": "kong.response.get_raw_body()",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "config.response_payload_body",
+											"value": "true",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "config.phase",
+											"value": "access",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/plugins/",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"plugins",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Global Log File Config",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "file-log",
+											"type": "text"
+										},
+										{
+											"key": "config.path",
+											"value": "/tmp/api-global.log",
+											"type": "text"
+										},
+										{
+											"key": "config.custom_fields_by_lua.access",
+											"value": "kong.log.set_serialize_value(\"request.body\", kong.request.get_raw_body())",
+											"type": "text"
+										},
+										{
+											"key": "config.custom_fields_by_lua.body_filter",
+											"value": "kong.log.set_serialize_value(\"response.body\", kong.response.get_raw_body())",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/plugins/",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"plugins",
+										""
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "kong-plugin-http-log-with-body",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "bodylog",
+											"type": "text"
+										},
+										{
+											"key": "config.environment",
+											"value": "development",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "config.server.host",
+											"value": "logstash01",
+											"type": "text",
+											"disabled": true
+										},
+										{
+											"key": "port",
+											"value": "5000",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/plugins",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"plugins"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pre-Plugin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "pre-function",
+											"type": "text"
+										},
+										{
+											"key": "config.access[1]",
+											"value": "kong.log.err('Test Access')",
+											"type": "text"
+										},
+										{
+											"key": "config.access[2]",
+											"type": "file",
+											"src": [],
+											"disabled": true
+										},
+										{
+											"key": "config.header_filter[1]",
+											"value": "kong.log.err('Test Header_Filter!')",
+											"type": "text"
+										},
+										{
+											"key": "config.body_filter[1]",
+											"value": "kong.log.err('Test Body_Filter!')",
+											"type": "text"
+										},
+										{
+											"key": "config.log[1]",
+											"value": "kong.log.err('Test Log!')",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/plugins",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"plugins"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Pos-Plugin",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "post-function",
+											"type": "text"
+										},
+										{
+											"key": "config.access",
+											"value": "kong.log.set_serialize_value(\"request.body\", kong.request.get_raw_body()); kong.log.set_serialize_value(\"response.body\", kong.response.get_raw_body())",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/plugins",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"plugins"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Enable OAuth 2 Plugin to Route",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "oauth2",
+											"type": "text"
+										},
+										{
+											"key": "instance_name",
+											"value": "oauth2-ecommece",
+											"type": "text"
+										},
+										{
+											"key": "config.enable_client_credentials",
+											"value": "true",
+											"type": "text"
+										},
+										{
+											"key": "config.enable_authorization_code",
+											"value": "true",
+											"type": "text"
+										},
+										{
+											"key": "config.global_credentials",
+											"value": "true",
+											"type": "text"
+										},
+										{
+											"key": "config.provision_key",
+											"value": "abc123",
+											"type": "text"
+										},
+										{
+											"key": "config.token_expiration",
+											"value": "28800",
+											"type": "text"
+										},
+										{
+											"key": "config.refresh_token_ttl",
+											"value": "1209600",
+											"type": "text"
+										},
+										{
+											"key": "tags",
+											"value": "ecommerce",
+											"type": "text"
+										},
+										{
+											"key": "config.scopes",
+											"value": "email",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/routes/ecommerce-carts/plugins",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"routes",
+										"ecommerce-carts",
+										"plugins"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Services",
+					"item": [
+						{
+							"name": "ecommerce-carts",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "ecommerce-carts",
+											"type": "text"
+										},
+										{
+											"key": "url",
+											"value": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/services",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"services"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "ecommerce-orders",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "ecommerce-orders",
+											"type": "text"
+										},
+										{
+											"key": "url",
+											"value": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/orders",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/services",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"services"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "correios",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "correios",
+											"type": "text"
+										},
+										{
+											"key": "url",
+											"value": "https://viacep.com.br/ws",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/services",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"services"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get service config",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{kong-address}}:8001/services/",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"services",
+										""
+									]
+								},
+								"description": "Get service configuration"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Routes",
+					"item": [
+						{
+							"name": "Create Route-Cart",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"ecommerce-carts\",\r\n  \"protocols\": [\r\n    \"http\",\r\n    \"https\"\r\n  ],\r\n  \"methods\": [\r\n    \"GET\",\r\n    \"POST\",\r\n    \"PUT\",\r\n    \"DELETE\"\r\n  ],\r\n  \"hosts\": [\r\n  ],\r\n  \"paths\": [\r\n    \"/sandbox/ecommerce/v1/carts\"\r\n  ],\r\n  \"headers\": {\r\n  },\r\n  \"https_redirect_status_code\": 426,\r\n  \"regex_priority\": 0,\r\n  \"strip_path\": true,\r\n  \"path_handling\": \"v0\",\r\n  \"preserve_host\": false,\r\n  \"request_buffering\": true,\r\n  \"response_buffering\": true,\r\n  \"tags\": [\r\n    \"ecommerce\"\r\n  ],\r\n  \"service\": {\r\n    \"id\": \"42c012f4-a20c-4363-bc51-8176198343b9\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/services/ecommerce-carts/routes",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"services",
+										"ecommerce-carts",
+										"routes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Route-Orders",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"ecommerce-orders\",\r\n  \"protocols\": [\r\n    \"http\",\r\n    \"https\"\r\n  ],\r\n  \"methods\": [\r\n    \"GET\",\r\n    \"POST\",\r\n    \"PUT\",\r\n    \"DELETE\"\r\n  ],\r\n  \"hosts\": [\r\n  ],\r\n  \"paths\": [\r\n    \"/sandbox/ecommerce/v1/orders\"\r\n  ],\r\n  \"headers\": {\r\n  },\r\n  \"https_redirect_status_code\": 426,\r\n  \"regex_priority\": 0,\r\n  \"strip_path\": true,\r\n  \"path_handling\": \"v0\",\r\n  \"preserve_host\": false,\r\n  \"request_buffering\": true,\r\n  \"response_buffering\": true,\r\n  \"tags\": [\r\n    \"ecommerce\"\r\n  ],\r\n  \"service\": {\r\n    \"id\": \"4d9e3769-70b7-48c7-a4a4-88b70ee99813\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/services/ecommerce-orders/routes",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"services",
+										"ecommerce-orders",
+										"routes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Route-CEP",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"correios\",\r\n  \"protocols\": [\r\n    \"http\",\r\n    \"https\"\r\n  ],\r\n  \"methods\": [\r\n    \"GET\"\r\n  ],\r\n  \"hosts\": [\r\n  ],\r\n  \"paths\": [\r\n    \"/sandbox/correios/v1/cep\"\r\n  ],\r\n  \"headers\": {\r\n  },\r\n  \"https_redirect_status_code\": 426,\r\n  \"regex_priority\": 0,\r\n  \"strip_path\": true,\r\n  \"path_handling\": \"v0\",\r\n  \"preserve_host\": false,\r\n  \"request_buffering\": true,\r\n  \"response_buffering\": true,\r\n  \"tags\": [\r\n    \"correios\"\r\n  ],\r\n  \"service\": {\r\n    \"id\": \"7088b74e-6a4b-43f6-818b-94780286f085\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/services/correios/routes",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"services",
+										"correios",
+										"routes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Get Route Config",
+							"request": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{kong-address}}:8001/routes/ecommerce-carts",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"routes",
+										"ecommerce-carts"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Consumer App",
+					"item": [
+						{
+							"name": "Create Acme Consummer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "acmeapp",
+											"type": "text"
+										},
+										{
+											"key": "custom_id",
+											"value": "acme1234",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/consumers",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"consumers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Acme key-auth",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "key",
+											"value": "123",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/consumers/acmeapp/key-auth",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"consumers",
+										"acmeapp",
+										"key-auth"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Acme App",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "acmeapp",
+											"type": "text"
+										},
+										{
+											"key": "client_id",
+											"value": "456",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "789",
+											"type": "text"
+										},
+										{
+											"key": "redirect_uris",
+											"value": "http://mockbin.org/",
+											"type": "text"
+										},
+										{
+											"key": "hash_secret",
+											"value": "true",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/consumers/acmeapp/oauth2",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"consumers",
+										"acmeapp",
+										"oauth2"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Testes Iniciais",
+			"item": [
+				{
+					"name": "{{kong-address}}:8001/services",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "example_service",
+									"type": "text"
+								},
+								{
+									"key": "url",
+									"value": "http://httpbin.org",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{kong-address}}:8001/services",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8001",
+							"path": [
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Service Teste",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "mock-beeceptor",
+									"type": "text"
+								},
+								{
+									"key": "url",
+									"value": "http://commecemock.free.beeceptor.com/mock",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{kong-address}}:8001/services",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8001",
+							"path": [
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Route-mock",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"mock\",\r\n  \"protocols\": [\r\n    \"http\"\r\n  ],\r\n  \"methods\": [\r\n    \"GET\",\r\n    \"POST\"\r\n  ],\r\n  \"hosts\": [\r\n    \"http://commecemock.free.beeceptor.com\"\r\n  ],\r\n  \"paths\": [\r\n    \"/mock\"\r\n  ],\r\n  \"headers\": {\r\n    \"x-my-header\": [\r\n      \"order\"\r\n    ]\r\n  },\r\n  \"https_redirect_status_code\": 426,\r\n  \"regex_priority\": 0,\r\n  \"strip_path\": true,\r\n  \"path_handling\": \"v0\",\r\n  \"preserve_host\": false,\r\n  \"request_buffering\": true,\r\n  \"response_buffering\": true,\r\n  \"tags\": [\r\n    \"mock\"\r\n  ],\r\n  \"service\": {\r\n    \"id\": \"b2bde0a2-e5f1-496a-a8cd-4be86507f7aa\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{kong-address}}:8001/services/test_service/routes",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8001",
+							"path": [
+								"services",
+								"test_service",
+								"routes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Route-Cart",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"carts\",\r\n  \"protocols\": [\r\n    \"http\",\r\n    \"https\"\r\n  ],\r\n  \"methods\": [\r\n    \"GET\",\r\n    \"POST\",\r\n    \"PUT\",\r\n    \"DELETE\"\r\n  ],\r\n  \"hosts\": [\r\n    \"example.com\",\r\n    \"foo.test\"\r\n  ],\r\n  \"paths\": [\r\n    \"/carts\"\r\n  ],\r\n  \"headers\": {\r\n    \"x-my-header\": [\r\n      \"cart\",\r\n      \"order\"\r\n    ]\r\n  },\r\n  \"https_redirect_status_code\": 426,\r\n  \"regex_priority\": 0,\r\n  \"strip_path\": true,\r\n  \"path_handling\": \"v0\",\r\n  \"preserve_host\": false,\r\n  \"request_buffering\": true,\r\n  \"response_buffering\": true,\r\n  \"tags\": [\r\n    \"ecommerce\"\r\n  ],\r\n  \"service\": {\r\n    \"id\": \"42c012f4-a20c-4363-bc51-8176198343b9\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{kong-address}}:8001/services/test_service/routes",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8001",
+							"path": [
+								"services",
+								"test_service",
+								"routes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{kong-address}}:8001/services/example_service/routes",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "paths[]",
+									"value": "/mock",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "example_route",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{kong-address}}:8001/services/example_service/routes",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8001",
+							"path": [
+								"services",
+								"example_service",
+								"routes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{kong-address}}:8000/mock/anything",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{kong-address}}:8000/mock/anything",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8000",
+							"path": [
+								"mock",
+								"anything"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{kong-address}}:8000/mock/anything Copy",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{kong-address}}:8000/mock/anything",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8000",
+							"path": [
+								"mock",
+								"anything"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Service Mock",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "beeceptor",
+									"type": "text"
+								},
+								{
+									"key": "url",
+									"value": "http://commecemock.free.beeceptor.com/mock",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{kong-address}}:8001/services",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8001",
+							"path": [
+								"services"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Post mock anything",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "campoone",
+									"value": "valor one",
+									"type": "text"
+								},
+								{
+									"key": "campotwo",
+									"value": "valordois",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{kong-address}}:8000/mockone/anything",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8000",
+							"path": [
+								"mockone",
+								"anything"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get mock anything",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{kong-address}}:8000/mockone/anything",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8000",
+							"path": [
+								"mockone",
+								"anything"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "mock",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{kong-address}}:8000/mockone",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8000",
+							"path": [
+								"mockone"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST mock carts",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderid\": 147,\r\n    \"produto\": {\r\n        \"sku\" : 123456,\r\n        \"produto\" : \"Panela de Barro\",    \r\n        \"valor\": 99.99\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{kong-address}}:8000/carts",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8000",
+							"path": [
+								"carts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "POST carts commecemock",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"orderid\": 147,\r\n    \"produto\": {\r\n        \"sku\" : 123456,\r\n        \"produto\" : \"Panela de Barro\",    \r\n        \"valor\": 99.99\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{kong-address}}:8000/sandbox/ecommece/v1/testepostmantwo",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8000",
+							"path": [
+								"sandbox",
+								"ecommece",
+								"v1",
+								"testepostmantwo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get mock carts",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{kong-address}}:8000/carts",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8000",
+							"path": [
+								"carts"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "chatGPT",
+			"item": [
+				{
+					"name": "Criar Services",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "beeceptor-service",
+									"type": "text"
+								},
+								{
+									"key": "url",
+									"value": "https://app.beeceptor.com/console/commecemock",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://192.168.0.15:8001/services/",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"15"
+							],
+							"port": "8001",
+							"path": [
+								"services",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Minha Rota",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "paths",
+									"value": "/minha-rota",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://192.168.0.15:8001/services/beeceptor-service/routes",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"15"
+							],
+							"port": "8001",
+							"path": [
+								"services",
+								"beeceptor-service",
+								"routes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/minha-rota",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://192.168.0.15:8000/minha-rota",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"15"
+							],
+							"port": "8000",
+							"path": [
+								"minha-rota"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "elastic search APIs",
+			"item": [
+				{
+					"name": "_search",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "abc123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "elastic",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": {\r\n    \"bool\": {\r\n      \"must\": [\r\n        {\r\n          \"match_all\": {}\r\n        },\r\n        {\r\n          \"range\": {\r\n            \"@timestamp\": {\r\n              \"gte\": \"2023-12-06T09:36:56.042Z\"\r\n            }\r\n          }\r\n        }\r\n      ]\r\n    }\r\n  },\r\n  \"size\": 10,\r\n  \"from\": 0,\r\n  \"_source\": [\r\n    \"*\"\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "https://192.168.0.15:9200/konglog*/_search",
+							"protocol": "https",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"15"
+							],
+							"port": "9200",
+							"path": [
+								"konglog*",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "_search Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Authorization",
+								"value": "Basic ZWxhc3RpYzphYmMxMjM=",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"query\": {\r\n    \"bool\": {\r\n      \"must\": [\r\n        {\r\n          \"match_all\": {}\r\n        },\r\n        {\r\n          \"range\": {\r\n            \"@timestamp\": {\r\n              \"gte\": \"2024-01-30T09:36:56.042Z\"\r\n            }\r\n          }\r\n        }\r\n      ]\r\n    }\r\n  },\r\n  \"size\": 10,\r\n  \"from\": 0,\r\n  \"_source\": [\r\n    \"*\"\r\n  ]\r\n}"
+						},
+						"url": {
+							"raw": "https://192.168.0.15:9200/konglog*/_search",
+							"protocol": "https",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"15"
+							],
+							"port": "9200",
+							"path": [
+								"konglog*",
+								"_search"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "_nodes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "password",
+									"value": "abc123",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "elastic",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://192.168.0.15:9200/_nodes",
+							"protocol": "http",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"15"
+							],
+							"port": "9200",
+							"path": [
+								"_nodes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://192.168.0.15:9200/_nodes",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "elastic",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "abc123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://192.168.0.15:9200/_nodes",
+							"protocol": "https",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"15"
+							],
+							"port": "9200",
+							"path": [
+								"_nodes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "https://192.168.0.15:9200/_nodes",
+					"request": {
+						"auth": {
+							"type": "basic",
+							"basic": [
+								{
+									"key": "username",
+									"value": "elastic",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "abc123",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "https://192.168.0.15:9200/_nodes",
+							"protocol": "https",
+							"host": [
+								"192",
+								"168",
+								"0",
+								"15"
+							],
+							"port": "9200",
+							"path": [
+								"_nodes"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Autentication",
+			"item": [
+				{
+					"name": "OAuth AcmeAPP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 201\", function () {\r",
+									"   pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"access_token\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "456",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "789",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{kong-ip}}:8443/sandbox/ecommerce/v1/carts/oauth2/token",
+							"protocol": "https",
+							"host": [
+								"{{kong-ip}}"
+							],
+							"port": "8443",
+							"path": [
+								"sandbox",
+								"ecommerce",
+								"v1",
+								"carts",
+								"oauth2",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Viewing Access Tokens",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{kong-address}}:8001/oauth2_tokens/",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8001",
+							"path": [
+								"oauth2_tokens",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

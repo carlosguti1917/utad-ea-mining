@@ -40,7 +40,7 @@ ELASTIC = {
 
 # it only works with file .owl
 OWL_FILE = {
-  "file_name": "EA Mining OntoUML Teste V1_3.owl",
+  "file_name": "EA Mining OntoUML Teste V1_4.owl",
 }
 
 FREQUENT_API_ATTRIBUTES = {

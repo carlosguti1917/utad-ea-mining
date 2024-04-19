@@ -59,6 +59,7 @@ ignore_field_name = [
     ['_source', 'request', 'headers', 'content-length'],  
     ['_source', 'request', 'headers', 'content-type'],  
     ['_source', 'request', 'headers', 'user-agent'],  
+    ['_source', 'request', 'headers', 'postman-token'],  
     ['_source', 'request', 'size'],  
     ['_source', 'response', 'headers', 'access-control-allow-origin'],
     ['_source', 'response', 'headers', 'connection'],    

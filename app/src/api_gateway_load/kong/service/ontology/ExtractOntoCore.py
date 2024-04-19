@@ -30,6 +30,7 @@ collection_call_cleaned = mydb["kong-api-call-cleaned"]
 #print("classes = ",list(onto.classes()))
 
 class ExtractOntoCore:
+    
     def __init__(self, begindate):
         # self.myclient = pymongo.MongoClient(configs.MONGO_DB_SERVER["host"])
         # self.mydb = self.myclient[configs.MONGO_DB_SERVER["databasename"]]
@@ -78,7 +79,10 @@ def get_onto_resource_attributes_from_json(attributes_list, api_resource, json_o
                             attribute_exists = True
                             #print("Attribute already exists in api_resource.resource_data: ", resource_data.attribute_name[0], " = ", resource_data.attribute_value[0])
                             break 
-                        
+                # if the attribute value is null ignore it
+                if attribute_value.strip() =="" or attribute_value == "null":
+                    continue
+                
                 if not attribute_exists:                    
                     attr = ns_core.Attribute()
                     if key_hierarchy == "":
@@ -112,26 +116,32 @@ def setOntolgyIndividuals(self, onto, className, individuoName):
 
 
 def tranform_to_ontology(api_calls):
+    """tranform the api_calls to ontology
+    Args:
+        api_calls (list): list of json api calls to be transformed to ontology
+    """
+    
     sync_reasoner()
-
     with onto:
         try:      
             for call in api_calls:
                 Consumer_app_id = None
                 Consumer_app_name = None
                 request_id = None
+                
+                if not onto_util.validate_json_to_extraction(call):
+                    continue
+                
                 cls_api_call = ns_core.APICall
                 
                 #verifica se existe consumer e request_id e se API Call já está registrada na ontologia
-                
                 if "_source" in call and "consumer" in call["_source"] and "id" in call["_source"]["consumer"]:
                     Consumer_app_id = call["_source"]["consumer"]["id"] 
                 if "_source" in call and "consumer" in call["_source"] and "username" in call["_source"]["consumer"]:
                     Consumer_app_name = call["_source"]["consumer"]["username"]           
                 if "@timestamp" in call["_source"] and "request" in call["_source"] and "id" in call["_source"]["request"]:  # o nome da classe e label da API Call é o request_id  
                     request_id = call["_source"]["request"]["id"]  
-            
-            
+                          
                 if request_id is None and Consumer_app_id is None and Consumer_app_name is None:
                     continue
                 if onto_util.get_individual(onto, cls_api_call, 'http://eamining.edu.pt/', request_id):
@@ -183,10 +193,12 @@ def tranform_to_ontology(api_calls):
                             api_operation = onto_util.get_individual(onto, ns_core.APIOperation, 'http://eamining.edu.pt/', operation_route)
                             if api_operation is None:
                                 api_operation = ns_core.APIOperation(operation_route)
-                                api_operation.label.append(operation_route)
+                                pattern = r"/(\d+)(?=/|$)"
+                                label = re.sub(pattern, '/id', operation_route)
+                                api_operation.label.append(label)
                                 api_operation.endpoint_route.append(operation_route) 
                                 api_operation.method.append(call["_source"]["request"]["method"])               
-                                api_call.participatedIn.append(api_operation)
+                            api_call.participatedIn.append(api_operation)
                         #ServiceDestination.endpoint_route
                         if "service" in call["_source"] and "host" in call["_source"]["service"] and "path" in call["_source"]["service"]:
                             api_destination_route = call["_source"]["service"]["host"] + call["_source"]["service"]["path"]
@@ -195,7 +207,8 @@ def tranform_to_ontology(api_calls):
                                 api_destination = ns_core.ServiceDestination(api_destination_route)
                                 api_destination.label.append(api_destination_route)
                                 api_destination.endpoint_route.append(api_destination_route)
-                                api_destination.participatedIn.append(api_call)
+                                #api_destination.participatedIn.append(api_call)
+                            api_destination.participatedIn.append(api_call)
                         #sync_reasoner()    
                         #API Resource Resouce.uri Resource.data
                         #inicializing the attributes_list
@@ -204,21 +217,36 @@ def tranform_to_ontology(api_calls):
                         if "request" in call["_source"] and "uri" in call["_source"]["request"]:
                             resource_uri = call["_source"]["request"]["uri"]
                             #Não dá para verificar se o recurso existe pois precisa guardar os dados
-                            api_resource = ns_core.APIResource(resource_uri)
+                            api_resource = ns_core.APIResource()
                             api_resource.resource_uri.append(resource_uri)
                             api_resource.label.append(resource_uri)
+                            api_resource.participatedIn.append(api_call)
                             #atribuir o resource_name 
                             #Define the updated pattern
-                            pattern = r"/v\d+/(.*?)/(\d+)"
+                            pattern = r"/v\d+/(.*)"
                             match = re.search(pattern, resource_uri)
                             if match:
                                 resource_name = match.group(1)
-                                api_resource.resource_name.append(resource_name)                                              
+                                api_resource.resource_name.append(resource_name)
                             # Transform the body into a datatype Attribute (array of name-value pairs)
                             if "request" in call["_source"] and "body" in call["_source"]["request"]:
                                 request_body = call["_source"]["request"]["body"]
-                                request_body_json = json.loads(request_body)
-                                get_onto_resource_attributes_from_json(attributes_list, api_resource, request_body_json, "")
+                                if request_body.strip() != "":
+                                    request_body_json = json.loads(request_body)
+                                    get_onto_resource_attributes_from_json(attributes_list, api_resource, request_body_json, "")
+                            #Wheather the request body is empty the attibute may is in the path
+                            elif '/' in resource_name:
+                                pairs = resource_name.split('/')
+                                if len(pairs) % 2 == 0:
+                                    for i in range(0, len(pairs), 2):
+                                        att_name = pairs[i]
+                                        att_value = pairs[i+1]
+                                        attr = ns_core.Attribute()
+                                        attr.attribute_name.append(att_name) 
+                                        attr.label.append(att_name)
+                                        attr.attribute_value.append(att_value)                                                                                 
+                                        api_resource.resource_data.append(attr)
+                            
                         #sync_reasoner()
                         # Response data
                         #api_resource.data.append(call["_source"]["request"]["body"])     
@@ -226,8 +254,9 @@ def tranform_to_ontology(api_calls):
                             #Não dá para verificar se o recurso existe pois precisa guardar os dados                                           
                             # Transform the body into a datatype Attribute (array of name-value pairs)
                             response_body = call["_source"]["response"]["body"]
-                            response_body_json = json.loads(response_body)
-                            get_onto_resource_attributes_from_json(attributes_list, api_resource, response_body_json, "") 
+                            if response_body.strip() != "":
+                                response_body_json = json.loads(response_body)
+                                get_onto_resource_attributes_from_json(attributes_list, api_resource, response_body_json, "") 
                         
                         # Api Operation Modifies API Resource
                         if api_operation and api_resource:
@@ -235,25 +264,24 @@ def tranform_to_ontology(api_calls):
                             relator_operation_executed.mediates.append(api_operation)
                             relator_operation_executed.mediates.append(api_resource)                       
                             #api_operation.modifies.append(api_resource)
-                            # Não consegui atribuir o a associação
+                            # Não consegui atribuir o a associação materail modifies
                         
-                        try:
-                            #save the individuals                  
-                            #check de ontology consistency before saving                        
-                            sync_reasoner()
-                            onto.save(format="rdfxml")
-                            #pass
-                            #TODO Ao final tem que criar um API Documentation e criar a relação material is documented by
-                        except Exception as error:
-                            inconsistent_cls_list = list(default_world.inconsistent_classes())
-                            for il in inconsistent_cls_list:
-                                print(il)
-                                print('inconsistency_list', il)                                                 
-                            print('Ocorreu problema {} '.format(error.__class__))
-                            print("mensagem", str(error))
-                            print("In extractAPIConcepts module :", __name__)  
-                            raise Exception(f"Ontology inconsistency found: {il}")  
-                        
+            try:
+                #save the individuals                  
+                #check de ontology consistency before saving                        
+                sync_reasoner()
+                onto.save(format="rdfxml")
+                #pass
+                #TODO Ao final tem que criar um API Documentation e criar a relação material is documented by
+            except Exception as error:
+                inconsistent_cls_list = list(default_world.inconsistent_classes())
+                for il in inconsistent_cls_list:
+                    print(il)
+                    print('inconsistency_list', il)                                                 
+                print('Ocorreu problema {} '.format(error.__class__))
+                print("mensagem", str(error))
+                print("In extractAPIConcepts module :", __name__)  
+                raise Exception(f"Ontology inconsistency found: {il}")  
         except Exception as error:
              print('Ocorreu problema {} '.format(error.__class__))
              print("mensagem", str(error))

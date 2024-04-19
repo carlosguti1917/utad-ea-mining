@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog prefer="public" xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog">
     <group id="Folder Repository, directory=, recursive=true, Auto-Update=true, version=2" prefer="public" xml:base="">
-        <uri id="Automatically generated entry, Timestamp=1712884591800" name="duplicate:http://apieamining.edu.pt" uri="Onto%20EA%20Mining%20v0.1-RDFXML%20copy.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1712884591800" name="duplicate:http://apieamining.edu.pt" uri="Onto%20EA%20Mining%20v0.1-RDFXML.nt"/>
-        <uri id="Automatically generated entry, Timestamp=1712884591800" name="duplicate:http://apieamining.edu.pt" uri="Onto%20EA%20Mining%20v0.1-RDFXML.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1712884591800" name="duplicate:http://eamining.edu.pt" uri="EA%20Mining%20OntoUML%20Teste%20V1_1%20ieee_access.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1712884591800" name="duplicate:http://eamining.edu.pt" uri="EA%20Mining%20OntoUML%20Teste%20V1_1.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1712884591800" name="duplicate:http://eamining.edu.pt" uri="EA%20Mining%20OntoUML%20Teste%20V1_1_old.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1712884591800" name="duplicate:http://eamining.edu.pt" uri="EA%20Mining%20OntoUML%20Teste%20V1_3.owl"/>
-        <uri id="Automatically generated entry, Timestamp=1712884591800" name="duplicate:http://eamining.edu.pt" uri="ontoreasoner.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1713239544219" name="duplicate:http://eamining.edu.pt" uri="EA%20Mining%20OntoUML%20Teste%20V1_1%20ieee_access.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1713239544219" name="duplicate:http://eamining.edu.pt" uri="EA%20Mining%20OntoUML%20Teste%20V1_1.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1713239544219" name="duplicate:http://eamining.edu.pt" uri="EA%20Mining%20OntoUML%20Teste%20V1_3%20-%20Limpo.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1713239544219" name="duplicate:http://eamining.edu.pt" uri="EA%20Mining%20OntoUML%20Teste%20V1_3.owl"/>
+        <uri id="Automatically generated entry, Timestamp=1713239544219" name="duplicate:http://eamining.edu.pt" uri="EA%20Mining%20OntoUML%20Teste%20V1_3.rdf"/>
+        <uri id="Automatically generated entry, Timestamp=1713239544219" name="http://eamining.edu.pt/" uri="EA%20Mining%20OntoUML%20Teste%20V1_3%20-%20Copia%20Muito%20FTC.owl"/>
     </group>
 </catalog>

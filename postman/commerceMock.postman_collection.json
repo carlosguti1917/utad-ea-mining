@@ -1,0 +1,2942 @@
+{
+	"info": {
+		"_postman_id": "8a9a7cbe-bc56-404a-8dd6-878bedbb6ecf",
+		"name": "commerceMock",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31557509",
+		"_collection_link": "https://backend-cea.postman.co/workspace/CommerceMock~d3c0cf1b-b00e-4fda-99e2-3a66161a2e0e/collection/3540883-8a9a7cbe-bc56-404a-8dd6-878bedbb6ecf?action=share&source=collection_link&creator=31557509"
+	},
+	"item": [
+		{
+			"name": "Test Case 1",
+			"item": [
+				{
+					"name": "carts",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts",
+							"protocol": "https",
+							"host": [
+								"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"carts"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "carts M1",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"carts"
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "{{client_id}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": "\r\n\r\n"
+						}
+					]
+				},
+				{
+					"name": "POST carts/{id}/itens",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts/3456/itens",
+							"protocol": "https",
+							"host": [
+								"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"carts",
+								"3456",
+								"itens"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "carts/3456/1",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/carts/3456/itens",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"carts",
+										"3456",
+										"itens"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "POST carts/{id}/itens",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts/{{x-cart_id}}/itens",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"carts",
+										"{{x-cart_id}}",
+										"itens"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "POST carts/{id}/itens default",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts/{{x-cart_id}}/itens",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"carts",
+										"{{x-cart_id}}",
+										"itens"
+									]
+								}
+							},
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "carts/{id}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts/1",
+							"protocol": "https",
+							"host": [
+								"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"carts",
+								"1"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "carts/1",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "client_id",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "access_token",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts/1",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"carts",
+										"1"
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "{{client_id}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"cartid\": 1,\r\n    \"cliente\": 12345,\r\n    \"itens\" : [\r\n        {\r\n            \"sku\" : 123456,\r\n            \"produto\" : \"Produto 1\"\r\n        }\r\n    ]\r\n}"
+						},
+						{
+							"name": "carts/2",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "client_id",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "access_token",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts/2",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"carts",
+										"2"
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "{{client_id}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"cartid\": 2,\r\n    \"cliente\": 12345,\r\n    \"itens\" : [\r\n        {\r\n        \"sku\" : 123456,\r\n        \"produto\" : \"Produto 1\"\r\n        }\r\n    ]\r\n}"
+						},
+						{
+							"name": "carts/3456",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "client_id",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "access_token",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts/3456",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"carts",
+										"3456"
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "{{client_id}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"cartid\": 3456,\n    \"cliente\": 12345,\n    \"itens\": [\n        {\n            \"sku\": 12,\n            \"produto\": \"Produto 1\"\n        },\n        {\n            \"sku\": 34,\n            \"produto\": \"Produto 4\"\n        },\n        {\n            \"sku\": 35,\n            \"produto\": \"Produto 3\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "carts/{id} default",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "client_id",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "access_token",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts/",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"carts",
+										""
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "{{client_id}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"name": "Content-Type",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Address by ZipCode Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/correiros/v1/cep/22160220",
+							"protocol": "https",
+							"host": [
+								"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"correiros",
+								"v1",
+								"cep",
+								"22160220"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Address by ZipCode 22160220",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "client_id",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "access_token",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/correiros/v1/cep/22160220",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"correiros",
+										"v1",
+										"cep",
+										"22160220"
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "{{client_id}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"endereco\": {\n        \"bairro\": \"botafogo\",\n        \"cep\": \"22160220\",\n        \"cidade\": \"Rio de Janeiro\",\n        \"complemento\": \"casa 3\",\n        \"logradouro\": \"rua teste, n 34\",\n        \"uf\": \"RJ\"\n    }\n}"
+						},
+						{
+							"name": "Address by ZipCode default",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "client_id",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "access_token",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/correiros/v1/cep/",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"correiros",
+										"v1",
+										"cep",
+										""
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "{{client_id}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Add Delivery Address Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "client_if",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart\": 3456,\r\n    \"orderDate\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"cliente\": {\r\n        \"codigo\": 12345,\r\n        \"name\": \"Carlos Pinheiro\"\r\n    },    \r\n    \"deliveryAddress\": {\r\n            \"bairro\": \"Centro\",\r\n            \"cep\": \"20031004\",\r\n            \"cidade\": \"Rio de Janeiro\",\r\n            \"complemento2\": \"- de 65 a 81 - lado ímpar\",\r\n            \"end\": \"Avenida Almirante Barroso\",\r\n            \"numero\" : 81,\r\n            \"complemento1\" : \"apto 1003\",\r\n            \"uf\": \"RJ\",\r\n            \"unidadesPostagem\": \"\"\r\n    },\r\n    \"statusPedidos\": {\r\n        \"code\": 1,\r\n        \"description\": \"waiting payment\"\r\n    },\r\n    \"origem\": \"e-commerce\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/carts/{id}/deliveryaddress",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"carts",
+								"{id}",
+								"deliveryaddress"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add Delivery Address",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "client_if",
+										"value": "{{client_id}}",
+										"type": "text"
+									},
+									{
+										"key": "access_token",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts/3456/deliveryaddress",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"carts",
+										"3456",
+										"deliveryaddress"
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "{{client_id}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Add Delivery Address default",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "client_if",
+										"value": "{{client_id}}",
+										"type": "text"
+									},
+									{
+										"key": "access_token",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts/{{x-cart_id}}/deliveryaddress",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"carts",
+										"{{x-cart_id}}",
+										"deliveryaddress"
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "{{client_id}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Add payment method Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "client_if",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart\": 3456,\r\n    \"orderDate\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"cliente\": {\r\n        \"codigo\": 12345,\r\n        \"name\": \"Carlos Pinheiro\"\r\n    },\r\n    \"paymentMethod\" : {\r\n        \"method\" : \"credit_card\",\r\n        \"cardHolder\" : \"Carlos Pinheiro\",\r\n        \"cardNumber\" : \"4561\",\r\n        \"dueDate\" : \"02/2025\",\r\n        \"cvv\" : 111\r\n    },\r\n    \"totalValue\": \"150.00\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts/3456/paymentmethod",
+							"protocol": "https",
+							"host": [
+								"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"carts",
+								"3456",
+								"paymentmethod"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add payment method Copy",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "client_if",
+										"value": "{{client_id}}",
+										"type": "text"
+									},
+									{
+										"key": "access_token",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts/3456/paymentmethod",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"carts",
+										"3456",
+										"paymentmethod"
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "{{client_id}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "orders",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/orders",
+							"protocol": "https",
+							"host": [
+								"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Default",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/orders",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"orders"
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Location",
+									"value": "",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "12345-01",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/orders/12345-01",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"orders",
+										"12345-01"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 22 Aug 2021 18:55:42 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "x-srv-trace",
+									"value": "v=1;t=e6142b53c54b4215"
+								},
+								{
+									"key": "x-srv-span",
+									"value": "v=1;s=2e202a577402cc80"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "120"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "119"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1629658602"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"13f-mv36lGgybmhOFldFHUnXiv/3M4k\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"numPedido\": \"12345-01\",\n    \"dataPedido\": \"2021-08-06T12:59:59.550-03:00\",\n    \"statusPedidos\": \"APROVADO\",\n    \"origem\": \"App IOS\",\n    \"cart\" : {\n        \"cartid\": 3456,\n        \"cliente\": 12345,\n        \"itens\": [\n            {\n                \"produto\" : \"Panela de Barro\",\n                \"sku\" : 123,\n                \"valor\": 99.99\n            },\n            {\n                \"sku\": 34,\n                \"produto\": \"Produto 2\",\n                \"valor\": 199.99\n            }\n        ]\n    }    \n}"
+						}
+					]
+				},
+				{
+					"name": "orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/orders",
+							"protocol": "https",
+							"host": [
+								"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Default",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/orders",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"orders"
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "12345-01",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/orders/12345-01",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"orders",
+										"12345-01"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 22 Aug 2021 18:55:42 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "x-srv-trace",
+									"value": "v=1;t=e6142b53c54b4215"
+								},
+								{
+									"key": "x-srv-span",
+									"value": "v=1;s=2e202a577402cc80"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "120"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "119"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1629658602"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"13f-mv36lGgybmhOFldFHUnXiv/3M4k\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"numPedido\": \"12345-01\",\n    \"dataPedido\": \"2021-08-06T12:59:59.550-03:00\",\n    \"statusPedidos\": \"APROVADO\",\n    \"channel\": \"e-commerce\",\n    \"cart\" : {\n        \"cartid\": 3456,\n        \"cliente\": 12345,\n        \"itens\": [\n            {\n                \"produto\" : \"Panela de Barro\",\n                \"sku\" : 123,\n                \"valor\": 99.99\n            },\n            {\n                \"sku\": 34,\n                \"produto\": \"Produto 2\",\n                \"valor\": 199.99\n            }\n        ]\n    }    \n}"
+						},
+						{
+							"name": "1001",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/orders/1001",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"orders",
+										"1001"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 22 Aug 2021 18:55:42 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "x-srv-trace",
+									"value": "v=1;t=e6142b53c54b4215"
+								},
+								{
+									"key": "x-srv-span",
+									"value": "v=1;s=2e202a577402cc80"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "120"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "119"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1629658602"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"13f-mv36lGgybmhOFldFHUnXiv/3M4k\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"numPedido\": 1001,\n    \"dataPedido\": \"2021-08-06T12:59:59.550-03:00\",\n    \"codigo\": 12345,\n    \"statusPedidos\": \"APROVADO\",\n    \"origem\": \"App IOS\",\n    \"cart\" : {\n        \"cartid\": 3456,\n        \"cliente\": 12345,\n        \"itens\": [\n            {\n                \"sku\": 12,\n                \"produto\": \"Produto 1\",\n                \"valor\": 99.99\n            },\n            {\n                \"sku\": 34,\n                \"produto\": \"Produto 2\",\n                \"valor\": 199.99\n            },\n            {\n                \"sku\": 35,\n                \"produto\": \"Produto 2\",\n                \"valor\": 299.99\n            }\n        ]\n    }    \n}"
+						}
+					]
+				},
+				{
+					"name": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts/{{x-cart_id}}/itens",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts/{{x-cart_id}}/itens",
+							"protocol": "https",
+							"host": [
+								"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"carts",
+								"{{x-cart_id}}",
+								"itens"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Payments",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart\": {{x-cart_id}},\r\n    \"cliente\": {\r\n        \"codigo\": {{x-customer_id}},\r\n        \"name\": \"{{x-customer_name}}\"\r\n    },\r\n    \"paymentMethod\" : {\r\n        \"method\" : \"credit_card\",\r\n        \"cardHolder\" : \"{{x-customer_name}}\",\r\n        \"cardNumber\" : \"{{x-cardNumber}}\",\r\n        \"dueDate\" : \"{{x-card_due_date}}\",\r\n        \"cvv\" : {{x-card_cvv}}\r\n    },\r\n    \"totalValue\": \"{{x-cart_total_value}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/payments",
+							"protocol": "https",
+							"host": [
+								"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"payments"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Payments",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "client_id",
+										"value": "{{client_id}}",
+										"type": "text"
+									},
+									{
+										"key": "access_token",
+										"value": "{{access_token}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cart\": {{x-cart_id}},\r\n    \"cliente\": {\r\n        \"codigo\": {{x-customer_id}},\r\n        \"name\": \"{{x-customer_name}}\"\r\n    },\r\n    \"paymentMethod\" : {\r\n        \"method\" : \"credit_card\",\r\n        \"cardHolder\" : \"{{x-customer_name}}\",\r\n        \"cardNumber\" : \"{{x-cardNumber}}\",\r\n        \"dueDate\" : \"{{x-card_due_date}}\",\r\n        \"cvv\" : {{x-card_cvv}}\r\n    },\r\n    \"totalValue\": \"{{x-cart_total_value}}\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/payments",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"payments"
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "{{client_id}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Payments Copy",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart\": {{x-cart_id}},\r\n    \"cliente\": {\r\n        \"codigo\": {{x-customer_id}},\r\n        \"name\": \"{{x-customer_name}}\"\r\n    },\r\n    \"paymentMethod\" : {\r\n        \"method\" : \"credit_card\",\r\n        \"cardHolder\" : \"{{x-customer_name}}\",\r\n        \"cardNumber\" : \"{{x-cardNumber}}\",\r\n        \"dueDate\" : \"{{x-card_due_date}}\",\r\n        \"cvv\" : {{x-card_cvv}}\r\n    },\r\n    \"totalValue\": \"{{x-cart_total_value}}\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/payments",
+							"protocol": "https",
+							"host": [
+								"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"payments"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Payments",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "client_id",
+										"value": "{{client_id}}",
+										"type": "text"
+									},
+									{
+										"key": "access_token",
+										"value": "{{access_token}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cart\": {{x-cart_id}},\r\n    \"cliente\": {\r\n        \"codigo\": {{x-customer_id}},\r\n        \"name\": \"{{x-customer_name}}\"\r\n    },\r\n    \"paymentMethod\" : {\r\n        \"method\" : \"credit_card\",\r\n        \"cardHolder\" : \"{{x-customer_name}}\",\r\n        \"cardNumber\" : \"{{x-cardNumber}}\",\r\n        \"dueDate\" : \"{{x-card_due_date}}\",\r\n        \"cvv\" : {{x-card_cvv}}\r\n    },\r\n    \"totalValue\": \"{{x-cart_total_value}}\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/payments",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"payments"
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "{{client_id}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Payments id",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "client_id",
+										"value": "{{client_id}}",
+										"type": "text"
+									},
+									{
+										"key": "access_token",
+										"value": "{{access_token}}",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cart\": {{x-cart_id}},\r\n    \"cliente\": {\r\n        \"codigo\": {{x-customer_id}},\r\n        \"name\": \"{{x-customer_name}}\"\r\n    },\r\n    \"paymentMethod\" : {\r\n        \"method\" : \"credit_card\",\r\n        \"cardHolder\" : \"{{x-customer_name}}\",\r\n        \"cardNumber\" : \"{{x-cardNumber}}\",\r\n        \"dueDate\" : \"{{x-card_due_date}}\",\r\n        \"cvv\" : {{x-card_cvv}}\r\n    },\r\n    \"totalValue\": \"{{x-cart_total_value}}\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/payments/{{x-transaction_id}}",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"payments",
+										"{{x-transaction_id}}"
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "{{client_id}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "Automated Test Case",
+			"item": [
+				{
+					"name": "carts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"pm.test(\"Successful POST request\", function () {\r",
+									"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Body matches string\", function () {\r",
+									"    // testa se o texto inclui a string\r",
+									"    pm.expect(pm.response.text()).to.include(\"cartid\");\r",
+									"});\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"x-cart_id\", jsonData.cartid);\r",
+									"\r",
+									"//  const responseJson = pm.response.json();\r",
+									"//    pm.expect(responseJson.type).to.eql('vip');\r",
+									"//   pm.expect(responseJson.name).to.be.a('string');\r",
+									"//    const obj = JSON.parse(postman.getEnvironmentVariable(\"obj\"));"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"//data = pm.request.body;\r",
+									"//body = data[data.mode];\r",
+									"//jsonData = JSON.parse(body);\r",
+									"//console.log(jsonData);\r",
+									"//var v_client_id = jsonData.cliente.codigo;\r",
+									"//console.log(v_client_id);\r",
+									"//pm.variables.set(\"x-customer_id\", v_client_id);\r",
+									"//pm.environment.set(\"x-customer_id\", jsonData.cliente.codigo);\r",
+									"//pm.environment.set(\"x-customer_name\", jsonData.cliente.name);\r",
+									"\r",
+									"\r",
+									"//var v_teste = jsonData.teste;\r",
+									"//console.log(v_teste);\r",
+									"//pm.environment.set(\"x_teste\", v_teste);\r",
+									"//console.log(pm.request.body.raw);\r",
+									"//const requestBody = xml2Json(pm.request.body.raw);\r",
+									"//var rowdataType = requestBody['ROWDATA'].$['type']\r",
+									"\r",
+									"//console.log(pm.request.body)\r",
+									"//var req = JSON.parse(request.body);\r",
+									"//console.log(request)\r",
+									"\r",
+									"//var req = JSON.parse(request.data.body); // or stringify\r",
+									"//console.log(req);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"verifica\": \"{{verifica}}\",\r\n    \"teste\": \"{{$randomInt}}\",\r\n    \"teste2\": \"{{x-teste}}\",\r\n    \"cliente\": {\r\n        \"codigo\": \"{{x-customer_id}}\",\r\n        \"name\" : \"Teste BAse\"\r\n    },\r\n    \"produto\": {\r\n        \"sku\" : 123456,\r\n        \"produto\" : \"Panela de Barro\",    \r\n        \"valor\": 99.99\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1,\r\n        \"descricao\" : \"APP ANDROID\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts",
+							"protocol": "https",
+							"host": [
+								"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"carts"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "carts M1",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"carts"
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "{{client_id}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "POST carts/{id}/itens",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts/3456/itens",
+							"protocol": "https",
+							"host": [
+								"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"carts",
+								"3456",
+								"itens"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "carts/3456/1",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/carts/3456/itens",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"carts",
+										"3456",
+										"itens"
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"cart\": 3456,\n    \"orderDate\": \"2020-07-06T12:59:59.550-03:00\",\n    \"cliente\": {\n        \"codigo\": 12345,\n        \"name\": \"Carlos Pinheiro\",\n        \"document\": \"123456789-1\"\n    },    \n    \"products\": [\n        {\n            \"produto\" : \"Panela de Barro\",\n            \"sku\" : 123,\n            \"valor\": 99.99\n        }\n    ],\n    \"statusPedidos\": {\n        \"code\": 1,\n        \"description\": \"waiting payment\"\n    },\n    \"origem\": \"e-commerce\"\n}"
+						}
+					]
+				},
+				{
+					"name": "carts/{id}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts/1",
+							"protocol": "https",
+							"host": [
+								"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"carts",
+								"1"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "carts/1",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "client_id",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "access_token",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts/1",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"carts",
+										"1"
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "{{client_id}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"cartid\": 1,\r\n    \"cliente\": 12345,\r\n    \"itens\" : [\r\n        {\r\n            \"sku\" : 123456,\r\n            \"produto\" : \"Produto 1\"\r\n        }\r\n    ]\r\n}"
+						},
+						{
+							"name": "carts/2",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "client_id",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "access_token",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts/2",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"carts",
+										"2"
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "{{client_id}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\r\n    \"cartid\": 2,\r\n    \"cliente\": 12345,\r\n    \"itens\" : [\r\n        {\r\n        \"sku\" : 123456,\r\n        \"produto\" : \"Produto 1\"\r\n        }\r\n    ]\r\n}"
+						},
+						{
+							"name": "carts/3456",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "client_id",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "access_token",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts/3456",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"carts",
+										"3456"
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "{{client_id}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"cartid\": 3456,\n    \"cliente\": 12345,\n    \"itens\": [\n        {\n            \"sku\": 12,\n            \"produto\": \"Produto 1\"\n        },\n        {\n            \"sku\": 34,\n            \"produto\": \"Produto 2\"\n        },\n        {\n            \"sku\": 35,\n            \"produto\": \"Produto 2\"\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Address by ZipCode Copy",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/correiros/v1/cep/22160220",
+							"protocol": "https",
+							"host": [
+								"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"correiros",
+								"v1",
+								"cep",
+								"22160220"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Address by ZipCode 22160220",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "client_id",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "access_token",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/correiros/v1/cep/22160220",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"correiros",
+										"v1",
+										"cep",
+										"22160220"
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "{{client_id}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": "{\n    \"endereco\": {\n        \"bairro\": \"botafogo\",\n        \"cep\": \"22160220\",\n        \"cidade\": \"Rio de Janeiro\",\n        \"complemento\": \"casa 3\",\n        \"logradouro\": \"rua teste, n 34\",\n        \"uf\": \"RJ\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "Add Delivery Address Copy",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "client_if",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart\": 3456,\r\n    \"orderDate\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"cliente\": {\r\n        \"codigo\": 12345,\r\n        \"name\": \"Carlos Pinheiro\"\r\n    },    \r\n    \"deliveryAddress\": {\r\n            \"bairro\": \"Centro\",\r\n            \"cep\": \"20031004\",\r\n            \"cidade\": \"Rio de Janeiro\",\r\n            \"complemento2\": \"- de 65 a 81 - lado ímpar\",\r\n            \"end\": \"Avenida Almirante Barroso\",\r\n            \"numero\" : 81,\r\n            \"complemento1\" : \"apto 1003\",\r\n            \"uf\": \"RJ\",\r\n            \"unidadesPostagem\": \"\"\r\n    },\r\n    \"statusPedidos\": {\r\n        \"code\": 1,\r\n        \"description\": \"waiting payment\"\r\n    },\r\n    \"origem\": \"e-commerce\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/carts/{id}/deliveryaddress",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"carts",
+								"{id}",
+								"deliveryaddress"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add Delivery Address",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "client_if",
+										"value": "{{client_id}}",
+										"type": "text"
+									},
+									{
+										"key": "access_token",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts/3456/deliveryaddress",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"carts",
+										"3456",
+										"deliveryaddress"
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "{{client_id}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "Add payment method",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "client_if",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart\": 3456,\r\n    \"orderDate\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"cliente\": {\r\n        \"codigo\": 12345,\r\n        \"name\": \"Carlos Pinheiro\"\r\n    },\r\n    \"paymentMethod\" : {\r\n        \"method\" : \"credit_card\",\r\n        \"cardHolder\" : \"Carlos Pinheiro\",\r\n        \"cardNumber\" : \"4561\",\r\n        \"dueDate\" : \"02/2025\",\r\n        \"cvv\" : 111\r\n    },\r\n    \"totalValue\": \"150.00\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts/paymentmethod",
+							"protocol": "https",
+							"host": [
+								"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"carts",
+								"paymentmethod"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Add payment method Copy",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "client_if",
+										"value": "{{client_id}}",
+										"type": "text"
+									},
+									{
+										"key": "access_token",
+										"value": "{{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"cart\": 3456,\r\n    \"orderDate\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"cliente\": {\r\n        \"codigo\": 12345,\r\n        \"name\": \"Carlos Pinheiro\"\r\n    },\r\n    \"paymentMethod\" {\r\n        \"method\" : \"credit_card\",\r\n        \"cardHolder\" : \"Carlos Pinheiro\",\r\n        \"cardNumber\" : \"4561\",\r\n        \"dueDate\" : \"02/2025\",\r\n        \"cvv\" : 111,\r\n    },\r\n    \"totalValue\": \"150.00\",\r\n    \"status\" : \"aproved\"\r\n}\r\n",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/carts/{id}/paymentmethod",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"carts",
+										"{id}",
+										"paymentmethod"
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "{{client_id}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"code": 202,
+							"_postman_previewlanguage": "json",
+							"header": null,
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "orders",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/orders",
+							"protocol": "https",
+							"host": [
+								"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Default",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": ""
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/orders",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"orders"
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								},
+								{
+									"key": "Location",
+									"value": "",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "12345-01",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/orders/12345-01",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"orders",
+										"12345-01"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 22 Aug 2021 18:55:42 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "x-srv-trace",
+									"value": "v=1;t=e6142b53c54b4215"
+								},
+								{
+									"key": "x-srv-span",
+									"value": "v=1;s=2e202a577402cc80"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "120"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "119"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1629658602"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"13f-mv36lGgybmhOFldFHUnXiv/3M4k\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"numPedido\": \"12345-01\",\n    \"dataPedido\": \"2021-08-06T12:59:59.550-03:00\",\n    \"statusPedidos\": \"APROVADO\",\n    \"origem\": \"App IOS\",\n    \"cart\" : {\n        \"cartid\": 3456,\n        \"cliente\": 12345,\n        \"itens\": [\n            {\n                \"produto\" : \"Panela de Barro\",\n                \"sku\" : 123,\n                \"valor\": 99.99\n            },\n            {\n                \"sku\": 34,\n                \"produto\": \"Produto 2\",\n                \"valor\": 199.99\n            }\n        ]\n    }    \n}"
+						}
+					]
+				},
+				{
+					"name": "orders",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/orders",
+							"protocol": "https",
+							"host": [
+								"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+								"mock",
+								"pstmn",
+								"io"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "Default",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/orders",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"orders"
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Default Copy",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/orders/{{x-order_id}}",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"orders",
+										"{{x-order_id}}"
+									]
+								}
+							},
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json",
+									"description": "",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "12345-01",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/orders/12345-01",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"orders",
+										"12345-01"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 22 Aug 2021 18:55:42 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "x-srv-trace",
+									"value": "v=1;t=e6142b53c54b4215"
+								},
+								{
+									"key": "x-srv-span",
+									"value": "v=1;s=2e202a577402cc80"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "120"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "119"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1629658602"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"13f-mv36lGgybmhOFldFHUnXiv/3M4k\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"numPedido\": \"12345-01\",\n    \"dataPedido\": \"2021-08-06T12:59:59.550-03:00\",\n    \"statusPedidos\": \"APROVADO\",\n    \"channel\": \"e-commerce\",\n    \"cart\" : {\n        \"cartid\": 3456,\n        \"cliente\": 12345,\n        \"itens\": [\n            {\n                \"produto\" : \"Panela de Barro\",\n                \"sku\" : 123,\n                \"valor\": 99.99\n            },\n            {\n                \"sku\": 34,\n                \"produto\": \"Produto 2\",\n                \"valor\": 199.99\n            }\n        ]\n    }    \n}"
+						},
+						{
+							"name": "1001",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/orders/1001",
+									"protocol": "https",
+									"host": [
+										"9ea47488-10da-4ef5-8cc9-b0bdd94906e2",
+										"mock",
+										"pstmn",
+										"io"
+									],
+									"path": [
+										"orders",
+										"1001"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Date",
+									"value": "Sun, 22 Aug 2021 18:55:42 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json; charset=utf-8"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Server",
+									"value": "nginx"
+								},
+								{
+									"key": "x-srv-trace",
+									"value": "v=1;t=e6142b53c54b4215"
+								},
+								{
+									"key": "x-srv-span",
+									"value": "v=1;s=2e202a577402cc80"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "120"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "119"
+								},
+								{
+									"key": "X-RateLimit-Reset",
+									"value": "1629658602"
+								},
+								{
+									"key": "ETag",
+									"value": "W/\"13f-mv36lGgybmhOFldFHUnXiv/3M4k\""
+								},
+								{
+									"key": "Vary",
+									"value": "Accept-Encoding"
+								},
+								{
+									"key": "Content-Encoding",
+									"value": "gzip"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"numPedido\": 1001,\n    \"dataPedido\": \"2021-08-06T12:59:59.550-03:00\",\n    \"codigo\": 12345,\n    \"statusPedidos\": \"APROVADO\",\n    \"origem\": \"App IOS\",\n    \"cart\" : {\n        \"cartid\": 3456,\n        \"cliente\": 12345,\n        \"itens\": [\n            {\n                \"sku\": 12,\n                \"produto\": \"Produto 1\",\n                \"valor\": 99.99\n            },\n            {\n                \"sku\": 34,\n                \"produto\": \"Produto 2\",\n                \"valor\": 199.99\n            },\n            {\n                \"sku\": 35,\n                \"produto\": \"Produto 2\",\n                \"valor\": 299.99\n            }\n        ]\n    }    \n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "carts/{id}/itens",
+			"request": {
+				"method": "DELETE",
+				"header": []
+			},
+			"response": []
+		}
+	]
+}

@@ -29,7 +29,6 @@ class MongoDbRepository4Kong:
             mydb = myclient[configs.MONGO_DB_SERVER["databasename"]]
             collection_call_detail = mydb["kong-api-call-details"]
             x = collection_call_detail.insert_one(dicJson)
-            #print("****dicJson ****", dicJson)
 
         except Exception as error:
             print("MongoDvRepository.saveCallDetails()")
@@ -52,17 +51,11 @@ class MongoDbRepository4Kong:
                 print(request_id)
                 getCallsById(request_id) """
 
-            #logs = []
-            # cursor = collection_calls.find()
 
             """ usando o pandas"""
             cursor_of_docs = list(collection_calls.find())
-            # list_docs = collection_calls.find()
-            #df_aux = pandas.read_sql(teste)
-            # document_list = pandas.DataFrame(list_docs)
             documents = []
 
-            #for i, doc in enumerate(cursor_of_docs):
             for doc in cursor_of_docs:
                 #document = pandas.DataFrame(columns=[])
                 document = pandas.DataFrame([doc])
@@ -72,10 +65,7 @@ class MongoDbRepository4Kong:
                 document.dropna
                 #documents.append(document.to_dict('records'))
                 documents.append(document)
-
-            #print("documents:", str(documents))
-            #json_export = documents.to_json()
-            #json_loaded = json.loads(json_export)
+                
             return documents # list of pandas.DataFrame documents
         except Exception as error:
             print('Ocorreu problema {} '.format(error.__class__))
