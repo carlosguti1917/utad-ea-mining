@@ -462,7 +462,11 @@ def mining_frequent_temporal_correlations(onto):
             
             #add ftc
             for selected_corr in selected_api_res_corrls:
-                ftc_list.append(add_frequent_temporal_correlation(onto, selected_corr))
+                ftc_list = add_frequent_temporal_correlation(onto, selected_corr, ftc_list)
+
+                
+            # ftc_list_aux = pd.DataFrame(ftc_list).drop_duplicates()
+            # ftc_list = ftc_list_aux.values.tolist()
             
             print(f"ftc_list: {len(ftc_list)}")
             
@@ -473,6 +477,9 @@ def mining_frequent_temporal_correlations(onto):
                 if len(ftc_list) > 0:
                     #sync_reasoner()
                     save_ftc_to_preprocessing_file(ftc_list)
+                    
+                    #idenfier case id 
+                    
                     #onto.save(format="rdfxml")
             except RecursionError as error:
                 print(f"RecursionError for entity: {error}")
@@ -499,27 +506,26 @@ def save_ftc_to_preprocessing_file(ftc_list):
     #df = pd.Series(columns=['ftc_id', 'ftc_antedecent_timestamp', 'ftc_consequent_timestamp'])
     #df2 = pd.DataFrame(ftc_list)
     
-    ftc_series = pd.Series(columns=['correlation_id', 'antecedent_id', 'antecedent_request_time','consequent_id', 'consequent_response_time'])
+    df = pd.DataFrame(columns=['correlation_id', 'antecedent_id', 'antecedent_request_time','consequent_id', 'consequent_response_time'])
     
     try:
         for ftc in ftc_list:
             ftc_id = ftc._name
-            for mediated in ftc.mediates:
-                if ns_process_view.APIAntecedentActivity in mediated.is_a:
-                    antecedent = mediated
-                    antecedent_id = antecedent.name
-                    antecedent_request_time = antecedent.request_time[0].isoformat()
-                if ns_process_view.APIConsequentActivity in mediated.is_a:
-                    consequent = mediated
-                    consequent_id = antecedent.name
-                    consequent_request_time = consequent.request_time[0].isoformat()
+            antecedent = ftc.mediates[0]
+            antecedent_id = antecedent.name
+            antecedent_request_time = antecedent.request_time[0].isoformat()
+            consequent = ftc.mediates[1]
+            consequent_id = consequent.name
+            consequent_request_time = consequent.request_time[0].isoformat()
             
-            ftc_series.append(ftc_id, antecedent_id, antecedent_request_time, consequent_id, consequent_request_time)
+            # new_row = {'correlation_id': ftc_id, 'antecedent_id': antecedent_id, 'antecedent_request_time': antecedent_request_time, 'consequent_id': consequent_id, 'consequent_response_time': consequent_request_time}
+            # df = df.append(new_row, ignore_index=True)
+            df.loc[len(df)] = [ftc_id, antecedent_id, antecedent_request_time, consequent_id, consequent_request_time]
                
         file_path = './temp/'   
         file_nm = "ftc_list.csv"
         # Save the Series to a CSV file
-        ftc_series.to_csv(file_path + file_nm, index=False)
+        df.to_csv(file_path + file_nm, index=False)
         #save the list of ftc_list to a file
         # file_nm = "ftc_list.csv"
         # file_path = './temp/'
@@ -531,7 +537,7 @@ def save_ftc_to_preprocessing_file(ftc_list):
         print(f"In save_ftc_to_file module :", __name__)
         raise error
     
-def add_frequent_temporal_correlation(onto, correlation_list):      
+def add_frequent_temporal_correlation(onto, correlation_list, ftc_list):      
     """
     calc the temporal dependency between api_call and inner_api_call based on the request_
     record the younger as Antecedent Activity and the older as Consequent Activity
@@ -555,6 +561,7 @@ def add_frequent_temporal_correlation(onto, correlation_list):
     # record the attributes that are correlated in the correlated_attributes to reapeated_attributes in the created Frequente Temporal Correlation
     
     ftc = None
+    new_ftc = False
     api_call_a = correlation_list[1]
     api_call_b = correlation_list[4]
        
@@ -562,54 +569,63 @@ def add_frequent_temporal_correlation(onto, correlation_list):
     #     if api_call_a.api_uri != api_call_b.api_uri:
         if api_call_a.api_uri != api_call_b.api_uri:
             try:
-                #sync_reasoner()
-                if api_call_a.request_time < api_call_b.request_time:   
-                    api_antecedent_activity = ns_process_view.APIAntecedentActivity(api_call_a.name)
-                    api_antecedent_activity.equivalent_to.append(api_call_a)
-                    api_consequent_activity = ns_process_view.APIConsequentActivity(api_call_b.name)
-                    api_consequent_activity.equivalent_to.append(api_call_b)
-                else:
-                    api_antecedent_activity = ns_process_view.APIAntecedentActivity(api_call_b.name)
-                    api_antecedent_activity.equivalent_to.append(api_call_b)
-                    api_consequent_activity = ns_process_view.APIAntecedentActivity(api_call_a.name)
-                    api_consequent_activity.equivalent_to.append(api_call_a)
-                    
+                #verify FrequentTemporalCorrelation already exists, if not create it
+                for e in ftc_list:
+                    if e.mediates[0] == api_call_a and e.mediates[1] == api_call_b:
+                        ftc = e
+                        api_antecedent_activity = ftc.mediates[0]
+                        api_consequent_activity = ftc.mediates[1]
+                        break
 
-                # Get the Consumer App related to api_call_a based on the inverse participatedIn property
-                cls_consumer_app = ns_core.ConsumerApp
-                cls_partner = ns_process_view.Partner
-                #consumer_app = api_call_a.INVERSE_participatedIn[0]
-                inverse_participations_a = api_call_a.INVERSE_participatedIn
-                inverse_participations_b = api_call_b.INVERSE_participatedIn
-                for inverse_participation_a in inverse_participations_a:
-                    if cls_partner in inverse_participation_a.is_a or cls_consumer_app in inverse_participation_a.is_a:
-                        consumer_app_a = inverse_participation_a
-                    else:
-                        continue
+                if ftc is None:                          
+                    # Create the relator Frequente Temporal Correlation
+                    ftc = ns_process_view.FrequentTemporalCorrelation()
+                    new_ftc = True
                     
-                    for inverse_participation_b in inverse_participations_b:
-                        if cls_partner in inverse_participation_b.is_a or cls_consumer_app in inverse_participation_b.is_a:
-                            consumer_app_b = inverse_participation_b
+                    if api_call_a.request_time < api_call_b.request_time:   
+                        api_antecedent_activity = ns_process_view.APIAntecedentActivity(api_call_a.name)
+                        api_antecedent_activity.equivalent_to.append(api_call_a)
+                        api_consequent_activity = ns_process_view.APIConsequentActivity(api_call_b.name)
+                        api_consequent_activity.equivalent_to.append(api_call_b)
+                    else:
+                        print("This code in if ftc is not None: should not be executed")
+                        # api_antecedent_activity = ns_process_view.APIAntecedentActivity(api_call_b.name)
+                        # api_antecedent_activity.equivalent_to.append(api_call_b)
+                        # api_consequent_activity = ns_process_view.APIAntecedentActivity(api_call_a.name)
+                        # api_consequent_activity.equivalent_to.append(api_call_a)                                      
+                    
+                    # Get the Consumer App related to api_call_a based on the inverse participatedIn property
+                    cls_consumer_app = ns_core.ConsumerApp
+                    cls_partner = ns_process_view.Partner
+                    #consumer_app = api_call_a.INVERSE_participatedIn[0]
+                    inverse_participations_a = api_call_a.INVERSE_participatedIn
+                    inverse_participations_b = api_call_b.INVERSE_participatedIn
+                    for inverse_participation_a in inverse_participations_a:
+                        if cls_partner in inverse_participation_a.is_a or cls_consumer_app in inverse_participation_a.is_a:
+                            consumer_app_a = inverse_participation_a
                         else:
                             continue
                         
-                        if consumer_app_a == consumer_app_b:
-                            #verify if the partner is already exists and is related the antecedent activity and consequent activity
-                            if consumer_app_a not in api_antecedent_activity.participatedIn and consumer_app_a not in api_consequent_activity.participatedIn:
-                                partner = onto_util.get_individual(onto, ns_process_view.Partner, "http://eamining.edu.pt/", consumer_app_a._name)
-                                if partner is None:
-                                    partner = ns_process_view.Partner(consumer_app_a._name)
-                                    partner.equivalent_to.append(consumer_app_a)
-                                    partner.participatedIn.append(api_antecedent_activity)
-                                    partner.participatedIn.append(api_consequent_activity) 
+                        for inverse_participation_b in inverse_participations_b:
+                            if cls_partner in inverse_participation_b.is_a or cls_consumer_app in inverse_participation_b.is_a:
+                                consumer_app_b = inverse_participation_b
+                            else:
+                                continue
+                            
+                            if consumer_app_a == consumer_app_b:
+                                #verify if the partner is already exists and is related the antecedent activity and consequent activity
+                                if consumer_app_a not in api_antecedent_activity.participatedIn and consumer_app_a not in api_consequent_activity.participatedIn:
+                                    partner = onto_util.get_individual(onto, ns_process_view.Partner, "http://eamining.edu.pt/", consumer_app_a._name)
+                                    if partner is None:
+                                        partner = ns_process_view.Partner(consumer_app_a._name)
+                                        partner.equivalent_to.append(consumer_app_a)
+                                        partner.participatedIn.append(api_antecedent_activity)
+                                        partner.participatedIn.append(api_consequent_activity) 
 
                             # Just checking if the attributes values are the same
                             if correlation_list[3].attribute_value[0] != correlation_list[6].attribute_value[0]:
                                 continue
-                            
-                            # Create the relator Frequente Temporal Correlation
-                            ftc = ns_process_view.FrequentTemporalCorrelation()
-                                            
+
                             # Create the temporal dependency between the API Antecedent Activity and the API Consequent Activity
                             api_consequent_activity.historicallyDependsOn.append(api_antecedent_activity)
                                                 
@@ -617,43 +633,27 @@ def add_frequent_temporal_correlation(onto, correlation_list):
                             ftc.mediates.append(api_antecedent_activity)
                             ftc.mediates.append(api_consequent_activity)
                             
-                            # Record the attributes that are correlated in the correlated_attributes to repeated_attributes in the created Frequente Temporal Correlation
-                            #for attributes in correlation_list:
-                                #verify the attribute order. If attribute[0] is from api_call_a, then it is the Antecedent Activity (attribute_name_a), otherwise it is the Consequent Activity (attribute_name_b)                                            
-                            if api_antecedent_activity.name == api_call_a.name:
-                                attribute_a = correlation_list[3]
-                                attribute_b = correlation_list[6]
-                            else:
-                                attribute_a = correlation_list[6]
-                                attribute_b = correlation_list[3]
-                                
-                            # Create the attribute pair
-                            attribute_pair = ns_core.AttributePair()
-                            attribute_pair.attribute_a.append(attribute_a)
-                            attribute_pair.attribute_b.append(attribute_b)                          
-                            # Add the attribute pair to the repeated_attributes property of the Frequente Temporal Correlation
-                            ftc.repeated_attributes.append(attribute_pair)
+                # Record the attributes that are correlated in the correlated_attributes to repeated_attributes in the created Frequente Temporal Correlation
+                #for attributes in correlation_list:
+                    #verify the attribute order. If attribute[0] is from api_call_a, then it is the Antecedent Activity (attribute_name_a), otherwise it is the Consequent Activity (attribute_name_b)                                            
+                if api_antecedent_activity.name == api_call_a.name:
+                    attribute_a = correlation_list[3]
+                    attribute_b = correlation_list[6]
+                else:
+                    attribute_a = correlation_list[6]
+                    attribute_b = correlation_list[3]
+                    
+                # Create the attribute pair
+                attribute_pair = ns_core.AttributePair()
+                attribute_pair.attribute_a.append(attribute_a)
+                attribute_pair.attribute_b.append(attribute_b)                          
+                # Add the attribute pair to the repeated_attributes property of the Frequente Temporal Correlation
+                ftc.repeated_attributes.append(attribute_pair)
 
-                            # try:                
-                            #     #check de ontology consistency before saving               
-                            #     #save the individual Freqeuente Temporal Correlation in the ontology                        
-                            #     sync_reasoner()
-                            #     onto.save(format="rdfxml")
-                            
-                            # except RecursionError as error:
-                            #     print(f"RecursionError for entity: {error}")
-                            #     return str(error)   
-                            # except Exception as error:
-                            #     inconsistent_cls_list = list(default_world.inconsistent_classes())
-                            #     for il in inconsistent_cls_list:
-                            #         print(il)
-                            #         print('inconsistency_list', il)                                                 
-                            #     print('Ocorreu problema {} '.format(error.__class__))
-                            #     print("mensagem", str(error))
-                            #     print("In extractAPIConcepts module :", __name__)  
-                            #     raise Exception(f"Ontology inconsistency found: {il}")  
-  
-                return ftc
+                if new_ftc:
+                    ftc_list.append(ftc)
+                    
+                return ftc_list                     
             except Exception as error:
                 print('Ocorreu problema {} '.format(error.__class__))
                 print("mensagem", str(error))
