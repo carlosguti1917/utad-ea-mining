@@ -5,6 +5,7 @@ from datetime import datetime
 import sys
 import os
 import os.path
+import pandas as pd
 import pymongo
 from rdflib import XSD
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', "..")))
@@ -360,41 +361,168 @@ def validate_json_to_extraction(call):
 
 def remove_ftc_noise(ftc_list, activity):
     """
-        Remove the false positive from the FTC list
+        This is a recursive function to remove the noise from the Frequent Temporal Correlation list.
+        It removes overlapping transactions
         args:
-            ftc_list: list of ns_process_view.FrequentTemporalCorrelation instances
-    """
-    #   Inicialize a processing_list and a new_list
-    #   get all the events in the file and store in a processing_list
-    #   get the younger event in the processing_list and store in the under_analisys_event and anteceedent_event_id
-    #   pre-processing to clean noise events passing the under_analisys_event
-    #      store in a memory consequent_event_id the event id of the consequent event
-    #      iterate through the file and select all the consequent event of the antecedent event 
-    #      for each consequent event of the antecedent_event_id check if the start datetime is between the start and end datetime of the antecedent event, if yes, discart removing the line from the processing_list
-    #      set the consequent_event_id to the under_analisys_event
-    #      repeat the process until there is no more consequent event for the under_analisys_event
+            ftc_list: is a panda dataframe with a list of ns_process_view.FrequentTemporalCorrelation instances
+            ftc_list has the following structure: columns=['correlation_id', 'antecedent_id', 'antecedent_request_time','consequent_id', 'consequent_response_time']
+    """      
     
-    #   get the younger APIAntecedenteActivity in the ftc_list and store it in a var under_analisys_event and other var antecedent_activity
-    #      store in a memory var the consequent_event_id the event id of the consequent event
-    #      iterate through the ftc_list and select all the consequent event of the antecedent event 
-    #      for each consequent event of the antecedent_event_id check if the start datetime is between the start and end datetime of the antecedent event, if yes, discart removing the line from the list
-    #      set the consequent_event_id to the under_analisys_event
-    #      call the function again, passing the ftc_list and the under_analisys_event, repeating the process until there is no more consequent event for the under_analisys_event  
-
+    new_ftc_list = pd.DataFrame(columns=ftc_list.columns)
+    #new_ftc_list = None
+    under_analysis_event = activity
+    #antecedent_activity = None
+    under_analysis_begin_time = None
+    under_analysis_end_time = None
+    consequent_event_id = None
+    correlation_id = None
+    next_row = None
+    print(f"No inicio ftc_list len: {len(ftc_list)}  ")
+    
+    #for control or updated rows purposes
+    if 'case_id' not in ftc_list.columns:
+        case_id = -1
+        ftc_list['case_id'] = case_id 
         
-    
-    new_ftc_list = []
     try:
-        for ftc in ftc_list:
-            if len(ftc) > 1:
-                new_ftc_list.append(ftc)
-        return new_ftc_list
+        if under_analysis_event is None:
+            # Get the younger antecedent_id in the ftc_list
+            min_date_index = ftc_list['antecedent_request_time'].idxmin()
+            under_analysis_event = ftc_list.loc[min_date_index, 'antecedent_id']
+            #antecedent_activity = under_analysis_event
+            under_analysis_begin_time = ftc_list.loc[min_date_index, 'antecedent_request_time']
+            under_analysis_end_time = ftc_list.loc[min_date_index, 'consequent_response_time']
+            
+        # Filter the ftc_list to get the lines where antecedent_id = under_analysis_event
+        filtered_ftc_list = ftc_list[ftc_list['antecedent_id'] == under_analysis_event]
+        under_analysis_begin_time = filtered_ftc_list['antecedent_request_time'].min()
+        under_analysis_end_time = filtered_ftc_list['consequent_response_time'].min()
+        
+        # Iterate through the filtered ftc_list and select all the consequent events of the antecedent event
+        conta_removed = 0
+        conta_rows = 0
+        for index, row in filtered_ftc_list.iterrows():
+            conta_rows += 1
+            antecedent_id = row['antecedent_id']
+            consequent_id = row['consequent_id']
+            consequent_response_time = row['consequent_response_time']
+            correlation_id = row['correlation_id']
+            ftc_index = ftc_list[(ftc_list['correlation_id'] == correlation_id)].index
+                       
+            # Check if the consequent_response_time is between under_analysis_begin_time and under_analysis_end_time
+            if (consequent_response_time > under_analysis_end_time):
+                #remove the long distance transactions of an antecedent acitivity, we are interested in the short distance transactions
+                #drop_index = ftc_list[(ftc_list['consequent_id'] == consequent_id) & (ftc_list['antecedent_id'] == under_analysis_event)].index
+                ftc_list = ftc_list.drop(ftc_index) 
+                conta_removed += 1
+            else:
+                ftc_list.loc[ftc_index, 'case_id'] = 0       
+                consequent_event_id = consequent_id 
+                
+                
+            num_rows = filtered_ftc_list.shape[0]
+            print(f"num_rows: {num_rows}  index: {index} conta_rows: {conta_rows}  conta_removed: {conta_removed}")
+            if num_rows == conta_rows:
+                #next_row = filtered_ftc_list.shift(axis='index', periods=2)
+                aux_next_row = ftc_list[(ftc_list['case_id'] == -1)]
+                for index, aux_row in aux_next_row.iterrows():
+                    next_consequent_id = aux_row['consequent_id']               
+                    next_antecedent_id = aux_row['antecedent_id']
+                    correlation_id = aux_row['correlation_id'] 
+                    consequent_event_id = next_antecedent_id
+                    #print(f"next correlation_id: {correlation_id}  ")
+                    break
+                #next_row= ftc_list[(ftc_list['correlation_id'] == correlation_id)].shift(-1)
+            
+        #print(f"next_row: {correlation_id}  ")
+        # if consequent_event_id is None:
+        #     #get the next root event to be analyzed
+        #     if next_row is not None:
+        #         #consequent_event_id = ftc_list.loc[next_index, 'antecedent_id'] 
+        #         consequent_event_id = next_row['antecedent_id']
+        #         print(f"next correlation_id: {correlation_id}  ")
+            
+        
+        if consequent_event_id is not None:
+            # Call the function recursively with the filtered ftc_list and the consequent_event_id as the activity parameter until there is no more consequent event for the under_analysis_event     
+            ftc_list = remove_ftc_noise(ftc_list, consequent_event_id)
+        
+        print(f"Depois ftc_list len: {len(ftc_list)}")
+        
+        return ftc_list
+
     except Exception as error:
         print('Ocorreu problema {} '.format(error.__class__))
         print("mensagem", str(error))
         print(f"In remove_ftc_noise module :", __name__)        
         raise error
-    
+
+def case_id_generation(ftc_list, activity, generate_next_case):
+    """
+        Identify a chain of activities connections based on the Frequent Temporal Correlation list.
+        Args:
+            ftc_list: A pandas DataFrame with a list of ns_process_view.FrequentTemporalCorrelation instances. 
+                        ftc_list has the following structure: columns=['case_id', 'correlation_id', 'antecedent_id', 'antecedent_request_time','consequent_id', 'consequent_response_time']
+            activity: The activity under analysis
+    """
+    try:
+        # Initialize ftc_index
+        ftc_index = [0]
+        under_analysis_event = activity
+        consequent_event_id = None
+        
+        # if case_id does not exist
+        if 'case_id' in ftc_list.columns:
+            if generate_next_case:
+                case_id = ftc_list['case_id'].max() +1
+                generate_next_case = False
+            else:
+                case_id = ftc_list['case_id'].max()
+        else:
+            case_id = 0
+            ftc_list['case_id'] = case_id        
+        
+        if under_analysis_event is None:  #first time      
+            min_index = ftc_list[ftc_list['case_id'] == 0]['antecedent_request_time'].idxmin()            
+            antecedent_id = ftc_list.loc[min_index, 'antecedent_id']
+            consequent_event_id = ftc_list.loc[min_index, 'consequent_id'] 
+            ftc_list.loc[min_index, 'case_id'] = case_id
+            under_analysis_event = antecedent_id        
+              
+        aux_line = ftc_list[(ftc_list['antecedent_id'] == under_analysis_event) & (ftc_list['case_id'] == 0)]
+        #aux_line = ftc_list[[ftc_list['antecedent_id'] == under_analysis_event]]
+        
+        for index, row in aux_line.iterrows():
+            consequent_event_id = row['consequent_id']
+            #ftc_index = ftc_list[(ftc_list['correlation_id'] == row['consequent_id']) & (ftc_list['antecedent_id'] == under_analysis_event)].index
+            ftc_index = ftc_list[(ftc_list['correlation_id'] == row['correlation_id'])].index
+            ftc_list.loc[ftc_index, 'case_id'] = case_id            
+            under_analysis_event = consequent_event_id    
+            print(f"correlation_id: {row['correlation_id']} case_id {case_id}" )
+
+        # get the next event to be analyzed
+        if consequent_event_id is None:
+            aux_next = ftc_list[ftc_list['case_id'] == 0].sort_values(by=['antecedent_request_time']).head(1)
+            for index, row_i in aux_next.iterrows():
+                next_correlation = row_i['correlation_id']
+                #antecedent_id = row_i['antecedent_id']
+                consequent_event_id = row_i['antecedent_id']
+                under_analysis_event = consequent_event_id
+                generate_next_case = True
+            
+        if consequent_event_id is not None:
+            ftc_list = case_id_generation(ftc_list, under_analysis_event, generate_next_case)  
+            
+        print(f"fim ################### {case_id} ")  
+        
+        return ftc_list
+    except Exception as error:
+        print('Ocorreu problema {} '.format(error.__class__))
+        print("mensagem", str(error))
+        print(f"In case_id_generation module :", __name__)        
+        raise error
+   
+   
 def event_transactions_selection(file_path, file_name):
     """
         Select the time series transactions based on the begin and end date.
@@ -435,18 +563,28 @@ def event_transactions_selection(file_path, file_name):
     
     selected_transactions = []
     try:
-        with open(file_path + file_name, 'r') as file:
-            data = file.read()
-            file.close()
-            data = data.splitlines()
-            for line in data:
-                line_data = line.split('\t')
-                transaction_date = line_data[0]
-                if begin_date <= transaction_date <= end_date:
-                    selected_transactions.append(line)
+        # revoming the noise from the Frequent Temporal Correlation list
+        df = pd.read_csv(file_path + file_name)
+        cleaned_data = remove_ftc_noise(df, None)
+        print(f"cleaned_data len: {len(cleaned_data)}")
+        file_nm = "ftc_list_cleaned.csv"     
+        cleaned_data.to_csv(file_path + file_nm, index=False)
+        
+        #TODO after this point save ftcs on de ontology 
+        df = pd.read_csv(file_path + file_nm)
+        labeled_data = case_id_generation(df, None)
+        print(f"labeled_data len: {len(labeled_data)}")
+            
+       
+        # for line in data:
+        #     line_data = line.split('\t')
+            #transaction_date = line_data[0]
+            # if begin_date <= transaction_date <= end_date:
+            #     selected_transactions.append(line)
+        
         return selected_transactions
     except Exception as error:
         print('Ocorreu problema {} '.format(error.__class__))
         print("mensagem", str(error))
-        print(f"In time_series_transaction_selection module :", __name__)        
+        print(f"In event_transactions_selection module :", __name__)        
         raise error
