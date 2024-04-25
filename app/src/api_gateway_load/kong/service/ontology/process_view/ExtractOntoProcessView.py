@@ -469,14 +469,14 @@ def mining_frequent_temporal_correlations(onto):
             # ftc_list = ftc_list_aux.values.tolist()
             
             print(f"ftc_list: {len(ftc_list)}")
-            
-            
-                            
+          
             try:                
                 #check de ontology consistency and save the ontology             
                 if len(ftc_list) > 0:
                     #sync_reasoner()
                     save_ftc_to_preprocessing_file(ftc_list)
+                    #TODO abrir o arquivo resultante e iterar em ftcList removendo os FTCs, antecedentes e consequentes que não tiverem na lista retornada
+                    #TODO abrir o arquivo resultante e criar os activities connections
                     
                     #idenfier case id 
                     
@@ -526,10 +526,12 @@ def save_ftc_to_preprocessing_file(ftc_list):
         file_nm = "ftc_list.csv"
         # Save the Series to a CSV file
         df.to_csv(file_path + file_nm, index=False)
+        
         #save the list of ftc_list to a file
         # file_nm = "ftc_list.csv"
         # file_path = './temp/'
         # onto_util.save_result_to_file(new_ftc_event_list, file_path, file_nm, None)
+        
      
     except Exception as error:
         print('Ocorreu problema {} '.format(error.__class__))

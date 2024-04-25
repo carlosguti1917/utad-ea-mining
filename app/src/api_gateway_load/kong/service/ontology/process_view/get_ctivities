@@ -1,0 +1,42 @@
+import pandas as pd
+from pm4py.objects.log.importer.xes import importer as xes_importer
+from pm4py.objects.conversion.log import converter as log_converter
+from pm4py.algo.discovery.alpha import algorithm as alpha_miner
+from pm4py.algo.discovery.inductive import algorithm as inductive_miner
+import pm4py
+# Read event log CSV into DataFrame
+log_file = pd.read_csv('D:/Temp/UTAD/Teste Mining/teste_case_id_order.csv', sep=';')
+dataframe = pm4py.format_dataframe(log_file, case_id='case_id', activity_key='activity a', timestamp_key='antecedent_request_time')
+#imestamp format is %Y-%m-%d %H:%M:%S%z
+event_log = pm4py.convert_to_event_log(dataframe)
+
+# Convert DataFrame to PM4Py event log
+# event_log = log_converter.apply(event_log_df)
+
+# Discover process models
+alpha_miner_result = alpha_miner.apply(event_log)
+inductive_miner_result = inductive_miner.apply(event_log)
+
+# Check activity in other flows
+#target_activity = 'POST /sandbox/ecommerce/v1/carts'
+activities = ['POST /sandbox/ecommerce/v1/carts', 'POST /sandbox/ecommerce/v1/orders', 'GET /products', ['POST /sandbox/ecommerce/v1/carts/paymentmethod']]
+target_activity = 'POST /sandbox/ecommerce/v1/orders'
+#for net in [alpha_miner_result, inductive_miner_result]:
+not_start_activities = []
+for net in [alpha_miner_result]:
+    # Unpack the tuple to access the process model
+    net, initial_marking, final_marking = net
+    for transition in net.transitions:
+        print(f"'{transition.label}'")
+        if transition.label in activities:
+            # Check if the transition is not a start activity
+            for arc in transition.in_arcs:
+                print(f"arc.source: {arc.source}")
+                print(f"arc.target: {arc.target}")
+                if arc.source.name != 'start': 
+                    print(f"{transition.label} is present in another position of the process flow that is not a start activity.")
+                    not_start_activities.append(transition.label)
+                    break
+print(not_start_activities)
+                    
+print('Done')
