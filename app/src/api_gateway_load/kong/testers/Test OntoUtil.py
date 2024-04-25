@@ -24,7 +24,7 @@ from api_gateway_load.utils import onto_util
 # select the frequent temporal correlation from csv file
 file_path = './temp/'   
 file_nm = "ftc_list.csv"
-#onto_util.event_transactions_selection(file_path, file_nm)
+#onto_util.event_transactions_selection(file_path, file_nm) # Este é o oficial que será chamado pelo mining_process_model
 
 
 df = pd.read_csv(file_path + file_nm)
@@ -35,8 +35,8 @@ df = pd.read_csv(file_path + file_nm)
 file_path = './temp/'   
 file_nm = "ftc_list_cleaned.csv"
 df = pd.read_csv(file_path + file_nm)
-data_case_id = onto_util.case_id_generation(df, None, True)
+#data_case_id = onto_util.case_id_generation(df, None, True)
 file_nm = "ftc_list_with_case_id.csv"
-data_case_id.to_csv(file_path + file_nm, index=False)
+#data_case_id.to_csv(file_path + file_nm, index=False)
 
 print("OntoUtil executed with success")
