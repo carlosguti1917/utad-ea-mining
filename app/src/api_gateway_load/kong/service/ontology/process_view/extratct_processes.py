@@ -11,10 +11,6 @@ from pm4py.visualization.petri_net import visualizer as pn_visualizer
 from pm4py.algo.discovery.alpha import algorithm as alpha_miner
 from pm4py.algo.discovery.inductive import algorithm as inductive_miner
 
-log_file = pd.read_csv('D:/Temp/UTAD/Teste Mining/teste_case_id_order.csv', sep=';')
-dataframe = pm4py.format_dataframe(log_file, case_id='case_id', activity_key='activity a', timestamp_key='antecedent_request_time')
-#imestamp format is %Y-%m-%d %H:%M:%S%z
-event_log = pm4py.convert_to_event_log(dataframe)
 
 # Opções:
 #Obter a lista de atividades de início e fim
@@ -25,17 +21,21 @@ event_log = pm4py.convert_to_event_log(dataframe)
 # Deve sobrar duas atividades de início, que são os processos.
 # Salvar cada um destes processos em um arquivo .bpmn usando 
 # filtered_dataframe = pm4py.filter_start_activities(dataframe, ['Act. A'], activity_key='concept:name', case_id_key='case:concept:name', timestamp_key='time:timestamp')
-
 #Também é possivel filtrar pelo inicio e fim
 #filtered_dataframe = pm4py.filter_between(dataframe, 'A', 'D', activity_key='concept:name', case_id_key='case:concept:name', timestamp_key='time:timestamp')
-
-
 #Uma opção é:
 # dentify Cases Belonging to the Same Process:
 # Use clustering algorithms (e.g., k-means) to group cases that have similar process flows.
 # Calculate the similarity between process flows of different cases and group cases with high similarity.
-#Filtrar pelo início e fim e top k
+#Filtrar pelo início e fim e top k-means
 
+file_path = './temp/'   
+file_nm = "ftc_list.csv"
+
+log_file = pd.read_csv(file_path + file_nm, sep=';')
+dataframe = pm4py.format_dataframe(log_file, case_id='case_id', activity_key='activity a', timestamp_key='antecedent_request_time')
+#imestamp format is %Y-%m-%d %H:%M:%S%z
+event_log = pm4py.convert_to_event_log(dataframe)
 
 def processes_discovery():
   
@@ -89,5 +89,5 @@ def remove_not_pure_start_activies(start_activities):
     return pure_start_activities
 
 
-if __name__ == "__main__":
-    processes_discovery()    
+# if __name__ == "__main__":
+#     processes_discovery()    

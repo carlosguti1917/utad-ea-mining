@@ -5,6 +5,7 @@ import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..')))
 
 from api_gateway_load import configs
+from api_gateway_load.utils import onto_util
 
 onto_path.append("app/src/api_gateway_load/repository/")  # Set the path to load the ontology
 #onto = get_ontology("EA Mining OntoUML Teste V1_3.owl").load()
@@ -13,7 +14,8 @@ onto = get_ontology(configs.OWL_FILE["file_name"]).load()
 from api_gateway_load.kong.service import LoaderCalls as loader
 from api_gateway_load.kong.service import DataPrepare
 from api_gateway_load.kong.service.ontology import ExtractOntoCore
-from api_gateway_load.kong.service.ontology.process_view import ExtractOntoProcessView
+from app.src.api_gateway_load.kong.service.ontology.process_view import ExtractProcessFromOntology
+from app.src.api_gateway_load.kong.service.ontology.process_view import extratct_processes
 
 # observação, esta hora é UTC - para o Brasil considerar 3h de avanço em relação a hora desejada.
 beginDate = "2024-04-15T03:01:00.000Z"
@@ -35,9 +37,25 @@ print("Extration of Core Ontology with success")
 print("Remove Frequent Items with success")
 
 #mining process view
-ExtractOntoProcessView.mining_frequent_temporal_correlations(onto) # Vale para versão final
-#TODO a lógica está gerando um número muito grande de FTCs. Revisar
-#Calcular uma amostra de Calls para testar a lógica
-# Ainda assim, tá gerando FTC de mais
-
+ftc_list = ExtractProcessFromOntology.mining_frequent_temporal_correlations(onto) # Vale para versão final
 print("Mining Frequent Temporal Correlations with success")
+
+file_path = './temp/'   
+file_nm = "ftc_list.csv"
+selected_transactions = onto_util.event_transactions_selection(file_path, file_nm) # Este é o oficial que será chamado pelo mining_process_model
+
+#cleaned_data = onto_util.remove_ftc_noise(df, None) # já faz dentro do event_transactions_selection
+
+#data_case_id = onto_util.case_id_generation(df, None, True) # já faz dentro do event_transactions_selection
+
+#create Activity Connections and Frequent Temporal Correlations
+ExtractProcessFromOntology.mining_activities_connection(onto, selected_transactions, ftc_list)
+sync_reasoner()
+onto.save(format="rdfxml")
+
+#extratct_processes.processes_discovery()
+print("Processes Discovery with success")
+
+#create Process in Ontology
+
+print("All tests executed with success")
