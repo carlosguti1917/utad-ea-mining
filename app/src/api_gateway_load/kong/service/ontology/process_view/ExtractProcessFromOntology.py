@@ -54,7 +54,7 @@ Nova interação para obter os candidatos ao Activiti Connection
     2.4 O process é uma sequencia de activies connection
     2.5 A partir desta sequência extrair para o xml do archimate
 '''
-
+                
    
 def record_frequent_items_to_ignore(onto):
     #record the attributes that are frequent in the resources of the API calls in files for further processing of mining.
@@ -475,11 +475,11 @@ def mining_frequent_temporal_correlations(onto):
                 if len(ftc_list) > 0:
                     #sync_reasoner()
                     save_ftc_to_preprocessing_file(ftc_list)
+                    return ftc_list
                     #TODO abrir o arquivo resultante e iterar em ftcList removendo os FTCs, antecedentes e consequentes que não tiverem na lista retornada
+                    #TODO Gerar os cases ID
                     #TODO abrir o arquivo resultante e criar os activities connections
-                    
-                    #idenfier case id 
-                    
+                    #idenfier case id                    
                     #onto.save(format="rdfxml")
             except RecursionError as error:
                 print(f"RecursionError for entity: {error}")
@@ -853,19 +853,33 @@ def navigate_and_export_ontology(onto):
     onto_util.export_to_file(line_data, '.', 'api_resource_data.txt', headers)                    
 
 
-def mining_activities_connection(onto):
+def mining_activities_connection(onto, ftc_list, selected_transactions):
     # the goas is to find the activities that are creat a chain of activities that are connected by the same api_name and attributes
     # Scan the Frequent Temporal Correlations (FTC) and check que antecedent and consequent activities
     # the candidates are those that have the same api_name and APIOperation and the atecedent request_time and consequent request_time have no other activities between them
     # at least one attribute name of the attribute pair should be present in all individuals of the FTC with the same antecedent and consequent activities api_name and APIOperation
-    # Select the antecedent to be part isEventProperPartOf the APIActivietiesConnection, thus it is exclusive. Use the same logic to the consequent
-    # Select the consequent to be part isEventProperPartOf the APIActivietiesConnection
+    # Select the antecedent to be part isEventProperPartOf the APIActivitiesConnection, thus it is exclusive. Use the same logic to the consequent
+    # Select the consequent to be part isEventProperPartOf the APIActivitiesConnection
     # Order the FTC based on that the antecedent is the younger and the consequent is the older and the consequent is the same of the antecedent of the next FTC
     # the consequent of the next FTC should not have the same api_name and APIOperation that already exists in the APIActivietiesConnection chain as API Consequent Activity or API Antecedent Activity
     # the antecedent of the next FTC should not have the same api_name and APIOperation that already exists in the APIActivietiesConnection as API Antecedent Activity
     # generate the smpf file to be processed by the ARM algorithm to find the frequent sequences
-    pass
-    
+
+    try:
+        with onto:
+            for transaction in selected_transactions:
+                ftcs = ftc_list.get(transaction, [])
+                for ftc in ftcs:
+                    activity = ns_process_view.APIActivitiesConnection()
+                    activity.label = f"case_id : {transaction.case_id}"
+                    activity.isEventProperPartOf.append(ftc.mediates[0])
+                    activity.isEventProperPartOf.append(ftc.mediates[1])
+
+    except Exception as error:   
+        print('Ocorreu problema {} '.format(error.__class__))
+        print("mensagem", str(error))
+        print(f"In remove_frequent_items module :", __name__)
+        raise error       
 def mining_processes(onto):   
     # opem the smpf file with the frequent sequences
     # Apply the ARM algorithm to find the frequent sequences

@@ -4,6 +4,9 @@ from pm4py.objects.conversion.log import converter as log_converter
 from pm4py.algo.discovery.alpha import algorithm as alpha_miner
 from pm4py.algo.discovery.inductive import algorithm as inductive_miner
 import pm4py
+
+""" This file is for tests porpouses only. """
+
 # Read event log CSV into DataFrame
 log_file = pd.read_csv('D:/Temp/UTAD/Teste Mining/teste_case_id_order.csv', sep=';')
 dataframe = pm4py.format_dataframe(log_file, case_id='case_id', activity_key='activity a', timestamp_key='antecedent_request_time')

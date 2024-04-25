@@ -328,7 +328,6 @@ def validate_json_to_extraction(call):
     isValid = True
     try:
         #verifica se existe consumer e request_id e se API Call já está registrada na ontologia
-        
         # Only matter if the call has a consumer and a request_id
         if not ("_source" in call and "consumer" in call["_source"] and "id" in call["_source"]["consumer"]):
             isValid = False 
@@ -532,15 +531,7 @@ def event_transactions_selection(file_path, file_name):
     """
     
     # get the younger transaction in the file, that is the transaction with the smaler start datetime and store in the under_analisys_transaction
-    # iterate through the file and select the transactions that start datetime between the begin and end date of the previous transaction
-    
-    # I have 
-    #   correlation id between two events
-    # Needs
-    #   events id
-    #   events start datetime and end datetime
-    #   for each anteceedent event, I need the id of the consequent event
-    # Logic
+    # iterate through the file and select the transactions that start datetime between the begin and end date of the previous transaction  
     #   Inicialize a processing_list and a new_list
     #   get all the events in the file and store in a processing_list
     #   get the younger event in the processing_list and store in the under_analisys_event and anteceedent_event_id
