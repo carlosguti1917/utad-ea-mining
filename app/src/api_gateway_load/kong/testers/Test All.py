@@ -37,23 +37,10 @@ print("Extration of Core Ontology with success")
 print("Remove Frequent Items with success")
 
 #mining process view
-ftc_list = ExtractProcessFromOntology.mining_frequent_temporal_correlations(onto) # Vale para versão final
+#ftc_list = ExtractProcessFromOntology.mining_frequent_temporal_correlations(onto) # Vale para versão final
 print("Mining Frequent Temporal Correlations with success")
 
-file_path = './temp/'   
-file_nm = "ftc_list.csv"
-selected_transactions = onto_util.event_transactions_selection(file_path, file_nm) # Este é o oficial que será chamado pelo mining_process_model
-
-#cleaned_data = onto_util.remove_ftc_noise(df, None) # já faz dentro do event_transactions_selection
-
-#data_case_id = onto_util.case_id_generation(df, None, True) # já faz dentro do event_transactions_selection
-
-#create Activity Connections and Frequent Temporal Correlations
-ExtractProcessFromOntology.mining_activities_connection(onto, selected_transactions, ftc_list)
-sync_reasoner()
-onto.save(format="rdfxml")
-
-#extratct_processes.processes_discovery()
+extratct_processes.processes_discovery() # Vale para versão final
 print("Processes Discovery with success")
 
 #create Process in Ontology

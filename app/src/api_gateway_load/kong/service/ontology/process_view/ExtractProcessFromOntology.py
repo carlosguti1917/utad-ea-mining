@@ -271,6 +271,10 @@ def verify_attribute_utility(attribute_name, resource_name, api_call_name):
         raise error
 
 def mining_frequent_temporal_correlations(onto):
+    """
+        idenfity the frequent temporal correlations between two sequential API calls
+        identigy API Activites Connections and save them into the ontology
+    """
     ftc_list = []
     api_resource_correlations = []
     # Find all ConsumerApp 
@@ -302,19 +306,108 @@ def mining_frequent_temporal_correlations(onto):
             conta_api_calls = len(api_calls)
             conta_api_call = 0
             for api_call in api_calls:
-                    # Inicialize the variables api_call_resource and api_call_operation
-                    api_call_resource = None
-                    api_call_operation = None
-                    conta_api_call += 1
-                    # if conta_api_call == 3: # for testing purposes
-                    #     break
-                    print(f"conta_api_call: {conta_api_call} de {conta_api_calls}")
-                    # Ensuring that only instancs of API_Call
-                    if not ns_core.APICall in api_call.is_a:
-                        continue 
+                # Inicialize the variables api_call_resource and api_call_operation
+                api_call_resource = None
+                api_call_operation = None
+                conta_api_call += 1
+                # if conta_api_call == 3: # for testing purposes
+                #     break
+                print(f"conta_api_call: {conta_api_call} de {conta_api_calls}")
+                # Ensuring that only instancs of API_Call
+                if not ns_core.APICall in api_call.is_a:
+                    continue 
 
-                    # get the modified resources of the api_call
-                    query_a = f"""
+                # get the modified resources of the api_call
+                query_a = f"""
+                        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                        PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                        PREFIX gufo: <http://purl.org/nemo/gufo#>
+                        PREFIX ns_core: <http://eamining.edu.pt/core#>
+                        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+                        PREFIX aPIO: <aPIOperation:>
+
+                        SELECT distinct ?resource ?operation
+                        WHERE {{
+                            ?operation a ns_core:APIOperation . 
+                            ?operation ^gufo:participatedIn ?api_call .
+                            ?api_call a ns_core:APICall .
+                            ?operation ^gufo:mediates ?operationExecuted .
+                            ?operationExecuted a ns_core:OperationExecuted .
+                            ?operationExecuted gufo:mediates ?resource .
+                            ?resource gufo:participatedIn ?api_call .
+                            ?resource a ns_core:APIResource . 
+                            FILTER(
+                                IRI(?api_call) = <{api_call.iri}>
+                            )
+                        }}                    
+                    """                       
+                # Execute the query_a
+                #api_call_resources = list(default_world.sparql(query_a))
+                query_a_result = list(default_world.sparql(query_a))
+                for result in query_a_result:
+                    api_call_resource = result[0]  # Get the individual from the tuple of resources
+                    api_call_operation = result[1]  # Get the individual from the tuple of operations
+                
+                if api_call_operation is None:
+                    print(f"the APICall {api_call} does not have api_call_operation")
+                    continue
+                
+                # search in other API calls and resources to correlate
+                #inner_api_calls = sorted(list([inner_api_call for inner_api_call in consumer_app.participatedIn if inner_api_call.request_time > api_call.request_time]), key=lambda x: x.request_time)
+                
+                call_req_time  = api_call.request_time[0].isoformat()
+                query_inner_call = f"""
+                        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                        PREFIX owl: <http://www.w3.org/2002/07/owl#>
+                        PREFIX gufo: <http://purl.org/nemo/gufo#>
+                        PREFIX ns_core: <http://eamining.edu.pt/core#>
+                        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+                        PREFIX aPIC: <aPICall:>
+                        PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                        SELECT distinct ?api_call
+                        WHERE {{
+                            ?api_call a ns_core:APICall .
+                            ?api_call aPIC:request_time ?request_time.
+                            ?consummer_app gufo:participatedIn ?api_call .
+                            ?consummer_app a ns_core:ConsumerApp .
+                            FILTER(
+                                IRI(?consummer_app) = <{consumer_app.iri}>  
+                                && ?request_time > '{call_req_time}'^^xsd:dateTime
+                            )          
+                        }}  
+                        order by ?request_time                  
+                    """     
+                            
+                # Execute the query_query_inner_call               
+                inner_api_calls = list(default_world.sparql(query_inner_call))
+                
+                conta_inner_api_calls = len(inner_api_calls)
+                conta_inner_api_call = 0
+                for tuplas in inner_api_calls:
+                    inner_api_call = tuplas[0]
+                    inner_api_call_resource = None
+                    inner_api_call_operation = None
+                    
+                    conta_inner_api_call += 1
+                    # if conta_inner_api_call == 2:
+                    #     break
+                    print(f"conta_api_call: {conta_api_call} de {conta_api_calls} -> conta_inner_api_call: {conta_inner_api_call}  de {conta_inner_api_calls}")
+                    # if API Calls have the same api_uri, then ignore it, because we need only one to build the sequence, even in case of call back.
+                    
+                    # Ensuring that only instances of API_Call is keeped
+                    if not ns_core.APICall in inner_api_call.is_a:
+                        continue 
+                    
+                    if api_call.api_uri[0] == inner_api_call.api_uri[0]:
+                        continue                        
+                    # Cada chamada tem uma operação que modifica um recurso
+                    # obter as duas operações
+                    # obter os recursos modificados através do relator operationExecuted
+                    # obter os atributos dos recursos
+                    # comparar os atributos dos recursos evitando os atributos frequentes  
+                    
+                    # get the modified resources of the inner_api_call
+                    query_i = f"""
                             PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                             PREFIX owl: <http://www.w3.org/2002/07/owl#>
                             PREFIX gufo: <http://purl.org/nemo/gufo#>
@@ -322,132 +415,43 @@ def mining_frequent_temporal_correlations(onto):
                             PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
                             PREFIX aPIO: <aPIOperation:>
 
-                            SELECT distinct ?resource ?operation
-                            WHERE {{
-                                ?operation a ns_core:APIOperation . 
-                                ?operation ^gufo:participatedIn ?api_call .
-                                ?api_call a ns_core:APICall .
-                                ?operation ^gufo:mediates ?operationExecuted .
-                                ?operationExecuted a ns_core:OperationExecuted .
-                                ?operationExecuted gufo:mediates ?resource .
-                                ?resource gufo:participatedIn ?api_call .
-                                ?resource a ns_core:APIResource . 
+                        SELECT distinct ?resource ?operation
+                        WHERE {{
+                            ?operation a ns_core:APIOperation . 
+                            ?operation ^gufo:participatedIn ?api_call .
+                            ?api_call a ns_core:APICall .
+                            ?operation ^gufo:mediates ?operationExecuted .
+                            ?operationExecuted a ns_core:OperationExecuted .
+                            ?operationExecuted gufo:mediates ?resource .
+                            ?resource gufo:participatedIn ?api_call .
+                            ?resource a ns_core:APIResource . 
                                 FILTER(
-                                    IRI(?api_call) = <{api_call.iri}>
+                                    IRI(?api_call) = <{inner_api_call.iri}>
                                 )
                             }}                    
-                        """                       
-                    # Execute the query_a
-                    #api_call_resources = list(default_world.sparql(query_a))
-                    query_a_result = list(default_world.sparql(query_a))
-                    for result in query_a_result:
-                        api_call_resource = result[0]  # Get the individual from the tuple of resources
-                        api_call_operation = result[1]  # Get the individual from the tuple of operations
+                        """               
+
+                    query_i_result = list(default_world.sparql(query_i))
+                    for result_i in query_i_result:
+                        inner_api_call_resource = result_i[0]  # Get the individual from the tuple of resources
+                        inner_api_call_operation = result_i[1]  # Get the individual from the tuple of operations                        
+                        #inner_api_call_resources = list(default_world.sparql(query_i))                          
                     
-                    if api_call_operation is None:
-                        print(f"the APICall {api_call} does not have api_call_operation")
+                    # If the operations are equals, then ignore it
+                    if inner_api_call_operation is None:
+                        print(f"the inner_api_call_operation APICall {inner_api_call} does not have api_call_operation")
                         continue
-                    
-                    # search in other API calls and resources to correlate
-                    #inner_api_calls = sorted(list([inner_api_call for inner_api_call in consumer_app.participatedIn if inner_api_call.request_time > api_call.request_time]), key=lambda x: x.request_time)
-                    
-                    call_req_time  = api_call.request_time[0].isoformat()
-                    query_inner_call = f"""
-                            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-                            PREFIX owl: <http://www.w3.org/2002/07/owl#>
-                            PREFIX gufo: <http://purl.org/nemo/gufo#>
-                            PREFIX ns_core: <http://eamining.edu.pt/core#>
-                            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-                            PREFIX aPIC: <aPICall:>
-                            PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
-                            SELECT distinct ?api_call
-                            WHERE {{
-                                ?api_call a ns_core:APICall .
-                                ?api_call aPIC:request_time ?request_time.
-                                ?consummer_app gufo:participatedIn ?api_call .
-                                ?consummer_app a ns_core:ConsumerApp .
-                                FILTER(
-                                    IRI(?consummer_app) = <{consumer_app.iri}>  
-                                    && ?request_time > '{call_req_time}'^^xsd:dateTime
-                                )          
-                            }}  
-                            order by ?request_time                  
-                        """     
-                                
-                    # Execute the query_query_inner_call               
-                    inner_api_calls = list(default_world.sparql(query_inner_call))
-                  
-                    conta_inner_api_calls = len(inner_api_calls)
-                    conta_inner_api_call = 0
-                    for tuplas in inner_api_calls:
-                        inner_api_call = tuplas[0]
-                        inner_api_call_resource = None
-                        inner_api_call_operation = None
-                        
-                        conta_inner_api_call += 1
-                        # if conta_inner_api_call == 2:
-                        #     break
-                        print(f"conta_api_call: {conta_api_call} de {conta_api_calls} -> conta_inner_api_call: {conta_inner_api_call}  de {conta_inner_api_calls}")
-                        # if API Calls have the same api_uri, then ignore it, because we need only one to build the sequence, even in case of call back.
-                        
-                        # Ensuring that only instances of API_Call is keeped
-                        if not ns_core.APICall in inner_api_call.is_a:
-                            continue 
-                        
-                        if api_call.api_uri[0] == inner_api_call.api_uri[0]:
-                            continue                        
-                        # Cada chamada tem uma operação que modifica um recurso
-                        # obter as duas operações
-                        # obter os recursos modificados através do relator operationExecuted
-                        # obter os atributos dos recursos
-                        # comparar os atributos dos recursos evitando os atributos frequentes  
-                        
-                        # get the modified resources of the inner_api_call
-                        query_i = f"""
-                                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-                                PREFIX owl: <http://www.w3.org/2002/07/owl#>
-                                PREFIX gufo: <http://purl.org/nemo/gufo#>
-                                PREFIX ns_core: <http://eamining.edu.pt/core#>
-                                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-                                PREFIX aPIO: <aPIOperation:>
 
-                            SELECT distinct ?resource ?operation
-                            WHERE {{
-                                ?operation a ns_core:APIOperation . 
-                                ?operation ^gufo:participatedIn ?api_call .
-                                ?api_call a ns_core:APICall .
-                                ?operation ^gufo:mediates ?operationExecuted .
-                                ?operationExecuted a ns_core:OperationExecuted .
-                                ?operationExecuted gufo:mediates ?resource .
-                                ?resource gufo:participatedIn ?api_call .
-                                ?resource a ns_core:APIResource . 
-                                    FILTER(
-                                        IRI(?api_call) = <{inner_api_call.iri}>
-                                    )
-                                }}                    
-                            """               
-
-                        query_i_result = list(default_world.sparql(query_i))
-                        for result_i in query_i_result:
-                            inner_api_call_resource = result_i[0]  # Get the individual from the tuple of resources
-                            inner_api_call_operation = result_i[1]  # Get the individual from the tuple of operations                        
-                            #inner_api_call_resources = list(default_world.sparql(query_i))                          
-                        
-                        # If the operations are equals, then ignore it
-                        if inner_api_call_operation is None:
-                            print(f"the inner_api_call_operation APICall {inner_api_call} does not have api_call_operation")
-                            continue
-
-                        if api_call_operation.label[0] == inner_api_call_operation.label[0]:
-                            continue 
-                                                                    
-                        #check the correlation between the attributes of the resources:
-                        corr = onto_util.get_api_resources_correlations(api_call, api_call_resource, inner_api_call, inner_api_call_resource)
-                        if corr is not None and len(corr) > 0:
-                            api_resource_correlations.append(corr)
-                        else:
-                            continue
-                            #ftc_list.append(save_frequent_temporal_correlation(onto, api_call, inner_api_call, api_resource_correlations))
+                    if api_call_operation.label[0] == inner_api_call_operation.label[0]:
+                        continue 
+                                                                
+                    #check the correlation between the attributes of the resources:
+                    corr = onto_util.get_api_resources_correlations(api_call, api_call_resource, inner_api_call, inner_api_call_resource)
+                    if corr is not None and len(corr) > 0:
+                        api_resource_correlations.append(corr)
+                    else:
+                        continue
+                        #ftc_list.append(save_frequent_temporal_correlation(onto, api_call, inner_api_call, api_resource_correlations))
          
             # for each ConsumerApp save the ontology with the ftc_list
             # check if the correlations are consistent before saving the ontology. This measure how much de correlation repeated in the resources of the api_call
@@ -463,24 +467,24 @@ def mining_frequent_temporal_correlations(onto):
             #add ftc
             for selected_corr in selected_api_res_corrls:
                 ftc_list = add_frequent_temporal_correlation(onto, selected_corr, ftc_list)
-
-                
-            # ftc_list_aux = pd.DataFrame(ftc_list).drop_duplicates()
-            # ftc_list = ftc_list_aux.values.tolist()
-            
-            print(f"ftc_list: {len(ftc_list)}")
+           
+            # print(f"ftc_list: {len(ftc_list)}")
           
             try:                
                 #check de ontology consistency and save the ontology             
                 if len(ftc_list) > 0:
                     #sync_reasoner()
                     save_ftc_to_preprocessing_file(ftc_list)
-                    return ftc_list
-                    #TODO abrir o arquivo resultante e iterar em ftcList removendo os FTCs, antecedentes e consequentes que não tiverem na lista retornada
-                    #TODO Gerar os cases ID
-                    #TODO abrir o arquivo resultante e criar os activities connections
-                    #idenfier case id                    
-                    #onto.save(format="rdfxml")
+                    file_path = configs.TEMP_PROCESSING_FILES["file_path"]
+                    file_name = configs.TEMP_PROCESSING_FILES["file_ftc_list_name"]
+                    selected_transactions = onto_util.event_transactions_selection(file_path, file_name) #select the candidates to activities connections and creates cases id
+                    #minint activities connections e saving the ontology
+                    ftc_list = mining_activities_connection(onto, ftc_list, selected_transactions)
+                    #mining_activities_connection(onto, ftc_list, selected_transactions)
+                    
+                sync_reasoner()
+                onto.save(format="rdfxml")
+                return ftc_list
             except RecursionError as error:
                 print(f"RecursionError for entity: {error}")
                 return str(error)   
@@ -506,32 +510,33 @@ def save_ftc_to_preprocessing_file(ftc_list):
     #df = pd.Series(columns=['ftc_id', 'ftc_antedecent_timestamp', 'ftc_consequent_timestamp'])
     #df2 = pd.DataFrame(ftc_list)
     
-    df = pd.DataFrame(columns=['correlation_id', 'antecedent_id', 'antecedent_request_time','consequent_id', 'consequent_response_time'])
+    df = pd.DataFrame(columns=['correlation_id', 'antecedent_id', 'antecedent_activity_name', 'antecedent_request_time','consequent_id', 'consequent_response_time'])
     
     try:
         for ftc in ftc_list:
             ftc_id = ftc._name
             antecedent = ftc.mediates[0]
             antecedent_id = antecedent.name
+            antecedent_activity_method = antecedent.participatedIn[0].method[0]
+            antecedent_activity_uri = antecedent.api_uri[0]
+            antecedent_activity_name = antecedent_activity_method + "_" + antecedent_activity_uri
+            # antecedent_activity_route = antecedent.participatedIn[0].endpoint[0]
+            # pattern = r"/v\d+/(.*)"
+            # match = re.search(pattern, antecedent_activity_route)
+            # if match:
+            #     operation_name = match.group(1)
+            #     antecedent_activity_name = antecedent_activity_method + "_" + operation_name
             antecedent_request_time = antecedent.request_time[0].isoformat()
             consequent = ftc.mediates[1]
             consequent_id = consequent.name
             consequent_request_time = consequent.request_time[0].isoformat()
             
-            # new_row = {'correlation_id': ftc_id, 'antecedent_id': antecedent_id, 'antecedent_request_time': antecedent_request_time, 'consequent_id': consequent_id, 'consequent_response_time': consequent_request_time}
-            # df = df.append(new_row, ignore_index=True)
-            df.loc[len(df)] = [ftc_id, antecedent_id, antecedent_request_time, consequent_id, consequent_request_time]
+            df.loc[len(df)] = [ftc_id, antecedent_id, antecedent_activity_name, antecedent_request_time, consequent_id, consequent_request_time]
                
-        file_path = './temp/'   
-        file_nm = "ftc_list.csv"
+        file_path = configs.TEMP_PROCESSING_FILES["file_path"]
+        file_nm = configs.TEMP_PROCESSING_FILES["file_ftc_list_name"]
         # Save the Series to a CSV file
         df.to_csv(file_path + file_nm, index=False)
-        
-        #save the list of ftc_list to a file
-        # file_nm = "ftc_list.csv"
-        # file_path = './temp/'
-        # onto_util.save_result_to_file(new_ftc_event_list, file_path, file_nm, None)
-        
      
     except Exception as error:
         print('Ocorreu problema {} '.format(error.__class__))
@@ -663,41 +668,41 @@ def add_frequent_temporal_correlation(onto, correlation_list, ftc_list):
                 raise error     
                      
 
-def get_api_resources_correlations_old(api_call_a, api_call_resource_a, api_call_b, api_call_resource_b):
-    """ Verify the correlation between the attributes of the resources
-        all the repeated values sould match among the resources_a and resources_b attibutes
-        return a list of correlated attributes in a correlation set, that with not duplicated entries
-        the correlation have 6 attributes: correlation_key, api_name_a, api_name_b, attribute_a, attribute_a_value attribute_b, attribute_b_alue
-    """
-    correlations_list = []  
-    cont_size = 0 # used to calculate the weight of the correlations. The weight is the number the correlations found for each attibute. Each correlation should corresponde a 100% of the correlations
-    # Find all attributes 
-    try:
-        for attribute_a in api_call_resource_a.resource_data:
-            attribute_a_name = attribute_a.attribute_name[0]
-            if attribute_a_name in onto_util.get_ignored_attributes_from_file('./temp/', api_call_a.api_name[0]):
-                continue
-            else:
-                # search in other attributes of the api resources for the same attribute value
-                for attribute_b in api_call_resource_b.resource_data:
-                    attribute_b_name = attribute_b.attribute_name[0]
-                    if attribute_b_name in onto_util.get_ignored_attributes_from_file('./temp/', api_call_b.api_name[0]):
-                        continue
-                    else:
-                        if attribute_a.attribute_value[0] == attribute_b.attribute_value[0]:
-                            #print(f"attribute correlation identified {attribute_a.attribute_name} : {attribute_a.attribute_value} ->  {attribute_b.attribute_name}, {attribute_b.attribute_value}")                        
-                            operation_a_label = api_call_a.participatedIn[0].label[0]
-                            operation_b_label = api_call_b.participatedIn[0].label[0]
-                            correlation_key = f"{operation_a_label}/{attribute_a.attribute_name} | {operation_b_label}/{attribute_b.attribute_name}"
-                            correlations_list.append([correlation_key, api_call_a, operation_a_label, attribute_a.attribute_name[0], attribute_a.attribute_value[0], api_call_b, operation_b_label, attribute_b.attribute_name[0], attribute_b.attribute_value[0]]) 
+# def get_api_resources_correlations_old(api_call_a, api_call_resource_a, api_call_b, api_call_resource_b):
+#     """ Verify the correlation between the attributes of the resources
+#         all the repeated values sould match among the resources_a and resources_b attibutes
+#         return a list of correlated attributes in a correlation set, that with not duplicated entries
+#         the correlation have 6 attributes: correlation_key, api_name_a, api_name_b, attribute_a, attribute_a_value attribute_b, attribute_b_alue
+#     """
+#     correlations_list = []  
+#     cont_size = 0 # used to calculate the weight of the correlations. The weight is the number the correlations found for each attibute. Each correlation should corresponde a 100% of the correlations
+#     # Find all attributes 
+#     try:
+#         for attribute_a in api_call_resource_a.resource_data:
+#             attribute_a_name = attribute_a.attribute_name[0]
+#             if attribute_a_name in onto_util.get_ignored_attributes_from_file('./temp/', api_call_a.api_name[0]):
+#                 continue
+#             else:
+#                 # search in other attributes of the api resources for the same attribute value
+#                 for attribute_b in api_call_resource_b.resource_data:
+#                     attribute_b_name = attribute_b.attribute_name[0]
+#                     if attribute_b_name in onto_util.get_ignored_attributes_from_file('./temp/', api_call_b.api_name[0]):
+#                         continue
+#                     else:
+#                         if attribute_a.attribute_value[0] == attribute_b.attribute_value[0]:
+#                             #print(f"attribute correlation identified {attribute_a.attribute_name} : {attribute_a.attribute_value} ->  {attribute_b.attribute_name}, {attribute_b.attribute_value}")                        
+#                             operation_a_label = api_call_a.participatedIn[0].label[0]
+#                             operation_b_label = api_call_b.participatedIn[0].label[0]
+#                             correlation_key = f"{operation_a_label}/{attribute_a.attribute_name} | {operation_b_label}/{attribute_b.attribute_name}"
+#                             correlations_list.append([correlation_key, api_call_a, operation_a_label, attribute_a.attribute_name[0], attribute_a.attribute_value[0], api_call_b, operation_b_label, attribute_b.attribute_name[0], attribute_b.attribute_value[0]]) 
                 
-                            #TODO talvez registrar na ontologia resouce equality. Algo como api_resource.AttributesEquality.append(attribute_name)                    
-        return correlations_list      
-    except Exception as error:
-        print('Ocorreu problema {} '.format(error.__class__))
-        print("mensagem", str(error))
-        print(f"In get_api_resources_correlations({api_call_a}, {api_call_b}) :", __name__)        
-        raise error                     
+#                             #TODO talvez registrar na ontologia resouce equality. Algo como api_resource.AttributesEquality.append(attribute_name)                    
+#         return correlations_list      
+#     except Exception as error:
+#         print('Ocorreu problema {} '.format(error.__class__))
+#         print("mensagem", str(error))
+#         print(f"In get_api_resources_correlations({api_call_a}, {api_call_b}) :", __name__)        
+#         raise error                     
 
 
                     
@@ -777,26 +782,7 @@ def save_frequent_temporal_correlation(onto, api_call_a, api_call_b, correlated_
                         attribute_pair.attribute_b.append(attribute_b)                          
                         # Add the attribute pair to the repeated_attributes property of the Frequente Temporal Correlation
                         ftc.repeated_attributes.append(attribute_pair)
-
-                    # try:                
-                    #     #check de ontology consistency before saving               
-                    #     #save the individual Freqeuente Temporal Correlation in the ontology                        
-                    #     sync_reasoner()
-                    #     onto.save(format="rdfxml")
-                    
-                    # except RecursionError as error:
-                    #     print(f"RecursionError for entity: {error}")
-                    #     return str(error)   
-                    # except Exception as error:
-                    #     inconsistent_cls_list = list(default_world.inconsistent_classes())
-                    #     for il in inconsistent_cls_list:
-                    #         print(il)
-                    #         print('inconsistency_list', il)                                                 
-                    #     print('Ocorreu problema {} '.format(error.__class__))
-                    #     print("mensagem", str(error))
-                    #     print("In extractAPIConcepts module :", __name__)  
-                    #     raise Exception(f"Ontology inconsistency found: {il}")  
-  
+                          
                 return ftc
             except Exception as error:
                 print('Ocorreu problema {} '.format(error.__class__))
@@ -804,53 +790,53 @@ def save_frequent_temporal_correlation(onto, api_call_a, api_call_b, correlated_
                 print(f"In save_frequent_temporal_correlation({api_call_a}, {api_call_b}) :", __name__)        
                 raise error     
 
-def navigate_and_export_ontology(onto):
-    # Prepare data
-    line_data = []
-    headers = ['API Call', 'Resource Data Attributes']
-    # Find ConsumerApp by client_id
-    #consumer_apps = onto.search(type=onto.ConsumerApp, client_id=client_id_value)
-    consumer_apps = onto.search(type=ns_core.ConsumerApp)
-    #TODO tem que pegar só os ConsumerApp sem as subclasses. Está retornando o Partner.
-    for consumer_app in consumer_apps:
-        # Find API Calls associated with ConsumerApp
-        # api_calls = onto.search(type=ns_core.APICall, participatedIn=consumer_app) . Isso aqui teria que ser por sparql, pois não existe o param object property
-        api_calls = list(consumer_app.participatedIn)
-        for api_call in api_calls:
-            # Find API Resources associated with API Call
-            api_operations = list(api_call.participatedIn)
-            #classe = ns_core.OperationExecuted           
-            for api_operation in api_operations:
-                #g = Graph()
-                # Parse in an RDF file hosted at some location
-                query = f"""PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-                            PREFIX owl: <http://www.w3.org/2002/07/owl#>
-                            PREFIX gufo: <http://purl.org/nemo/gufo#>
-                            PREFIX ns_core: <http://eamining.edu.pt/core#>
-                            SELECT ?operationExecuted
-                            WHERE {{
-                                ?operationExecuted rdf:type ns_core:OperationExecuted .
-                                ?operationExecuted gufo:mediates <{api_operation.iri}> .
-                            }}
-                        """                       
-                # Execute the query
-                operations_executed = list(default_world.sparql(query))
-                for operation_executed_tuple in operations_executed:
-                    operation_executed = operation_executed_tuple[0]  # Get the individual from the tuple
-                    resources = list(operation_executed.mediates)
-                    for resource in resources:
-                            # Check if resource is an instance of ns_core.APIResource
-                            if ns_core.APIResource in resource.is_a:
-                                #attribute_values = [attr.attribute_value for attr in resource.resource_data] 
-                                attribute_values = []
-                                for att in resource.resource_data:
-                                    for value in att.attribute_value:
-                                        at = value
-                                    attribute_values.append(value)
-                                print(attribute_values)
-                    #Append to CSV data
-                    line_data.append([api_call, attribute_values])
-    onto_util.export_to_file(line_data, '.', 'api_resource_data.txt', headers)                    
+# def navigate_and_export_ontology(onto):
+#     # Prepare data
+#     line_data = []
+#     headers = ['API Call', 'Resource Data Attributes']
+#     # Find ConsumerApp by client_id
+#     #consumer_apps = onto.search(type=onto.ConsumerApp, client_id=client_id_value)
+#     consumer_apps = onto.search(type=ns_core.ConsumerApp)
+#     #TODO tem que pegar só os ConsumerApp sem as subclasses. Está retornando o Partner.
+#     for consumer_app in consumer_apps:
+#         # Find API Calls associated with ConsumerApp
+#         # api_calls = onto.search(type=ns_core.APICall, participatedIn=consumer_app) . Isso aqui teria que ser por sparql, pois não existe o param object property
+#         api_calls = list(consumer_app.participatedIn)
+#         for api_call in api_calls:
+#             # Find API Resources associated with API Call
+#             api_operations = list(api_call.participatedIn)
+#             #classe = ns_core.OperationExecuted           
+#             for api_operation in api_operations:
+#                 #g = Graph()
+#                 # Parse in an RDF file hosted at some location
+#                 query = f"""PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+#                             PREFIX owl: <http://www.w3.org/2002/07/owl#>
+#                             PREFIX gufo: <http://purl.org/nemo/gufo#>
+#                             PREFIX ns_core: <http://eamining.edu.pt/core#>
+#                             SELECT ?operationExecuted
+#                             WHERE {{
+#                                 ?operationExecuted rdf:type ns_core:OperationExecuted .
+#                                 ?operationExecuted gufo:mediates <{api_operation.iri}> .
+#                             }}
+#                         """                       
+#                 # Execute the query
+#                 operations_executed = list(default_world.sparql(query))
+#                 for operation_executed_tuple in operations_executed:
+#                     operation_executed = operation_executed_tuple[0]  # Get the individual from the tuple
+#                     resources = list(operation_executed.mediates)
+#                     for resource in resources:
+#                             # Check if resource is an instance of ns_core.APIResource
+#                             if ns_core.APIResource in resource.is_a:
+#                                 #attribute_values = [attr.attribute_value for attr in resource.resource_data] 
+#                                 attribute_values = []
+#                                 for att in resource.resource_data:
+#                                     for value in att.attribute_value:
+#                                         at = value
+#                                     attribute_values.append(value)
+#                                 print(attribute_values)
+#                     #Append to CSV data
+#                     line_data.append([api_call, attribute_values])
+#     onto_util.export_to_file(line_data, '.', 'api_resource_data.txt', headers)                    
 
 
 def mining_activities_connection(onto, ftc_list, selected_transactions):
@@ -866,20 +852,38 @@ def mining_activities_connection(onto, ftc_list, selected_transactions):
     # generate the smpf file to be processed by the ARM algorithm to find the frequent sequences
 
     try:
+        ftc = None
+        new_actitivities = False
         with onto:
-            for transaction in selected_transactions:
-                ftcs = ftc_list.get(transaction, [])
+            for index, row in selected_transactions.iterrows():
+                # Get the Frequent Temporal Correlations in ftc_list that have an identifier in selected_transactions
+                correlation_id = row['correlation_id']
+                ftcs = [ftc for ftc in ftc_list if ftc.name == correlation_id]
                 for ftc in ftcs:
+                    antecedent_id = ftc.mediates[0]
+                    consequent_id = ftc.mediates[1]
+                    case_id = row['case_id']
                     activity = ns_process_view.APIActivitiesConnection()
-                    activity.label = f"case_id : {transaction.case_id}"
-                    activity.isEventProperPartOf.append(ftc.mediates[0])
-                    activity.isEventProperPartOf.append(ftc.mediates[1])
+                    activity.name = f"{correlation_id}_{case_id}"
+                    activity.label = f"connection: {correlation_id}_{case_id}"
+                    activity.label = f"case_id : {case_id}"
+                    activity.isEventProperPartOf.append(antecedent_id)
+                    activity.isEventProperPartOf.append(consequent_id)
+                    new_actitivities = True
+                    #print(f"activity: {activity} ")
+                    
+                if new_actitivities:
+                    ftc_list.append(ftc)        
+                                   
+        return ftc_list #return the ftc_list with the activities connections uptated 
 
     except Exception as error:   
         print('Ocorreu problema {} '.format(error.__class__))
         print("mensagem", str(error))
         print(f"In remove_frequent_items module :", __name__)
         raise error       
+    
+    
 def mining_processes(onto):   
     # opem the smpf file with the frequent sequences
     # Apply the ARM algorithm to find the frequent sequences
@@ -893,168 +897,28 @@ def mining_processes(onto):
     pass
 
 
-def mining_frequent_temporal_correlations_old(onto):
-    # Find all ConsumerApp 
-    #consumer_apps = [individual for individual in onto.individuals() if individual.is_a[0] == ns_core.ConsumerApp]
-    
-    ftc_list = []
-    
-    query = """
-            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-            PREFIX ns_core: <http://eamining.edu.pt/core#>
-            PREFIX ns_process_view: <http://eamining.edu.pt/process-view#>
-
-            SELECT DISTINCT ?consumerApp
-            WHERE {
-                ?consumerApp rdf:type ns_core:ConsumerApp .
-                FILTER NOT EXISTS {
-                    ?subclass rdf:type ns_process_view:Partner .
-                    ?subclass rdfs:subClassOf ?consumerApp .
-                    FILTER (?subclass != ?consumerApp)
-                }
-            }
-        """
-    consumer_apps = list(default_world.sparql(query))       
-
-    # before start the mining, chech the ontology consistency
-    sync_reasoner()
-
-    for consumer_app_tuple in consumer_apps:
-        consumer_app = consumer_app_tuple[0]
-        # Find API Calls associated with ConsumerApp and sort them by request_time
-        api_calls = sorted(list(consumer_app.participatedIn), key=lambda x: x.request_time)
-        conta_api_calls = len(api_calls)
-        conta_api_call = 0
-        scanned_api_calls = [] # to regist the api calls that already have been scanned
-        for api_call in api_calls:
-            print(f"conta_api_call: {conta_api_call} de {conta_api_calls}")
-            conta_api_call += 1
-            # Only instancs of API_Call
-            if not ns_core.APICall in api_call.is_a:
-                continue
-            # Find API Resources associated with API Call
-            api_operations = list(api_call.participatedIn)     
-            for api_operation in api_operations:
-                query = f"""
-                        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-                        PREFIX owl: <http://www.w3.org/2002/07/owl#>
-                        PREFIX gufo: <http://purl.org/nemo/gufo#>
-                        PREFIX ns_core: <http://eamining.edu.pt/core#>
-
-                        SELECT distinct ?operationExecuted ?resource 
-                        WHERE {{
-                            ?operationExecuted rdf:type ns_core:OperationExecuted .
-                            ?operationExecuted gufo:mediates ?resource .
-                            ?resource rdf:type ns_core:APIResource .
-                            ?operationExecuted gufo:mediates ?operation .
-                            ?operation rdf:type ns_core:APIOperation .
-                            ?operation rdfs:label ?operation_label .
-                            FILTER(?operation_label = '{api_operation.iri}')
-                        }}                        
-                        """                       
-                # Execute the query
-                operations_executed = list(default_world.sparql(query))
-                conta_operations_executed = len(operations_executed)
-                conta_operation_executed = 0                
-                for operation_executed_tuple in operations_executed:
-                    print(f"conta_api_call: {conta_api_call} de {conta_api_calls} -> conta_operation_executed: {conta_operation_executed} de {conta_operations_executed}")
-                    conta_operation_executed += 1
-                    resource = operation_executed_tuple[1]  # Get the individual resource from the tuple, the second element in the select of query
-                    #for resource in resources:
-                    # Check if resource is an instance of ns_core.APIResource
-                    #if ns_core.APIResource in resource.is_a:
-                        #attribute_values = [attr.attribute_value for attr in resource.resource_data] 
-                        #attributes = []
-                    conta_attritutos = len(resource.resource_data)
-                    conta_attributo = 0
-                    for attribute in resource.resource_data:
-                        print(f"conta_api_call: {conta_api_call} de {conta_api_calls} -> conta_operation_executed: {conta_operation_executed} de {conta_operations_executed} -> conta_attributo: {conta_attributo} de {conta_attritutos}")
-                        conta_attributo += 1 
-                        ftc_list = []
-                        attribute_name = attribute.attribute_name
-                        attribute_value = attribute.attribute_value
-                        print(attribute_name, attribute_value)
-                        # search in other API calls and resources for the same attribute value
-                        inner_api_calls = sorted([inner_api_call for inner_api_call in consumer_app.participatedIn if inner_api_call.request_time > api_call.request_time], key=lambda x: x.request_time)
-                        conta_inner_api_calls = len(inner_api_calls)
-                        conta_inner_api_call = 0
-                        for inner_api_call in inner_api_calls:
-                            print(f"conta_api_call: {conta_api_call} de {conta_api_calls} -> conta_operation_executed: {conta_operation_executed} de {conta_operations_executed} -> conta_attributo: {conta_attributo} de {conta_attritutos} -> conta_inner_api_call: {conta_inner_api_call}  de {conta_inner_api_calls}")
-                            conta_inner_api_call += 1
-                            if inner_api_call != api_call and inner_api_call.api_uri != api_call.api_uri:                              
-                                inner_operations = inner_api_call.participatedIn
-                                for inner_operation in inner_operations:
-                                    inner_query = f"""
-                                        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-                                        PREFIX owl: <http://www.w3.org/2002/07/owl#>
-                                        PREFIX gufo: <http://purl.org/nemo/gufo#>
-                                        PREFIX ns_core: <http://eamining.edu.pt/core#>                                    
-                                        SELECT distinct ?operationExecuted ?resource 
-                                        WHERE {{
-                                            ?operationExecuted rdf:type ns_core:OperationExecuted .
-                                            ?operationExecuted gufo:mediates ?resource .
-                                            ?resource rdf:type ns_core:APIResource .
-                                            ?operationExecuted gufo:mediates ?operation .
-                                            ?operation rdf:type ns_core:APIOperation .
-                                            ?operation rdfs:label ?operation_label .
-                                            FILTER(?operation_label = '{inner_operation.iri}')
-                                        }}                                        
-                                        """ 
-                                    inner_operations_executed = list(default_world.sparql(inner_query))
-                                    for inner_operation_executed_tuple in inner_operations_executed:
-                                        #inner_operation_executed = inner_operation_executed_tuple[0]  # Get the individual from the tuple
-                                        #inner_resources = list(inner_operation_executed.mediates) 
-                                        inner_resource = inner_operation_executed_tuple[1]  # Get the individual resource from the tuple, the second element in the select of query
-                                        #for inner_resource in inner_resources:
-                                        api_correlations = check_api_resource_correlation_old(api_call, resource, inner_api_call, inner_resource)
-                                        if api_correlations is not None and len(api_correlations) > 0:
-                                            ftc_list.append(save_frequent_temporal_correlation(onto, api_call, inner_api_call, api_correlations))
-                                            #scanned_api_calls.append(api_call, inner_api_call)
-                        
-                        #For each attribute save the ontology wiht the correlations to avoid acomulate to much
-                        try:                
-                            #check de ontology consistency before saving               
-                            #save the ontology
-                            #observe the ftc_list reinicialization
-                            if len(ftc_list) > 0:
-                                sync_reasoner()
-                                onto.save(format="rdfxml")
-                        except RecursionError as error:
-                            print(f"RecursionError for entity: {error}")
-                            return str(error)   
-                        except Exception as error:
-                            inconsistent_cls_list = list(default_world.inconsistent_classes())
-                            for il in inconsistent_cls_list:
-                                print(il)
-                                print('inconsistency_list', il)                                                 
-                            print('Ocorreu problema {} '.format(error.__class__))
-                            print("mensagem", str(error))
-                            print("In extractAPIConcepts module :", __name__)  
-                            raise Exception(f"Ontology inconsistency found: {il}")  
-
-def check_api_resource_correlation_old(api_call_a, api_call_resource_a, api_call_b, api_call_resource_b):
-    # Prepare data
-    correlations_list = []
-    # Find all attributes 
-    for attribute_a in api_call_resource_a.resource_data:
-        attribute_a_name = attribute_a.attribute_name[0]
-        api_name_a = api_call_a.api_name[0]
-        if attribute_a_name in onto_util.get_ignored_attributes_from_file('./temp/', api_name_a):
-            continue
-        else:
-            # search in other API calls and resources for the same attribute value
-            for attribute_b in api_call_resource_b.resource_data:
-                attribute_b_name = attribute_b.attribute_name[0]
-                api_name_b = api_call_b.api_name[0]
-                if attribute_b_name in onto_util.get_ignored_attributes_from_file('./temp/', api_name_b):
-                    continue
-                else:
-                    if attribute_a.attribute_value[0] == attribute_b.attribute_value[0]:
-                        print(f"attribute correlation identified {attribute_a.attribute_name} : {attribute_a.attribute_value} ->  {attribute_b.attribute_name}, {attribute_b.attribute_value}")                        
-                        correlations_list.append([api_call_a, api_call_b, attribute_a, attribute_b])  
-                        #TODO talvez registrar na ontologia resouce equality . Algo como api_resource.AttributesEquality.append(attribute_name)                    
-    return correlations_list
+# def check_api_resource_correlation_old(api_call_a, api_call_resource_a, api_call_b, api_call_resource_b):
+#     # Prepare data
+#     correlations_list = []
+#     # Find all attributes 
+#     for attribute_a in api_call_resource_a.resource_data:
+#         attribute_a_name = attribute_a.attribute_name[0]
+#         api_name_a = api_call_a.api_name[0]
+#         if attribute_a_name in onto_util.get_ignored_attributes_from_file('./temp/', api_name_a):
+#             continue
+#         else:
+#             # search in other API calls and resources for the same attribute value
+#             for attribute_b in api_call_resource_b.resource_data:
+#                 attribute_b_name = attribute_b.attribute_name[0]
+#                 api_name_b = api_call_b.api_name[0]
+#                 if attribute_b_name in onto_util.get_ignored_attributes_from_file('./temp/', api_name_b):
+#                     continue
+#                 else:
+#                     if attribute_a.attribute_value[0] == attribute_b.attribute_value[0]:
+#                         print(f"attribute correlation identified {attribute_a.attribute_name} : {attribute_a.attribute_value} ->  {attribute_b.attribute_name}, {attribute_b.attribute_value}")                        
+#                         correlations_list.append([api_call_a, api_call_b, attribute_a, attribute_b])  
+#                         #TODO talvez registrar na ontologia resouce equality . Algo como api_resource.AttributesEquality.append(attribute_name)                    
+#     return correlations_list
     # search in other API calls and resources for the same attribute value
     # inner_api_calls = sorted([inner_api_call for inner_api_call in consumer_app.participatedIn if inner_api_call.request_time > api_call.request_time], key=lambda x: x.request_time)
 

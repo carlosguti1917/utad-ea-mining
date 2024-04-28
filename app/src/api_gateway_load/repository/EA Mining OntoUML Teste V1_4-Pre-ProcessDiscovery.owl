@@ -13,7 +13,6 @@
          xmlns:attr="attribute:"
          xmlns:freq="frequentTemporalCorrelation:"
          xmlns:attr2="attributePair:"
-         xmlns:core="http://eamining.edu.pt/core#"
          xmlns="http://eamining.edu.pt/">
 
 <owl:Ontology rdf:about="http://eamining.edu.pt"/>
@@ -264,7 +263,6 @@
   <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#FunctionalComplex"/>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#Kind"/>
-  <rdf:type rdf:resource="http://purl.org/nemo/gufo#FunctionalComplex"/>
   <rdfs:label xml:lang="en">API Resource</rdfs:label>
 </owl:Class>
 
@@ -272,7 +270,6 @@
   <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#QualityValue"/>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#AbstractIndividualType"/>
-  <rdf:type rdf:resource="http://purl.org/nemo/gufo#QualityValue"/>
   <rdfs:label xml:lang="en">Attribute</rdfs:label>
 </owl:Class>
 
@@ -280,7 +277,6 @@
   <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#QualityValue"/>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#AbstractIndividualType"/>
-  <rdf:type rdf:resource="http://purl.org/nemo/gufo#QualityValue"/>
   <rdfs:label xml:lang="en">Attribute Pair</rdfs:label>
 </owl:Class>
 
@@ -303,7 +299,6 @@
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#Kind"/>
   <gufo:isDerivedFrom rdf:resource="process-view#apiConsequentActivityHistoricallyDependsOnApiAntecedentActivity"/>
-  <rdf:type rdf:resource="http://purl.org/nemo/gufo#Relator"/>
   <rdfs:label xml:lang="en">Frequent Temporal Correlation</rdfs:label>
 </owl:Class>
 
@@ -323,7 +318,6 @@
   </rdfs:subClassOf>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#Kind"/>
-  <rdf:type rdf:resource="http://purl.org/nemo/gufo#FunctionalComplex"/>
   <rdfs:label xml:lang="en">API Documentation</rdfs:label>
 </owl:Class>
 
@@ -342,7 +336,6 @@
   </rdfs:subClassOf>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#Kind"/>
-  <rdf:type rdf:resource="http://purl.org/nemo/gufo#FunctionalComplex"/>
   <rdfs:label xml:lang="en">API Domain</rdfs:label>
 </owl:Class>
 
@@ -363,7 +356,6 @@
   </rdfs:subClassOf>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#SubKind"/>
-  <rdf:type rdf:resource="core#Service"/>
   <rdfs:label xml:lang="en">API Operation</rdfs:label>
 </owl:Class>
 
@@ -385,7 +377,6 @@
   </rdfs:subClassOf>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#Kind"/>
-  <rdf:type rdf:resource="http://purl.org/nemo/gufo#Relator"/>
   <rdfs:label xml:lang="en">Operation Executed</rdfs:label>
 </owl:Class>
 
@@ -393,7 +384,6 @@
   <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#FunctionalComplex"/>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#Kind"/>
-  <rdf:type rdf:resource="http://purl.org/nemo/gufo#FunctionalComplex"/>
   <rdfs:label xml:lang="en">Correlated Data Objects</rdfs:label>
 </owl:Class>
 
@@ -401,7 +391,6 @@
   <rdfs:subClassOf rdf:resource="data-relation-view#APIDomain"/>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#Role"/>
-  <rdf:type rdf:resource="data-relation-view#APIDomain"/>
   <rdfs:label xml:lang="en">Data Domain</rdfs:label>
 </owl:Class>
 
@@ -419,7 +408,6 @@
   </rdfs:subClassOf>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#Role"/>
-  <rdf:type rdf:resource="core#APIResource"/>
   <rdfs:label xml:lang="en">API Entity</rdfs:label>
 </owl:Class>
 
@@ -437,7 +425,6 @@
   </rdfs:subClassOf>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#EventType"/>
-  <rdf:type rdf:resource="http://purl.org/nemo/gufo#Event"/>
   <rdfs:label xml:lang="en">Process</rdfs:label>
 </owl:Class>
 
@@ -445,7 +432,6 @@
   <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#FunctionalComplex"/>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#Kind"/>
-  <rdf:type rdf:resource="http://purl.org/nemo/gufo#FunctionalComplex"/>
   <rdfs:label xml:lang="en">EA Processes View</rdfs:label>
 </owl:Class>
 
@@ -481,7 +467,6 @@
   </rdfs:subClassOf>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#EventType"/>
-  <rdf:type rdf:resource="http://purl.org/nemo/gufo#Event"/>
   <rdfs:label xml:lang="en">API Call</rdfs:label>
 </owl:Class>
 
@@ -489,7 +474,6 @@
   <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#FunctionalComplex"/>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#Kind"/>
-  <rdf:type rdf:resource="http://purl.org/nemo/gufo#FunctionalComplex"/>
   <rdfs:label xml:lang="en">Consumer App</rdfs:label>
 </owl:Class>
 
@@ -497,7 +481,6 @@
   <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#FunctionalComplex"/>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#Kind"/>
-  <rdf:type rdf:resource="http://purl.org/nemo/gufo#FunctionalComplex"/>
   <rdfs:label xml:lang="en">Service</rdfs:label>
 </owl:Class>
 
@@ -536,7 +519,6 @@
   </rdfs:subClassOf>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#EventType"/>
-  <rdf:type rdf:resource="core#APICall"/>
   <rdfs:label xml:lang="en">API Antecedent Activity</rdfs:label>
 </owl:Class>
 
@@ -581,7 +563,6 @@
   </rdfs:subClassOf>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#EventType"/>
-  <rdf:type rdf:resource="core#APICall"/>
   <rdfs:label xml:lang="en">API Consequent Activity</rdfs:label>
 </owl:Class>
 
@@ -603,7 +584,6 @@
   </rdfs:subClassOf>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#Kind"/>
-  <rdf:type rdf:resource="http://purl.org/nemo/gufo#Relator"/>
   <rdfs:label xml:lang="en">Documented API</rdfs:label>
 </owl:Class>
 
@@ -626,7 +606,6 @@
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#Kind"/>
   <gufo:isDerivedFrom rdf:resource="core#belongsTo"/>
-  <rdf:type rdf:resource="http://purl.org/nemo/gufo#Relator"/>
   <rdfs:label xml:lang="en">API Domain Map</rdfs:label>
 </owl:Class>
 
@@ -653,7 +632,6 @@
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#Kind"/>
   <gufo:isDerivedFrom rdf:resource="data-relation-view#pertainsTo"/>
-  <rdf:type rdf:resource="http://purl.org/nemo/gufo#Relator"/>
   <rdfs:label xml:lang="en">Frequent Data Domain Correlation</rdfs:label>
 </owl:Class>
 
@@ -684,7 +662,6 @@
   </rdfs:subClassOf>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#EventType"/>
-  <rdf:type rdf:resource="http://purl.org/nemo/gufo#Event"/>
   <rdfs:label xml:lang="en">API Activities Connection</rdfs:label>
 </owl:Class>
 
@@ -694,7 +671,6 @@
   <rdfs:subClassOf rdf:resource="core#Service"/>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#SubKind"/>
-  <rdf:type rdf:resource="core#Service"/>
   <rdfs:label xml:lang="en">Service Destination</rdfs:label>
 </owl:Class>
 
@@ -708,7 +684,6 @@
   </rdfs:subClassOf>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#Role"/>
-  <rdf:type rdf:resource="core#ConsumerApp"/>
   <rdfs:label xml:lang="en">Partner</rdfs:label>
 </owl:Class>
 
@@ -716,7 +691,6 @@
   <rdfs:subClassOf rdf:resource="http://purl.org/nemo/gufo#VariableCollection"/>
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#Kind"/>
-  <rdf:type rdf:resource="http://purl.org/nemo/gufo#VariableCollection"/>
   <rdfs:label xml:lang="en">EA Data Objects Relation View</rdfs:label>
 </owl:Class>
 
@@ -741,7 +715,6 @@
   <rdf:type rdf:resource="http://www.w3.org/2002/07/owl#NamedIndividual"/>
   <rdf:type rdf:resource="http://purl.org/nemo/gufo#Kind"/>
   <gufo:isDerivedFrom rdf:resource="process-view#ProcessElementView_1"/>
-  <rdf:type rdf:resource="http://purl.org/nemo/gufo#Relator"/>
   <rdfs:label xml:lang="en">Process Element View</rdfs:label>
 </owl:Class>
 
@@ -822,7 +795,6 @@
   <gufo:participatedIn rdf:resource="POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts"/>
   <rdf:type rdf:resource="process-view#APIAntecedentActivity"/>
   <owl:sameAs rdf:resource="1f61314f275fcc690049921bffac9314"/>
-  <rdf:type rdf:resource="process-view#APIConsequentActivity"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">1f61314f275fcc690049921bffac9314</rdfs:label>
   <aPIC:request_time rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-04-15T12:53:00.155+00:00</aPIC:request_time>
   <aPIC:result_status rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">200</aPIC:result_status>
@@ -966,7 +938,6 @@
   <gufo:historicallyDependsOn rdf:resource="d8f0be34dbe53b47439e4743f851f003"/>
   <gufo:historicallyDependsOn rdf:resource="0245083144e7d95ef7fe83188a5ad93d"/>
   <gufo:historicallyDependsOn rdf:resource="35870d5f1ab813656678421a10e84419"/>
-  <rdf:type rdf:resource="process-view#APIAntecedentActivity"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ae54160d795c2a33ec1d7f6f49e0e21b</rdfs:label>
   <aPIC:request_time rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-04-15T12:53:06.370+00:00</aPIC:request_time>
   <aPIC:result_status rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">201</aPIC:result_status>
@@ -1000,7 +971,6 @@
   <gufo:participatedIn rdf:resource="POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts"/>
   <rdf:type rdf:resource="process-view#APIAntecedentActivity"/>
   <owl:sameAs rdf:resource="c7e0d77e6ae7cd73dfd6946606d74c48"/>
-  <rdf:type rdf:resource="process-view#APIConsequentActivity"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">c7e0d77e6ae7cd73dfd6946606d74c48</rdfs:label>
   <aPIC:request_time rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-04-15T12:53:07.486+00:00</aPIC:request_time>
   <aPIC:result_status rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">200</aPIC:result_status>
@@ -1161,7 +1131,6 @@
   <gufo:participatedIn rdf:resource="POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts"/>
   <rdf:type rdf:resource="process-view#APIAntecedentActivity"/>
   <owl:sameAs rdf:resource="6d719d4dbd44c308573a0f7202646132"/>
-  <rdf:type rdf:resource="process-view#APIConsequentActivity"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">6d719d4dbd44c308573a0f7202646132</rdfs:label>
   <aPIC:request_time rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-04-15T12:53:22.881+00:00</aPIC:request_time>
   <aPIC:result_status rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">200</aPIC:result_status>
@@ -1305,7 +1274,6 @@
   <gufo:historicallyDependsOn rdf:resource="0a24fd410982f710ecf46e4f77959a0f"/>
   <gufo:historicallyDependsOn rdf:resource="c6c6ba19432f7e4179f9fb417e34cc32"/>
   <gufo:historicallyDependsOn rdf:resource="d11fd05a45d72e384b833f41fd3ea735"/>
-  <rdf:type rdf:resource="process-view#APIAntecedentActivity"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">ea16780bda072b5240e92d0556d6562b</rdfs:label>
   <aPIC:request_time rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-04-15T12:53:27.761+00:00</aPIC:request_time>
   <aPIC:result_status rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">201</aPIC:result_status>
@@ -1327,7 +1295,6 @@
   <gufo:historicallyDependsOn rdf:resource="0a24fd410982f710ecf46e4f77959a0f"/>
   <gufo:historicallyDependsOn rdf:resource="c6c6ba19432f7e4179f9fb417e34cc32"/>
   <gufo:historicallyDependsOn rdf:resource="d11fd05a45d72e384b833f41fd3ea735"/>
-  <rdf:type rdf:resource="process-view#APIAntecedentActivity"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">75a271015f46b15d73b5b85b42a4903b</rdfs:label>
   <aPIC:request_time rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-04-15T12:53:28.535+00:00</aPIC:request_time>
   <aPIC:result_status rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">201</aPIC:result_status>
@@ -1340,7 +1307,6 @@
   <gufo:participatedIn rdf:resource="POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts"/>
   <rdf:type rdf:resource="process-view#APIAntecedentActivity"/>
   <owl:sameAs rdf:resource="12ee15190795751bacf4557437b7f01d"/>
-  <rdf:type rdf:resource="process-view#APIConsequentActivity"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">12ee15190795751bacf4557437b7f01d</rdfs:label>
   <aPIC:request_time rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-04-15T12:53:28.857+00:00</aPIC:request_time>
   <aPIC:result_status rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">200</aPIC:result_status>
@@ -1501,7 +1467,6 @@
   <gufo:participatedIn rdf:resource="POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts"/>
   <rdf:type rdf:resource="process-view#APIAntecedentActivity"/>
   <owl:sameAs rdf:resource="11768f697684bc4ba978566adf4aa46a"/>
-  <rdf:type rdf:resource="process-view#APIConsequentActivity"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">11768f697684bc4ba978566adf4aa46a</rdfs:label>
   <aPIC:request_time rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-04-15T12:54:25.778+00:00</aPIC:request_time>
   <aPIC:result_status rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">200</aPIC:result_status>
@@ -1648,7 +1613,6 @@
   <gufo:historicallyDependsOn rdf:resource="0e0c3828d61b3a329b4556342082c711"/>
   <gufo:historicallyDependsOn rdf:resource="4ca0f67d44beac1effcc6b7c334f1f41"/>
   <gufo:historicallyDependsOn rdf:resource="62f74f677d0cf542d1ffe2333f747f4f"/>
-  <rdf:type rdf:resource="process-view#APIAntecedentActivity"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">977f0a1b10c9b961b53c66298f0fda09</rdfs:label>
   <aPIC:request_time rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-04-15T12:54:30.765+00:00</aPIC:request_time>
   <aPIC:result_status rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">201</aPIC:result_status>
@@ -1670,7 +1634,6 @@
   <gufo:historicallyDependsOn rdf:resource="0e0c3828d61b3a329b4556342082c711"/>
   <gufo:historicallyDependsOn rdf:resource="4ca0f67d44beac1effcc6b7c334f1f41"/>
   <gufo:historicallyDependsOn rdf:resource="62f74f677d0cf542d1ffe2333f747f4f"/>
-  <rdf:type rdf:resource="process-view#APIAntecedentActivity"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">4781fa753af37576c302156de8dd5d4c</rdfs:label>
   <aPIC:request_time rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-04-15T12:54:31.593+00:00</aPIC:request_time>
   <aPIC:result_status rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">201</aPIC:result_status>
@@ -1683,7 +1646,6 @@
   <gufo:participatedIn rdf:resource="POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts"/>
   <rdf:type rdf:resource="process-view#APIAntecedentActivity"/>
   <owl:sameAs rdf:resource="103c3f724547d15dfb735900e40b1811"/>
-  <rdf:type rdf:resource="process-view#APIConsequentActivity"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">103c3f724547d15dfb735900e40b1811</rdfs:label>
   <aPIC:request_time rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-04-15T12:54:31.939+00:00</aPIC:request_time>
   <aPIC:result_status rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">200</aPIC:result_status>
@@ -1831,7 +1793,6 @@
   <gufo:historicallyDependsOn rdf:resource="0cbe9e61b5c4604efd17c2211cfadd53"/>
   <gufo:historicallyDependsOn rdf:resource="fb0b322cf88b1b220006f66448a03126"/>
   <gufo:historicallyDependsOn rdf:resource="921be3663f228521fb65a168b3e6e929"/>
-  <rdf:type rdf:resource="process-view#APIAntecedentActivity"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">d506027a96849120e3bd28154207b904</rdfs:label>
   <aPIC:request_time rdf:datatype="http://www.w3.org/2001/XMLSchema#dateTime">2024-04-15T12:54:37.604+00:00</aPIC:request_time>
   <aPIC:result_status rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">201</aPIC:result_status>
@@ -21974,10 +21935,6 @@
   <rdf:type rdf:resource="process-view#APIActivitiesConnection"/>
   <gufo:isEventProperPartOf rdf:resource="1f61314f275fcc690049921bffac9314"/>
   <gufo:isEventProperPartOf rdf:resource="8815d10cf19f330023b98f4cdb1d695c"/>
-  <gufo:historicallyDependsOn rdf:resource="process1"/>
-  <gufo:historicallyDependsOn rdf:resource="process2"/>
-  <gufo:historicallyDependsOn rdf:resource="process3"/>
-  <gufo:historicallyDependsOn rdf:resource="process4"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 1</rdfs:label>
 </owl:NamedIndividual>
 
@@ -21985,10 +21942,6 @@
   <rdf:type rdf:resource="process-view#APIActivitiesConnection"/>
   <gufo:isEventProperPartOf rdf:resource="8815d10cf19f330023b98f4cdb1d695c"/>
   <gufo:isEventProperPartOf rdf:resource="c65ed00a2aad8c2a1d71ad6970e8047a"/>
-  <gufo:historicallyDependsOn rdf:resource="process1"/>
-  <gufo:historicallyDependsOn rdf:resource="process2"/>
-  <gufo:historicallyDependsOn rdf:resource="process3"/>
-  <gufo:historicallyDependsOn rdf:resource="process4"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 2</rdfs:label>
 </owl:NamedIndividual>
 
@@ -21996,10 +21949,6 @@
   <rdf:type rdf:resource="process-view#APIActivitiesConnection"/>
   <gufo:isEventProperPartOf rdf:resource="db60373a949c022813e4e718dc353a56"/>
   <gufo:isEventProperPartOf rdf:resource="c65ed00a2aad8c2a1d71ad6970e8047a"/>
-  <gufo:historicallyDependsOn rdf:resource="process1"/>
-  <gufo:historicallyDependsOn rdf:resource="process2"/>
-  <gufo:historicallyDependsOn rdf:resource="process3"/>
-  <gufo:historicallyDependsOn rdf:resource="process4"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 3</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22007,10 +21956,6 @@
   <rdf:type rdf:resource="process-view#APIActivitiesConnection"/>
   <gufo:isEventProperPartOf rdf:resource="9b8bcc0e4bcb2261fd816e54dd709a50"/>
   <gufo:isEventProperPartOf rdf:resource="c65ed00a2aad8c2a1d71ad6970e8047a"/>
-  <gufo:historicallyDependsOn rdf:resource="process1"/>
-  <gufo:historicallyDependsOn rdf:resource="process2"/>
-  <gufo:historicallyDependsOn rdf:resource="process3"/>
-  <gufo:historicallyDependsOn rdf:resource="process4"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 4</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22018,10 +21963,6 @@
   <rdf:type rdf:resource="process-view#APIActivitiesConnection"/>
   <gufo:isEventProperPartOf rdf:resource="c65ed00a2aad8c2a1d71ad6970e8047a"/>
   <gufo:isEventProperPartOf rdf:resource="d8f0be34dbe53b47439e4743f851f003"/>
-  <gufo:historicallyDependsOn rdf:resource="process1"/>
-  <gufo:historicallyDependsOn rdf:resource="process2"/>
-  <gufo:historicallyDependsOn rdf:resource="process3"/>
-  <gufo:historicallyDependsOn rdf:resource="process4"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 2</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22029,10 +21970,6 @@
   <rdf:type rdf:resource="process-view#APIActivitiesConnection"/>
   <gufo:isEventProperPartOf rdf:resource="d8f0be34dbe53b47439e4743f851f003"/>
   <gufo:isEventProperPartOf rdf:resource="0245083144e7d95ef7fe83188a5ad93d"/>
-  <gufo:historicallyDependsOn rdf:resource="process1"/>
-  <gufo:historicallyDependsOn rdf:resource="process2"/>
-  <gufo:historicallyDependsOn rdf:resource="process3"/>
-  <gufo:historicallyDependsOn rdf:resource="process4"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 2</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22040,10 +21977,6 @@
   <rdf:type rdf:resource="process-view#APIActivitiesConnection"/>
   <gufo:isEventProperPartOf rdf:resource="0245083144e7d95ef7fe83188a5ad93d"/>
   <gufo:isEventProperPartOf rdf:resource="35870d5f1ab813656678421a10e84419"/>
-  <gufo:historicallyDependsOn rdf:resource="process1"/>
-  <gufo:historicallyDependsOn rdf:resource="process2"/>
-  <gufo:historicallyDependsOn rdf:resource="process3"/>
-  <gufo:historicallyDependsOn rdf:resource="process4"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 2</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22051,10 +21984,6 @@
   <rdf:type rdf:resource="process-view#APIActivitiesConnection"/>
   <gufo:isEventProperPartOf rdf:resource="35870d5f1ab813656678421a10e84419"/>
   <gufo:isEventProperPartOf rdf:resource="ae54160d795c2a33ec1d7f6f49e0e21b"/>
-  <gufo:historicallyDependsOn rdf:resource="process1"/>
-  <gufo:historicallyDependsOn rdf:resource="process2"/>
-  <gufo:historicallyDependsOn rdf:resource="process3"/>
-  <gufo:historicallyDependsOn rdf:resource="process4"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 2</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22111,10 +22040,6 @@
   <rdf:type rdf:resource="process-view#APIActivitiesConnection"/>
   <gufo:isEventProperPartOf rdf:resource="9c4ea67e722176497ed7a7577374733c"/>
   <gufo:isEventProperPartOf rdf:resource="7b5b045e30971f5f10f91005ae421f1d"/>
-  <gufo:historicallyDependsOn rdf:resource="process1"/>
-  <gufo:historicallyDependsOn rdf:resource="process2"/>
-  <gufo:historicallyDependsOn rdf:resource="process3"/>
-  <gufo:historicallyDependsOn rdf:resource="process4"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 8</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22234,10 +22159,6 @@
   <rdf:type rdf:resource="process-view#APIActivitiesConnection"/>
   <gufo:isEventProperPartOf rdf:resource="7239985dfd860f238508722b8c857210"/>
   <gufo:isEventProperPartOf rdf:resource="87409e0c5de4412ce81fd139fdb77670"/>
-  <gufo:historicallyDependsOn rdf:resource="process1"/>
-  <gufo:historicallyDependsOn rdf:resource="process2"/>
-  <gufo:historicallyDependsOn rdf:resource="process3"/>
-  <gufo:historicallyDependsOn rdf:resource="process4"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 14</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22259,10 +22180,6 @@
   <rdf:type rdf:resource="process-view#APIActivitiesConnection"/>
   <gufo:isEventProperPartOf rdf:resource="11768f697684bc4ba978566adf4aa46a"/>
   <gufo:isEventProperPartOf rdf:resource="e7ae28431d39a3487e3f89469eb0c372"/>
-  <gufo:historicallyDependsOn rdf:resource="process1"/>
-  <gufo:historicallyDependsOn rdf:resource="process2"/>
-  <gufo:historicallyDependsOn rdf:resource="process3"/>
-  <gufo:historicallyDependsOn rdf:resource="process4"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 15</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22319,10 +22236,6 @@
   <rdf:type rdf:resource="process-view#APIActivitiesConnection"/>
   <gufo:isEventProperPartOf rdf:resource="103c3f724547d15dfb735900e40b1811"/>
   <gufo:isEventProperPartOf rdf:resource="4d94ff799a8fc7443e1c8f3cb2c56f42"/>
-  <gufo:historicallyDependsOn rdf:resource="process1"/>
-  <gufo:historicallyDependsOn rdf:resource="process2"/>
-  <gufo:historicallyDependsOn rdf:resource="process3"/>
-  <gufo:historicallyDependsOn rdf:resource="process4"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 18</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22330,10 +22243,6 @@
   <rdf:type rdf:resource="process-view#APIActivitiesConnection"/>
   <gufo:isEventProperPartOf rdf:resource="4d94ff799a8fc7443e1c8f3cb2c56f42"/>
   <gufo:isEventProperPartOf rdf:resource="cc32673cbdefaf7d1c8ec24163b27157"/>
-  <gufo:historicallyDependsOn rdf:resource="process1"/>
-  <gufo:historicallyDependsOn rdf:resource="process2"/>
-  <gufo:historicallyDependsOn rdf:resource="process3"/>
-  <gufo:historicallyDependsOn rdf:resource="process4"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 18</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22348,10 +22257,6 @@
   <rdf:type rdf:resource="process-view#APIActivitiesConnection"/>
   <gufo:isEventProperPartOf rdf:resource="cc32673cbdefaf7d1c8ec24163b27157"/>
   <gufo:isEventProperPartOf rdf:resource="ceb8695fd1ca286bf2c14b61153a6455"/>
-  <gufo:historicallyDependsOn rdf:resource="process1"/>
-  <gufo:historicallyDependsOn rdf:resource="process2"/>
-  <gufo:historicallyDependsOn rdf:resource="process3"/>
-  <gufo:historicallyDependsOn rdf:resource="process4"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 18</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22359,10 +22264,6 @@
   <rdf:type rdf:resource="process-view#APIActivitiesConnection"/>
   <gufo:isEventProperPartOf rdf:resource="ceb8695fd1ca286bf2c14b61153a6455"/>
   <gufo:isEventProperPartOf rdf:resource="0cbe9e61b5c4604efd17c2211cfadd53"/>
-  <gufo:historicallyDependsOn rdf:resource="process1"/>
-  <gufo:historicallyDependsOn rdf:resource="process2"/>
-  <gufo:historicallyDependsOn rdf:resource="process3"/>
-  <gufo:historicallyDependsOn rdf:resource="process4"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 18</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22370,10 +22271,6 @@
   <rdf:type rdf:resource="process-view#APIActivitiesConnection"/>
   <gufo:isEventProperPartOf rdf:resource="0cbe9e61b5c4604efd17c2211cfadd53"/>
   <gufo:isEventProperPartOf rdf:resource="921be3663f228521fb65a168b3e6e929"/>
-  <gufo:historicallyDependsOn rdf:resource="process1"/>
-  <gufo:historicallyDependsOn rdf:resource="process2"/>
-  <gufo:historicallyDependsOn rdf:resource="process3"/>
-  <gufo:historicallyDependsOn rdf:resource="process4"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 18</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22381,10 +22278,6 @@
   <rdf:type rdf:resource="process-view#APIActivitiesConnection"/>
   <gufo:isEventProperPartOf rdf:resource="fb0b322cf88b1b220006f66448a03126"/>
   <gufo:isEventProperPartOf rdf:resource="921be3663f228521fb65a168b3e6e929"/>
-  <gufo:historicallyDependsOn rdf:resource="process1"/>
-  <gufo:historicallyDependsOn rdf:resource="process2"/>
-  <gufo:historicallyDependsOn rdf:resource="process3"/>
-  <gufo:historicallyDependsOn rdf:resource="process4"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 20</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22392,96 +22285,8 @@
   <rdf:type rdf:resource="process-view#APIActivitiesConnection"/>
   <gufo:isEventProperPartOf rdf:resource="921be3663f228521fb65a168b3e6e929"/>
   <gufo:isEventProperPartOf rdf:resource="d506027a96849120e3bd28154207b904"/>
-  <gufo:historicallyDependsOn rdf:resource="process1"/>
-  <gufo:historicallyDependsOn rdf:resource="process2"/>
-  <gufo:historicallyDependsOn rdf:resource="process3"/>
-  <gufo:historicallyDependsOn rdf:resource="process4"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 18</rdfs:label>
 </owl:NamedIndividual>
-
-<owl:NamedIndividual rdf:about="process1">
-  <rdf:type rdf:resource="process-view#Process"/>
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">process_name: POST carts</rdfs:label>
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">start_activity: POST_/sandbox/ecommerce/v1/carts</rdfs:label>
-</owl:NamedIndividual>
-
-<owl:NamedIndividual rdf:about="process2">
-  <rdf:type rdf:resource="process-view#Process"/>
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">process_name: GET orders</rdfs:label>
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">start_activity: GET_/sandbox/ecommerce/v1/orders</rdfs:label>
-</owl:NamedIndividual>
-
-<owl:NamedIndividual rdf:about="process3">
-  <rdf:type rdf:resource="process-view#Process"/>
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">process_name: POST itens</rdfs:label>
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">start_activity: POST_/sandbox/ecommerce/v1/carts/763/itens</rdfs:label>
-</owl:NamedIndividual>
-
-<owl:NamedIndividual rdf:about="process4">
-  <rdf:type rdf:resource="process-view#Process"/>
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">process_name: GET payments</rdfs:label>
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">start_activity: GET_/sandbox/payment/v1/payments</rdfs:label>
-</owl:NamedIndividual>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/GET_http://192.168.0.15:8000/sandbox/payment/v1/payments/757"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/831/deliveryaddress"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/orders/519"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/GET_http://192.168.0.15:8000/sandbox/payment/v1/payments/362"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/orders/547"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/772/itens"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/215/deliveryaddress"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/291/deliveryaddress"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/GET_http://192.168.0.15:8000/sandbox/payment/v1/payments"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/orders"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/291/itens"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/paymentmethod"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/215/itens"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/291"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/220"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/215"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/772/deliveryaddress"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/GET_http://192.168.0.15:8000/sandbox/payment/v1/payments/560"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/orders/71"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/772"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/763"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/orders"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/831/itens"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/763/deliveryaddress"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/220/itens"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/GET_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/831"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/220/deliveryaddress"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/POST_http://192.168.0.15:8000/sandbox/ecommerce/v1/carts/763/itens"/>
-
-<core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/POST_http://192.168.0.15:8000/sandbox/payment/v1/payments"/>
 
 
 </rdf:RDF>

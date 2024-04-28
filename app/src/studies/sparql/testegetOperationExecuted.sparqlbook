@@ -100,5 +100,11 @@
     "language": "sparql",
     "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX gufo: <http://purl.org/nemo/gufo#>\r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX ns_process_view: <http://eamining.edu.pt/process-view#>\r\n\r\nSELECT DISTINCT ?ftc #?antecedent ?consequent\r\nWHERE {\r\n    ?ftc a ns_process_view:FrequentTemporalCorrelation .\r\n    # ?ftc gufo:mediates ?antecedent .\r\n    # ?antecedent a ns_process_view:APIAntecedentActivity .\r\n    # ?ftc gufo:mediates ?consequent .\r\n    # ?consequent a ns_process_view:APIConsequentActivity .\r\n    # FILTER (\r\n    #     ?antecedent.name  = '1f61314f275fcc690049921bffac9314' && ?consequent = '8815d10cf19f330023b98f4cdb1d695c'\r\n    # )                        \r\n}\r\n\r\nLIMIT 10",
     "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX ns_process_view: <http://eamining.edu.pt/process-view#>\r\n\r\nSELECT ?activity_connection\r\nWHERE {\r\n    ?activity_connection a ns_process_view:APIActivitiesConnection .\r\n}\r\n\r\nlimit 10",
+    "metadata": {}
   }
 ]

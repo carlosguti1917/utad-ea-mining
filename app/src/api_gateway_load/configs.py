@@ -46,3 +46,13 @@ OWL_FILE = {
 FREQUENT_API_ATTRIBUTES = {
   "file_name": "frequent_attributes.ignore",
 }
+
+TEMP_PROCESSING_FILES = {
+  "file_path": "./temp/",
+  "file_ftc_list_name": "ftc_list.csv",
+}
+
+ARCHIMATE_MODEL = {
+  "file_path": "./archimate/",
+  "archimate_file_name": "archimate_model.xml",
+}
