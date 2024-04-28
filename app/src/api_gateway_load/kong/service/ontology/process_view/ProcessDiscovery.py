@@ -144,7 +144,7 @@ def processes_discovery():
             # Save the ontology
             sync_reasoner()
             onto.save()
-            
+    
     except Exception as error:   
         print('Ocorreu problema {} '.format(error.__class__))
         print("mensagem", str(error))

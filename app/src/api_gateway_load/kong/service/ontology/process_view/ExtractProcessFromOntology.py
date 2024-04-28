@@ -784,6 +784,7 @@ def save_frequent_temporal_correlation(onto, api_call_a, api_call_b, correlated_
                         ftc.repeated_attributes.append(attribute_pair)
                           
                 return ftc
+            
             except Exception as error:
                 print('Ocorreu problema {} '.format(error.__class__))
                 print("mensagem", str(error))

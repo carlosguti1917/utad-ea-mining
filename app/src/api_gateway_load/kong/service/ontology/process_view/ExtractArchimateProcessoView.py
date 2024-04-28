@@ -355,6 +355,7 @@ def add_process_view_diagram_nodes(root):
         print(f"In create_archimate_diagram module :", __name__)
         raise error        
    
+   
 
 def print_root_xml(root):
         

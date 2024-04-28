@@ -566,7 +566,6 @@ def event_transactions_selection(file_path, file_name):
         df = pd.read_csv(file_path + file_nm)
         labeled_data = case_id_generation(df, None, True)
         # print(f"labeled_data len: {len(labeled_data)}")
-                    
         return labeled_data
     except Exception as error:
         print('Ocorreu problema {} '.format(error.__class__))

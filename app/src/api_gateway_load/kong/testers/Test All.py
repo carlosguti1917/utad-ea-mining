@@ -40,7 +40,7 @@ print("Remove Frequent Items with success")
 #ftc_list = ExtractProcessFromOntology.mining_frequent_temporal_correlations(onto) # Vale para versão final
 print("Mining Frequent Temporal Correlations with success")
 
-extratct_processes.processes_discovery() # Vale para versão final
+extratct_processes.processes_discovery() # Vale para versão final 
 print("Processes Discovery with success")
 
 #create Process in Ontology
