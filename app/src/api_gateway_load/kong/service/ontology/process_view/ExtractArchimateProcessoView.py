@@ -61,8 +61,8 @@ def save_archimate_exchange_model(root):
         dom = xml.dom.minidom.parseString(xml_string)
         pretty_xml_string = dom.toprettyxml()
         # Print the pretty-printed XML string
-        print("#################### pretty_xml_string ##########################")
-        print(pretty_xml_string)
+        # print("#################### pretty_xml_string ##########################")
+        # print(pretty_xml_string)
         # Save the XML string to a file
         file_path = configs.ARCHIMATE_MODEL["file_path"]        
         file_name = configs.ARCHIMATE_MODEL["archimate_file_name"]
@@ -142,8 +142,10 @@ def add_archimate_process_elements(root, processes):
             if process_exists is None:
                 process_element = ET.SubElement(elements, "element", attrib={"identifier": process_identifier, "xsi:type": "BusinessProcess"})
                 process_name = ET.SubElement(process_element, "name")
-                process_name.text = process_name_text           
+                process_name.text = process_name_text  
             
+            # actor = process.actor
+            # root = add_archimate_actors_to_process(root, actor)
             root, event_number = add_archimate_event_process_elements(root, process_identifier, process_name_text, event_number)   
         
         #save_archimate_exchange_model(root)
@@ -162,6 +164,15 @@ def add_archimate_process_elements(root, processes):
         print('Ocorreu problema {} '.format(error.__class__))
         print("mensagem", str(error))
         print(f"In create_archimate_process_elements module :", __name__)
+        raise error
+
+def add_archimate_actors_to_process(root, process):
+    try:
+        pass
+    except Exception as error:   
+        print('Ocorreu problema {} '.format(error.__class__))
+        print("mensagem", str(error))
+        print(f"In create_archimate_actors_to_process module :", __name__)
         raise error
 
 def add_archimate_event_process_elements(root, process_identifier, process_name, event_number):   
@@ -236,36 +247,51 @@ def add_process_view_diagram_nodes(root):
 
         element_width = 100
         axis_width = 1200        
-        distance_between_elements = 10
+        distance_between_elements = 150
         
         # Count the number of elements that are of type BusinessProcess
-        business_process_count = sum(1 for element in elements if element.attrib.get('xsi:type') == 'BusinessProcess')
-        print(f"Number of elements of type BusinessProcess: {business_process_count}")   
-        total_bp = business_process_count  # Number of elements
-        available_space_bp = axis_width - (total_bp * (element_width + distance_between_elements))
-        if available_space_bp < 0:
-            raise ValueError("Not enough space for all BusinessProcess elements with the given distance.")         
-        center_position_bp = axis_width // 2
-        half_available_space = available_space_bp // 2
-        starting_position = center_position_bp - half_available_space
+        total_bp = sum(1 for element in elements if element.attrib.get('xsi:type') == 'BusinessProcess')
+        print(f"Number of elements of type BusinessProcess: {total_bp}")   
+        # available_space_bp = axis_width - (total_bp * (element_width + distance_between_elements))
+        # if available_space_bp < 0:
+        #     raise ValueError("Not enough space for all BusinessProcess elements with the given distance.")         
+        # center_position_bp = axis_width // 2
+        # half_available_space = available_space_bp // 2
+        #starting_position = center_position_bp - half_available_space
+        # while True:
+        #     available_space_bp = axis_width - (total_bp * (element_width + distance_between_elements))  
+        #     if available_space_bp < 0:
+        #         total_bp = total_bp / 2
+        #     else:
+        #         break          
+        # starting_x_bp = int((axis_width // total_bp) - (element_width // 2))
         
         # Count the number of elements that are of type BusinessEvent
-        business_event_count = sum(1 for element in elements if element.attrib.get('xsi:type') == 'BusinessEvent')
-        print(f"Number of elements of type BusinessProcess: {business_event_count}")   
-        total_be = business_event_count  # Number of elements
-        available_space_be = axis_width - (total_be * (element_width + distance_between_elements))
-        if available_space_be < 0:
-            print("Not enough space for all BusinessEvents elements with the given distance.")         
-        center_position_be = axis_width // 2
-        half_available_space_be = available_space_be // 2
-        starting_position_be = center_position_be - half_available_space_be         
+        total_be = sum(1 for element in elements if element.attrib.get('xsi:type') == 'BusinessEvent')
+        print(f"Number of elements of type BusinessProcess: {total_be}")   
+        # available_space_be = axis_width - (total_be * (element_width + distance_between_elements))
+        # if available_space_be < 0:
+        #     print("Not enough space for all BusinessEvents elements with the given distance.")         
+        # center_position_be = axis_width // 2
+        # half_available_space_be = available_space_be // 2
+        # while True:
+        #     available_space_be = axis_width - (total_be * (element_width + distance_between_elements))  
+        #     if available_space_be < 0:
+        #         total_be = total_be / 2
+        #     else:
+        #         break            
+        # starting_x_be = int((axis_width // total_be) - (element_width // 2))
         
         
-        # Initialize variables
-        level = 1
-        x_offset = 500
+        # Initialize position variables
+        
+        level_bp = 0
+        level_be = 0
+        y_offset = ((total_be // total_bp) * 100)
+        y_bp = 400
+        y_be = 10
         count_bp = 0
-        count_ev = 0
+        count_be = 0
         node_number = 0
         bp_relationships = None
         connection_number = 0
@@ -273,25 +299,40 @@ def add_process_view_diagram_nodes(root):
         # Iterate over the elements
         for element in elements:
             element_type = element.get("xsi:type")
-            
             # Check if the element is a BusinessProcess or BusinessEvent
             element_identifier = element.get('identifier')
             if element_type == "BusinessProcess":
                 count_bp += 1
-                level = 1
-                y = 300  # Set y position for BusinessProcess elements
+                level_bp += 1
+                if level_bp > 1:
+                    y_bp += y_offset
+                y = y_bp
                 #x_offset += 100  # Increase y_offset for the next BusinessProcess
-                x = starting_position + (count_bp * (element_width + distance_between_elements))
+                # if count_bp == 1:
+                #     x = starting_x_bp
+                # elif (count_bp / total_bp) < 1:
+                #     x = int(starting_x_bp + (count_bp * (element_width + distance_between_elements)))
+                # else:
+                #     level_bp += 1
+                #     x = starting_x_bp                             
+                x = 250 
                 #relationships = root.find(".//relationship[@souce="+ element_identifier +"]") 
             elif element_type == "BusinessEvent":
-                count_ev += 1
-                level = 2
-                y = 500  # Set y position for BusinessEvent elements
-                if x > axis_width:  
-                    count_ev = 1
-                    y += 150
-                x = starting_position_be + (count_ev * (element_width + 30 + distance_between_elements))
-                    
+                count_be += 1
+                #level_be += 1
+                # if level_be > 1:
+                #     y_be += 600
+                # if count_be == 1:
+                #     x = starting_x_be
+                # elif (count_be / total_be) < 1:
+                #     x = int(starting_x_bp + (count_bp * (element_width + distance_between_elements)))
+                # else:
+                #     level_be += 1 
+                #     y_be = y + 200
+                #     x = starting_x_be 
+                x = 500
+                y_be = y_be + 100
+                y = y_be  # Set y position for BusinessEvent elements                    
             node_number += 1
             node_identifier = f"id-node-{node_number}"
             diagram_view_node = ET.SubElement(diagram_view, "node", attrib={"identifier":node_identifier, "xsi:type":"Element", "elementRef":element_identifier, "x":str(x) , "y":str(y), "w":"120", "h":"50"})    
