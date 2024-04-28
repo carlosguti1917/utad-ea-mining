@@ -295,14 +295,7 @@ def add_process_view_diagram_nodes(root):
         node_number = 0
         bp_relationships = None
         connection_number = 0
-        be_antecedent_identifier = None
-        antecedent_node_identifier = None
 
-        root_copy_xpaths = etree.fromstring(ET.tostring(root))
-        namespaces = {'ns': 'http://www.opengroup.org/xsd/archimate/3.0/'} # replace with your namespace URI
-        #element = root.xpath(".//ns:element[@name='specific_name']", namespaces=namespaces)
-        #event_relation4 = root_copy_xpaths.xpath(f".//ns:relationship[@target='id-event-2']", namespaces=namespaces)
-        
         # Iterate over the elements
         for element in elements:
             element_type = element.get("xsi:type")
@@ -314,53 +307,36 @@ def add_process_view_diagram_nodes(root):
                 if level_bp > 1:
                     y_bp += y_offset
                 y = y_bp
+                #x_offset += 100  # Increase y_offset for the next BusinessProcess
+                # if count_bp == 1:
+                #     x = starting_x_bp
+                # elif (count_bp / total_bp) < 1:
+                #     x = int(starting_x_bp + (count_bp * (element_width + distance_between_elements)))
+                # else:
+                #     level_bp += 1
+                #     x = starting_x_bp                             
                 x = 250 
-                node_number += 1
-                node_identifier = f"id-node-{node_number}"
-                diagram_view_node = ET.SubElement(diagram_view, "node", attrib={"identifier":node_identifier, "xsi:type":"Element", "elementRef":element_identifier, "x":str(x) , "y":str(y), "w":"120", "h":"50"})                 
+                #relationships = root.find(".//relationship[@souce="+ element_identifier +"]") 
             elif element_type == "BusinessEvent":
                 count_be += 1
+                #level_be += 1
+                # if level_be > 1:
+                #     y_be += 600
+                # if count_be == 1:
+                #     x = starting_x_be
+                # elif (count_be / total_be) < 1:
+                #     x = int(starting_x_bp + (count_bp * (element_width + distance_between_elements)))
+                # else:
+                #     level_be += 1 
+                #     y_be = y + 200
+                #     x = starting_x_be 
                 x = 500
                 y_be = y_be + 100
-                y = y_be  # Set y position for BusinessEvent elements 
-                
-                #creating node
-                node_number += 1
-                node_identifier = f"id-node-{node_number}"
-                diagram_view_node = ET.SubElement(diagram_view, "node", attrib={"identifier":node_identifier, "xsi:type":"Element", "elementRef":element_identifier, "x":str(x) , "y":str(y), "w":"120", "h":"50"})                                 
-                
-                event_number = f"be-{count_be}"
-                relationship_id = f"id-relation-{event_number}"
-                #relationships
-                relationships = root.find("relationships")
-                #relationships = root.find("ns:relationships", namespaces=namespaces)
-                if relationships is None:
-                    relationships = ET.SubElement(root, "relationships")
-                relationship_exists = root.find(f".//relationship[@identifier='{relationship_id}']")
-                #relationship_exists = root.find(f".//ns:relationship[@identifier='{relationship_id}']", namespaces=namespaces)
-                
-                if relationship_exists is None:
-                    if be_antecedent_identifier is not None:
-                        target_value = 'id-event-2'
-                        # verify it the antecedent and the element are connected to the same BusinessProcess
-                        #event_relation = root.find(f".//relationship[@target='{element_identifier}']")
-                        event_relation = root_copy_xpaths.xpath(f".//ns:relationship[@target='{element_identifier}']", namespaces=namespaces)
-                        antecedent_relation = root_copy_xpaths.xpath(f".//ns:relationship[@target='{be_antecedent_identifier}']", namespaces=namespaces)
-                        event_process = event_relation[0].get("source")
-                        antecedent_event_process = antecedent_relation[0].get("source")
-                        if event_process == antecedent_event_process:
-                            relationship = ET.SubElement(relationships, "relationship ", attrib={"identifier": relationship_id, "source": be_antecedent_identifier, "target": element_identifier, "xsi:type":"Flow" })                
-                            relationship_name = ET.SubElement(relationship, "name")
-                            relationship_name.text = relationship_id
-                        # criar connection
-                    # if antecedent_node_identifier is not None:
-                    #     connection_number += 1
-                    #     connection_idenfitier = f"id-connection-{connection_number}"
-                    #     diagram_view_connection = ET.SubElement(diagram_view, "connection", attrib={"identifier": connection_idenfitier, "xsi:type":"Relationship", "source":antecedent_node_identifier, "target":node_identifier, "relationshipRef":relationship_id})
-                be_antecedent_identifier = element_identifier
-                #antecedent_node_identifier = node_identifier
-                                   
-               
+                y = y_be  # Set y position for BusinessEvent elements                    
+            node_number += 1
+            node_identifier = f"id-node-{node_number}"
+            diagram_view_node = ET.SubElement(diagram_view, "node", attrib={"identifier":node_identifier, "xsi:type":"Element", "elementRef":element_identifier, "x":str(x) , "y":str(y), "w":"120", "h":"50"})    
+            
 
         nodes = root.findall(".//node")
         for node in nodes:
@@ -386,6 +362,32 @@ def add_process_view_diagram_nodes(root):
                 connection_number += 1
                 connection_idenfitier = f"id-connection-{connection_number}"
                 diagram_view_connection = ET.SubElement(diagram_view, "connection", attrib={"identifier": connection_idenfitier, "xsi:type":"Relationship", "source":source_node, "target":target_node, "relationshipRef":relationship_id})
+
+            # if bp_relationships is not None:
+                 
+            #     for relationship in bp_relationships:
+            #         connection_number += 1
+            #         source = relationship.get("source")
+            #         target = relationship.get("target")
+            #         relationship_id = relationship.get("identifier")
+            #         source_node = f"id-node-{source}"
+            #         target_node = f"id-node-{target}"
+            #         connection_idenfitier = f"id-connection-{node_number}"
+            #         diagram_view_connection = ET.SubElement(diagram_view, "connection", attrib={"identifier": connection_idenfitier, "xsi:type":"Relationship", "source":source_node, "target":target_node, "relationshipRef":relationship_id})
+            
+
+        # relationships = root.find("relationships")
+        # # relationships = root.find('relationships') 
+        # connection_number = 0        
+        # for relationship in relationships:
+        #     connection_number += 1
+        #     source = relationship.get("source")
+        #     target = relationship.get("target")
+        #     relationship_id = relationship.get("identifier")
+        #     source_node = f"id-node-{source}"
+        #     target_node = f"id-node-{target}"
+        #     connection_idenfitier = f"id-connection-{connection_number}"
+        #     diagram_view_connection = ET.SubElement(diagram_view, "connection", attrib={"identifier": connection_idenfitier, "xsi:type":"Relationship", "source":source_node, "target":target_node, "relationshipRef":relationship_id})    
         
         return root
     except Exception as error:   
