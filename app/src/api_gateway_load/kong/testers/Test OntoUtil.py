@@ -39,4 +39,18 @@ df = pd.read_csv(file_path + file_nm)
 file_nm = "ftc_list_with_case_id.csv"
 #data_case_id.to_csv(file_path + file_nm, index=False)
 
+
+# file_path = './temp/'   
+# file_nm = "ftc_list.csv"
+# selected_transactions = onto_util.event_transactions_selection(file_path, file_nm) # Já faz dentro do mining_frequent_temporal_correlations. Este é o oficial que será chamado pelo mining_process_model, está aqui para efeitos de testes
+
+#cleaned_data = onto_util.remove_ftc_noise(df, None) # já faz dentro do event_transactions_selection
+
+#data_case_id = onto_util.case_id_generation(df, None, True) # já faz dentro do event_transactions_selection
+
+#create Activity Connections and Frequent Temporal Correlations
+# ExtractProcessFromOntology.mining_activities_connection(onto, selected_transactions, ftc_list)
+# sync_reasoner()
+# onto.save(format="rdfxml")
+
 print("OntoUtil executed with success")

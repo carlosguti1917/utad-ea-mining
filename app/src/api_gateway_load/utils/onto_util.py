@@ -57,6 +57,10 @@ def add_ignored_attribute_to_file(attribute_name, file_path, api_name):
         raise error      
 
 def attribute_pairs_selection(api_resource_correlations):
+    """
+        select the attributes pairs to be used in the Frequent Temporal Correlation
+    """
+    #TODO conferir, parece haver alguns attributs pairs que não correspondem na ontologia
     aux_corr_dict = {} # Auxiliary Dictionary to store the attributes pair and the number of times they appear in the correlations
     selected_correlations = [] # List of attributes pair selected to be used in the FTC
     aux_operations_dic = {}
@@ -88,7 +92,7 @@ def attribute_pairs_selection(api_resource_correlations):
 
     
         sorted_aux_corr_dict = dict(sorted(aux_corr_dict.items(), key=lambda item: item[0]))
-        print(f"sorted_aux_corr_dict len: {len(sorted_aux_corr_dict)}")
+        # print(f"sorted_aux_corr_dict len: {len(sorted_aux_corr_dict)}")
         for key_a in sorted_aux_corr_dict:
             total_operations = sorted_aux_corr_dict[key_a]["total_operations_pair"]
             #print(F"Total Operations = {total_operations}")
@@ -370,13 +374,11 @@ def remove_ftc_noise(ftc_list, activity):
     new_ftc_list = pd.DataFrame(columns=ftc_list.columns)
     #new_ftc_list = None
     under_analysis_event = activity
-    #antecedent_activity = None
     under_analysis_begin_time = None
     under_analysis_end_time = None
     consequent_event_id = None
     correlation_id = None
-    next_row = None
-    print(f"No inicio ftc_list len: {len(ftc_list)}  ")
+    # print(f"No inicio ftc_list len: {len(ftc_list)}  ")
     
     #for control or updated rows purposes
     if 'case_id' not in ftc_list.columns:
@@ -420,7 +422,7 @@ def remove_ftc_noise(ftc_list, activity):
                 
                 
             num_rows = filtered_ftc_list.shape[0]
-            print(f"num_rows: {num_rows}  index: {index} conta_rows: {conta_rows}  conta_removed: {conta_removed}")
+            # print(f"num_rows: {num_rows}  index: {index} conta_rows: {conta_rows}  conta_removed: {conta_removed}")
             if num_rows == conta_rows:
                 #next_row = filtered_ftc_list.shift(axis='index', periods=2)
                 aux_next_row = ftc_list[(ftc_list['case_id'] == -1)]
@@ -446,7 +448,7 @@ def remove_ftc_noise(ftc_list, activity):
             # Call the function recursively with the filtered ftc_list and the consequent_event_id as the activity parameter until there is no more consequent event for the under_analysis_event     
             ftc_list = remove_ftc_noise(ftc_list, consequent_event_id)
         
-        print(f"Depois ftc_list len: {len(ftc_list)}")
+        # print(f"Depois ftc_list len: {len(ftc_list)}")
         
         return ftc_list
 
@@ -463,6 +465,7 @@ def case_id_generation(ftc_list, activity, generate_next_case):
             ftc_list: A pandas DataFrame with a list of ns_process_view.FrequentTemporalCorrelation instances. 
                         ftc_list has the following structure: columns=['case_id', 'correlation_id', 'antecedent_id', 'antecedent_request_time','consequent_id', 'consequent_response_time']
             activity: The activity under analysis
+            generate_next_case: A boolean flag to indicate if a new case_id should be generated
     """
     try:
         # Initialize ftc_index
@@ -489,7 +492,6 @@ def case_id_generation(ftc_list, activity, generate_next_case):
             under_analysis_event = antecedent_id        
               
         aux_line = ftc_list[(ftc_list['antecedent_id'] == under_analysis_event) & (ftc_list['case_id'] == 0)]
-        #aux_line = ftc_list[[ftc_list['antecedent_id'] == under_analysis_event]]
         
         for index, row in aux_line.iterrows():
             consequent_event_id = row['consequent_id']
@@ -497,14 +499,13 @@ def case_id_generation(ftc_list, activity, generate_next_case):
             ftc_index = ftc_list[(ftc_list['correlation_id'] == row['correlation_id'])].index
             ftc_list.loc[ftc_index, 'case_id'] = case_id            
             under_analysis_event = consequent_event_id    
-            print(f"correlation_id: {row['correlation_id']} case_id {case_id}" )
+            # print(f"correlation_id: {row['correlation_id']} case_id {case_id}" )
 
         # get the next event to be analyzed
         if consequent_event_id is None:
             aux_next = ftc_list[ftc_list['case_id'] == 0].sort_values(by=['antecedent_request_time']).head(1)
             for index, row_i in aux_next.iterrows():
                 next_correlation = row_i['correlation_id']
-                #antecedent_id = row_i['antecedent_id']
                 consequent_event_id = row_i['antecedent_id']
                 under_analysis_event = consequent_event_id
                 generate_next_case = True
@@ -512,7 +513,7 @@ def case_id_generation(ftc_list, activity, generate_next_case):
         if consequent_event_id is not None:
             ftc_list = case_id_generation(ftc_list, under_analysis_event, generate_next_case)  
             
-        print(f"fim ################### {case_id} ")  
+        # print(f"fim ################### {case_id} ")  
         
         return ftc_list
     except Exception as error:
@@ -552,28 +553,20 @@ def event_transactions_selection(file_path, file_name):
     #      repeat the process until there is no more consequent event for the under_analisys_event 
     
     
-    selected_transactions = []
+    labeled_data = None
     try:
         # revoming the noise from the Frequent Temporal Correlation list
         df = pd.read_csv(file_path + file_name)
         cleaned_data = remove_ftc_noise(df, None)
-        print(f"cleaned_data len: {len(cleaned_data)}")
+        # print(f"cleaned_data len: {len(cleaned_data)}")
         file_nm = "ftc_list_cleaned.csv"     
         cleaned_data.to_csv(file_path + file_nm, index=False)
         
         #TODO after this point save ftcs on de ontology 
         df = pd.read_csv(file_path + file_nm)
-        labeled_data = case_id_generation(df, None)
-        print(f"labeled_data len: {len(labeled_data)}")
-            
-       
-        # for line in data:
-        #     line_data = line.split('\t')
-            #transaction_date = line_data[0]
-            # if begin_date <= transaction_date <= end_date:
-            #     selected_transactions.append(line)
-        
-        return selected_transactions
+        labeled_data = case_id_generation(df, None, True)
+        # print(f"labeled_data len: {len(labeled_data)}")
+        return labeled_data
     except Exception as error:
         print('Ocorreu problema {} '.format(error.__class__))
         print("mensagem", str(error))
