@@ -21978,7 +21978,35 @@
   <gufo:historicallyDependsOn rdf:resource="process2"/>
   <gufo:historicallyDependsOn rdf:resource="process3"/>
   <gufo:historicallyDependsOn rdf:resource="process4"/>
+  <gufo:historicallyDependsOn rdf:resource="POST carts"/>
+  <gufo:historicallyDependsOn rdf:resource="GET orders"/>
+  <gufo:historicallyDependsOn rdf:resource="POST itens"/>
+  <gufo:historicallyDependsOn rdf:resource="GET payments"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 1</rdfs:label>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="process1">
+  <rdf:type rdf:resource="process-view#Process"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">process_name: POST carts</rdfs:label>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">start_activity: POST_/sandbox/ecommerce/v1/carts</rdfs:label>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="process2">
+  <rdf:type rdf:resource="process-view#Process"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">process_name: GET orders</rdfs:label>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">start_activity: GET_/sandbox/ecommerce/v1/orders</rdfs:label>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="process3">
+  <rdf:type rdf:resource="process-view#Process"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">process_name: POST itens</rdfs:label>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">start_activity: POST_/sandbox/ecommerce/v1/carts/763/itens</rdfs:label>
+</owl:NamedIndividual>
+
+<owl:NamedIndividual rdf:about="process4">
+  <rdf:type rdf:resource="process-view#Process"/>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">process_name: GET payments</rdfs:label>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">start_activity: GET_/sandbox/payment/v1/payments</rdfs:label>
 </owl:NamedIndividual>
 
 <owl:NamedIndividual rdf:about="apiactivitiesconnection2">
@@ -21989,6 +22017,10 @@
   <gufo:historicallyDependsOn rdf:resource="process2"/>
   <gufo:historicallyDependsOn rdf:resource="process3"/>
   <gufo:historicallyDependsOn rdf:resource="process4"/>
+  <gufo:historicallyDependsOn rdf:resource="POST carts"/>
+  <gufo:historicallyDependsOn rdf:resource="GET orders"/>
+  <gufo:historicallyDependsOn rdf:resource="POST itens"/>
+  <gufo:historicallyDependsOn rdf:resource="GET payments"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 2</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22000,6 +22032,10 @@
   <gufo:historicallyDependsOn rdf:resource="process2"/>
   <gufo:historicallyDependsOn rdf:resource="process3"/>
   <gufo:historicallyDependsOn rdf:resource="process4"/>
+  <gufo:historicallyDependsOn rdf:resource="POST carts"/>
+  <gufo:historicallyDependsOn rdf:resource="GET orders"/>
+  <gufo:historicallyDependsOn rdf:resource="POST itens"/>
+  <gufo:historicallyDependsOn rdf:resource="GET payments"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 3</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22011,6 +22047,10 @@
   <gufo:historicallyDependsOn rdf:resource="process2"/>
   <gufo:historicallyDependsOn rdf:resource="process3"/>
   <gufo:historicallyDependsOn rdf:resource="process4"/>
+  <gufo:historicallyDependsOn rdf:resource="POST carts"/>
+  <gufo:historicallyDependsOn rdf:resource="GET orders"/>
+  <gufo:historicallyDependsOn rdf:resource="POST itens"/>
+  <gufo:historicallyDependsOn rdf:resource="GET payments"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 4</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22022,6 +22062,10 @@
   <gufo:historicallyDependsOn rdf:resource="process2"/>
   <gufo:historicallyDependsOn rdf:resource="process3"/>
   <gufo:historicallyDependsOn rdf:resource="process4"/>
+  <gufo:historicallyDependsOn rdf:resource="POST carts"/>
+  <gufo:historicallyDependsOn rdf:resource="GET orders"/>
+  <gufo:historicallyDependsOn rdf:resource="POST itens"/>
+  <gufo:historicallyDependsOn rdf:resource="GET payments"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 2</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22033,6 +22077,10 @@
   <gufo:historicallyDependsOn rdf:resource="process2"/>
   <gufo:historicallyDependsOn rdf:resource="process3"/>
   <gufo:historicallyDependsOn rdf:resource="process4"/>
+  <gufo:historicallyDependsOn rdf:resource="POST carts"/>
+  <gufo:historicallyDependsOn rdf:resource="GET orders"/>
+  <gufo:historicallyDependsOn rdf:resource="POST itens"/>
+  <gufo:historicallyDependsOn rdf:resource="GET payments"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 2</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22044,6 +22092,10 @@
   <gufo:historicallyDependsOn rdf:resource="process2"/>
   <gufo:historicallyDependsOn rdf:resource="process3"/>
   <gufo:historicallyDependsOn rdf:resource="process4"/>
+  <gufo:historicallyDependsOn rdf:resource="POST carts"/>
+  <gufo:historicallyDependsOn rdf:resource="GET orders"/>
+  <gufo:historicallyDependsOn rdf:resource="POST itens"/>
+  <gufo:historicallyDependsOn rdf:resource="GET payments"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 2</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22055,6 +22107,10 @@
   <gufo:historicallyDependsOn rdf:resource="process2"/>
   <gufo:historicallyDependsOn rdf:resource="process3"/>
   <gufo:historicallyDependsOn rdf:resource="process4"/>
+  <gufo:historicallyDependsOn rdf:resource="POST carts"/>
+  <gufo:historicallyDependsOn rdf:resource="GET orders"/>
+  <gufo:historicallyDependsOn rdf:resource="POST itens"/>
+  <gufo:historicallyDependsOn rdf:resource="GET payments"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 2</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22115,6 +22171,10 @@
   <gufo:historicallyDependsOn rdf:resource="process2"/>
   <gufo:historicallyDependsOn rdf:resource="process3"/>
   <gufo:historicallyDependsOn rdf:resource="process4"/>
+  <gufo:historicallyDependsOn rdf:resource="POST carts"/>
+  <gufo:historicallyDependsOn rdf:resource="GET orders"/>
+  <gufo:historicallyDependsOn rdf:resource="POST itens"/>
+  <gufo:historicallyDependsOn rdf:resource="GET payments"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 8</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22238,6 +22298,10 @@
   <gufo:historicallyDependsOn rdf:resource="process2"/>
   <gufo:historicallyDependsOn rdf:resource="process3"/>
   <gufo:historicallyDependsOn rdf:resource="process4"/>
+  <gufo:historicallyDependsOn rdf:resource="POST carts"/>
+  <gufo:historicallyDependsOn rdf:resource="GET orders"/>
+  <gufo:historicallyDependsOn rdf:resource="POST itens"/>
+  <gufo:historicallyDependsOn rdf:resource="GET payments"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 14</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22263,6 +22327,10 @@
   <gufo:historicallyDependsOn rdf:resource="process2"/>
   <gufo:historicallyDependsOn rdf:resource="process3"/>
   <gufo:historicallyDependsOn rdf:resource="process4"/>
+  <gufo:historicallyDependsOn rdf:resource="POST carts"/>
+  <gufo:historicallyDependsOn rdf:resource="GET orders"/>
+  <gufo:historicallyDependsOn rdf:resource="POST itens"/>
+  <gufo:historicallyDependsOn rdf:resource="GET payments"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 15</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22323,6 +22391,10 @@
   <gufo:historicallyDependsOn rdf:resource="process2"/>
   <gufo:historicallyDependsOn rdf:resource="process3"/>
   <gufo:historicallyDependsOn rdf:resource="process4"/>
+  <gufo:historicallyDependsOn rdf:resource="POST carts"/>
+  <gufo:historicallyDependsOn rdf:resource="GET orders"/>
+  <gufo:historicallyDependsOn rdf:resource="POST itens"/>
+  <gufo:historicallyDependsOn rdf:resource="GET payments"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 18</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22334,6 +22406,10 @@
   <gufo:historicallyDependsOn rdf:resource="process2"/>
   <gufo:historicallyDependsOn rdf:resource="process3"/>
   <gufo:historicallyDependsOn rdf:resource="process4"/>
+  <gufo:historicallyDependsOn rdf:resource="POST carts"/>
+  <gufo:historicallyDependsOn rdf:resource="GET orders"/>
+  <gufo:historicallyDependsOn rdf:resource="POST itens"/>
+  <gufo:historicallyDependsOn rdf:resource="GET payments"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 18</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22352,6 +22428,10 @@
   <gufo:historicallyDependsOn rdf:resource="process2"/>
   <gufo:historicallyDependsOn rdf:resource="process3"/>
   <gufo:historicallyDependsOn rdf:resource="process4"/>
+  <gufo:historicallyDependsOn rdf:resource="POST carts"/>
+  <gufo:historicallyDependsOn rdf:resource="GET orders"/>
+  <gufo:historicallyDependsOn rdf:resource="POST itens"/>
+  <gufo:historicallyDependsOn rdf:resource="GET payments"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 18</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22363,6 +22443,10 @@
   <gufo:historicallyDependsOn rdf:resource="process2"/>
   <gufo:historicallyDependsOn rdf:resource="process3"/>
   <gufo:historicallyDependsOn rdf:resource="process4"/>
+  <gufo:historicallyDependsOn rdf:resource="POST carts"/>
+  <gufo:historicallyDependsOn rdf:resource="GET orders"/>
+  <gufo:historicallyDependsOn rdf:resource="POST itens"/>
+  <gufo:historicallyDependsOn rdf:resource="GET payments"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 18</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22374,6 +22458,10 @@
   <gufo:historicallyDependsOn rdf:resource="process2"/>
   <gufo:historicallyDependsOn rdf:resource="process3"/>
   <gufo:historicallyDependsOn rdf:resource="process4"/>
+  <gufo:historicallyDependsOn rdf:resource="POST carts"/>
+  <gufo:historicallyDependsOn rdf:resource="GET orders"/>
+  <gufo:historicallyDependsOn rdf:resource="POST itens"/>
+  <gufo:historicallyDependsOn rdf:resource="GET payments"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 18</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22385,6 +22473,10 @@
   <gufo:historicallyDependsOn rdf:resource="process2"/>
   <gufo:historicallyDependsOn rdf:resource="process3"/>
   <gufo:historicallyDependsOn rdf:resource="process4"/>
+  <gufo:historicallyDependsOn rdf:resource="POST carts"/>
+  <gufo:historicallyDependsOn rdf:resource="GET orders"/>
+  <gufo:historicallyDependsOn rdf:resource="POST itens"/>
+  <gufo:historicallyDependsOn rdf:resource="GET payments"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 20</rdfs:label>
 </owl:NamedIndividual>
 
@@ -22396,31 +22488,39 @@
   <gufo:historicallyDependsOn rdf:resource="process2"/>
   <gufo:historicallyDependsOn rdf:resource="process3"/>
   <gufo:historicallyDependsOn rdf:resource="process4"/>
+  <gufo:historicallyDependsOn rdf:resource="POST carts"/>
+  <gufo:historicallyDependsOn rdf:resource="GET orders"/>
+  <gufo:historicallyDependsOn rdf:resource="POST itens"/>
+  <gufo:historicallyDependsOn rdf:resource="GET payments"/>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">case_id : 18</rdfs:label>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="process1">
+<owl:NamedIndividual rdf:about="POST carts">
   <rdf:type rdf:resource="process-view#Process"/>
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">process_name: POST carts</rdfs:label>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">POST carts</rdfs:label>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">start_activity: POST_/sandbox/ecommerce/v1/carts</rdfs:label>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Partner: acmeapp</rdfs:label>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="process2">
+<owl:NamedIndividual rdf:about="GET orders">
   <rdf:type rdf:resource="process-view#Process"/>
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">process_name: GET orders</rdfs:label>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GET orders</rdfs:label>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">start_activity: GET_/sandbox/ecommerce/v1/orders</rdfs:label>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Partner: acmeapp</rdfs:label>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="process3">
+<owl:NamedIndividual rdf:about="POST itens">
   <rdf:type rdf:resource="process-view#Process"/>
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">process_name: POST itens</rdfs:label>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">POST itens</rdfs:label>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">start_activity: POST_/sandbox/ecommerce/v1/carts/763/itens</rdfs:label>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Partner: acmeapp</rdfs:label>
 </owl:NamedIndividual>
 
-<owl:NamedIndividual rdf:about="process4">
+<owl:NamedIndividual rdf:about="GET payments">
   <rdf:type rdf:resource="process-view#Process"/>
-  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">process_name: GET payments</rdfs:label>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">GET payments</rdfs:label>
   <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">start_activity: GET_/sandbox/payment/v1/payments</rdfs:label>
+  <rdfs:label rdf:datatype="http://www.w3.org/2001/XMLSchema#string">Partner: acmeapp</rdfs:label>
 </owl:NamedIndividual>
 
 <core:APIOperation rdf:about="file:///C:/Users/carlo/AppData/Local/Temp/GET_http://192.168.0.15:8000/sandbox/payment/v1/payments/757"/>

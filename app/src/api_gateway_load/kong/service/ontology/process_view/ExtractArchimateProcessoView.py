@@ -138,11 +138,15 @@ def add_archimate_process_elements(root, processes):
             process_identifier = f"id-process-{process_element_number}"
             process_exists = elements.find(f".//element[@identifier='{process_identifier}']")
             label_parts = process.label[0].split(': ')
-            process_name_text = label_parts[1]
+            if len(label_parts) > 1:
+                process_name_text = label_parts[1]
+            else:
+                process_name_text = process.label[0]
             if process_exists is None:
                 process_element = ET.SubElement(elements, "element", attrib={"identifier": process_identifier, "xsi:type": "BusinessProcess"})
                 process_name = ET.SubElement(process_element, "name")
                 process_name.text = process_name_text  
+                root = add_archimate_actors_to_process(root, process, process_identifier)
             
             # actor = process.actor
             # root = add_archimate_actors_to_process(root, actor)
@@ -163,12 +167,39 @@ def add_archimate_process_elements(root, processes):
     except Exception as error:   
         print('Ocorreu problema {} '.format(error.__class__))
         print("mensagem", str(error))
-        print(f"In create_archimate_process_elements module :", __name__)
+        print(f"In add_archimate_process_elements module :", __name__)
         raise error
 
-def add_archimate_actors_to_process(root, process):
+def add_archimate_actors_to_process(root, process, process_identifier):
     try:
-        pass
+        labels  = process.label
+        for label in labels:
+            label_parts = label.split(': ')
+            part0 = label_parts[0]
+            if part0 != "Partner":
+                continue
+            actor_name = label_parts[1]
+            actor_identifier = f"id-actor-{actor_name}"
+            elements = root.find("elements")
+            if elements is None:
+                elements = ET.SubElement(root, "elements")
+            actor_exists = elements.find(f".//element[@identifier='{actor_identifier}']")
+            if actor_exists is None:
+                actor_element = ET.SubElement(elements, "element", attrib={"identifier": actor_identifier, "xsi:type": "BusinessActor"})
+                actor_element_name = ET.SubElement(actor_element, "name")
+                actor_element_name.text = actor_name
+            #relationships
+            relationships = root.find("relationships")
+            if relationships is None:
+                relationships = ET.SubElement(root, "relationships")            
+            relationship_id = f"id-relation-{actor_name}-{process_identifier}"
+            relationship_exists = root.find(f".//relationship[@identifier='{relationship_id}']")
+            if relationship_exists is None:
+                relationship = ET.SubElement(relationships, "relationship ", attrib={"identifier": relationship_id, "source": process_identifier, "target": actor_identifier, "xsi:type":"Serving" })                
+                relationship_name = ET.SubElement(relationship, "name")
+                relationship_name.text = relationship_id
+        
+        return root
     except Exception as error:   
         print('Ocorreu problema {} '.format(error.__class__))
         print("mensagem", str(error))
@@ -215,7 +246,7 @@ def add_archimate_event_process_elements(root, process_identifier, process_name,
             relationship_id = f"id-relation-{event_number}"
             relationship_exists = root.find(f".//relationship[@identifier='{relationship_id}']")
             if relationship_exists is None:
-                relationship = ET.SubElement(relationships, "relationship ", attrib={"identifier": relationship_id, "source": process_identifier, "target": event_identifier, "xsi:type":"Serving" })                
+                relationship = ET.SubElement(relationships, "relationship ", attrib={"identifier": relationship_id, "source": process_identifier, "target": event_identifier, "xsi:type":"Association" })                
                 relationship_name = ET.SubElement(relationship, "name")
                 relationship_name.text = relationship_id           
         
@@ -250,48 +281,25 @@ def add_process_view_diagram_nodes(root):
         distance_between_elements = 150
         
         # Count the number of elements that are of type BusinessProcess
-        total_bp = sum(1 for element in elements if element.attrib.get('xsi:type') == 'BusinessProcess')
-        print(f"Number of elements of type BusinessProcess: {total_bp}")   
-        # available_space_bp = axis_width - (total_bp * (element_width + distance_between_elements))
-        # if available_space_bp < 0:
-        #     raise ValueError("Not enough space for all BusinessProcess elements with the given distance.")         
-        # center_position_bp = axis_width // 2
-        # half_available_space = available_space_bp // 2
-        #starting_position = center_position_bp - half_available_space
-        # while True:
-        #     available_space_bp = axis_width - (total_bp * (element_width + distance_between_elements))  
-        #     if available_space_bp < 0:
-        #         total_bp = total_bp / 2
-        #     else:
-        #         break          
-        # starting_x_bp = int((axis_width // total_bp) - (element_width // 2))
-        
+        total_bp = sum(1 for element in elements if element.attrib.get('xsi:type') == 'BusinessProcess')     
         # Count the number of elements that are of type BusinessEvent
         total_be = sum(1 for element in elements if element.attrib.get('xsi:type') == 'BusinessEvent')
-        print(f"Number of elements of type BusinessProcess: {total_be}")   
-        # available_space_be = axis_width - (total_be * (element_width + distance_between_elements))
-        # if available_space_be < 0:
-        #     print("Not enough space for all BusinessEvents elements with the given distance.")         
-        # center_position_be = axis_width // 2
-        # half_available_space_be = available_space_be // 2
-        # while True:
-        #     available_space_be = axis_width - (total_be * (element_width + distance_between_elements))  
-        #     if available_space_be < 0:
-        #         total_be = total_be / 2
-        #     else:
-        #         break            
-        # starting_x_be = int((axis_width // total_be) - (element_width // 2))
-        
+        # Count the number of elements that are of type BusinessActor
+        total_ba = sum(1 for element in elements if element.attrib.get('xsi:type') == 'BusinessActor')
+
         
         # Initialize position variables
         
         level_bp = 0
         level_be = 0
-        y_offset = ((total_be // total_bp) * 100)
+        y_offset = int((total_be // total_bp) * 100)
         y_bp = 400
         y_be = 10
+        y_ba = int((400 * total_bp) / 2)
+        y_ba_offset = int((total_bp // total_ba) * 100)
         count_bp = 0
         count_be = 0
+        count_ba = 0
         node_number = 0
         bp_relationships = None
         connection_number = 0
@@ -359,9 +367,16 @@ def add_process_view_diagram_nodes(root):
                     #     diagram_view_connection = ET.SubElement(diagram_view, "connection", attrib={"identifier": connection_idenfitier, "xsi:type":"Relationship", "source":antecedent_node_identifier, "target":node_identifier, "relationshipRef":relationship_id})
                 be_antecedent_identifier = element_identifier
                 #antecedent_node_identifier = node_identifier
-                                   
-               
+            if element_type == "BusinessActor":
+                count_ba += 1
+                y_ba = y_ba + y_ba_offset
+                y = y_ba
+                x = 50 
+                node_number += 1
+                node_identifier = f"id-node-{node_number}"
+                diagram_view_node = ET.SubElement(diagram_view, "node", attrib={"identifier":node_identifier, "xsi:type":"Element", "elementRef":element_identifier, "x":str(x) , "y":str(y), "w":"120", "h":"50"})                                 
 
+        # create the connections
         nodes = root.findall(".//node")
         for node in nodes:
             element_ref = node.get('elementRef')

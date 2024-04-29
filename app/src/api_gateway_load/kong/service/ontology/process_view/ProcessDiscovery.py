@@ -74,7 +74,7 @@ def get_event_log():
                 }
         """
         activies_connections = list(default_world.sparql(query)) 
-        df_activies = pd.DataFrame(columns=['case_id', 'activity_connection', 'antecedent_activity_name', 'antecedent_request_time'])
+        df_activies = pd.DataFrame(columns=['case_id', 'activity_connection', 'antecedent_activity_name', 'antecedent_request_time', 'partner_name'])
         for activity_connection_tuple in activies_connections:
             activity_connection = activity_connection_tuple[0]
             case_id = activity_connection.label[0]
@@ -82,6 +82,8 @@ def get_event_log():
             antecedent_id = antecedent_activity.name
             antecedent_activity_method = antecedent_activity.participatedIn[0].method[0]
             antecedent_activity_uri = antecedent_activity.api_uri[0]
+            partner = antecedent_activity.INVERSE_participatedIn[0]
+            partner_name = partner.name
             activity_connection = activity_connection
             # antecedent_activity_route = antecedent.participatedIn[0].endpoint[0]
             # pattern = r"/v\d+/(.*)"
@@ -95,7 +97,7 @@ def get_event_log():
             
             #dt_activities = pm4py.format_dataframe(log_file, case_id='case_id', activity_key='activity a', timestamp_key='antecedent_request_time')                     
             
-            df_activies.loc[len(df_activies)] = [case_id, activity_connection, antecedent_activity_name, antecedent_request_time]
+            df_activies.loc[len(df_activies)] = [case_id, activity_connection, antecedent_activity_name, antecedent_request_time, partner_name]
         
         formated_df = pm4py.format_dataframe(df_activies, case_id='case_id', activity_key='antecedent_activity_name', timestamp_key='antecedent_request_time')
         event_log = pm4py.convert_to_event_log(formated_df)
@@ -114,7 +116,6 @@ def processes_discovery():
         with onto:
             event_log, activies_connections = get_event_log()
             start_activities = pm4py.get_start_activities(event_log, activity_key='antecedent_activity_name', case_id_key='case_id', timestamp_key='antecedent_request_time')
-            #end_activities = pm4py.get_end_activities(event_log, activity_key='antecedent_activity_name', case_id_key='case_id', timestamp_key='antecedent_request_time') 
 
             # remove cases with less than two activities
             start_activities = remove_isolated_activies(event_log, start_activities)
@@ -158,11 +159,13 @@ def add_process_to_ontology(process_name, start_activity, process_variant_log):
     try:
         with onto:
             # Create the process
+            #TODO verificar antes de o processo já não existe, neste caso, só atualziar o label partner
             process = ns_process_view.Process()
             process.label.append(f"{process_name}")
             process.name = process_name
             #process.isPartOf.append(ns_process_view.ProcessView)
             process.label.append(f"start_activity: {start_activity}")
+            #process.label.append(f"Partner: {}")
             
             #iterate through the process_variant_log and for each activity get the corresponding activity connection in activies_connections.           
             for case in process_variant_log:
@@ -171,7 +174,8 @@ def add_process_to_ontology(process_name, start_activity, process_variant_log):
                     #antecedent_actitivy_id = event['antecedent_id']
                     activity_connection = event['activity_connection']
                     activity_connection.historicallyDependsOn.append(process)
-                                       
+                    partner_name = event['partner_name']
+                    process.label.append(f"Partner: {partner_name}")
                     # for activity_connection in activies_connections:
                     #     activity_uri = activity_connection[0].isEventProperPartOf[0].api_uri[0] 
                     #     method = activity_connection[0].isEventProperPartOf[0].participatedIn[0].method[0]
