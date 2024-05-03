@@ -121,9 +121,10 @@ def tranform_to_ontology(api_calls):
         api_calls (list): list of json api calls to be transformed to ontology
     """
     
-    sync_reasoner()
+    #sync_reasoner()
     with onto:
         try:      
+
             for call in api_calls:
                 Consumer_app_id = None
                 Consumer_app_name = None
@@ -175,8 +176,7 @@ def tranform_to_ontology(api_calls):
                         # #TODO confirmar o response_time
                         if "response" in call["_source"] and "headers" in call["_source"]["response"] and "date" in call["_source"]["response"]["headers"]:
                             parsed_datetime = datetime.strptime(call["_source"]["response"]["headers"]["date"], '%a, %d %b %Y %H:%M:%S %Z')
-                            xsd_timestamp = parsed_datetime.isoformat() + 'Z'
-                            #api_call.response_time.append(xsd_timestamp)                      
+                            xsd_timestamp = parsed_datetime.isoformat() + 'Z'                    
                         if "response" in call["_source"] and "status" in call["_source"]["response"]:
                             api_call.result_status.append(call["_source"]["response"]["status"])               
                         if "request" in call["_source"] and "uri" in call["_source"]["request"]:
@@ -188,14 +188,19 @@ def tranform_to_ontology(api_calls):
                             consumer_app.participatedIn.append(api_call)
                         #sync_reasoner()                                
                         #ApiOperation.method
-                        if "request" in call["_source"] and "method" in call["_source"]["request"] and "request" in call["_source"] and "url" in call["_source"]["request"]:
-                            operation_route = call["_source"]["request"]["method"] + "_" + call["_source"]["request"]["url"]
+                        if "request" in call["_source"] and "method" in call["_source"]["request"] and "request" in call["_source"] and "uri" in call["_source"]["request"]:
+                            pattern = r"/(\d+)(?=/|$)"
+                            route_aux = call["_source"]["request"]["uri"]
+                            route = re.sub(pattern, '/x', route_aux)
+                            # match = re.search(pattern, antecedent_activity_route)
+                            # if match:
+                            #     operation_name = match.group(1)
+                            #     route = call["_source"]["request"]["method"] + "_" + route                                
+                            operation_route = call["_source"]["request"]["method"] + "_" + route
                             api_operation = onto_util.get_individual(onto, ns_core.APIOperation, 'http://eamining.edu.pt/', operation_route)
                             if api_operation is None:
                                 api_operation = ns_core.APIOperation(operation_route)
-                                pattern = r"/(\d+)(?=/|$)"
-                                label = re.sub(pattern, '/id', operation_route)
-                                api_operation.label.append(label)
+                                api_operation.label.append(operation_route)
                                 api_operation.endpoint_route.append(operation_route) 
                                 api_operation.method.append(call["_source"]["request"]["method"])               
                             api_call.participatedIn.append(api_operation)
@@ -280,12 +285,13 @@ def tranform_to_ontology(api_calls):
                     print('inconsistency_list', il)                                                 
                 print('Ocorreu problema {} '.format(error.__class__))
                 print("mensagem", str(error))
-                print("In extractAPIConcepts module :", __name__)  
+                print("In tranform_to_ontology module :", __name__)  
                 raise Exception(f"Ontology inconsistency found: {il}")  
         except Exception as error:
+             print("call = ", call)
              print('Ocorreu problema {} '.format(error.__class__))
              print("mensagem", str(error))
-             print("In extractAPIConcepts module :", __name__)                           
+             print("In tranform_to_ontology module :", __name__) 
 
 
     

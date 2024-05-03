@@ -184,7 +184,8 @@ def get_individual(onto, onto_class, iri_base, individual_name):
 
     Args:
         onto: The ontology to query.
-        class_name: The name of the class to query for.
+        onto_class: The name of class type to query for.
+        iri_base: The base IRI of the ontology.
         individual_name: The name of the individual to query for.
 
     Returns:
@@ -307,10 +308,6 @@ def resource_correlations_selection(api_resource_correlations, selected_attribut
                 if correlation_key in selected_attribute_pairs:
                     if not [correlation_key, attribute_correlation[1], attribute_correlation[2], attribute_correlation[3], attribute_correlation[4], attribute_correlation[5], 
                             attribute_correlation[6]] in new_correlations_list:
-                        
-                        # new_correlations_list.append([attribute_correlation[0], attribute_correlation[1], attribute_correlation[2], attribute_correlation[3], 
-                        #                               attribute_correlation[4], attribute_correlation[5], attribute_correlation[6], attribute_correlation[7], 
-                        #                               attribute_correlation[8]]) 
                         new_correlations_list.append([attribute_correlation[0], attribute_correlation[1], attribute_correlation[2], attribute_correlation[3], 
                                 attribute_correlation[4], attribute_correlation[5], attribute_correlation[6]]) 
                         #TODO talvez registrar na ontologia resouce equality. Algo como api_resource.AttributesEquality.append(attribute_name)  
@@ -473,7 +470,6 @@ def case_id_generation(ftc_list, activity, generate_next_case):
         under_analysis_event = activity
         consequent_event_id = None
         
-        # if case_id does not exist
         if 'case_id' in ftc_list.columns:
             if generate_next_case:
                 case_id = ftc_list['case_id'].max() +1
@@ -481,7 +477,28 @@ def case_id_generation(ftc_list, activity, generate_next_case):
             else:
                 case_id = ftc_list['case_id'].max()
         else:
-            case_id = 0
+            # get the max value in the case_id in ontology
+            query = f"""
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+                PREFIX ns_core: <http://eamining.edu.pt/core#>
+                PREFIX ns_process_view: <http://eamining.edu.pt/process-view#>
+                PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+
+                SELECT (MAX(xsd:integer(REPLACE(?label, "case_id : ", ""))) AS ?maxValue)
+                #SELECT distinct (xsd:integer(REPLACE(?label, "case_id : ", "")) as ?case_id)
+                WHERE {{
+                    ?activity_connection a ns_process_view:APIActivitiesConnection .
+                    ?activity_connection rdfs:label ?label .
+                    FILTER(REGEX(?label, "case_id : [0-9]+"))
+                }}
+            """            
+            results = list(default_world.sparql(query))           
+            case_id = 1 # default value in case there is no case_id in the ontology
+            for result in results:
+                maxvalue = result[0]
+                if maxvalue is not None: 
+                    case_id = maxvalue + 1                          
             ftc_list['case_id'] = case_id        
         
         if under_analysis_event is None:  #first time      
@@ -526,9 +543,11 @@ def case_id_generation(ftc_list, activity, generate_next_case):
 def event_transactions_selection(file_path, file_name):
     """
         Select the time series transactions based on the begin and end date.
+        it saves the transactions in a file (ftc_list_cleaned.csv)
         args:
-            file_path: the path to the file
-            file_name: the name of the file
+            file_path: the path to the file (./temp/)
+            file_name: the name of the file (ftc_list.csv)
+                    
     """
     
     # get the younger transaction in the file, that is the transaction with the smaler start datetime and store in the under_analisys_transaction
@@ -559,11 +578,12 @@ def event_transactions_selection(file_path, file_name):
         df = pd.read_csv(file_path + file_name)
         cleaned_data = remove_ftc_noise(df, None)
         # print(f"cleaned_data len: {len(cleaned_data)}")
-        file_nm = "ftc_list_cleaned.csv"     
+        
+        file_nm = configs.TEMP_PROCESSING_FILES["file_name_cleaned_ftc_list"]  #just for cheching
         cleaned_data.to_csv(file_path + file_nm, index=False)
         
-        #TODO after this point save ftcs on de ontology 
-        df = pd.read_csv(file_path + file_nm)
+        # df = pd.read_csv(file_path + file_nm) #just for cheching
+        df = cleaned_data
         labeled_data = case_id_generation(df, None, True)
         # print(f"labeled_data len: {len(labeled_data)}")
         return labeled_data
@@ -572,3 +592,38 @@ def event_transactions_selection(file_path, file_name):
         print("mensagem", str(error))
         print(f"In event_transactions_selection module :", __name__)        
         raise error
+    
+def get_consumer_apps():
+    list_consumer_apps = []
+    try:
+        query = """
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+                PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+                PREFIX ns_core: <http://eamining.edu.pt/core#>
+                PREFIX ns_process_view: <http://eamining.edu.pt/process-view#>
+
+                SELECT DISTINCT ?consumerApp
+                WHERE {
+                    ?consumerApp rdf:type ns_core:ConsumerApp .
+                    FILTER NOT EXISTS {
+                        ?subclass rdf:type ns_process_view:Partner .
+                        ?subclass rdfs:subClassOf ?consumerApp .
+                        FILTER (?subclass != ?consumerApp)
+                    }
+                }
+            """
+        consumer_apps = list(default_world.sparql(query))      
+        # before start the mining, chech the ontology consistency
+        #sync_reasoner()    
+        for consumer_app_tuple in consumer_apps:
+            consumer_app = consumer_app_tuple[0]
+            if consumer_app.name == 'Partner':
+                continue
+            list_consumer_apps.append(consumer_app)
+        return list_consumer_apps
+    except Exception as error:
+        print('Ocorreu problema {} '.format(error.__class__))
+        print("mensagem", str(error))
+        print(f"In get_consumer_apps module :", __name__)        
+        raise error    
+    

@@ -50,6 +50,22 @@ FREQUENT_API_ATTRIBUTES = {
 TEMP_PROCESSING_FILES = {
   "file_path": "./temp/",
   "file_ftc_list_name": "ftc_list.csv",
+  "file_name_cleaned_ftc_list": "ftc_list_cleaned.csv",
+}
+
+APRIORI_INVERSE_ARGS = {
+  "MIM_SUPPORT": 0.01,
+  #"MAX_SUPPORT": 1, #  The item is present in all transactions, for small datasets tests
+  "MAX_SUPPORT": 0.5, #  The item is present in 50% of transactions, for small datasets tests, but suport booleans 
+  #"MAX_SUPPORT": 0.3, #  The item is present in 20% of transactions, for small datasets tests, small enums with 5 values
+  #"MAX_SUPPORT": 0.1, #  The item is present in 10% of transactions, for small datasets tests, medium enums with 10 values
+  #"MAX_SUPPORT": 0.06, #  The item is present in 6% of transactions, for medium datasets training set, enums with 15 values - Recomended
+}
+
+PM4PI_ARGS = {
+  "TOP_K" : 3, # For tests with very small datasets
+  #"TOP_K" : 5, # For tests with small datasets (10 tests sets)
+  #"TOP_K__" : 10, # For tests with medium datasets (15 tests sets)
 }
 
 ARCHIMATE_MODEL = {

@@ -104,7 +104,19 @@
   {
     "kind": 2,
     "language": "sparql",
-    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX ns_process_view: <http://eamining.edu.pt/process-view#>\r\n\r\nSELECT ?activity_connection\r\nWHERE {\r\n    ?activity_connection a ns_process_view:APIActivitiesConnection .\r\n}\r\n\r\nlimit 10",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX ns_process_view: <http://eamining.edu.pt/process-view#>\r\n\r\nSELECT ?activity_connection\r\nWHERE {\r\n    ?activity_connection a ns_process_view:APIActivitiesConnection .\r\n}\r\n\r\nlimit 10\r\n\r\n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX ns_process_view: <http://eamining.edu.pt/process-view#>\r\nPREFIX xsd: <http://www.w3.org/2001/XMLSchema#>\r\n\r\nSELECT (MAX(xsd:integer(REPLACE(?label, \"case_id : \", \"\"))) AS ?maxValue)\r\n#SELECT distinct (xsd:integer(REPLACE(?label, \"case_id : \", \"\")) as ?case_id)\r\nWHERE {\r\n    ?activity_connection a ns_process_view:APIActivitiesConnection .\r\n    ?activity_connection rdfs:label ?label .\r\n    FILTER(REGEX(?label, \"case_id : [0-9]+\"))\r\n}",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX ns_process_view: <http://eamining.edu.pt/process-view#>\r\n\r\nSELECT ?activity_connection\r\nWHERE {\r\n    ?activity_connection a ns_process_view:APIActivitiesConnection .\r\n    ?activity_connection rdfs:label ?label .\r\n    #FILTER(REGEX(?label, \"partner : (.+)\"))\r\n    FILTER(\r\n        ?label = \"partner : OpenApp\")\r\n\r\n}\r\nlimit 100",
     "metadata": {}
   }
 ]

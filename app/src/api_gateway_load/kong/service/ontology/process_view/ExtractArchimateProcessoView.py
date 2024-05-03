@@ -148,20 +148,7 @@ def add_archimate_process_elements(root, processes):
                 process_name.text = process_name_text  
                 root = add_archimate_actors_to_process(root, process, process_identifier)
             
-            # actor = process.actor
-            # root = add_archimate_actors_to_process(root, actor)
             root, event_number = add_archimate_event_process_elements(root, process_identifier, process_name_text, event_number)   
-        
-        #save_archimate_exchange_model(root)
-        # relationships = root.find("relationships")
-        # # relationships = root.find('relationships')
-        # if relationships is not None:
-        #     # Iterate through child elements (relationships)
-        #     for relationship in relationships:
-        #         # Access attributes and child elements of each relationship
-        #         print(relationship.tag, relationship.attrib)
-        #         source = relationship.attrib['source']
-        #         target = relationship.attrib['target']
         
         return root
     except Exception as error:   
@@ -176,7 +163,7 @@ def add_archimate_actors_to_process(root, process, process_identifier):
         for label in labels:
             label_parts = label.split(': ')
             part0 = label_parts[0]
-            if part0 != "Partner":
+            if part0 != "partner":
                 continue
             actor_name = label_parts[1]
             actor_identifier = f"id-actor-{actor_name}"
