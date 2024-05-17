@@ -116,7 +116,13 @@
   {
     "kind": 2,
     "language": "sparql",
-    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX ns_process_view: <http://eamining.edu.pt/process-view#>\r\n\r\nSELECT ?activity_connection\r\nWHERE {\r\n    ?activity_connection a ns_process_view:APIActivitiesConnection .\r\n    ?activity_connection rdfs:label ?label .\r\n    #FILTER(REGEX(?label, \"partner : (.+)\"))\r\n    FILTER(\r\n        ?label = \"partner : OpenApp\")\r\n\r\n}\r\nlimit 100",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX ns_process_view: <http://eamining.edu.pt/process-view#>\r\n\r\nSELECT ?activity_connection\r\nWHERE {\r\n    ?activity_connection a ns_process_view:APIActivitiesConnection .\r\n    ?activity_connection rdfs:label ?label .\r\n    #FILTER(REGEX(?label, \"partner : (.+)\"))\r\n    FILTER(\r\n        ?label = \"partner : OpenApp\")\r\n\r\n}\r\n\r\nLIMIT 10",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX aPIR: <aPIResource:>\r\nPREFIX ns_data_relation_view: <http://eamining.edu.pt/data-relation-view#>\r\n\r\nSELECT ?resource\r\nWHERE {\r\n    ?resource a ns_core:APIResource .\r\n    ?resource aPIR:resource_uri ?resource_uri .\r\n    FILTER( \r\n        ?resource_uri = \"/sandbox/ecommerce/v1/carts\"\r\n    )\r\n\r\n}\r\n\r\nlimit 100",
     "metadata": {}
   }
 ]

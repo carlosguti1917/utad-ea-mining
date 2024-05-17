@@ -124,7 +124,6 @@ def processes_discovery():
     process_list = []
     try:
         with onto:
-            # Pegar App antes, para não misturar depois na hora do calculo euristico, pois não há como agrupar.
             consumer_apps = onto_util.get_consumer_apps()
             for consumer_app in consumer_apps:
                 print(f"Process Discovery for {consumer_app.name}")
@@ -157,7 +156,7 @@ def processes_discovery():
                     directory = "./temp/process/"
                     os.makedirs(directory, exist_ok=True)
                     pm4py.save_vis_heuristics_net(heu_net, f"{directory}heuristics_net_{process_name}.png")
-                    with open(f"{directory}heuristics_net{process_name}.pkl", 'wb') as f:
+                    with open(f"{directory}heuristics_net_{process_name}.pkl", 'wb') as f:
                         pickle.dump(heu_net, f)               
                     # Save the start_activity as process and create the hostorical dependency with the activies
                     process_list.append(add_process_to_ontology(process_name, start_activity, test_k))
@@ -217,19 +216,8 @@ def remove_isolated_activities(event_log, start_activities):
             start_activities: list of start activities
     """
     try:
-        # Discover process models
-        isolated_start_activities = start_activities
-        # Discover process models
-        # alpha_miner_result = alpha_miner.apply(event_log)
-        # isolated_start_activities = start_activities
-       
-        #dfg = dfg_discovery.apply(event_log)
-        
-        # Check activity in other flows
-        # for net in [alpha_miner_result]:
-        #     # Unpack the tuple to access the process model
-        #     net, initial_marking, final_marking = net
-            
+
+        isolated_start_activities = start_activities    
         activity_counts = defaultdict(int)
         dfg = dfg_discovery.apply(event_log)
         # Check activity in other flows
@@ -300,36 +288,6 @@ def remove_dependent_start_activities(event_log, start_activities):
         print(f"In remove_isolated_activies module :", __name__)
         raise error    
         
-def remove_not_pure_start_activies_old(event_log, start_activities):
-    """
-        Remove start activities that are part of another start activity
-        args:
-            start_activities: list of start activities
-    """
-   
-    # Discover process models
-    alpha_miner_result = alpha_miner.apply(event_log)
-    #inductive_miner_result = inductive_miner.apply(event_log)
-    pure_start_activities = start_activities
-    
-    # Check activity in other flows
-    for net in [alpha_miner_result]:
-        # Unpack the tuple to access the process model
-        net, initial_marking, final_marking = net
-        for transition in net.transitions:
-            # print(f"'{transition.label}'")
-            if transition.label in start_activities:
-                # Check if the transition is not a start activity
-                for arc in transition.in_arcs:
-                    # print(f"arc.source: {arc.source}")
-                    # print(f"arc.target: {arc.target}")
-                    if arc.source.name != 'start': 
-                        # print(f"{transition.label} is present in another position of the process flow that is not a start activity.")
-                        pure_start_activities.pop(transition.label)
-                        break
-    
-    return pure_start_activities
-
 
 if __name__ == "__main__":
     processes_discovery()    

@@ -11674,16 +11674,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               <http://eamining.edu.pt/0f4b7b26a22bf54a6199b7128c3d7643> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation101_12
-:frequenttemporalcorrelation101_12 rdf:type owl:NamedIndividual ,
-                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                   gufo:isEventProperPartOf :a2504375a12bbe613663b62b5669f07b ,
-                                                            <http://eamining.edu.pt/0f4b7b26a22bf54a6199b7128c3d7643> ;
-                                   rdfs:label "case_id : 12" ,
-                                              "connection: frequenttemporalcorrelation101_12" ,
-                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/itens consequent: GET_/sandbox/ecommerce/v1/carts/x partner: EA Mining OntoUML Teste V1_4.acmeapp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation102
 :frequenttemporalcorrelation102 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -11724,16 +11714,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               <http://eamining.edu.pt/4e4f9c52d2d0e3377db31e25c9c2a544> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation106_5
-:frequenttemporalcorrelation106_5 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf <http://eamining.edu.pt/0f4b7b26a22bf54a6199b7128c3d7643> ,
-                                                           <http://eamining.edu.pt/4e4f9c52d2d0e3377db31e25c9c2a544> ;
-                                  rdfs:label "case_id : 5" ,
-                                             "connection: frequenttemporalcorrelation106_5" ,
-                                             "references antecedent operation: GET_/sandbox/ecommerce/v1/carts/x consequent: POST_/sandbox/ecommerce/v1/orders partner: EA Mining OntoUML Teste V1_4.acmeapp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation107
 :frequenttemporalcorrelation107 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -11748,16 +11728,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                 freq:repeated_attributes :attributepair108 ;
                                 gufo:mediates <http://eamining.edu.pt/2ebf6e745e99f47279c22365b5769e2b> ,
                                               <http://eamining.edu.pt/25452f417688121d5ebe90241ff0672c> .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation108_13
-:frequenttemporalcorrelation108_13 rdf:type owl:NamedIndividual ,
-                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                   gufo:isEventProperPartOf <http://eamining.edu.pt/2ebf6e745e99f47279c22365b5769e2b> ,
-                                                            <http://eamining.edu.pt/25452f417688121d5ebe90241ff0672c> ;
-                                   rdfs:label "case_id : 13" ,
-                                              "connection: frequenttemporalcorrelation108_13" ,
-                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/deliveryaddress consequent: POST_/sandbox/ecommerce/v1/carts/paymentmethod partner: EA Mining OntoUML Teste V1_4.acmeapp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation109
@@ -11792,16 +11762,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               <http://eamining.edu.pt/4e4f9c52d2d0e3377db31e25c9c2a544> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation111_13
-:frequenttemporalcorrelation111_13 rdf:type owl:NamedIndividual ,
-                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                   gufo:isEventProperPartOf <http://eamining.edu.pt/25452f417688121d5ebe90241ff0672c> ,
-                                                            <http://eamining.edu.pt/4e4f9c52d2d0e3377db31e25c9c2a544> ;
-                                   rdfs:label "case_id : 13" ,
-                                              "connection: frequenttemporalcorrelation111_13" ,
-                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/paymentmethod consequent: POST_/sandbox/ecommerce/v1/orders partner: EA Mining OntoUML Teste V1_4.acmeapp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation112
 :frequenttemporalcorrelation112 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -11818,16 +11778,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               <http://eamining.edu.pt/4e4f9c52d2d0e3377db31e25c9c2a544> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation113_5
-:frequenttemporalcorrelation113_5 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf <http://eamining.edu.pt/1a90fb7920d6c04185d9253d9798da7f> ,
-                                                           <http://eamining.edu.pt/4e4f9c52d2d0e3377db31e25c9c2a544> ;
-                                  rdfs:label "case_id : 5" ,
-                                             "connection: frequenttemporalcorrelation113_5" ,
-                                             "references antecedent operation: POST_/sandbox/ecommerce/v1/orders consequent: POST_/sandbox/payment/v1/payments partner: EA Mining OntoUML Teste V1_4.acmeapp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation114
 :frequenttemporalcorrelation114 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -11842,17 +11792,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                 freq:repeated_attributes :attributepair115 ;
                                 gufo:mediates :d8d6a33041f8c042f4c09a757b27e725 ,
                                               :e3237f242a245121d190d721a5578258 .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation115_14
-:frequenttemporalcorrelation115_14 rdf:type owl:NamedIndividual ,
-                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                   gufo:isEventProperPartOf :d8d6a33041f8c042f4c09a757b27e725 ,
-                                                            :e3237f242a245121d190d721a5578258 ;
-                                   rdfs:label "case_id : 14" ,
-                                              "connection: frequenttemporalcorrelation115_14" ,
-                                              "partner : acmeapp" ,
-                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/carts consequent: POST_/sandbox/ecommerce/v1/carts/x/itens partner: EA Mining OntoUML Teste V1_4.acmeapp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation116
@@ -11911,16 +11850,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               :e3c2a175174bb27ddc3b54000808d136 .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation121_14
-:frequenttemporalcorrelation121_14 rdf:type owl:NamedIndividual ,
-                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                   gufo:isEventProperPartOf :e3237f242a245121d190d721a5578258 ,
-                                                            :e3c2a175174bb27ddc3b54000808d136 ;
-                                   rdfs:label "case_id : 14" ,
-                                              "connection: frequenttemporalcorrelation121_14" ,
-                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/itens consequent: GET_/sandbox/ecommerce/v1/carts/x partner: EA Mining OntoUML Teste V1_4.acmeapp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation122
 :frequenttemporalcorrelation122 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -11961,16 +11890,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               <http://eamining.edu.pt/02009d2e56da51152390f56f114b1855> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation126_15
-:frequenttemporalcorrelation126_15 rdf:type owl:NamedIndividual ,
-                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                   gufo:isEventProperPartOf :e3c2a175174bb27ddc3b54000808d136 ,
-                                                            <http://eamining.edu.pt/02009d2e56da51152390f56f114b1855> ;
-                                   rdfs:label "case_id : 15" ,
-                                              "connection: frequenttemporalcorrelation126_15" ,
-                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/itens consequent: GET_/sandbox/ecommerce/v1/carts/x partner: EA Mining OntoUML Teste V1_4.acmeapp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation127
 :frequenttemporalcorrelation127 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -11993,16 +11912,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                 freq:repeated_attributes :attributepair129 ;
                                 gufo:mediates :c581184a2abf2c6fbef39e569d58bc7a ,
                                               <http://eamining.edu.pt/02009d2e56da51152390f56f114b1855> .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation12_3
-:frequenttemporalcorrelation12_3 rdf:type owl:NamedIndividual ,
-                                          <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                 gufo:isEventProperPartOf :bbc9e03b779fa7109af95478bc46fb25 ,
-                                                          <http://eamining.edu.pt/5ea7c53baf2ded25d74a120b59ba9e00> ;
-                                 rdfs:label "case_id : 3" ,
-                                            "connection: frequenttemporalcorrelation12_3" ,
-                                            "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/itens consequent: GET_/sandbox/ecommerce/v1/carts/x partner: EA Mining OntoUML Teste V1_4.acmeapp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation13
@@ -12029,32 +11938,12 @@ gufo:VariableCollection rdf:type owl:Class .
                                               :e3c2a175174bb27ddc3b54000808d136 .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation131_14
-:frequenttemporalcorrelation131_14 rdf:type owl:NamedIndividual ,
-                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                   gufo:isEventProperPartOf :c581184a2abf2c6fbef39e569d58bc7a ,
-                                                            :e3c2a175174bb27ddc3b54000808d136 ;
-                                   rdfs:label "case_id : 14" ,
-                                              "connection: frequenttemporalcorrelation131_14" ,
-                                              "references antecedent operation: GET_/sandbox/ecommerce/v1/carts/x consequent: POST_/sandbox/ecommerce/v1/orders partner: EA Mining OntoUML Teste V1_4.acmeapp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation132
 :frequenttemporalcorrelation132 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
                                 freq:repeated_attributes :attributepair132 ;
                                 gufo:mediates <http://eamining.edu.pt/0ccbc85ca4ab5708a5e50632265bc456> ,
                                               <http://eamining.edu.pt/8dd3c41a3afae42427f83863dc22616d> .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation132_16
-:frequenttemporalcorrelation132_16 rdf:type owl:NamedIndividual ,
-                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                   gufo:isEventProperPartOf <http://eamining.edu.pt/0ccbc85ca4ab5708a5e50632265bc456> ,
-                                                            <http://eamining.edu.pt/8dd3c41a3afae42427f83863dc22616d> ;
-                                   rdfs:label "case_id : 16" ,
-                                              "connection: frequenttemporalcorrelation132_16" ,
-                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/deliveryaddress consequent: POST_/sandbox/ecommerce/v1/carts/paymentmethod partner: EA Mining OntoUML Teste V1_4.acmeapp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation133
@@ -12081,16 +11970,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               <http://eamining.edu.pt/0ccbc85ca4ab5708a5e50632265bc456> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation135_16
-:frequenttemporalcorrelation135_16 rdf:type owl:NamedIndividual ,
-                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                   gufo:isEventProperPartOf :c581184a2abf2c6fbef39e569d58bc7a ,
-                                                            <http://eamining.edu.pt/0ccbc85ca4ab5708a5e50632265bc456> ;
-                                   rdfs:label "case_id : 16" ,
-                                              "connection: frequenttemporalcorrelation135_16" ,
-                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/paymentmethod consequent: POST_/sandbox/ecommerce/v1/orders partner: EA Mining OntoUML Teste V1_4.acmeapp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation136
 :frequenttemporalcorrelation136 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -12107,32 +11986,12 @@ gufo:VariableCollection rdf:type owl:Class .
                                               <http://eamining.edu.pt/6cb7ed31b2b4394c1880a3204fdb6c56> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation137_14
-:frequenttemporalcorrelation137_14 rdf:type owl:NamedIndividual ,
-                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                   gufo:isEventProperPartOf :c581184a2abf2c6fbef39e569d58bc7a ,
-                                                            <http://eamining.edu.pt/6cb7ed31b2b4394c1880a3204fdb6c56> ;
-                                   rdfs:label "case_id : 14" ,
-                                              "connection: frequenttemporalcorrelation137_14" ,
-                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/orders consequent: POST_/sandbox/payment/v1/payments partner: EA Mining OntoUML Teste V1_4.acmeapp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation138
 :frequenttemporalcorrelation138 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
                                 freq:repeated_attributes :attributepair138 ;
                                 gufo:mediates :ddd88a6de9107b42f432ef2edfd8271c ,
                                               <http://eamining.edu.pt/9cec91218eacce095fb6c90c7faf3317> .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation138_1
-:frequenttemporalcorrelation138_1 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf :ddd88a6de9107b42f432ef2edfd8271c ,
-                                                           <http://eamining.edu.pt/9cec91218eacce095fb6c90c7faf3317> ;
-                                  rdfs:label "case_id : 1" ,
-                                             "connection: frequenttemporalcorrelation138_1" ,
-                                             "references antecedent operation: POST_/sandbox/handle-claim/v1/claims consequent: GET_/sandbox/handle-claim/v1/claims/x/capture-informations partner: EA Mining OntoUML Teste V1_4.OpenApp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation139
@@ -12207,16 +12066,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               <http://eamining.edu.pt/9cec91218eacce095fb6c90c7faf3317> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation146_2
-:frequenttemporalcorrelation146_2 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf :a5f780073bf21d0d87b7044e33cb4522 ,
-                                                           <http://eamining.edu.pt/9cec91218eacce095fb6c90c7faf3317> ;
-                                  rdfs:label "case_id : 2" ,
-                                             "connection: frequenttemporalcorrelation146_2" ,
-                                             "references antecedent operation: GET_/sandbox/handle-claim/v1/claims/x/capture-informations consequent: GET_/sandbox/handle-claim/v1/claims/x/stackholders partner: EA Mining OntoUML Teste V1_4.OpenApp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation147
 :frequenttemporalcorrelation147 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -12263,17 +12112,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                 freq:repeated_attributes :attributepair151 ;
                                 gufo:mediates :a5f780073bf21d0d87b7044e33cb4522 ,
                                               <http://eamining.edu.pt/76ec0232aeaf3d310feea60f82b7cb0e> .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation151_2
-:frequenttemporalcorrelation151_2 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf :a5f780073bf21d0d87b7044e33cb4522 ,
-                                                           <http://eamining.edu.pt/76ec0232aeaf3d310feea60f82b7cb0e> ;
-                                  rdfs:label "case_id : 2" ,
-                                             "connection: frequenttemporalcorrelation151_2" ,
-                                             "partner : OpenApp" ,
-                                             "references antecedent operation: GET_/sandbox/handle-claim/v1/claims/x/stackholders consequent: POST_/sandbox/handle-claim/v1/claims/x/notify-stackholders partner: EA Mining OntoUML Teste V1_4.OpenApp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation152
@@ -12412,16 +12250,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               <http://eamining.edu.pt/76ec0232aeaf3d310feea60f82b7cb0e> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation167_2
-:frequenttemporalcorrelation167_2 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf <http://eamining.edu.pt/535b9539b4d3ad41a912906518ddad03> ,
-                                                           <http://eamining.edu.pt/76ec0232aeaf3d310feea60f82b7cb0e> ;
-                                  rdfs:label "case_id : 2" ,
-                                             "connection: frequenttemporalcorrelation167_2" ,
-                                             "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/notify-stackholders consequent: POST_/sandbox/handle-claim/v1/claims/x/validations partner: EA Mining OntoUML Teste V1_4.OpenApp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation168
 :frequenttemporalcorrelation168 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -12526,17 +12354,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               <http://eamining.edu.pt/76ec0232aeaf3d310feea60f82b7cb0e> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation17_2
-:frequenttemporalcorrelation17_2 rdf:type owl:NamedIndividual ,
-                                          <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                 gufo:isEventProperPartOf :cf228a65b2fe8f705f01091bceb8fa0b ,
-                                                          <http://eamining.edu.pt/5ea7c53baf2ded25d74a120b59ba9e00> ;
-                                 rdfs:label "case_id : 2" ,
-                                            "connection: frequenttemporalcorrelation17_2" ,
-                                            "partner : acmeapp" ,
-                                            "references antecedent operation: GET_/sandbox/ecommerce/v1/carts/x consequent: POST_/sandbox/ecommerce/v1/orders partner: EA Mining OntoUML Teste V1_4.acmeapp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation18
 :frequenttemporalcorrelation18 rdf:type owl:NamedIndividual ,
                                         <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -12567,16 +12384,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                 freq:repeated_attributes :attributepair182 ;
                                 gufo:mediates :de92da3067062f3cb5356a7e4a4ac862 ,
                                               <http://eamining.edu.pt/535b9539b4d3ad41a912906518ddad03> .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation182_2
-:frequenttemporalcorrelation182_2 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf :de92da3067062f3cb5356a7e4a4ac862 ,
-                                                           <http://eamining.edu.pt/535b9539b4d3ad41a912906518ddad03> ;
-                                  rdfs:label "case_id : 2" ,
-                                             "connection: frequenttemporalcorrelation182_2" ,
-                                             "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/validations consequent: POST_/sandbox/handle-claim/v1/claims/x/investigation-result partner: EA Mining OntoUML Teste V1_4.OpenApp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation183
@@ -12699,16 +12506,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               <http://eamining.edu.pt/19bb6808ceb50d1f99253539f693f375> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation196_2
-:frequenttemporalcorrelation196_2 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf :de92da3067062f3cb5356a7e4a4ac862 ,
-                                                           <http://eamining.edu.pt/19bb6808ceb50d1f99253539f693f375> ;
-                                  rdfs:label "case_id : 2" ,
-                                             "connection: frequenttemporalcorrelation196_2" ,
-                                             "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/investigation-result consequent: POST_/sandbox/payment/v1/payments partner: EA Mining OntoUML Teste V1_4.OpenApp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation197
 :frequenttemporalcorrelation197 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -12731,16 +12528,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                 freq:repeated_attributes :attributepair199 ;
                                 gufo:mediates :de92da3067062f3cb5356a7e4a4ac862 ,
                                               :f0c145086b02b0316357547cce542039 .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation1_1
-:frequenttemporalcorrelation1_1 rdf:type owl:NamedIndividual ,
-                                         <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                gufo:isEventProperPartOf :ff957026c03b847e2e5ea06be0d33640 ,
-                                                         <http://eamining.edu.pt/0d75f90266e37a467c82b5340cc3a949> ;
-                                rdfs:label "case_id : 1" ,
-                                           "connection: frequenttemporalcorrelation1_1" ,
-                                           "references antecedent operation: POST_/sandbox/ecommerce/v1/carts consequent: POST_/sandbox/ecommerce/v1/carts/x/itens partner: EA Mining OntoUML Teste V1_4.acmeapp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation2
@@ -12839,16 +12626,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               <http://eamining.edu.pt/401d423db7c4567e95bbaa34e6384b44> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation209_2
-:frequenttemporalcorrelation209_2 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf <http://eamining.edu.pt/19bb6808ceb50d1f99253539f693f375> ,
-                                                           <http://eamining.edu.pt/401d423db7c4567e95bbaa34e6384b44> ;
-                                  rdfs:label "case_id : 2" ,
-                                             "connection: frequenttemporalcorrelation209_2" ,
-                                             "references antecedent operation: POST_/sandbox/payment/v1/payments consequent: POST_/sandbox/handle-claim/v1/claims partner: 9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io.payments" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation21
 :frequenttemporalcorrelation21 rdf:type owl:NamedIndividual ,
                                         <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -12871,16 +12648,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                 freq:repeated_attributes :attributepair211 ;
                                 gufo:mediates :b7c688618e582468d56c1b12f7b15539 ,
                                               <http://eamining.edu.pt/543d2a0d8e59337ec2b7ce3ffa34ab14> .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation211_3
-:frequenttemporalcorrelation211_3 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf :b7c688618e582468d56c1b12f7b15539 ,
-                                                           <http://eamining.edu.pt/543d2a0d8e59337ec2b7ce3ffa34ab14> ;
-                                  rdfs:label "case_id : 3" ,
-                                             "connection: frequenttemporalcorrelation211_3" ,
-                                             "references antecedent operation: POST_/sandbox/handle-claim/v1/claims consequent: GET_/sandbox/handle-claim/v1/claims/x/capture-informations partner: EA Mining OntoUML Teste V1_4.OpenApp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation212
@@ -12931,16 +12698,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               <http://eamining.edu.pt/543d2a0d8e59337ec2b7ce3ffa34ab14> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation217_3
-:frequenttemporalcorrelation217_3 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf :c94b510b496fd30d2d00f1363f38543d ,
-                                                           <http://eamining.edu.pt/543d2a0d8e59337ec2b7ce3ffa34ab14> ;
-                                  rdfs:label "case_id : 3" ,
-                                             "connection: frequenttemporalcorrelation217_3" ,
-                                             "references antecedent operation: GET_/sandbox/handle-claim/v1/claims/x/capture-informations consequent: GET_/sandbox/handle-claim/v1/claims/x/stackholders partner: EA Mining OntoUML Teste V1_4.OpenApp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation218
 :frequenttemporalcorrelation218 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -12987,16 +12744,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                 freq:repeated_attributes :attributepair222 ;
                                 gufo:mediates :c94b510b496fd30d2d00f1363f38543d ,
                                               :f81e113f3cee9746c2ef1f4c4b7aa678 .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation222_3
-:frequenttemporalcorrelation222_3 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf :c94b510b496fd30d2d00f1363f38543d ,
-                                                           :f81e113f3cee9746c2ef1f4c4b7aa678 ;
-                                  rdfs:label "case_id : 3" ,
-                                             "connection: frequenttemporalcorrelation222_3" ,
-                                             "references antecedent operation: GET_/sandbox/handle-claim/v1/claims/x/stackholders consequent: POST_/sandbox/handle-claim/v1/claims/x/notify-stackholders partner: EA Mining OntoUML Teste V1_4.OpenApp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation223
@@ -13055,16 +12802,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               :c94b510b496fd30d2d00f1363f38543d .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation22_4
-:frequenttemporalcorrelation22_4 rdf:type owl:NamedIndividual ,
-                                          <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                 gufo:isEventProperPartOf :f037e8171e6ead3c483a171705f3c905 ,
-                                                          <http://eamining.edu.pt/28a063484f44fb19f3562d4c55f61927> ;
-                                 rdfs:label "case_id : 4" ,
-                                            "connection: frequenttemporalcorrelation22_4" ,
-                                            "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/deliveryaddress consequent: POST_/sandbox/ecommerce/v1/carts/paymentmethod partner: EA Mining OntoUML Teste V1_4.acmeapp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation23
 :frequenttemporalcorrelation23 rdf:type owl:NamedIndividual ,
                                         <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -13119,16 +12856,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                 freq:repeated_attributes :attributepair235 ;
                                 gufo:mediates :f0c145086b02b0316357547cce542039 ,
                                               :f81e113f3cee9746c2ef1f4c4b7aa678 .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation235_3
-:frequenttemporalcorrelation235_3 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf :f0c145086b02b0316357547cce542039 ,
-                                                           :f81e113f3cee9746c2ef1f4c4b7aa678 ;
-                                  rdfs:label "case_id : 3" ,
-                                             "connection: frequenttemporalcorrelation235_3" ,
-                                             "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/notify-stackholders consequent: POST_/sandbox/handle-claim/v1/claims/x/validations partner: EA Mining OntoUML Teste V1_4.OpenApp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation236
@@ -13235,16 +12962,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               :f0c145086b02b0316357547cce542039 .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation247_3
-:frequenttemporalcorrelation247_3 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf :d208df6d188dbe7a199fe81bebc34776 ,
-                                                           :f0c145086b02b0316357547cce542039 ;
-                                  rdfs:label "case_id : 3" ,
-                                             "connection: frequenttemporalcorrelation247_3" ,
-                                             "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/validations consequent: POST_/sandbox/handle-claim/v1/claims/x/investigation-result partner: EA Mining OntoUML Teste V1_4.OpenApp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation248
 :frequenttemporalcorrelation248 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -13341,32 +13058,12 @@ gufo:VariableCollection rdf:type owl:Class .
                                               :e642cc19b2c41d55e2573b6c9e09557b .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation258_3
-:frequenttemporalcorrelation258_3 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf :d208df6d188dbe7a199fe81bebc34776 ,
-                                                           :e642cc19b2c41d55e2573b6c9e09557b ;
-                                  rdfs:label "case_id : 3" ,
-                                             "connection: frequenttemporalcorrelation258_3" ,
-                                             "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/investigation-result consequent: POST_/sandbox/payment/v1/payments partner: EA Mining OntoUML Teste V1_4.OpenApp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation259
 :frequenttemporalcorrelation259 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
                                 freq:repeated_attributes :attributepair259 ;
                                 gufo:mediates :d208df6d188dbe7a199fe81bebc34776 ,
                                               <http://eamining.edu.pt/3468883af9c7785a5b3ced6c2c879979> .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation25_4
-:frequenttemporalcorrelation25_4 rdf:type owl:NamedIndividual ,
-                                          <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                 gufo:isEventProperPartOf :cf228a65b2fe8f705f01091bceb8fa0b ,
-                                                          <http://eamining.edu.pt/28a063484f44fb19f3562d4c55f61927> ;
-                                 rdfs:label "case_id : 4" ,
-                                            "connection: frequenttemporalcorrelation25_4" ,
-                                            "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/paymentmethod consequent: POST_/sandbox/ecommerce/v1/orders partner: EA Mining OntoUML Teste V1_4.acmeapp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation26
@@ -13449,16 +13146,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               <http://eamining.edu.pt/52b84724ebf8b42cccc787231b04992f> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation268_2
-:frequenttemporalcorrelation268_2 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf <http://eamining.edu.pt/401d423db7c4567e95bbaa34e6384b44> ,
-                                                           <http://eamining.edu.pt/52b84724ebf8b42cccc787231b04992f> ;
-                                  rdfs:label "case_id : 2" ,
-                                             "connection: frequenttemporalcorrelation268_2" ,
-                                             "references antecedent operation: POST_/sandbox/handle-claim/v1/claims consequent: GET_/sandbox/handle-claim/v1/claims/x/capture-informations partner: EA Mining OntoUML Teste V1_4.OpenApp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation269
 :frequenttemporalcorrelation269 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -13523,16 +13210,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               <http://eamining.edu.pt/52b84724ebf8b42cccc787231b04992f> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation275_2
-:frequenttemporalcorrelation275_2 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf <http://eamining.edu.pt/3468883af9c7785a5b3ced6c2c879979> ,
-                                                           <http://eamining.edu.pt/52b84724ebf8b42cccc787231b04992f> ;
-                                  rdfs:label "case_id : 2" ,
-                                             "connection: frequenttemporalcorrelation275_2" ,
-                                             "references antecedent operation: GET_/sandbox/handle-claim/v1/claims/x/capture-informations consequent: GET_/sandbox/handle-claim/v1/claims/x/stackholders partner: EA Mining OntoUML Teste V1_4.OpenApp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation276
 :frequenttemporalcorrelation276 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -13565,16 +13242,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               <http://eamining.edu.pt/52b84724ebf8b42cccc787231b04992f> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation27_2
-:frequenttemporalcorrelation27_2 rdf:type owl:NamedIndividual ,
-                                          <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                 gufo:isEventProperPartOf :cf228a65b2fe8f705f01091bceb8fa0b ,
-                                                          <http://eamining.edu.pt/733a146f8d5fa906ae8c314c80af0d72> ;
-                                 rdfs:label "case_id : 2" ,
-                                            "connection: frequenttemporalcorrelation27_2" ,
-                                            "references antecedent operation: POST_/sandbox/ecommerce/v1/orders consequent: POST_/sandbox/payment/v1/payments partner: EA Mining OntoUML Teste V1_4.acmeapp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation28
 :frequenttemporalcorrelation28 rdf:type owl:NamedIndividual ,
                                         <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -13589,16 +13256,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                 freq:repeated_attributes :attributepair280 ;
                                 gufo:mediates <http://eamining.edu.pt/3468883af9c7785a5b3ced6c2c879979> ,
                                               <http://eamining.edu.pt/35b610211d2c0d397701407225785629> .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation280_2
-:frequenttemporalcorrelation280_2 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf <http://eamining.edu.pt/3468883af9c7785a5b3ced6c2c879979> ,
-                                                           <http://eamining.edu.pt/35b610211d2c0d397701407225785629> ;
-                                  rdfs:label "case_id : 2" ,
-                                             "connection: frequenttemporalcorrelation280_2" ,
-                                             "references antecedent operation: GET_/sandbox/handle-claim/v1/claims/x/stackholders consequent: POST_/sandbox/handle-claim/v1/claims/x/notify-stackholders partner: EA Mining OntoUML Teste V1_4.OpenApp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation281
@@ -13689,16 +13346,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               <http://eamining.edu.pt/882ebd6ada58946ef3cc76625a379c58> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation290_2
-:frequenttemporalcorrelation290_2 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf <http://eamining.edu.pt/35b610211d2c0d397701407225785629> ,
-                                                           <http://eamining.edu.pt/882ebd6ada58946ef3cc76625a379c58> ;
-                                  rdfs:label "case_id : 2" ,
-                                             "connection: frequenttemporalcorrelation290_2" ,
-                                             "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/notify-stackholders consequent: POST_/sandbox/handle-claim/v1/claims/x/validations partner: EA Mining OntoUML Teste V1_4.OpenApp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation291
 :frequenttemporalcorrelation291 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -13769,16 +13416,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                 freq:repeated_attributes :attributepair299 ;
                                 gufo:mediates :f3e552690c6c5f7e45fbe34ed9281f03 ,
                                               <http://eamining.edu.pt/882ebd6ada58946ef3cc76625a379c58> .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation299_2
-:frequenttemporalcorrelation299_2 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf :f3e552690c6c5f7e45fbe34ed9281f03 ,
-                                                           <http://eamining.edu.pt/882ebd6ada58946ef3cc76625a379c58> ;
-                                  rdfs:label "case_id : 2" ,
-                                             "connection: frequenttemporalcorrelation299_2" ,
-                                             "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/validations consequent: POST_/sandbox/handle-claim/v1/claims/x/investigation-result partner: EA Mining OntoUML Teste V1_4.OpenApp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation3
@@ -13861,16 +13498,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               :f3e552690c6c5f7e45fbe34ed9281f03 .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation307_2
-:frequenttemporalcorrelation307_2 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf :bf307d5327531f3b7732747eff4dbf10 ,
-                                                           :f3e552690c6c5f7e45fbe34ed9281f03 ;
-                                  rdfs:label "case_id : 2" ,
-                                             "connection: frequenttemporalcorrelation307_2" ,
-                                             "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/investigation-result consequent: POST_/sandbox/payment/v1/payments partner: EA Mining OntoUML Teste V1_4.OpenApp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation308
 :frequenttemporalcorrelation308 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -13935,32 +13562,12 @@ gufo:VariableCollection rdf:type owl:Class .
                                               :df1776390cee1e33e6860a555c6d283b .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation314_2
-:frequenttemporalcorrelation314_2 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf :bf307d5327531f3b7732747eff4dbf10 ,
-                                                           :df1776390cee1e33e6860a555c6d283b ;
-                                  rdfs:label "case_id : 2" ,
-                                             "connection: frequenttemporalcorrelation314_2" ,
-                                             "references antecedent operation: POST_/sandbox/payment/v1/payments consequent: POST_/sandbox/handle-claim/v1/claims partner: 9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io.payments" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation315
 :frequenttemporalcorrelation315 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
                                 freq:repeated_attributes :attributepair315 ;
                                 gufo:mediates :df1776390cee1e33e6860a555c6d283b ,
                                               :fac0a56efac78c6d3e09142d2e292e29 .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation315_2
-:frequenttemporalcorrelation315_2 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf :df1776390cee1e33e6860a555c6d283b ,
-                                                           :fac0a56efac78c6d3e09142d2e292e29 ;
-                                  rdfs:label "case_id : 2" ,
-                                             "connection: frequenttemporalcorrelation315_2" ,
-                                             "references antecedent operation: POST_/sandbox/handle-claim/v1/claims consequent: GET_/sandbox/handle-claim/v1/claims/x/capture-informations partner: EA Mining OntoUML Teste V1_4.OpenApp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation316
@@ -14019,16 +13626,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               :fac0a56efac78c6d3e09142d2e292e29 .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation321_2
-:frequenttemporalcorrelation321_2 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf :f38f05489945011a5bb0c72228461669 ,
-                                                           :fac0a56efac78c6d3e09142d2e292e29 ;
-                                  rdfs:label "case_id : 2" ,
-                                             "connection: frequenttemporalcorrelation321_2" ,
-                                             "references antecedent operation: GET_/sandbox/handle-claim/v1/claims/x/capture-informations consequent: GET_/sandbox/handle-claim/v1/claims/x/stackholders partner: EA Mining OntoUML Teste V1_4.OpenApp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation322
 :frequenttemporalcorrelation322 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -14069,16 +13666,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               :f38f05489945011a5bb0c72228461669 .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation326_2
-:frequenttemporalcorrelation326_2 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf :b6710e53d2b107154dbe6c123ea0cb3d ,
-                                                           :f38f05489945011a5bb0c72228461669 ;
-                                  rdfs:label "case_id : 2" ,
-                                             "connection: frequenttemporalcorrelation326_2" ,
-                                             "references antecedent operation: GET_/sandbox/handle-claim/v1/claims/x/stackholders consequent: POST_/sandbox/handle-claim/v1/claims/x/notify-stackholders partner: EA Mining OntoUML Teste V1_4.OpenApp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation327
 :frequenttemporalcorrelation327 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -14101,16 +13688,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                 freq:repeated_attributes :attributepair329 ;
                                 gufo:mediates :f38f05489945011a5bb0c72228461669 ,
                                               <http://eamining.edu.pt/05266b20f14b826e0c767f57e43de159> .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation32_5
-:frequenttemporalcorrelation32_5 rdf:type owl:NamedIndividual ,
-                                          <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                 gufo:isEventProperPartOf :a1ae8e11266c0c346a53002fc9bf5967 ,
-                                                          :f342244d2a0fe7008c72b73bae0c0509 ;
-                                 rdfs:label "case_id : 5" ,
-                                            "connection: frequenttemporalcorrelation32_5" ,
-                                            "references antecedent operation: POST_/sandbox/ecommerce/v1/carts consequent: POST_/sandbox/ecommerce/v1/carts/x/itens partner: EA Mining OntoUML Teste V1_4.acmeapp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation33
@@ -14151,16 +13728,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                 freq:repeated_attributes :attributepair333 ;
                                 gufo:mediates :ad0a9c03418be37498d76716a0f0ee6c ,
                                               :b6710e53d2b107154dbe6c123ea0cb3d .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation333_2
-:frequenttemporalcorrelation333_2 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf :ad0a9c03418be37498d76716a0f0ee6c ,
-                                                           :b6710e53d2b107154dbe6c123ea0cb3d ;
-                                  rdfs:label "case_id : 2" ,
-                                             "connection: frequenttemporalcorrelation333_2" ,
-                                             "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/notify-stackholders consequent: POST_/sandbox/handle-claim/v1/claims/x/validations partner: EA Mining OntoUML Teste V1_4.OpenApp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation334
@@ -14211,16 +13778,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               <http://eamining.edu.pt/4df74273ddd24b6579190e700c28c046> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation339_2
-:frequenttemporalcorrelation339_2 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf :ad0a9c03418be37498d76716a0f0ee6c ,
-                                                           <http://eamining.edu.pt/4df74273ddd24b6579190e700c28c046> ;
-                                  rdfs:label "case_id : 2" ,
-                                             "connection: frequenttemporalcorrelation339_2" ,
-                                             "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/validations consequent: POST_/sandbox/handle-claim/v1/claims/x/investigation-result partner: EA Mining OntoUML Teste V1_4.OpenApp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation34
 :frequenttemporalcorrelation34 rdf:type owl:NamedIndividual ,
                                         <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -14269,16 +13826,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               <http://eamining.edu.pt/4df74273ddd24b6579190e700c28c046> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation344_2
-:frequenttemporalcorrelation344_2 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf <http://eamining.edu.pt/05266b20f14b826e0c767f57e43de159> ,
-                                                           <http://eamining.edu.pt/4df74273ddd24b6579190e700c28c046> ;
-                                  rdfs:label "case_id : 2" ,
-                                             "connection: frequenttemporalcorrelation344_2" ,
-                                             "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/investigation-result consequent: POST_/sandbox/payment/v1/payments partner: EA Mining OntoUML Teste V1_4.OpenApp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation345
 :frequenttemporalcorrelation345 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -14309,16 +13856,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                 freq:repeated_attributes :attributepair348 ;
                                 gufo:mediates :fd39a121f2fc892c40ab0915ce86d47a ,
                                               <http://eamining.edu.pt/69739b4c2e95632529af4e065d03a114> .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation348_4
-:frequenttemporalcorrelation348_4 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf :fd39a121f2fc892c40ab0915ce86d47a ,
-                                                           <http://eamining.edu.pt/69739b4c2e95632529af4e065d03a114> ;
-                                  rdfs:label "case_id : 4" ,
-                                             "connection: frequenttemporalcorrelation348_4" ,
-                                             "references antecedent operation: POST_/sandbox/handle-claim/v1/claims consequent: GET_/sandbox/handle-claim/v1/claims/x/capture-informations partner: EA Mining OntoUML Teste V1_4.OpenApp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation349
@@ -14377,16 +13914,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               <http://eamining.edu.pt/69739b4c2e95632529af4e065d03a114> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation354_4
-:frequenttemporalcorrelation354_4 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf :c7da643f845f16298549b77d7d4c7312 ,
-                                                           <http://eamining.edu.pt/69739b4c2e95632529af4e065d03a114> ;
-                                  rdfs:label "case_id : 4" ,
-                                             "connection: frequenttemporalcorrelation354_4" ,
-                                             "references antecedent operation: GET_/sandbox/handle-claim/v1/claims/x/capture-informations consequent: GET_/sandbox/handle-claim/v1/claims/x/stackholders partner: EA Mining OntoUML Teste V1_4.OpenApp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation355
 :frequenttemporalcorrelation355 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -14425,16 +13952,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                 freq:repeated_attributes :attributepair359 ;
                                 gufo:mediates :c7da643f845f16298549b77d7d4c7312 ,
                                               <http://eamining.edu.pt/57111e3ed3072410bbec3e50041cba41> .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation359_4
-:frequenttemporalcorrelation359_4 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf :c7da643f845f16298549b77d7d4c7312 ,
-                                                           <http://eamining.edu.pt/57111e3ed3072410bbec3e50041cba41> ;
-                                  rdfs:label "case_id : 4" ,
-                                             "connection: frequenttemporalcorrelation359_4" ,
-                                             "references antecedent operation: GET_/sandbox/handle-claim/v1/claims/x/stackholders consequent: POST_/sandbox/handle-claim/v1/claims/x/notify-stackholders partner: EA Mining OntoUML Teste V1_4.OpenApp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation36
@@ -14477,16 +13994,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               <http://eamining.edu.pt/57111e3ed3072410bbec3e50041cba41> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation363_4
-:frequenttemporalcorrelation363_4 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf <http://eamining.edu.pt/1493070553c4a666a40ca92e618a4a78> ,
-                                                           <http://eamining.edu.pt/57111e3ed3072410bbec3e50041cba41> ;
-                                  rdfs:label "case_id : 4" ,
-                                             "connection: frequenttemporalcorrelation363_4" ,
-                                             "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/notify-stackholders consequent: POST_/sandbox/handle-claim/v1/claims/x/validations partner: EA Mining OntoUML Teste V1_4.OpenApp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation364
 :frequenttemporalcorrelation364 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -14511,16 +14018,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               <http://eamining.edu.pt/3197f24b1d26b71e6eb20a3f36bd5d6c> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation366_4
-:frequenttemporalcorrelation366_4 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf <http://eamining.edu.pt/1493070553c4a666a40ca92e618a4a78> ,
-                                                           <http://eamining.edu.pt/3197f24b1d26b71e6eb20a3f36bd5d6c> ;
-                                  rdfs:label "case_id : 4" ,
-                                             "connection: frequenttemporalcorrelation366_4" ,
-                                             "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/validations consequent: POST_/sandbox/handle-claim/v1/claims/x/investigation-result partner: EA Mining OntoUML Teste V1_4.OpenApp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation367
 :frequenttemporalcorrelation367 rdf:type owl:NamedIndividual ,
                                          <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -14537,16 +14034,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                               <http://eamining.edu.pt/3197f24b1d26b71e6eb20a3f36bd5d6c> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation368_4
-:frequenttemporalcorrelation368_4 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf <http://eamining.edu.pt/0e72390d7a288a161afb3e460cacda2e> ,
-                                                           <http://eamining.edu.pt/3197f24b1d26b71e6eb20a3f36bd5d6c> ;
-                                  rdfs:label "case_id : 4" ,
-                                             "connection: frequenttemporalcorrelation368_4" ,
-                                             "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/investigation-result consequent: POST_/sandbox/payment/v1/payments partner: EA Mining OntoUML Teste V1_4.OpenApp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation37
 :frequenttemporalcorrelation37 rdf:type owl:NamedIndividual ,
                                         <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -14561,16 +14048,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                freq:repeated_attributes :attributepair38 ;
                                gufo:mediates :a1ae8e11266c0c346a53002fc9bf5967 ,
                                              :bd64a406aad6192cd5711f34e604084f .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation38_5
-:frequenttemporalcorrelation38_5 rdf:type owl:NamedIndividual ,
-                                          <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                 gufo:isEventProperPartOf :a1ae8e11266c0c346a53002fc9bf5967 ,
-                                                          :bd64a406aad6192cd5711f34e604084f ;
-                                 rdfs:label "case_id : 5" ,
-                                            "connection: frequenttemporalcorrelation38_5" ,
-                                            "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/itens consequent: GET_/sandbox/ecommerce/v1/carts/x partner: EA Mining OntoUML Teste V1_4.acmeapp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation39
@@ -14621,16 +14098,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                              :bd64a406aad6192cd5711f34e604084f .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation43_6
-:frequenttemporalcorrelation43_6 rdf:type owl:NamedIndividual ,
-                                          <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                 gufo:isEventProperPartOf :aa3a9e5831198070c8abe43e08e26314 ,
-                                                          :bd64a406aad6192cd5711f34e604084f ;
-                                 rdfs:label "case_id : 6" ,
-                                            "connection: frequenttemporalcorrelation43_6" ,
-                                            "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/itens consequent: GET_/sandbox/ecommerce/v1/carts/x partner: EA Mining OntoUML Teste V1_4.acmeapp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation44
 :frequenttemporalcorrelation44 rdf:type owl:NamedIndividual ,
                                         <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -14669,16 +14136,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                freq:repeated_attributes :attributepair48 ;
                                gufo:mediates :bd64a406aad6192cd5711f34e604084f ,
                                              <http://eamining.edu.pt/275cd4174583cb036eb1fe511a9ff864> .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation48_5
-:frequenttemporalcorrelation48_5 rdf:type owl:NamedIndividual ,
-                                          <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                 gufo:isEventProperPartOf :bd64a406aad6192cd5711f34e604084f ,
-                                                          <http://eamining.edu.pt/275cd4174583cb036eb1fe511a9ff864> ;
-                                 rdfs:label "case_id : 5" ,
-                                            "connection: frequenttemporalcorrelation48_5" ,
-                                            "references antecedent operation: GET_/sandbox/ecommerce/v1/carts/x consequent: POST_/sandbox/ecommerce/v1/orders partner: EA Mining OntoUML Teste V1_4.acmeapp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation49
@@ -14721,16 +14178,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                              <http://eamining.edu.pt/7bc7dc709afc2a1196f69937ee01f15f> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation52_7
-:frequenttemporalcorrelation52_7 rdf:type owl:NamedIndividual ,
-                                          <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                 gufo:isEventProperPartOf :f91a1546c9c84c003bfb2176c83d9f2b ,
-                                                          <http://eamining.edu.pt/7bc7dc709afc2a1196f69937ee01f15f> ;
-                                 rdfs:label "case_id : 7" ,
-                                            "connection: frequenttemporalcorrelation52_7" ,
-                                            "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/deliveryaddress consequent: POST_/sandbox/ecommerce/v1/carts/paymentmethod partner: EA Mining OntoUML Teste V1_4.acmeapp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation53
 :frequenttemporalcorrelation53 rdf:type owl:NamedIndividual ,
                                         <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -14755,16 +14202,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                              <http://eamining.edu.pt/7bc7dc709afc2a1196f69937ee01f15f> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation55_7
-:frequenttemporalcorrelation55_7 rdf:type owl:NamedIndividual ,
-                                          <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                 gufo:isEventProperPartOf <http://eamining.edu.pt/275cd4174583cb036eb1fe511a9ff864> ,
-                                                          <http://eamining.edu.pt/7bc7dc709afc2a1196f69937ee01f15f> ;
-                                 rdfs:label "case_id : 7" ,
-                                            "connection: frequenttemporalcorrelation55_7" ,
-                                            "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/paymentmethod consequent: POST_/sandbox/ecommerce/v1/orders partner: EA Mining OntoUML Teste V1_4.acmeapp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation56
 :frequenttemporalcorrelation56 rdf:type owl:NamedIndividual ,
                                         <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -14779,16 +14216,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                freq:repeated_attributes :attributepair57 ;
                                gufo:mediates <http://eamining.edu.pt/275cd4174583cb036eb1fe511a9ff864> ,
                                              <http://eamining.edu.pt/6f92b204fb23b60dc9abfd6d11414116> .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation57_5
-:frequenttemporalcorrelation57_5 rdf:type owl:NamedIndividual ,
-                                          <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                 gufo:isEventProperPartOf <http://eamining.edu.pt/275cd4174583cb036eb1fe511a9ff864> ,
-                                                          <http://eamining.edu.pt/6f92b204fb23b60dc9abfd6d11414116> ;
-                                 rdfs:label "case_id : 5" ,
-                                            "connection: frequenttemporalcorrelation57_5" ,
-                                            "references antecedent operation: POST_/sandbox/ecommerce/v1/orders consequent: POST_/sandbox/payment/v1/payments partner: EA Mining OntoUML Teste V1_4.acmeapp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation58
@@ -14831,16 +14258,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                              <http://eamining.edu.pt/7d08df05b800e36ebc1e9b055d28c075> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation61_5
-:frequenttemporalcorrelation61_5 rdf:type owl:NamedIndividual ,
-                                          <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                 gufo:isEventProperPartOf <http://eamining.edu.pt/6f92b204fb23b60dc9abfd6d11414116> ,
-                                                          <http://eamining.edu.pt/7d08df05b800e36ebc1e9b055d28c075> ;
-                                 rdfs:label "case_id : 5" ,
-                                            "connection: frequenttemporalcorrelation61_5" ,
-                                            "references antecedent operation: POST_/sandbox/payment/v1/payments consequent: POST_/sandbox/ecommerce/v1/carts/x/itens partner: EA Mining OntoUML Teste V1_4.acmeapp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation62
 :frequenttemporalcorrelation62 rdf:type owl:NamedIndividual ,
                                         <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -14855,16 +14272,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                freq:repeated_attributes :attributepair63 ;
                                gufo:mediates <http://eamining.edu.pt/2190c24133fffd1cda009b7dcbca601a> ,
                                              <http://eamining.edu.pt/64187e0da2ac7f3cd4acc42e445feb23> .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation63_8
-:frequenttemporalcorrelation63_8 rdf:type owl:NamedIndividual ,
-                                          <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                 gufo:isEventProperPartOf <http://eamining.edu.pt/2190c24133fffd1cda009b7dcbca601a> ,
-                                                          <http://eamining.edu.pt/64187e0da2ac7f3cd4acc42e445feb23> ;
-                                 rdfs:label "case_id : 8" ,
-                                            "connection: frequenttemporalcorrelation63_8" ,
-                                            "references antecedent operation: POST_/sandbox/ecommerce/v1/carts consequent: POST_/sandbox/ecommerce/v1/carts/x/itens partner: EA Mining OntoUML Teste V1_4.acmeapp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation64
@@ -14915,16 +14322,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                              <http://eamining.edu.pt/64187e0da2ac7f3cd4acc42e445feb23> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation69_8
-:frequenttemporalcorrelation69_8 rdf:type owl:NamedIndividual ,
-                                          <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                 gufo:isEventProperPartOf :b318ad0621084552a17895612fe08977 ,
-                                                          <http://eamining.edu.pt/64187e0da2ac7f3cd4acc42e445feb23> ;
-                                 rdfs:label "case_id : 8" ,
-                                            "connection: frequenttemporalcorrelation69_8" ,
-                                            "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/itens consequent: GET_/sandbox/ecommerce/v1/carts/x partner: EA Mining OntoUML Teste V1_4.acmeapp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation7
 :frequenttemporalcorrelation7 rdf:type owl:NamedIndividual ,
                                        <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -14973,16 +14370,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                              <http://eamining.edu.pt/42a376063549c74315de4052ff071b0d> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation74_9
-:frequenttemporalcorrelation74_9 rdf:type owl:NamedIndividual ,
-                                          <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                 gufo:isEventProperPartOf :b318ad0621084552a17895612fe08977 ,
-                                                          <http://eamining.edu.pt/42a376063549c74315de4052ff071b0d> ;
-                                 rdfs:label "case_id : 9" ,
-                                            "connection: frequenttemporalcorrelation74_9" ,
-                                            "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/itens consequent: GET_/sandbox/ecommerce/v1/carts/x partner: EA Mining OntoUML Teste V1_4.acmeapp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation75
 :frequenttemporalcorrelation75 rdf:type owl:NamedIndividual ,
                                         <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -15023,26 +14410,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                              <http://eamining.edu.pt/87b72f37c6ab3a4efdc5ee37a847f278> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation79_8
-:frequenttemporalcorrelation79_8 rdf:type owl:NamedIndividual ,
-                                          <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                 gufo:isEventProperPartOf :b318ad0621084552a17895612fe08977 ,
-                                                          <http://eamining.edu.pt/87b72f37c6ab3a4efdc5ee37a847f278> ;
-                                 rdfs:label "case_id : 8" ,
-                                            "connection: frequenttemporalcorrelation79_8" ,
-                                            "references antecedent operation: GET_/sandbox/ecommerce/v1/carts/x consequent: POST_/sandbox/ecommerce/v1/orders partner: EA Mining OntoUML Teste V1_4.acmeapp" .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation7_2
-:frequenttemporalcorrelation7_2 rdf:type owl:NamedIndividual ,
-                                         <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                gufo:isEventProperPartOf <http://eamining.edu.pt/0d75f90266e37a467c82b5340cc3a949> ,
-                                                         <http://eamining.edu.pt/5ea7c53baf2ded25d74a120b59ba9e00> ;
-                                rdfs:label "case_id : 2" ,
-                                           "connection: frequenttemporalcorrelation7_2" ,
-                                           "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/itens consequent: GET_/sandbox/ecommerce/v1/carts/x partner: EA Mining OntoUML Teste V1_4.acmeapp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation8
 :frequenttemporalcorrelation8 rdf:type owl:NamedIndividual ,
                                        <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -15075,16 +14442,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                              <http://eamining.edu.pt/7df2fa1c8c937929fdff3c60ec84ad21> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation82_10
-:frequenttemporalcorrelation82_10 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf :bb047063386f2f191de27a57e360447b ,
-                                                           <http://eamining.edu.pt/7df2fa1c8c937929fdff3c60ec84ad21> ;
-                                  rdfs:label "case_id : 10" ,
-                                             "connection: frequenttemporalcorrelation82_10" ,
-                                             "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/deliveryaddress consequent: POST_/sandbox/ecommerce/v1/carts/paymentmethod partner: EA Mining OntoUML Teste V1_4.acmeapp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation83
 :frequenttemporalcorrelation83 rdf:type owl:NamedIndividual ,
                                         <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -15109,16 +14466,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                              <http://eamining.edu.pt/87b72f37c6ab3a4efdc5ee37a847f278> .
 
 
-###  http://eamining.edu.pt/frequenttemporalcorrelation85_10
-:frequenttemporalcorrelation85_10 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf <http://eamining.edu.pt/7df2fa1c8c937929fdff3c60ec84ad21> ,
-                                                           <http://eamining.edu.pt/87b72f37c6ab3a4efdc5ee37a847f278> ;
-                                  rdfs:label "case_id : 10" ,
-                                             "connection: frequenttemporalcorrelation85_10" ,
-                                             "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/paymentmethod consequent: POST_/sandbox/ecommerce/v1/orders partner: EA Mining OntoUML Teste V1_4.acmeapp" .
-
-
 ###  http://eamining.edu.pt/frequenttemporalcorrelation86
 :frequenttemporalcorrelation86 rdf:type owl:NamedIndividual ,
                                         <http://eamining.edu.pt/process-view#FrequentTemporalCorrelation> ;
@@ -15133,16 +14480,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                freq:repeated_attributes :attributepair87 ;
                                gufo:mediates :faaa386bd8c68935741253135ec3b678 ,
                                              <http://eamining.edu.pt/87b72f37c6ab3a4efdc5ee37a847f278> .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation87_8
-:frequenttemporalcorrelation87_8 rdf:type owl:NamedIndividual ,
-                                          <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                 gufo:isEventProperPartOf :faaa386bd8c68935741253135ec3b678 ,
-                                                          <http://eamining.edu.pt/87b72f37c6ab3a4efdc5ee37a847f278> ;
-                                 rdfs:label "case_id : 8" ,
-                                            "connection: frequenttemporalcorrelation87_8" ,
-                                            "references antecedent operation: POST_/sandbox/ecommerce/v1/orders consequent: POST_/sandbox/payment/v1/payments partner: EA Mining OntoUML Teste V1_4.acmeapp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation88
@@ -15175,16 +14512,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                freq:repeated_attributes :attributepair90 ;
                                gufo:mediates <http://eamining.edu.pt/7a73097248bf1742a322a21cbc168078> ,
                                              <http://eamining.edu.pt/7d08df05b800e36ebc1e9b055d28c075> .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation90_11
-:frequenttemporalcorrelation90_11 rdf:type owl:NamedIndividual ,
-                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                  gufo:isEventProperPartOf <http://eamining.edu.pt/7a73097248bf1742a322a21cbc168078> ,
-                                                           <http://eamining.edu.pt/7d08df05b800e36ebc1e9b055d28c075> ;
-                                  rdfs:label "case_id : 11" ,
-                                             "connection: frequenttemporalcorrelation90_11" ,
-                                             "references antecedent operation: POST_/sandbox/ecommerce/v1/carts consequent: POST_/sandbox/ecommerce/v1/carts/x/itens partner: EA Mining OntoUML Teste V1_4.acmeapp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation91
@@ -15233,16 +14560,6 @@ gufo:VariableCollection rdf:type owl:Class .
                                freq:repeated_attributes :attributepair96 ;
                                gufo:mediates <http://eamining.edu.pt/0f4b7b26a22bf54a6199b7128c3d7643> ,
                                              <http://eamining.edu.pt/7d08df05b800e36ebc1e9b055d28c075> .
-
-
-###  http://eamining.edu.pt/frequenttemporalcorrelation96_5
-:frequenttemporalcorrelation96_5 rdf:type owl:NamedIndividual ,
-                                          <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
-                                 gufo:isEventProperPartOf <http://eamining.edu.pt/0f4b7b26a22bf54a6199b7128c3d7643> ,
-                                                          <http://eamining.edu.pt/7d08df05b800e36ebc1e9b055d28c075> ;
-                                 rdfs:label "case_id : 5" ,
-                                            "connection: frequenttemporalcorrelation96_5" ,
-                                            "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/itens consequent: GET_/sandbox/ecommerce/v1/carts/x partner: EA Mining OntoUML Teste V1_4.acmeapp" .
 
 
 ###  http://eamining.edu.pt/frequenttemporalcorrelation97
@@ -16614,6 +15931,14 @@ gufo:VariableCollection rdf:type owl:Class .
                                                                                      rdfs:label "9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/payments" .
 
 
+###  http://eamining.edu.pt/GET%20capture-informations
+<http://eamining.edu.pt/GET%20capture-informations> rdf:type owl:NamedIndividual ,
+                                                             <http://eamining.edu.pt/process-view#Process> ;
+                                                    rdfs:label "GET capture-informations" ,
+                                                               "partner: OpenApp" ,
+                                                               "start_activity: GET_/sandbox/handle-claim/v1/claims/x/capture-informations" .
+
+
 ###  http://eamining.edu.pt/GET_/sandbox/ecommerce/v1/carts/x
 <http://eamining.edu.pt/GET_/sandbox/ecommerce/v1/carts/x> rdf:type owl:NamedIndividual ,
                                                                     <http://eamining.edu.pt/core#APIOperation> ;
@@ -16636,6 +15961,31 @@ gufo:VariableCollection rdf:type owl:Class .
                                                                             aPIO:method "GET" ;
                                                                             serv:endpoint_route "GET_/sandbox/handle-claim/v1/claims/x/stackholders" ;
                                                                             rdfs:label "GET_/sandbox/handle-claim/v1/claims/x/stackholders" .
+
+
+###  http://eamining.edu.pt/POST%20carts
+<http://eamining.edu.pt/POST%20carts> rdf:type owl:NamedIndividual ,
+                                               <http://eamining.edu.pt/process-view#Process> ;
+                                      rdfs:label "POST carts" ,
+                                                 "Partner: acmeapp" ,
+                                                 "partner: acmeapp" ,
+                                                 "start_activity: POST_/sandbox/ecommerce/v1/carts" .
+
+
+###  http://eamining.edu.pt/POST%20claims
+<http://eamining.edu.pt/POST%20claims> rdf:type owl:NamedIndividual ,
+                                                <http://eamining.edu.pt/process-view#Process> ;
+                                       rdfs:label "POST claims" ,
+                                                  "partner: OpenApp" ,
+                                                  "start_activity: POST_/sandbox/handle-claim/v1/claims" .
+
+
+###  http://eamining.edu.pt/POST%20deliveryaddress
+<http://eamining.edu.pt/POST%20deliveryaddress> rdf:type owl:NamedIndividual ,
+                                                         <http://eamining.edu.pt/process-view#Process> ;
+                                                rdfs:label "POST deliveryaddress" ,
+                                                           "Partner: acmeapp" ,
+                                                           "start_activity: POST_/sandbox/ecommerce/v1/carts/x/deliveryaddress" .
 
 
 ###  http://eamining.edu.pt/POST_/sandbox/ecommerce/v1/carts
@@ -16849,6 +16199,870 @@ gufo:VariableCollection rdf:type owl:Class .
 ###  http://eamining.edu.pt/data-relation-view#pertainsTo
 <http://eamining.edu.pt/data-relation-view#pertainsTo> rdf:type owl:NamedIndividual ,
                                                                 gufo:MaterialRelationshipType .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation101_case_id%7C12
+<http://eamining.edu.pt/frequenttemporalcorrelation101_case_id%7C12> rdf:type owl:NamedIndividual ,
+                                                                              <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                     gufo:isEventProperPartOf :a2504375a12bbe613663b62b5669f07b ,
+                                                                                              <http://eamining.edu.pt/0f4b7b26a22bf54a6199b7128c3d7643> ;
+                                                                     rdfs:label "case_id : 12" ,
+                                                                                "connection: frequenttemporalcorrelation101_12" ,
+                                                                                "partner: acmeapp" ,
+                                                                                "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/itens consequent: GET_/sandbox/ecommerce/v1/carts/x partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation106_case_id%7C5
+<http://eamining.edu.pt/frequenttemporalcorrelation106_case_id%7C5> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                               <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                    gufo:isEventProperPartOf <http://eamining.edu.pt/0f4b7b26a22bf54a6199b7128c3d7643> ,
+                                                                                             <http://eamining.edu.pt/4e4f9c52d2d0e3377db31e25c9c2a544> ;
+                                                                    rdfs:label "case_id : 5" ,
+                                                                               "connection: frequenttemporalcorrelation106_5" ,
+                                                                               "partner: acmeapp" ,
+                                                                               "references antecedent operation: GET_/sandbox/ecommerce/v1/carts/x consequent: POST_/sandbox/ecommerce/v1/orders partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation108_case_id%7C13
+<http://eamining.edu.pt/frequenttemporalcorrelation108_case_id%7C13> rdf:type owl:NamedIndividual ,
+                                                                              <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                     gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                                <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                     gufo:isEventProperPartOf <http://eamining.edu.pt/2ebf6e745e99f47279c22365b5769e2b> ,
+                                                                                              <http://eamining.edu.pt/25452f417688121d5ebe90241ff0672c> ;
+                                                                     rdfs:label "case_id : 13" ,
+                                                                                "connection: frequenttemporalcorrelation108_13" ,
+                                                                                "partner: acmeapp" ,
+                                                                                "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/deliveryaddress consequent: POST_/sandbox/ecommerce/v1/carts/paymentmethod partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation111_case_id%7C13
+<http://eamining.edu.pt/frequenttemporalcorrelation111_case_id%7C13> rdf:type owl:NamedIndividual ,
+                                                                              <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                     gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                                <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                     gufo:isEventProperPartOf <http://eamining.edu.pt/25452f417688121d5ebe90241ff0672c> ,
+                                                                                              <http://eamining.edu.pt/4e4f9c52d2d0e3377db31e25c9c2a544> ;
+                                                                     rdfs:label "case_id : 13" ,
+                                                                                "connection: frequenttemporalcorrelation111_13" ,
+                                                                                "partner: acmeapp" ,
+                                                                                "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/paymentmethod consequent: POST_/sandbox/ecommerce/v1/orders partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation113_case_id%7C5
+<http://eamining.edu.pt/frequenttemporalcorrelation113_case_id%7C5> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                               <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                    gufo:isEventProperPartOf <http://eamining.edu.pt/1a90fb7920d6c04185d9253d9798da7f> ,
+                                                                                             <http://eamining.edu.pt/4e4f9c52d2d0e3377db31e25c9c2a544> ;
+                                                                    rdfs:label "case_id : 5" ,
+                                                                               "connection: frequenttemporalcorrelation113_5" ,
+                                                                               "partner: acmeapp" ,
+                                                                               "references antecedent operation: POST_/sandbox/ecommerce/v1/orders consequent: POST_/sandbox/payment/v1/payments partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation115_case_id%7C14
+<http://eamining.edu.pt/frequenttemporalcorrelation115_case_id%7C14> rdf:type owl:NamedIndividual ,
+                                                                              <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                     gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                                <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                     gufo:isEventProperPartOf :d8d6a33041f8c042f4c09a757b27e725 ,
+                                                                                              :e3237f242a245121d190d721a5578258 ;
+                                                                     rdfs:label "case_id : 14" ,
+                                                                                "connection: frequenttemporalcorrelation115_14" ,
+                                                                                "partner: acmeapp" ,
+                                                                                "references antecedent operation: POST_/sandbox/ecommerce/v1/carts consequent: POST_/sandbox/ecommerce/v1/carts/x/itens partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation121_case_id%7C14
+<http://eamining.edu.pt/frequenttemporalcorrelation121_case_id%7C14> rdf:type owl:NamedIndividual ,
+                                                                              <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                     gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                                <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                     gufo:isEventProperPartOf :e3237f242a245121d190d721a5578258 ,
+                                                                                              :e3c2a175174bb27ddc3b54000808d136 ;
+                                                                     rdfs:label "case_id : 14" ,
+                                                                                "connection: frequenttemporalcorrelation121_14" ,
+                                                                                "partner: acmeapp" ,
+                                                                                "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/itens consequent: GET_/sandbox/ecommerce/v1/carts/x partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation126_case_id%7C15
+<http://eamining.edu.pt/frequenttemporalcorrelation126_case_id%7C15> rdf:type owl:NamedIndividual ,
+                                                                              <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                     gufo:isEventProperPartOf :e3c2a175174bb27ddc3b54000808d136 ,
+                                                                                              <http://eamining.edu.pt/02009d2e56da51152390f56f114b1855> ;
+                                                                     rdfs:label "case_id : 15" ,
+                                                                                "connection: frequenttemporalcorrelation126_15" ,
+                                                                                "partner: acmeapp" ,
+                                                                                "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/itens consequent: GET_/sandbox/ecommerce/v1/carts/x partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation12_case_id%7C3
+<http://eamining.edu.pt/frequenttemporalcorrelation12_case_id%7C3> rdf:type owl:NamedIndividual ,
+                                                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                   gufo:isEventProperPartOf :bbc9e03b779fa7109af95478bc46fb25 ,
+                                                                                            <http://eamining.edu.pt/5ea7c53baf2ded25d74a120b59ba9e00> ;
+                                                                   rdfs:label "case_id : 3" ,
+                                                                              "connection: frequenttemporalcorrelation12_3" ,
+                                                                              "partner: acmeapp" ,
+                                                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/itens consequent: GET_/sandbox/ecommerce/v1/carts/x partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation131_case_id%7C14
+<http://eamining.edu.pt/frequenttemporalcorrelation131_case_id%7C14> rdf:type owl:NamedIndividual ,
+                                                                              <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                     gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                                <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                     gufo:isEventProperPartOf :c581184a2abf2c6fbef39e569d58bc7a ,
+                                                                                              :e3c2a175174bb27ddc3b54000808d136 ;
+                                                                     rdfs:label "case_id : 14" ,
+                                                                                "connection: frequenttemporalcorrelation131_14" ,
+                                                                                "partner: acmeapp" ,
+                                                                                "references antecedent operation: GET_/sandbox/ecommerce/v1/carts/x consequent: POST_/sandbox/ecommerce/v1/orders partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation132_case_id%7C16
+<http://eamining.edu.pt/frequenttemporalcorrelation132_case_id%7C16> rdf:type owl:NamedIndividual ,
+                                                                              <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                     gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                                <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                     gufo:isEventProperPartOf <http://eamining.edu.pt/0ccbc85ca4ab5708a5e50632265bc456> ,
+                                                                                              <http://eamining.edu.pt/8dd3c41a3afae42427f83863dc22616d> ;
+                                                                     rdfs:label "case_id : 16" ,
+                                                                                "connection: frequenttemporalcorrelation132_16" ,
+                                                                                "partner: acmeapp" ,
+                                                                                "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/deliveryaddress consequent: POST_/sandbox/ecommerce/v1/carts/paymentmethod partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation135_case_id%7C16
+<http://eamining.edu.pt/frequenttemporalcorrelation135_case_id%7C16> rdf:type owl:NamedIndividual ,
+                                                                              <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                     gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                                <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                     gufo:isEventProperPartOf :c581184a2abf2c6fbef39e569d58bc7a ,
+                                                                                              <http://eamining.edu.pt/0ccbc85ca4ab5708a5e50632265bc456> ;
+                                                                     rdfs:label "case_id : 16" ,
+                                                                                "connection: frequenttemporalcorrelation135_16" ,
+                                                                                "partner: acmeapp" ,
+                                                                                "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/paymentmethod consequent: POST_/sandbox/ecommerce/v1/orders partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation137_case_id%7C14
+<http://eamining.edu.pt/frequenttemporalcorrelation137_case_id%7C14> rdf:type owl:NamedIndividual ,
+                                                                              <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                     gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                                <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                     gufo:isEventProperPartOf :c581184a2abf2c6fbef39e569d58bc7a ,
+                                                                                              <http://eamining.edu.pt/6cb7ed31b2b4394c1880a3204fdb6c56> ;
+                                                                     rdfs:label "case_id : 14" ,
+                                                                                "connection: frequenttemporalcorrelation137_14" ,
+                                                                                "partner: acmeapp" ,
+                                                                                "references antecedent operation: POST_/sandbox/ecommerce/v1/orders consequent: POST_/sandbox/payment/v1/payments partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation138_case_id%7C1
+<http://eamining.edu.pt/frequenttemporalcorrelation138_case_id%7C1> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf :ddd88a6de9107b42f432ef2edfd8271c ,
+                                                                                             <http://eamining.edu.pt/9cec91218eacce095fb6c90c7faf3317> ;
+                                                                    rdfs:label "case_id : 1" ,
+                                                                               "connection: frequenttemporalcorrelation138_1" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: POST_/sandbox/handle-claim/v1/claims consequent: GET_/sandbox/handle-claim/v1/claims/x/capture-informations partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation146_case_id%7C2
+<http://eamining.edu.pt/frequenttemporalcorrelation146_case_id%7C2> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf :a5f780073bf21d0d87b7044e33cb4522 ,
+                                                                                             <http://eamining.edu.pt/9cec91218eacce095fb6c90c7faf3317> ;
+                                                                    rdfs:label "case_id : 2" ,
+                                                                               "connection: frequenttemporalcorrelation146_2" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: GET_/sandbox/handle-claim/v1/claims/x/capture-informations consequent: GET_/sandbox/handle-claim/v1/claims/x/stackholders partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation151_case_id%7C2
+<http://eamining.edu.pt/frequenttemporalcorrelation151_case_id%7C2> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf :a5f780073bf21d0d87b7044e33cb4522 ,
+                                                                                             <http://eamining.edu.pt/76ec0232aeaf3d310feea60f82b7cb0e> ;
+                                                                    rdfs:label "case_id : 2" ,
+                                                                               "connection: frequenttemporalcorrelation151_2" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: GET_/sandbox/handle-claim/v1/claims/x/stackholders consequent: POST_/sandbox/handle-claim/v1/claims/x/notify-stackholders partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation167_case_id%7C2
+<http://eamining.edu.pt/frequenttemporalcorrelation167_case_id%7C2> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf <http://eamining.edu.pt/535b9539b4d3ad41a912906518ddad03> ,
+                                                                                             <http://eamining.edu.pt/76ec0232aeaf3d310feea60f82b7cb0e> ;
+                                                                    rdfs:label "case_id : 2" ,
+                                                                               "connection: frequenttemporalcorrelation167_2" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/notify-stackholders consequent: POST_/sandbox/handle-claim/v1/claims/x/validations partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation17_case_id%7C2
+<http://eamining.edu.pt/frequenttemporalcorrelation17_case_id%7C2> rdf:type owl:NamedIndividual ,
+                                                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                   gufo:isEventProperPartOf :cf228a65b2fe8f705f01091bceb8fa0b ,
+                                                                                            <http://eamining.edu.pt/5ea7c53baf2ded25d74a120b59ba9e00> ;
+                                                                   rdfs:label "case_id : 2" ,
+                                                                              "connection: frequenttemporalcorrelation17_2" ,
+                                                                              "partner: acmeapp" ,
+                                                                              "references antecedent operation: GET_/sandbox/ecommerce/v1/carts/x consequent: POST_/sandbox/ecommerce/v1/orders partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation182_case_id%7C2
+<http://eamining.edu.pt/frequenttemporalcorrelation182_case_id%7C2> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf :de92da3067062f3cb5356a7e4a4ac862 ,
+                                                                                             <http://eamining.edu.pt/535b9539b4d3ad41a912906518ddad03> ;
+                                                                    rdfs:label "case_id : 2" ,
+                                                                               "connection: frequenttemporalcorrelation182_2" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/validations consequent: POST_/sandbox/handle-claim/v1/claims/x/investigation-result partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation196_case_id%7C2
+<http://eamining.edu.pt/frequenttemporalcorrelation196_case_id%7C2> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf :de92da3067062f3cb5356a7e4a4ac862 ,
+                                                                                             <http://eamining.edu.pt/19bb6808ceb50d1f99253539f693f375> ;
+                                                                    rdfs:label "case_id : 2" ,
+                                                                               "connection: frequenttemporalcorrelation196_2" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/investigation-result consequent: POST_/sandbox/payment/v1/payments partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation1_case_id%7C1
+<http://eamining.edu.pt/frequenttemporalcorrelation1_case_id%7C1> rdf:type owl:NamedIndividual ,
+                                                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                  gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                             <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                  gufo:isEventProperPartOf :ff957026c03b847e2e5ea06be0d33640 ,
+                                                                                           <http://eamining.edu.pt/0d75f90266e37a467c82b5340cc3a949> ;
+                                                                  rdfs:label "case_id : 1" ,
+                                                                             "connection: frequenttemporalcorrelation1_1" ,
+                                                                             "partner: acmeapp" ,
+                                                                             "references antecedent operation: POST_/sandbox/ecommerce/v1/carts consequent: POST_/sandbox/ecommerce/v1/carts/x/itens partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation209_case_id%7C2
+<http://eamining.edu.pt/frequenttemporalcorrelation209_case_id%7C2> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:isEventProperPartOf <http://eamining.edu.pt/19bb6808ceb50d1f99253539f693f375> ,
+                                                                                             <http://eamining.edu.pt/401d423db7c4567e95bbaa34e6384b44> ;
+                                                                    rdfs:label "case_id : 2" ,
+                                                                               "connection: frequenttemporalcorrelation209_2" ,
+                                                                               "partner: payments" ,
+                                                                               "references antecedent operation: POST_/sandbox/payment/v1/payments consequent: POST_/sandbox/handle-claim/v1/claims partner: 9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io.payments" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation211_case_id%7C3
+<http://eamining.edu.pt/frequenttemporalcorrelation211_case_id%7C3> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf :b7c688618e582468d56c1b12f7b15539 ,
+                                                                                             <http://eamining.edu.pt/543d2a0d8e59337ec2b7ce3ffa34ab14> ;
+                                                                    rdfs:label "case_id : 3" ,
+                                                                               "connection: frequenttemporalcorrelation211_3" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: POST_/sandbox/handle-claim/v1/claims consequent: GET_/sandbox/handle-claim/v1/claims/x/capture-informations partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation217_case_id%7C3
+<http://eamining.edu.pt/frequenttemporalcorrelation217_case_id%7C3> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf :c94b510b496fd30d2d00f1363f38543d ,
+                                                                                             <http://eamining.edu.pt/543d2a0d8e59337ec2b7ce3ffa34ab14> ;
+                                                                    rdfs:label "case_id : 3" ,
+                                                                               "connection: frequenttemporalcorrelation217_3" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: GET_/sandbox/handle-claim/v1/claims/x/capture-informations consequent: GET_/sandbox/handle-claim/v1/claims/x/stackholders partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation222_case_id%7C3
+<http://eamining.edu.pt/frequenttemporalcorrelation222_case_id%7C3> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf :c94b510b496fd30d2d00f1363f38543d ,
+                                                                                             :f81e113f3cee9746c2ef1f4c4b7aa678 ;
+                                                                    rdfs:label "case_id : 3" ,
+                                                                               "connection: frequenttemporalcorrelation222_3" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: GET_/sandbox/handle-claim/v1/claims/x/stackholders consequent: POST_/sandbox/handle-claim/v1/claims/x/notify-stackholders partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation22_case_id%7C4
+<http://eamining.edu.pt/frequenttemporalcorrelation22_case_id%7C4> rdf:type owl:NamedIndividual ,
+                                                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                   gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                              <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                   gufo:isEventProperPartOf :f037e8171e6ead3c483a171705f3c905 ,
+                                                                                            <http://eamining.edu.pt/28a063484f44fb19f3562d4c55f61927> ;
+                                                                   rdfs:label "case_id : 4" ,
+                                                                              "connection: frequenttemporalcorrelation22_4" ,
+                                                                              "partner: acmeapp" ,
+                                                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/deliveryaddress consequent: POST_/sandbox/ecommerce/v1/carts/paymentmethod partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation235_case_id%7C3
+<http://eamining.edu.pt/frequenttemporalcorrelation235_case_id%7C3> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf :f0c145086b02b0316357547cce542039 ,
+                                                                                             :f81e113f3cee9746c2ef1f4c4b7aa678 ;
+                                                                    rdfs:label "case_id : 3" ,
+                                                                               "connection: frequenttemporalcorrelation235_3" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/notify-stackholders consequent: POST_/sandbox/handle-claim/v1/claims/x/validations partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation247_case_id%7C3
+<http://eamining.edu.pt/frequenttemporalcorrelation247_case_id%7C3> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf :d208df6d188dbe7a199fe81bebc34776 ,
+                                                                                             :f0c145086b02b0316357547cce542039 ;
+                                                                    rdfs:label "case_id : 3" ,
+                                                                               "connection: frequenttemporalcorrelation247_3" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/validations consequent: POST_/sandbox/handle-claim/v1/claims/x/investigation-result partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation258_case_id%7C3
+<http://eamining.edu.pt/frequenttemporalcorrelation258_case_id%7C3> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf :d208df6d188dbe7a199fe81bebc34776 ,
+                                                                                             :e642cc19b2c41d55e2573b6c9e09557b ;
+                                                                    rdfs:label "case_id : 3" ,
+                                                                               "connection: frequenttemporalcorrelation258_3" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/investigation-result consequent: POST_/sandbox/payment/v1/payments partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation25_case_id%7C4
+<http://eamining.edu.pt/frequenttemporalcorrelation25_case_id%7C4> rdf:type owl:NamedIndividual ,
+                                                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                   gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                              <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                   gufo:isEventProperPartOf :cf228a65b2fe8f705f01091bceb8fa0b ,
+                                                                                            <http://eamining.edu.pt/28a063484f44fb19f3562d4c55f61927> ;
+                                                                   rdfs:label "case_id : 4" ,
+                                                                              "connection: frequenttemporalcorrelation25_4" ,
+                                                                              "partner: acmeapp" ,
+                                                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/paymentmethod consequent: POST_/sandbox/ecommerce/v1/orders partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation268_case_id%7C2
+<http://eamining.edu.pt/frequenttemporalcorrelation268_case_id%7C2> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf <http://eamining.edu.pt/401d423db7c4567e95bbaa34e6384b44> ,
+                                                                                             <http://eamining.edu.pt/52b84724ebf8b42cccc787231b04992f> ;
+                                                                    rdfs:label "case_id : 2" ,
+                                                                               "connection: frequenttemporalcorrelation268_2" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: POST_/sandbox/handle-claim/v1/claims consequent: GET_/sandbox/handle-claim/v1/claims/x/capture-informations partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation275_case_id%7C2
+<http://eamining.edu.pt/frequenttemporalcorrelation275_case_id%7C2> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf <http://eamining.edu.pt/3468883af9c7785a5b3ced6c2c879979> ,
+                                                                                             <http://eamining.edu.pt/52b84724ebf8b42cccc787231b04992f> ;
+                                                                    rdfs:label "case_id : 2" ,
+                                                                               "connection: frequenttemporalcorrelation275_2" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: GET_/sandbox/handle-claim/v1/claims/x/capture-informations consequent: GET_/sandbox/handle-claim/v1/claims/x/stackholders partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation27_case_id%7C2
+<http://eamining.edu.pt/frequenttemporalcorrelation27_case_id%7C2> rdf:type owl:NamedIndividual ,
+                                                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                   gufo:isEventProperPartOf :cf228a65b2fe8f705f01091bceb8fa0b ,
+                                                                                            <http://eamining.edu.pt/733a146f8d5fa906ae8c314c80af0d72> ;
+                                                                   rdfs:label "case_id : 2" ,
+                                                                              "connection: frequenttemporalcorrelation27_2" ,
+                                                                              "partner: acmeapp" ,
+                                                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/orders consequent: POST_/sandbox/payment/v1/payments partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation280_case_id%7C2
+<http://eamining.edu.pt/frequenttemporalcorrelation280_case_id%7C2> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf <http://eamining.edu.pt/3468883af9c7785a5b3ced6c2c879979> ,
+                                                                                             <http://eamining.edu.pt/35b610211d2c0d397701407225785629> ;
+                                                                    rdfs:label "case_id : 2" ,
+                                                                               "connection: frequenttemporalcorrelation280_2" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: GET_/sandbox/handle-claim/v1/claims/x/stackholders consequent: POST_/sandbox/handle-claim/v1/claims/x/notify-stackholders partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation290_case_id%7C2
+<http://eamining.edu.pt/frequenttemporalcorrelation290_case_id%7C2> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf <http://eamining.edu.pt/35b610211d2c0d397701407225785629> ,
+                                                                                             <http://eamining.edu.pt/882ebd6ada58946ef3cc76625a379c58> ;
+                                                                    rdfs:label "case_id : 2" ,
+                                                                               "connection: frequenttemporalcorrelation290_2" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/notify-stackholders consequent: POST_/sandbox/handle-claim/v1/claims/x/validations partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation299_case_id%7C2
+<http://eamining.edu.pt/frequenttemporalcorrelation299_case_id%7C2> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf :f3e552690c6c5f7e45fbe34ed9281f03 ,
+                                                                                             <http://eamining.edu.pt/882ebd6ada58946ef3cc76625a379c58> ;
+                                                                    rdfs:label "case_id : 2" ,
+                                                                               "connection: frequenttemporalcorrelation299_2" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/validations consequent: POST_/sandbox/handle-claim/v1/claims/x/investigation-result partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation307_case_id%7C2
+<http://eamining.edu.pt/frequenttemporalcorrelation307_case_id%7C2> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf :bf307d5327531f3b7732747eff4dbf10 ,
+                                                                                             :f3e552690c6c5f7e45fbe34ed9281f03 ;
+                                                                    rdfs:label "case_id : 2" ,
+                                                                               "connection: frequenttemporalcorrelation307_2" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/investigation-result consequent: POST_/sandbox/payment/v1/payments partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation314_case_id%7C2
+<http://eamining.edu.pt/frequenttemporalcorrelation314_case_id%7C2> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:isEventProperPartOf :bf307d5327531f3b7732747eff4dbf10 ,
+                                                                                             :df1776390cee1e33e6860a555c6d283b ;
+                                                                    rdfs:label "case_id : 2" ,
+                                                                               "connection: frequenttemporalcorrelation314_2" ,
+                                                                               "partner: payments" ,
+                                                                               "references antecedent operation: POST_/sandbox/payment/v1/payments consequent: POST_/sandbox/handle-claim/v1/claims partner: 9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io.payments" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation315_case_id%7C2
+<http://eamining.edu.pt/frequenttemporalcorrelation315_case_id%7C2> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf :df1776390cee1e33e6860a555c6d283b ,
+                                                                                             :fac0a56efac78c6d3e09142d2e292e29 ;
+                                                                    rdfs:label "case_id : 2" ,
+                                                                               "connection: frequenttemporalcorrelation315_2" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: POST_/sandbox/handle-claim/v1/claims consequent: GET_/sandbox/handle-claim/v1/claims/x/capture-informations partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation321_case_id%7C2
+<http://eamining.edu.pt/frequenttemporalcorrelation321_case_id%7C2> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf :f38f05489945011a5bb0c72228461669 ,
+                                                                                             :fac0a56efac78c6d3e09142d2e292e29 ;
+                                                                    rdfs:label "case_id : 2" ,
+                                                                               "connection: frequenttemporalcorrelation321_2" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: GET_/sandbox/handle-claim/v1/claims/x/capture-informations consequent: GET_/sandbox/handle-claim/v1/claims/x/stackholders partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation326_case_id%7C2
+<http://eamining.edu.pt/frequenttemporalcorrelation326_case_id%7C2> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf :b6710e53d2b107154dbe6c123ea0cb3d ,
+                                                                                             :f38f05489945011a5bb0c72228461669 ;
+                                                                    rdfs:label "case_id : 2" ,
+                                                                               "connection: frequenttemporalcorrelation326_2" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: GET_/sandbox/handle-claim/v1/claims/x/stackholders consequent: POST_/sandbox/handle-claim/v1/claims/x/notify-stackholders partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation32_case_id%7C5
+<http://eamining.edu.pt/frequenttemporalcorrelation32_case_id%7C5> rdf:type owl:NamedIndividual ,
+                                                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                   gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                              <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                   gufo:isEventProperPartOf :a1ae8e11266c0c346a53002fc9bf5967 ,
+                                                                                            :f342244d2a0fe7008c72b73bae0c0509 ;
+                                                                   rdfs:label "case_id : 5" ,
+                                                                              "connection: frequenttemporalcorrelation32_5" ,
+                                                                              "partner: acmeapp" ,
+                                                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/carts consequent: POST_/sandbox/ecommerce/v1/carts/x/itens partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation333_case_id%7C2
+<http://eamining.edu.pt/frequenttemporalcorrelation333_case_id%7C2> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf :ad0a9c03418be37498d76716a0f0ee6c ,
+                                                                                             :b6710e53d2b107154dbe6c123ea0cb3d ;
+                                                                    rdfs:label "case_id : 2" ,
+                                                                               "connection: frequenttemporalcorrelation333_2" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/notify-stackholders consequent: POST_/sandbox/handle-claim/v1/claims/x/validations partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation339_case_id%7C2
+<http://eamining.edu.pt/frequenttemporalcorrelation339_case_id%7C2> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf :ad0a9c03418be37498d76716a0f0ee6c ,
+                                                                                             <http://eamining.edu.pt/4df74273ddd24b6579190e700c28c046> ;
+                                                                    rdfs:label "case_id : 2" ,
+                                                                               "connection: frequenttemporalcorrelation339_2" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/validations consequent: POST_/sandbox/handle-claim/v1/claims/x/investigation-result partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation344_case_id%7C2
+<http://eamining.edu.pt/frequenttemporalcorrelation344_case_id%7C2> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf <http://eamining.edu.pt/05266b20f14b826e0c767f57e43de159> ,
+                                                                                             <http://eamining.edu.pt/4df74273ddd24b6579190e700c28c046> ;
+                                                                    rdfs:label "case_id : 2" ,
+                                                                               "connection: frequenttemporalcorrelation344_2" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/investigation-result consequent: POST_/sandbox/payment/v1/payments partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation348_case_id%7C4
+<http://eamining.edu.pt/frequenttemporalcorrelation348_case_id%7C4> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf :fd39a121f2fc892c40ab0915ce86d47a ,
+                                                                                             <http://eamining.edu.pt/69739b4c2e95632529af4e065d03a114> ;
+                                                                    rdfs:label "case_id : 4" ,
+                                                                               "connection: frequenttemporalcorrelation348_4" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: POST_/sandbox/handle-claim/v1/claims consequent: GET_/sandbox/handle-claim/v1/claims/x/capture-informations partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation354_case_id%7C4
+<http://eamining.edu.pt/frequenttemporalcorrelation354_case_id%7C4> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf :c7da643f845f16298549b77d7d4c7312 ,
+                                                                                             <http://eamining.edu.pt/69739b4c2e95632529af4e065d03a114> ;
+                                                                    rdfs:label "case_id : 4" ,
+                                                                               "connection: frequenttemporalcorrelation354_4" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: GET_/sandbox/handle-claim/v1/claims/x/capture-informations consequent: GET_/sandbox/handle-claim/v1/claims/x/stackholders partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation359_case_id%7C4
+<http://eamining.edu.pt/frequenttemporalcorrelation359_case_id%7C4> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf :c7da643f845f16298549b77d7d4c7312 ,
+                                                                                             <http://eamining.edu.pt/57111e3ed3072410bbec3e50041cba41> ;
+                                                                    rdfs:label "case_id : 4" ,
+                                                                               "connection: frequenttemporalcorrelation359_4" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: GET_/sandbox/handle-claim/v1/claims/x/stackholders consequent: POST_/sandbox/handle-claim/v1/claims/x/notify-stackholders partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation363_case_id%7C4
+<http://eamining.edu.pt/frequenttemporalcorrelation363_case_id%7C4> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf <http://eamining.edu.pt/1493070553c4a666a40ca92e618a4a78> ,
+                                                                                             <http://eamining.edu.pt/57111e3ed3072410bbec3e50041cba41> ;
+                                                                    rdfs:label "case_id : 4" ,
+                                                                               "connection: frequenttemporalcorrelation363_4" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/notify-stackholders consequent: POST_/sandbox/handle-claim/v1/claims/x/validations partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation366_case_id%7C4
+<http://eamining.edu.pt/frequenttemporalcorrelation366_case_id%7C4> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf <http://eamining.edu.pt/1493070553c4a666a40ca92e618a4a78> ,
+                                                                                             <http://eamining.edu.pt/3197f24b1d26b71e6eb20a3f36bd5d6c> ;
+                                                                    rdfs:label "case_id : 4" ,
+                                                                               "connection: frequenttemporalcorrelation366_4" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/validations consequent: POST_/sandbox/handle-claim/v1/claims/x/investigation-result partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation368_case_id%7C4
+<http://eamining.edu.pt/frequenttemporalcorrelation368_case_id%7C4> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/GET%20capture-informations> ,
+                                                                                               <http://eamining.edu.pt/POST%20claims> ;
+                                                                    gufo:isEventProperPartOf <http://eamining.edu.pt/0e72390d7a288a161afb3e460cacda2e> ,
+                                                                                             <http://eamining.edu.pt/3197f24b1d26b71e6eb20a3f36bd5d6c> ;
+                                                                    rdfs:label "case_id : 4" ,
+                                                                               "connection: frequenttemporalcorrelation368_4" ,
+                                                                               "partner: OpenApp" ,
+                                                                               "references antecedent operation: POST_/sandbox/handle-claim/v1/claims/x/investigation-result consequent: POST_/sandbox/payment/v1/payments partner: EA Mining OntoUML Teste V1_4.OpenApp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation38_case_id%7C5
+<http://eamining.edu.pt/frequenttemporalcorrelation38_case_id%7C5> rdf:type owl:NamedIndividual ,
+                                                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                   gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                              <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                   gufo:isEventProperPartOf :a1ae8e11266c0c346a53002fc9bf5967 ,
+                                                                                            :bd64a406aad6192cd5711f34e604084f ;
+                                                                   rdfs:label "case_id : 5" ,
+                                                                              "connection: frequenttemporalcorrelation38_5" ,
+                                                                              "partner: acmeapp" ,
+                                                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/itens consequent: GET_/sandbox/ecommerce/v1/carts/x partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation43_case_id%7C6
+<http://eamining.edu.pt/frequenttemporalcorrelation43_case_id%7C6> rdf:type owl:NamedIndividual ,
+                                                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                   gufo:isEventProperPartOf :aa3a9e5831198070c8abe43e08e26314 ,
+                                                                                            :bd64a406aad6192cd5711f34e604084f ;
+                                                                   rdfs:label "case_id : 6" ,
+                                                                              "connection: frequenttemporalcorrelation43_6" ,
+                                                                              "partner: acmeapp" ,
+                                                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/itens consequent: GET_/sandbox/ecommerce/v1/carts/x partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation48_case_id%7C5
+<http://eamining.edu.pt/frequenttemporalcorrelation48_case_id%7C5> rdf:type owl:NamedIndividual ,
+                                                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                   gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                              <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                   gufo:isEventProperPartOf :bd64a406aad6192cd5711f34e604084f ,
+                                                                                            <http://eamining.edu.pt/275cd4174583cb036eb1fe511a9ff864> ;
+                                                                   rdfs:label "case_id : 5" ,
+                                                                              "connection: frequenttemporalcorrelation48_5" ,
+                                                                              "partner: acmeapp" ,
+                                                                              "references antecedent operation: GET_/sandbox/ecommerce/v1/carts/x consequent: POST_/sandbox/ecommerce/v1/orders partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation52_case_id%7C7
+<http://eamining.edu.pt/frequenttemporalcorrelation52_case_id%7C7> rdf:type owl:NamedIndividual ,
+                                                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                   gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                              <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                   gufo:isEventProperPartOf :f91a1546c9c84c003bfb2176c83d9f2b ,
+                                                                                            <http://eamining.edu.pt/7bc7dc709afc2a1196f69937ee01f15f> ;
+                                                                   rdfs:label "case_id : 7" ,
+                                                                              "connection: frequenttemporalcorrelation52_7" ,
+                                                                              "partner: acmeapp" ,
+                                                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/deliveryaddress consequent: POST_/sandbox/ecommerce/v1/carts/paymentmethod partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation55_case_id%7C7
+<http://eamining.edu.pt/frequenttemporalcorrelation55_case_id%7C7> rdf:type owl:NamedIndividual ,
+                                                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                   gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                              <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                   gufo:isEventProperPartOf <http://eamining.edu.pt/275cd4174583cb036eb1fe511a9ff864> ,
+                                                                                            <http://eamining.edu.pt/7bc7dc709afc2a1196f69937ee01f15f> ;
+                                                                   rdfs:label "case_id : 7" ,
+                                                                              "connection: frequenttemporalcorrelation55_7" ,
+                                                                              "partner: acmeapp" ,
+                                                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/paymentmethod consequent: POST_/sandbox/ecommerce/v1/orders partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation57_case_id%7C5
+<http://eamining.edu.pt/frequenttemporalcorrelation57_case_id%7C5> rdf:type owl:NamedIndividual ,
+                                                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                   gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                              <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                   gufo:isEventProperPartOf <http://eamining.edu.pt/275cd4174583cb036eb1fe511a9ff864> ,
+                                                                                            <http://eamining.edu.pt/6f92b204fb23b60dc9abfd6d11414116> ;
+                                                                   rdfs:label "case_id : 5" ,
+                                                                              "connection: frequenttemporalcorrelation57_5" ,
+                                                                              "partner: acmeapp" ,
+                                                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/orders consequent: POST_/sandbox/payment/v1/payments partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation61_case_id%7C5
+<http://eamining.edu.pt/frequenttemporalcorrelation61_case_id%7C5> rdf:type owl:NamedIndividual ,
+                                                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                   gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                              <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                   gufo:isEventProperPartOf <http://eamining.edu.pt/6f92b204fb23b60dc9abfd6d11414116> ,
+                                                                                            <http://eamining.edu.pt/7d08df05b800e36ebc1e9b055d28c075> ;
+                                                                   rdfs:label "case_id : 5" ,
+                                                                              "connection: frequenttemporalcorrelation61_5" ,
+                                                                              "partner: acmeapp" ,
+                                                                              "references antecedent operation: POST_/sandbox/payment/v1/payments consequent: POST_/sandbox/ecommerce/v1/carts/x/itens partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation63_case_id%7C8
+<http://eamining.edu.pt/frequenttemporalcorrelation63_case_id%7C8> rdf:type owl:NamedIndividual ,
+                                                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                   gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                              <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                   gufo:isEventProperPartOf <http://eamining.edu.pt/2190c24133fffd1cda009b7dcbca601a> ,
+                                                                                            <http://eamining.edu.pt/64187e0da2ac7f3cd4acc42e445feb23> ;
+                                                                   rdfs:label "case_id : 8" ,
+                                                                              "connection: frequenttemporalcorrelation63_8" ,
+                                                                              "partner: acmeapp" ,
+                                                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/carts consequent: POST_/sandbox/ecommerce/v1/carts/x/itens partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation69_case_id%7C8
+<http://eamining.edu.pt/frequenttemporalcorrelation69_case_id%7C8> rdf:type owl:NamedIndividual ,
+                                                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                   gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                              <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                   gufo:isEventProperPartOf :b318ad0621084552a17895612fe08977 ,
+                                                                                            <http://eamining.edu.pt/64187e0da2ac7f3cd4acc42e445feb23> ;
+                                                                   rdfs:label "case_id : 8" ,
+                                                                              "connection: frequenttemporalcorrelation69_8" ,
+                                                                              "partner: acmeapp" ,
+                                                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/itens consequent: GET_/sandbox/ecommerce/v1/carts/x partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation74_case_id%7C9
+<http://eamining.edu.pt/frequenttemporalcorrelation74_case_id%7C9> rdf:type owl:NamedIndividual ,
+                                                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                   gufo:isEventProperPartOf :b318ad0621084552a17895612fe08977 ,
+                                                                                            <http://eamining.edu.pt/42a376063549c74315de4052ff071b0d> ;
+                                                                   rdfs:label "case_id : 9" ,
+                                                                              "connection: frequenttemporalcorrelation74_9" ,
+                                                                              "partner: acmeapp" ,
+                                                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/itens consequent: GET_/sandbox/ecommerce/v1/carts/x partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation79_case_id%7C8
+<http://eamining.edu.pt/frequenttemporalcorrelation79_case_id%7C8> rdf:type owl:NamedIndividual ,
+                                                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                   gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                              <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                   gufo:isEventProperPartOf :b318ad0621084552a17895612fe08977 ,
+                                                                                            <http://eamining.edu.pt/87b72f37c6ab3a4efdc5ee37a847f278> ;
+                                                                   rdfs:label "case_id : 8" ,
+                                                                              "connection: frequenttemporalcorrelation79_8" ,
+                                                                              "partner: acmeapp" ,
+                                                                              "references antecedent operation: GET_/sandbox/ecommerce/v1/carts/x consequent: POST_/sandbox/ecommerce/v1/orders partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation7_case_id%7C2
+<http://eamining.edu.pt/frequenttemporalcorrelation7_case_id%7C2> rdf:type owl:NamedIndividual ,
+                                                                           <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                  gufo:isEventProperPartOf <http://eamining.edu.pt/0d75f90266e37a467c82b5340cc3a949> ,
+                                                                                           <http://eamining.edu.pt/5ea7c53baf2ded25d74a120b59ba9e00> ;
+                                                                  rdfs:label "case_id : 2" ,
+                                                                             "connection: frequenttemporalcorrelation7_2" ,
+                                                                             "partner: acmeapp" ,
+                                                                             "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/itens consequent: GET_/sandbox/ecommerce/v1/carts/x partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation82_case_id%7C10
+<http://eamining.edu.pt/frequenttemporalcorrelation82_case_id%7C10> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                               <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                    gufo:isEventProperPartOf :bb047063386f2f191de27a57e360447b ,
+                                                                                             <http://eamining.edu.pt/7df2fa1c8c937929fdff3c60ec84ad21> ;
+                                                                    rdfs:label "case_id : 10" ,
+                                                                               "connection: frequenttemporalcorrelation82_10" ,
+                                                                               "partner: acmeapp" ,
+                                                                               "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/deliveryaddress consequent: POST_/sandbox/ecommerce/v1/carts/paymentmethod partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation85_case_id%7C10
+<http://eamining.edu.pt/frequenttemporalcorrelation85_case_id%7C10> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                               <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                    gufo:isEventProperPartOf <http://eamining.edu.pt/7df2fa1c8c937929fdff3c60ec84ad21> ,
+                                                                                             <http://eamining.edu.pt/87b72f37c6ab3a4efdc5ee37a847f278> ;
+                                                                    rdfs:label "case_id : 10" ,
+                                                                               "connection: frequenttemporalcorrelation85_10" ,
+                                                                               "partner: acmeapp" ,
+                                                                               "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/paymentmethod consequent: POST_/sandbox/ecommerce/v1/orders partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation87_case_id%7C8
+<http://eamining.edu.pt/frequenttemporalcorrelation87_case_id%7C8> rdf:type owl:NamedIndividual ,
+                                                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                   gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                              <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                   gufo:isEventProperPartOf :faaa386bd8c68935741253135ec3b678 ,
+                                                                                            <http://eamining.edu.pt/87b72f37c6ab3a4efdc5ee37a847f278> ;
+                                                                   rdfs:label "case_id : 8" ,
+                                                                              "connection: frequenttemporalcorrelation87_8" ,
+                                                                              "partner: acmeapp" ,
+                                                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/orders consequent: POST_/sandbox/payment/v1/payments partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation90_case_id%7C11
+<http://eamining.edu.pt/frequenttemporalcorrelation90_case_id%7C11> rdf:type owl:NamedIndividual ,
+                                                                             <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                    gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                               <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                    gufo:isEventProperPartOf <http://eamining.edu.pt/7a73097248bf1742a322a21cbc168078> ,
+                                                                                             <http://eamining.edu.pt/7d08df05b800e36ebc1e9b055d28c075> ;
+                                                                    rdfs:label "case_id : 11" ,
+                                                                               "connection: frequenttemporalcorrelation90_11" ,
+                                                                               "partner: acmeapp" ,
+                                                                               "references antecedent operation: POST_/sandbox/ecommerce/v1/carts consequent: POST_/sandbox/ecommerce/v1/carts/x/itens partner: EA Mining OntoUML Teste V1_4.acmeapp" .
+
+
+###  http://eamining.edu.pt/frequenttemporalcorrelation96_case_id%7C5
+<http://eamining.edu.pt/frequenttemporalcorrelation96_case_id%7C5> rdf:type owl:NamedIndividual ,
+                                                                            <http://eamining.edu.pt/process-view#APIActivitiesConnection> ;
+                                                                   gufo:historicallyDependsOn <http://eamining.edu.pt/POST%20carts> ,
+                                                                                              <http://eamining.edu.pt/POST%20deliveryaddress> ;
+                                                                   gufo:isEventProperPartOf <http://eamining.edu.pt/0f4b7b26a22bf54a6199b7128c3d7643> ,
+                                                                                            <http://eamining.edu.pt/7d08df05b800e36ebc1e9b055d28c075> ;
+                                                                   rdfs:label "case_id : 5" ,
+                                                                              "connection: frequenttemporalcorrelation96_5" ,
+                                                                              "partner: acmeapp" ,
+                                                                              "references antecedent operation: POST_/sandbox/ecommerce/v1/carts/x/itens consequent: GET_/sandbox/ecommerce/v1/carts/x partner: EA Mining OntoUML Teste V1_4.acmeapp" .
 
 
 ###  http://eamining.edu.pt/process-view#APIActivitiesConnection

@@ -65,10 +65,19 @@ APRIORI_INVERSE_ARGS = {
 PM4PI_ARGS = {
   "TOP_K" : 3, # For tests with very small datasets
   #"TOP_K" : 5, # For tests with small datasets (10 tests sets)
-  #"TOP_K__" : 10, # For tests with medium datasets (15 tests sets)
+  #"TOP_K__" : ?, # For tests with medium datasets (More than 20 tests sets)
+  #"TOP_K__" : ?, # For tests with medium datasets (More than 50 tests sets)
 }
 
 ARCHIMATE_MODEL = {
   "file_path": "./archimate/",
   "archimate_file_name": "archimate_model.xml", 
+}
+
+SWAGGERS_FILE_PATH = {
+  "file_path": "./docs/swaggers/",
+}
+
+DEVELOPER_PORTAL = {
+  "url": "./docs/swaggers/",
 }

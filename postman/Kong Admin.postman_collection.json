@@ -653,6 +653,81 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "Enable OAuth 2 Plugin to Route Claim",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "oauth2",
+											"type": "text"
+										},
+										{
+											"key": "instance_name",
+											"value": "oauth2-claims",
+											"type": "text"
+										},
+										{
+											"key": "config.enable_client_credentials",
+											"value": "true",
+											"type": "text"
+										},
+										{
+											"key": "config.enable_authorization_code",
+											"value": "true",
+											"type": "text"
+										},
+										{
+											"key": "config.global_credentials",
+											"value": "true",
+											"type": "text"
+										},
+										{
+											"key": "config.provision_key",
+											"value": "abc123",
+											"type": "text"
+										},
+										{
+											"key": "config.token_expiration",
+											"value": "28800",
+											"type": "text"
+										},
+										{
+											"key": "config.refresh_token_ttl",
+											"value": "1209600",
+											"type": "text"
+										},
+										{
+											"key": "tags",
+											"value": "Insurance Claims",
+											"type": "text"
+										},
+										{
+											"key": "config.scopes",
+											"value": "email",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/routes/insurance-claims/plugins",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"routes",
+										"insurance-claims",
+										"plugins"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -741,6 +816,39 @@
 										{
 											"key": "url",
 											"value": "https://viacep.com.br/ws",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/services",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"services"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "insurance-claims",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "insurance-claims",
+											"type": "text"
+										},
+										{
+											"key": "url",
+											"value": "https://9ea47488-10da-4ef5-8cc9-b0bdd94906e2.mock.pstmn.io/claims",
 											"type": "text"
 										}
 									]
@@ -864,6 +972,35 @@
 									"path": [
 										"services",
 										"correios",
+										"routes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Route-Insurance Claims",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n  \"name\": \"insurance-claims\",\r\n  \"protocols\": [\r\n    \"http\",\r\n    \"https\"\r\n  ],\r\n  \"methods\": [\r\n    \"GET\",\r\n    \"POST\",\r\n    \"PUT\",\r\n    \"DELETE\"\r\n  ],\r\n  \"hosts\": [\r\n  ],\r\n  \"paths\": [\r\n    \"/sandbox/handle-claim/v1/claims\",\r\n    \"/sandbox/handle-claim/v1/claims/{id}/capture-informations\",\r\n    \"/sandbox/handle-claim/v1/claims/{id}/stackholders\",\r\n    \"/sandbox/handle-claim/v1/claims/{id}/notify-stackholders\",\r\n    \"/sandbox/handle-claim/v1/claims/{id}/validations\",\r\n    \"/sandbox/handle-claim/v1/claims/{id}/investigation-result\"\r\n  ],\r\n  \"headers\": {\r\n  },\r\n  \"https_redirect_status_code\": 426,\r\n  \"regex_priority\": 0,\r\n  \"strip_path\": true,\r\n  \"path_handling\": \"v0\",\r\n  \"preserve_host\": false,\r\n  \"request_buffering\": true,\r\n  \"response_buffering\": true,\r\n  \"tags\": [\r\n    \"Insurance Claims\"\r\n  ],\r\n  \"service\": {\r\n    \"id\": \"0386f692-2aa4-47c0-a607-d73c1168d454\"\r\n  }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/services/insurance-claims/routes",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"services",
+										"insurance-claims",
 										"routes"
 									]
 								}
@@ -1002,6 +1139,120 @@
 									"path": [
 										"consumers",
 										"acmeapp",
+										"oauth2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create OpinApp Consummer",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "username",
+											"value": "OpenApp",
+											"type": "text"
+										},
+										{
+											"key": "custom_id",
+											"value": "opin1234",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/consumers",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"consumers"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create OpinApp key-auth",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "key",
+											"value": "550",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/consumers/OpenApp/key-auth",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"consumers",
+										"OpenApp",
+										"key-auth"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Create Opin App",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "name",
+											"value": "OpenApp",
+											"type": "text"
+										},
+										{
+											"key": "client_id",
+											"value": "550",
+											"type": "text"
+										},
+										{
+											"key": "client_secret",
+											"value": "551",
+											"type": "text"
+										},
+										{
+											"key": "redirect_uris",
+											"value": "http://mockbin.org/",
+											"type": "text"
+										},
+										{
+											"key": "hash_secret",
+											"value": "true",
+											"type": "text",
+											"disabled": true
+										}
+									]
+								},
+								"url": {
+									"raw": "{{kong-address}}:8001/consumers/OpenApp/oauth2",
+									"host": [
+										"{{kong-address}}"
+									],
+									"port": "8001",
+									"path": [
+										"consumers",
+										"OpenApp",
 										"oauth2"
 									]
 								}

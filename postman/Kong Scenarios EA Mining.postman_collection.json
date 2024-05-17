@@ -1,0 +1,4149 @@
+{
+	"info": {
+		"_postman_id": "eebc9df4-4410-4a89-9e4b-49e45330fbc3",
+		"name": "Kong Scenarios EA Mining",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "31557509",
+		"_collection_link": "https://backend-cea.postman.co/workspace/CommerceMock~d3c0cf1b-b00e-4fda-99e2-3a66161a2e0e/collection/31557509-eebc9df4-4410-4a89-9e4b-49e45330fbc3?action=share&source=collection_link&creator=31557509"
+	},
+	"item": [
+		{
+			"name": "Manual Test Case 1",
+			"item": [
+				{
+					"name": "OAuth AcmeAPP",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 201\", function () {\r",
+									"   pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"access_token\", jsonData.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "456",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "789",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{kong-ip}}:8443/sandbox/ecommerce/v1/carts/oauth2/token",
+							"protocol": "https",
+							"host": [
+								"{{kong-ip}}"
+							],
+							"port": "8443",
+							"path": [
+								"sandbox",
+								"ecommerce",
+								"v1",
+								"carts",
+								"oauth2",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "OAuth EAminingApp",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code 201\", function () {\r",
+									"   pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"access_token\", jsonData.access_token);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "client_id",
+									"value": "731",
+									"type": "text"
+								},
+								{
+									"key": "client_secret",
+									"value": "731",
+									"type": "text"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "https://{{kong-ip}}:8443/sandbox/ecommerce/v1/carts/oauth2/token",
+							"protocol": "https",
+							"host": [
+								"{{kong-ip}}"
+							],
+							"port": "8443",
+							"path": [
+								"sandbox",
+								"ecommerce",
+								"v1",
+								"carts",
+								"oauth2",
+								"token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Cart",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"//pm.environment.set(\"x-customer_id\", {});\r",
+									"//pm.variables.set(\"customer_id\", $randomInt)\r",
+									"\r",
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.variables.set(\"x-cart_id\", jsonData.cartid);\r",
+									"\r",
+									"//const resquestJson = pm.request.toJSON();\r",
+									"var jsonData = JSON.parse(requestBody);\r",
+									"pm.variables.set(\"x-customer_id\", jsonData.cliente.codigo);\r",
+									"pm.variables.set(\"x-customer_id\", jsonData.cliente.name);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cliente\": {\r\n        \"codigo\": {{$randomInt}},\r\n        \"name\" : \"{{$randomFullName}}\"\r\n    },\r\n    \"produto\": {\r\n        \"sku\" : 123456,\r\n        \"produto\" : \"Panela de Barro\",    \r\n        \"valor\": 99.99\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1,\r\n        \"descricao\" : \"APP ANDROID\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/carts",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8000",
+							"path": [
+								"sandbox",
+								"ecommerce",
+								"v1",
+								"carts"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Item 1",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart_id\" : {{x-cart_id}},\r\n    \"client\":  {{x-customer_id}},\r\n    \"product_sku\" : {{}},\r\n    \"quantity\" : 1,\r\n    \"origem\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/carts/{{x-cart_id}}/itens",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8000",
+							"path": [
+								"sandbox",
+								"ecommerce",
+								"v1",
+								"carts",
+								"{{x-cart_id}}",
+								"itens"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Item 2",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "access_token",
+								"value": "4f48e7a0-773b-35eb-b02d-3ac9f6bad35e",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart_id\" : 3456,\r\n    \"client\":  12345,\r\n    \"product_sku\" : 124,\r\n    \"quantity\" : 1,\r\n    \"origem\": 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/carts/595/itens",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8000",
+							"path": [
+								"sandbox",
+								"ecommerce",
+								"v1",
+								"carts",
+								"595",
+								"itens"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Address by ZipCode",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{kong-address}}:8000/sandbox/correios/v1/cep/20031004/json",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8000",
+							"path": [
+								"sandbox",
+								"correios",
+								"v1",
+								"cep",
+								"20031004",
+								"json"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add Delivery Address",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart\": 3456,\r\n    \"orderDate\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"cliente\": {\r\n        \"codigo\": 12345,\r\n        \"name\": \"Carlos Pinheiro\"\r\n    },    \r\n    \"deliveryAddress\": {\r\n            \"bairro\": \"Centro\",\r\n            \"cep\": \"20031004\",\r\n            \"cidade\": \"Rio de Janeiro\",\r\n            \"complemento2\": \"- de 65 a 81 - lado ímpar\",\r\n            \"end\": \"Avenida Almirante Barroso\",\r\n            \"numero\" : 81,\r\n            \"complemento1\" : \"apto 1003\",\r\n            \"uf\": \"RJ\",\r\n            \"unidadesPostagem\": \"\"\r\n    },\r\n    \"statusPedidos\": {\r\n        \"code\": 1,\r\n        \"description\": \"waiting payment\"\r\n    },\r\n    \"origem\": \"e-commerce\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/carts/{{x-cart_id}}/deliveryaddress",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8000",
+							"path": [
+								"sandbox",
+								"ecommerce",
+								"v1",
+								"carts",
+								"{{x-cart_id}}",
+								"deliveryaddress"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add payment method",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart\": {{x-customer_id}},\r\n    \"orderDate\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"cliente\": {\r\n        \"codigo\": 12345,\r\n        \"name\": \"Carlos Pinheiro\"\r\n    },\r\n    \"paymentMethod\": {\r\n        \"method\": \"credit_card\",\r\n        \"cardHolder\": \"Carlos Pinheiro\",\r\n        \"cardNumber\": \"4561\",\r\n        \"dueDate\": \"02/2025\",\r\n        \"cvv\": 111\r\n    },\r\n    \"totalValue\": \"150.00\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/carts/{{x-cart_id}}/paymentmethod",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8000",
+							"path": [
+								"sandbox",
+								"ecommerce",
+								"v1",
+								"carts",
+								"{{x-cart_id}}",
+								"paymentmethod"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "orders",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);\r",
+									"pm.environment.set(\"x-order_id\", jsonData.orderId);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cart\": {{x-cart_id}},\r\n    \"orderDate\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"cliente\": {\r\n        \"codigo\": 22494449,\r\n        \"name\": \"Carlos Pinheiro\",\r\n        \"document\": \"123456789-1\"\r\n    },    \r\n    \"products\": [{\r\n            \"produto\" : \"Panela de Barro\",\r\n            \"sku\" : 123456,\r\n            \"valor\": 99.99\r\n        }\r\n    ],\r\n    \"statusPedidos\": {\r\n        \"code\": 1,\r\n        \"description\": \"waiting payment\"\r\n    },\r\n    \"origem\": \"e-commerce\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/orders",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8000",
+							"path": [
+								"sandbox",
+								"ecommerce",
+								"v1",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "orders",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/orders",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8000",
+							"path": [
+								"sandbox",
+								"ecommerce",
+								"v1",
+								"orders"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "orders/1001",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/orders/12345-01",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8000",
+							"path": [
+								"sandbox",
+								"ecommerce",
+								"v1",
+								"orders",
+								"12345-01"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "orders/12345-01",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "{{client_id}}",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "{{access_token}}",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/orders/12345-01",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8000",
+							"path": [
+								"sandbox",
+								"ecommerce",
+								"v1",
+								"orders",
+								"12345-01"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "orders/1001",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/orders/1001",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"orders",
+								"1001"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "orders/1001",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "client_id",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "access_token",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/orders/1001",
+									"protocol": "https",
+									"host": [
+										"apiplatform",
+										"sensedia",
+										"com"
+									],
+									"path": [
+										"sandbox",
+										"commerce",
+										"v1",
+										"orders",
+										"1001"
+									],
+									"query": [
+										{
+											"key": "client_id",
+											"value": "{{client_id}}",
+											"disabled": true
+										}
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						}
+					]
+				},
+				{
+					"name": "carts/3456",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://apiplatform.sensedia.com/sandbox/commerce/v1/carts/3456",
+							"protocol": "https",
+							"host": [
+								"apiplatform",
+								"sensedia",
+								"com"
+							],
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"carts",
+								"3456"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "carts/{1}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "456",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/carts/1",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8000",
+							"path": [
+								"sandbox",
+								"ecommerce",
+								"v1",
+								"carts",
+								"1"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "carts/3456",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "client_id",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/carts/3456",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8000",
+							"path": [
+								"sandbox",
+								"ecommerce",
+								"v1",
+								"carts",
+								"3456"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "carts/x-cart_id",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "client_id",
+								"value": "",
+								"type": "text"
+							},
+							{
+								"key": "access_token",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"numPedido\": 1000,\r\n    \"dataPedido\": \"2020-07-06T12:59:59.550-03:00\",\r\n    \"produto\" : \"Panela de Barro\",\r\n    \"sku\" : 123456,\r\n    \"valor\": 99.99,\r\n    \"cliente\": {\r\n        \"codigo\": 22494449\r\n    },\r\n    \"statusPedidos\": {\r\n        \"codigo\": \"aprovado\"\r\n    },\r\n    \"origem\": {\r\n        \"codigo\": 1\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{kong-address}}:8000/sandbox/commerce/v1/carts/{{x-cart_id}}",
+							"host": [
+								"{{kong-address}}"
+							],
+							"port": "8000",
+							"path": [
+								"sandbox",
+								"commerce",
+								"v1",
+								"carts",
+								"{{x-cart_id}}"
+							],
+							"query": [
+								{
+									"key": "client_id",
+									"value": "{{client_id}}",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Automated Test Case",
+			"item": [
+				{
+					"name": "ecommerce",
+					"item": [
+						{
+							"name": "Partner 1",
+							"item": [
+								{
+									"name": "Autentication",
+									"item": [
+										{
+											"name": "OAuth AcmeAPP",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code 201\", function () {\r",
+															"   pm.response.to.have.status(201);\r",
+															"});\r",
+															"\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"pm.environment.set(\"access_token\", jsonData.access_token);"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/x-www-form-urlencoded",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"key": "client_id",
+															"value": "456",
+															"type": "text"
+														},
+														{
+															"key": "client_secret",
+															"value": "789",
+															"type": "text"
+														},
+														{
+															"key": "grant_type",
+															"value": "client_credentials",
+															"type": "text"
+														}
+													]
+												},
+												"url": {
+													"raw": "https://{{kong-ip}}:8443/sandbox/ecommerce/v1/carts/oauth2/token",
+													"protocol": "https",
+													"host": [
+														"{{kong-ip}}"
+													],
+													"port": "8443",
+													"path": [
+														"sandbox",
+														"ecommerce",
+														"v1",
+														"carts",
+														"oauth2",
+														"token"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Case 1",
+									"item": [
+										{
+											"name": "Create Cart",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"data = pm.request.body;\r",
+															"body = data[data.mode];\r",
+															"jsonData = JSON.parse(body);\r",
+															"console.log(jsonData);\r",
+															"var v_client_id = jsonData.client.code;\r",
+															"console.log(\"cliente number\", v_client_id);\r",
+															"pm.environment.set(\"x-customer_id\", v_client_id);\r",
+															"pm.environment.set(\"x-customer_name\", jsonData.client.name);\r",
+															"pm.environment.set(\"x-sku_1\", jsonData.product.sku);\r",
+															"pm.environment.set(\"x-product_1_name\", jsonData.product.name);\r",
+															"pm.environment.set(\"x-product_1_price\", jsonData.product.value);\r",
+															"// response\r",
+															"//var jsonResponseData = JSON.parse(responseBody);\r",
+															"//pm.globals.set(\"x-cart_id\", jsonResponseData.cartid);\r",
+															"pm.environment.set(\"x-cart_id\", jsonData.cartid);\r",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "client_id",
+														"value": "{{client_id}}",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "access_token",
+														"value": "{{access_token}}",
+														"type": "text",
+														"disabled": true
+													},
+													{
+														"key": "access_token",
+														"value": "a9e4186a-270e-3f97-b58e-6707e452f396",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"client\": {\r\n        \"code\": \"{{$randomInt}}\",\r\n        \"name\" : \"{{$randomFullName}}\"\r\n    },\r\n    \"product\": {\r\n        \"sku\" : {{$randomInt}},\r\n        \"name\" : \"{{$randomProductName}}\",\r\n        \"value\": {{$randomPrice}}\r\n    },\r\n    \"origem\": {\r\n        \"code\": 1,\r\n        \"description\" : \"APP ANDROID\"\r\n    },\r\n    \"cartid\" : {{$randomInt}}\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/carts",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"ecommerce",
+														"v1",
+														"carts"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Add Item 1",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"data = pm.request.body;\r",
+															"body = data[data.mode];\r",
+															"jsonData = JSON.parse(body);\r",
+															"pm.environment.set(\"x-sku_1\", jsonData.product_sku);\r",
+															"pm.environment.set(\"x-product_1_name\", jsonData.product_name);\r",
+															"pm.environment.set(\"x-product_1_price\", jsonData.produt_price);\r",
+															"total = pm.environment.get(\"x-cart_total_value\") + jsonData.produt_price;\r",
+															"pm.environment.set(\"x-cart_total_value\", jsonData.total);\r",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"pm.environment.set(\"x-cart_total_value\", 0);"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "client_id",
+														"value": "{{client_id}}",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "access_token",
+														"value": "",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"cart_id\" : {{x-cart_id}},\r\n    \"client\":  {{x-customer_id}},\r\n    \"product_sku\" : {{$randomInt}},\r\n    \"product_name\": \"{{$randomProductName}}\",\r\n    \"produt_price\": {{$randomPrice}},\r\n    \"quantity\" : 1,\r\n    \"origem\": 1\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/carts/{{x-cart_id}}/itens",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"ecommerce",
+														"v1",
+														"carts",
+														"{{x-cart_id}}",
+														"itens"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Add Item 2",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"data = pm.request.body;\r",
+															"body = data[data.mode];\r",
+															"jsonData = JSON.parse(body);\r",
+															"pm.environment.set(\"x-sku_2\", jsonData.product_sku);\r",
+															"pm.environment.set(\"x-product_2_name\", jsonData.product_name);\r",
+															"pm.environment.set(\"x-product_2_price\", jsonData.produt_price);\r",
+															"total = pm.environment.get(\"x-cart_total_value\") + jsonData.produt_price;\r",
+															"pm.environment.set(\"x-cart_total_value\", jsonData.total);\r",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "client_id",
+														"value": "{{client_id}}",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "access_token",
+														"value": "",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"cart_id\" : {{x-cart_id}},\r\n    \"client\":  {{x-customer_id}},\r\n    \"product_sku\" : {{$randomInt}},\r\n    \"product_name\": \"{{$randomProductName}}\",\r\n    \"produt_price\": {{$randomPrice}},\r\n    \"quantity\" : 1,\r\n    \"origem\": 1\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/carts/{{x-cart_id}}/itens",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"ecommerce",
+														"v1",
+														"carts",
+														"{{x-cart_id}}",
+														"itens"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Add Item 3",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"data = pm.request.body;\r",
+															"body = data[data.mode];\r",
+															"jsonData = JSON.parse(body);\r",
+															"pm.environment.set(\"x-sku_3\", jsonData.product_sku);\r",
+															"pm.environment.set(\"x-product_3_name\", jsonData.product_name);\r",
+															"pm.environment.set(\"x-product_3_price\", jsonData.produt_price);\r",
+															"total = pm.environment.get(\"x-cart_total_value\") + jsonData.produt_price;\r",
+															"pm.environment.set(\"x-cart_total_value\", jsonData.total);"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "client_id",
+														"value": "{{client_id}}",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "access_token",
+														"value": "{{access_token}}",
+														"type": "text",
+														"disabled": true
+													},
+													{
+														"key": "access_token",
+														"value": "4f48e7a0-773b-35eb-b02d-3ac9f6bad35e",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"cart_id\" : {{x-cart_id}},\r\n    \"client\":  {{x-customer_id}},\r\n    \"product_sku\" : {{$randomInt}},\r\n    \"product_name\": \"{{$randomProductName}}\",\r\n    \"produt_price\": {{$randomPrice}},\r\n    \"quantity\" : 2,\r\n    \"origem\": 1\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/carts/{{x-cart_id}}/itens",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"ecommerce",
+														"v1",
+														"carts",
+														"{{x-cart_id}}",
+														"itens"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Address by ZipCode",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"let lista_cep = [\r",
+															"    '55595090', '24923715', '25560030', '26196060', '26011580', '21721080', '24930376','20531575','23063500','20970160','25957035','28893446','27251177',\r",
+															"    '25995540','28895134','23080660','25963026','25540010','23573300','24457050','20740220','26295120','24808088','23530086','26160400', '22640342',\r",
+															"    '22776010', '22640340', '22640354', '22640330', '22640346', '22640332', '22640348', '22776020', '22640356', '22640338', '22640352', '22783123',\r",
+															"    '22621290', '22793380', '22631455', '22621310', '22793336', '22621000', '22640020', '22640000', '22640959', '22640972', '22631320'\r",
+															"]\r",
+															"\r",
+															"let min = 1;  // Minimum 4 digit number\r",
+															"let max = 50;  // Maximum 4 digit number\r",
+															"let random4Digit = Math.floor(Math.random() * (max - min + 1)) + min;\r",
+															"pm.environment.set(\"x-cep\", lista_cep[random4Digit]);"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Response status code is 200\", function () {",
+															"    pm.response.to.have.status(200);",
+															"});",
+															"",
+															"pm.test(\"Response body structure is valid\", function () {",
+															"    pm.expect(pm.response.json()).to.have.property('logradouro');",
+															"    pm.expect(pm.response.json()).to.have.property('complemento');",
+															"    pm.expect(pm.response.json()).to.have.property('bairro');",
+															"    pm.expect(pm.response.json()).to.have.property('localidade');",
+															"    pm.expect(pm.response.json()).to.have.property('uf');",
+															"});",
+															"",
+															"pm.environment.set(\"x-address_logradouro\", pm.response.json().logradouro);",
+															"pm.environment.set(\"x-address_complemento\", pm.response.json().complemento);",
+															"pm.environment.set(\"x-address_bairro\", pm.response.json().bairro);",
+															"pm.environment.set(\"x-address_cidade\", pm.response.json().localidade);",
+															"pm.environment.set(\"x-address_uf\", pm.response.json().uf);",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [
+													{
+														"key": "client_id",
+														"value": "",
+														"type": "text",
+														"disabled": true
+													},
+													{
+														"key": "access_token",
+														"value": "",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/correios/v1/cep/{{x-cep}}/json",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"correios",
+														"v1",
+														"cep",
+														"{{x-cep}}",
+														"json"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "carts/{1}",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "client_id",
+														"value": "{{client_id}}",
+														"type": "text"
+													},
+													{
+														"key": "access_token",
+														"value": "",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"client\": {\r\n        \"code\": \"{{$x-customer_id}}\",\r\n        \"name\" : \"{{$x-customer_name}}\"\r\n    },\r\n    \"products\": [{\r\n            \"produto\" : \"{{x-product_1_name}}\",\r\n            \"sku\" : {{x-sku_1}},\r\n            \"valor\": {{x-product_1_price}}\r\n        },\r\n        {\r\n            \"produto\" : \"{{x-product_2_name}}\",\r\n            \"sku\" : {{x-sku_2}},\r\n            \"valor\": {{x-product_2_price}}\r\n        },\r\n        {\r\n            \"produto\" : \"{{x-product_3_name}}\",\r\n            \"sku\" : {{x-sku_3}},\r\n            \"valor\": {{x-product_3_price}}\r\n        }  \r\n    ],\r\n    \"origem\": {\r\n        \"code\": 1,\r\n        \"description\" : \"APP ANDROID\"\r\n    }\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/carts/{{x-cart_id}}",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"ecommerce",
+														"v1",
+														"carts",
+														"{{x-cart_id}}"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Add Delivery Address",
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "client_id",
+														"value": "{{client_id}}",
+														"type": "text"
+													},
+													{
+														"key": "access_token",
+														"value": "{{access_token}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"cart\": {{x-cart_id}},\r\n    \"cliente\": {\r\n        \"codigo\": {{x-customer_id}},\r\n        \"name\": \"{{x-customer_name}}\"\r\n    },    \r\n    \"deliveryAddress\": {\r\n            \"cep\": \"{{x-cep}}\",\r\n            \"end\": \"{{x-address_logradouro}}\",\r\n            \"numero\" : {{$randomInt}},            \r\n            \"bairro\": \"{{x-address_bairro}}\",\r\n            \"cidade\": \"{{x-address_cidade}}\",\r\n            \"uf\": \"{{x-address_uf}}\"\r\n    },\r\n    \"origem\": \"e-commerce\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/carts/{{x-cart_id}}/deliveryaddress",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"ecommerce",
+														"v1",
+														"carts",
+														"{{x-cart_id}}",
+														"deliveryaddress"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Add payment method",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"var cvv = Math.floor(Math.random() * 999) + 1;\r",
+															"var card_due_date_month = Math.floor(Math.random() * 99) + 1;\r",
+															"var card_due_date_year = Math.floor(Math.random() * 9999) + 2025;\r",
+															"pm.environment.set(\"x-card_cvv\", cvv);\r",
+															"pm.environment.set(\"x-card_due_date\", card_due_date_month + '/' + card_due_date_year);\r",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"data = pm.request.body;\r",
+															"body = data[data.mode];\r",
+															"jsonData = JSON.parse(body);\r",
+															"pm.environment.set(\"x-cardNumber\", jsonData.paymentMethod.cardNumber);\r",
+															"pm.environment.set(\"x-card_due_date\", jsonData.paymentMethod.dueDate);\r",
+															"pm.environment.set(\"x-card_cvv\", jsonData.paymentMethod.cvv);\r",
+															"\r",
+															"\r",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "client_id",
+														"value": "{{client_id}}"
+													},
+													{
+														"key": "access_token",
+														"value": "{{access_token}}",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"cart\": {{x-cart_id}},\r\n    \"cliente\": {\r\n        \"codigo\": {{x-customer_id}},\r\n        \"name\": \"{{x-customer_name}}\"\r\n    },\r\n    \"paymentMethod\" : {\r\n        \"method\" : \"credit_card\",\r\n        \"cardHolder\" : \"{{x-customer_name}}\",\r\n        \"cardNumber\" : \"{{$randomCreditCardMask}}\",\r\n        \"dueDate\" : \"{{x-card_due_date}}\",\r\n        \"cvv\" : {{x-card_cvv}}\r\n    },\r\n    \"totalValue\": \"{{x-cart_total_value}}\"\r\n}\r\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/carts/paymentmethod",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"ecommerce",
+														"v1",
+														"carts",
+														"paymentmethod"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "orders",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"data = pm.request.body;\r",
+															"body = data[data.mode];\r",
+															"jsonData = JSON.parse(body);\r",
+															"pm.environment.set(\"x-customer_document\", jsonData.cliente.documento);\r",
+															"pm.environment.set(\"x-order_date\", jsonData.orderDate);\r",
+															"\r",
+															"//var jsonResponseData = JSON.parse(responseBody);\r",
+															"//pm.globals.set(\"x-order_id\", jsonResponseData.order_id);\r",
+															"pm.environment.set(\"x-order_id\", jsonData.order_id);\r",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "client_id",
+														"value": "{{client_id}}",
+														"type": "text"
+													},
+													{
+														"key": "access_token",
+														"value": "{{access_token}}",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"cart\": {{x-cart_id}},\r\n    \"orderDate\": \"{{$randomDateRecent}}\",\r\n    \"cliente\": {\r\n        \"codigo\": {{x-customer_id}},\r\n        \"name\": \"{{x-customer_name}}\",\r\n        \"documento\": \"{{$randomInt}}\"\r\n    },    \r\n    \"products\": [{\r\n            \"produto\" : \"{{x-product_1_name}}\",\r\n            \"sku\" : {{x-sku_1}},\r\n            \"valor\": {{x-product_1_price}}\r\n        },\r\n        {\r\n            \"produto\" : \"{{x-product_2_name}}\",\r\n            \"sku\" : {{x-sku_2}},\r\n            \"valor\": {{x-product_2_price}}\r\n        },\r\n        {\r\n            \"produto\" : \"{{x-product_3_name}}\",\r\n            \"sku\" : {{x-sku_3}},\r\n            \"valor\": {{x-product_3_price}}\r\n        }  \r\n    ],\r\n    \"statusPedidos\": {\r\n        \"code\": 1,\r\n        \"description\": \"waiting payment\"\r\n    },\r\n    \"order_id\" : {{$randomInt}},\r\n    \"origem\": \"e-commerce\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/orders",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"ecommerce",
+														"v1",
+														"orders"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "orders",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "client_id",
+														"value": "{{client_id}}",
+														"type": "text"
+													},
+													{
+														"key": "access_token",
+														"value": "",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"cart\": {{x-cart_id}},\r\n    \"orderDate\": \"{{$randomDateRecent}}\",\r\n    \"cliente\": {\r\n        \"codigo\": {{x-customer_id}},\r\n        \"name\": \"{{x-customer_name}}\",\r\n        \"documento\": \"{{$randomInt}}\"\r\n    },    \r\n    \"products\": [{\r\n            \"produto\" : \"{{x-product_1_name}}\",\r\n            \"sku\" : {{x-sku_1}},\r\n            \"valor\": {{x-product_1_price}}\r\n        },\r\n        {\r\n            \"produto\" : \"{{x-product_2_name}}\",\r\n            \"sku\" : {{x-sku_2}},\r\n            \"valor\": {{x-product_2_price}}\r\n        },\r\n        {\r\n            \"produto\" : \"{{x-product_3_name}}\",\r\n            \"sku\" : {{x-sku_3}},\r\n            \"valor\": {{x-product_3_price}}\r\n        }  \r\n    ],\r\n    \"statusPedidos\": {\r\n        \"code\": 1,\r\n        \"description\": \"waiting payment\"\r\n    },\r\n    \"origem\": \"e-commerce\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/orders/{{x-order_id}}",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"ecommerce",
+														"v1",
+														"orders",
+														"{{x-order_id}}"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Payments",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"data = pm.request.body;\r",
+															"body = data[data.mode];\r",
+															"jsonData = JSON.parse(body);\r",
+															"console.log(jsonData);\r",
+															"// response\r",
+															"//var jsonResponseData = JSON.parse(responseBody);\r",
+															"//pm.environment.set(\"x-transaction_id\", jsonResponseData.transaction_id);\r",
+															"pm.environment.set(\"x-transaction_id\", jsonData.transaction_id);"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "client_id",
+														"value": "{{client_id}}",
+														"type": "text"
+													},
+													{
+														"key": "access_token",
+														"value": "{{access_token}}",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"cart\": {{x-cart_id}},\r\n    \"cliente\": {\r\n        \"codigo\": {{x-customer_id}},\r\n        \"name\": \"{{x-customer_name}}\"\r\n    },\r\n    \"paymentMethod\" : {\r\n        \"method\" : \"credit_card\",\r\n        \"cardHolder\" : \"{{x-customer_name}}\",\r\n        \"cardNumber\" : \"{{x-cardNumber}}\",\r\n        \"dueDate\" : \"{{x-card_due_date}}\",\r\n        \"cvv\" : {{x-card_cvv}}\r\n    },\r\n    \"totalValue\": \"{{x-cart_total_value}}\",\r\n    \"transaction_id\" : {{$randomInt}}\r\n}\r\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/payment/v1/payments",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"payment",
+														"v1",
+														"payments"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Payments",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "client_id",
+														"value": "{{client_id}}",
+														"type": "text"
+													},
+													{
+														"key": "access_token",
+														"value": "{{access_token}}",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"transaction_id\" : {{x-transaction_id}},\r\n    \"cart\": {{x-cart_id}},\r\n    \"cliente\": {\r\n        \"codigo\": {{x-customer_id}},\r\n        \"name\": \"{{x-customer_name}}\"\r\n    },\r\n    \"paymentMethod\" : {\r\n        \"method\" : \"credit_card\",\r\n        \"cardHolder\" : \"{{x-customer_name}}\",\r\n        \"cardNumber\" : \"{{x-cardNumber}}\",\r\n        \"dueDate\" : \"{{x-card_due_date}}\",\r\n        \"cvv\" : {{x-card_cvv}}\r\n    },\r\n    \"totalValue\": \"{{x-cart_total_value}}\",\r\n    \"status\" : \"Aproved\"\r\n}\r\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/payment/v1/payments",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"payment",
+														"v1",
+														"payments"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Case 2",
+									"item": [
+										{
+											"name": "Create Cart",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"data = pm.request.body;\r",
+															"body = data[data.mode];\r",
+															"jsonData = JSON.parse(body);\r",
+															"console.log(jsonData);\r",
+															"var v_client_id = jsonData.client.code;\r",
+															"console.log(\"cliente number\", v_client_id);\r",
+															"pm.environment.set(\"x-customer_id\", v_client_id);\r",
+															"pm.environment.set(\"x-customer_name\", jsonData.client.name);\r",
+															"pm.environment.set(\"x-sku_1\", jsonData.product.sku);\r",
+															"pm.environment.set(\"x-product_1_name\", jsonData.product.name);\r",
+															"pm.environment.set(\"x-product_1_price\", jsonData.product.name);\r",
+															"// response\r",
+															"//var jsonResponseData = JSON.parse(responseBody);\r",
+															"//pm.environment.set(\"x-cart_id\", jsonResponseData.cartid);\r",
+															"pm.environment.set(\"x-cart_id\", jsonData.cartid);\r",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "client_id",
+														"value": "{{client_id}}",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "access_token",
+														"value": "{{access_token}}",
+														"type": "text",
+														"disabled": true
+													},
+													{
+														"key": "access_token",
+														"value": "a9e4186a-270e-3f97-b58e-6707e452f396",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"client\": {\r\n        \"code\": \"{{$randomInt}}\",\r\n        \"name\" : \"{{$randomFullName}}\"\r\n    },\r\n    \"product\": {\r\n        \"sku\" : {{$randomInt}},\r\n        \"name\" : \"{{$randomProductName}}\",\r\n        \"value\": {{$randomPrice}}\r\n    },\r\n    \"origem\": {\r\n        \"code\": 1,\r\n        \"description\" : \"APP ANDROID\"\r\n    },\r\n    \"cartid\" : {{$randomInt}}\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/carts",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"ecommerce",
+														"v1",
+														"carts"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Add Item 1",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"data = pm.request.body;\r",
+															"body = data[data.mode];\r",
+															"jsonData = JSON.parse(body);\r",
+															"pm.environment.set(\"x-sku_1\", jsonData.product_sku);\r",
+															"pm.environment.set(\"x-product_1_name\", jsonData.product_name);\r",
+															"pm.environment.set(\"x-product_1_price\", jsonData.produt_price);\r",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"pm.environment.set(\"x-cart_total_value\", 0);"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "client_id",
+														"value": "{{client_id}}",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "access_token",
+														"value": "",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"cart_id\" : {{x-cart_id}},\r\n    \"client\":  {{x-customer_id}},\r\n    \"product_sku\" : {{$randomInt}},\r\n    \"product_name\": \"{{$randomProductName}}\",\r\n    \"produt_price\": {{$randomPrice}},\r\n    \"quantity\" : 1,\r\n    \"origem\": 1\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/carts/{{x-cart_id}}/itens",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"ecommerce",
+														"v1",
+														"carts",
+														"{{x-cart_id}}",
+														"itens"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Add Item 2",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"data = pm.request.body;\r",
+															"body = data[data.mode];\r",
+															"jsonData = JSON.parse(body);\r",
+															"pm.environment.set(\"x-sku_2\", jsonData.product_sku);\r",
+															"pm.environment.set(\"x-product_2_name\", jsonData.product_name);\r",
+															"pm.environment.set(\"x-product_2_price\", jsonData.produt_price);\r",
+															"total = pm.environment.get(\"x-cart_total_value\") + jsonData.produt_price;\r",
+															"pm.environment.set(\"x-cart_total_value\", jsonData.total);"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "client_id",
+														"value": "{{client_id}}",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "access_token",
+														"value": "{{access_token}}",
+														"type": "text",
+														"disabled": true
+													},
+													{
+														"key": "access_token",
+														"value": "4f48e7a0-773b-35eb-b02d-3ac9f6bad35e",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"cart_id\" : {{x-cart_id}},\r\n    \"client\":  {{x-customer_id}},\r\n    \"product_sku\" : {{$randomInt}},\r\n    \"product_name\": \"{{$randomProductName}}\",\r\n    \"produt_price\": {{$randomPrice}},\r\n    \"quantity\" : 2,\r\n    \"origem\": 1\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/carts/{{x-cart_id}}/itens",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"ecommerce",
+														"v1",
+														"carts",
+														"{{x-cart_id}}",
+														"itens"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Address by ZipCode",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Response status code is 200\", function () {\r",
+															"    pm.response.to.have.status(200);\r",
+															"});\r",
+															"\r",
+															"pm.test(\"Response body structure is valid\", function () {\r",
+															"    pm.expect(pm.response.json()).to.have.property('logradouro');\r",
+															"    pm.expect(pm.response.json()).to.have.property('complemento');\r",
+															"    pm.expect(pm.response.json()).to.have.property('bairro');\r",
+															"    pm.expect(pm.response.json()).to.have.property('localidade');\r",
+															"    pm.expect(pm.response.json()).to.have.property('uf');\r",
+															"});\r",
+															"\r",
+															"pm.environment.set(\"x-address_logradouro\", pm.response.json().logradouro);\r",
+															"pm.environment.set(\"x-address_complemento\", pm.response.json().complemento);\r",
+															"pm.environment.set(\"x-address_bairro\", pm.response.json().bairro);\r",
+															"pm.environment.set(\"x-address_cidade\", pm.response.json().localidade);\r",
+															"pm.environment.set(\"x-address_uf\", pm.response.json().uf);\r",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"let lista_cep = [\r",
+															"    '55595090', '24923715', '25560030', '26196060', '26011580', '21721080', '24930376','20531575','23063500','20970160','25957035','28893446','27251177',\r",
+															"    '25995540','28895134','23080660','25963026','25540010','23573300','24457050','20740220','26295120','24808088','23530086','26160400', '22640342',\r",
+															"    '22776010', '22640340', '22640354', '22640330', '22640346', '22640332', '22640348', '22776020', '22640356', '22640338', '22640352', '22783123',\r",
+															"    '22621290', '22793380', '22631455', '22621310', '22793336', '22621000', '22640020', '22640000', '22640959', '22640972', '22631320'\r",
+															"]\r",
+															"\r",
+															"let min = 1;  // Minimum 4 digit number\r",
+															"let max = 50;  // Maximum 4 digit number\r",
+															"let random4Digit = Math.floor(Math.random() * (max - min + 1)) + min;\r",
+															"pm.environment.set(\"x-cep\", lista_cep[random4Digit]);"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [
+													{
+														"key": "client_id",
+														"value": "",
+														"type": "text",
+														"disabled": true
+													},
+													{
+														"key": "access_token",
+														"value": "",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "    {\r\n        \"cep\": \"{{x-cep}}\",\r\n        \"end\": \"{{x-address_logradouro}}\",\r\n        \"numero\" : {{$randomInt}},            \r\n        \"bairro\": \"{{x-address_bairro}}\",\r\n        \"cidade\": \"{{x-address_cidade}}\",\r\n        \"uf\": \"{{x-address_uf}}\"\r\n    }",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/correios/v1/cep/{{x-cep}}/json",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"correios",
+														"v1",
+														"cep",
+														"{{x-cep}}",
+														"json"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "carts/{1}",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "client_id",
+														"value": "{{client_id}}",
+														"type": "text"
+													},
+													{
+														"key": "access_token",
+														"value": "",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"client\": {\r\n        \"code\": \"{{$x-customer_id}}\",\r\n        \"name\" : \"{{$x-customer_name}}\"\r\n    },\r\n    \"products\": [{\r\n            \"produto\" : \"{{x-product_1_name}}\",\r\n            \"sku\" : {{x-sku_1}},\r\n            \"valor\": {{x-product_1_price}}\r\n        },\r\n        {\r\n            \"produto\" : \"{{x-product_2_name}}\",\r\n            \"sku\" : {{x-sku_2}},\r\n            \"valor\": {{x-product_2_price}}\r\n        },\r\n        {\r\n            \"produto\" : \"{{x-product_3_name}}\",\r\n            \"sku\" : {{x-sku_3}},\r\n            \"valor\": {{x-product_3_price}}\r\n        }  \r\n    ],\r\n    \"origem\": {\r\n        \"code\": 1,\r\n        \"description\" : \"APP ANDROID\"\r\n    }\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/carts/{{x-cart_id}}",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"ecommerce",
+														"v1",
+														"carts",
+														"{{x-cart_id}}"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Add Delivery Address",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"var cvv = Math.floor(Math.random() * 999) + 1;\r",
+															"var card_due_date_month = Math.floor(Math.random() * 99) + 1;\r",
+															"var card_due_date_year = Math.floor(Math.random() * 9999) + 2025;\r",
+															"pm.environment.set(\"x-card_cvv\", cvv);\r",
+															"pm.environment.set(\"x-card_due_date\", card_due_date_month + '/' + card_due_date_year);"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "client_id",
+														"value": "{{client_id}}",
+														"type": "text"
+													},
+													{
+														"key": "access_token",
+														"value": "{{access_token}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"cart\": {{x-cart_id}},\r\n    \"cliente\": {\r\n        \"codigo\": {{x-customer_id}},\r\n        \"name\": \"{{x-customer_name}}\"\r\n    },    \r\n    \"deliveryAddress\": {\r\n            \"cep\": \"{{x-cep}}\",\r\n            \"end\": \"{{x-address_logradouro}}\",\r\n            \"numero\" : {{$randomInt}},            \r\n            \"bairro\": \"{{x-address_bairro}}\",\r\n            \"cidade\": \"{{x-address_cidade}}\",\r\n            \"uf\": \"{{x-address_uf}}\"\r\n    },\r\n    \"statusPedidos\": {\r\n        \"code\": 1,\r\n        \"description\": \"waiting payment\"\r\n    },\r\n    \"origem\": \"e-commerce\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/carts/{{x-cart_id}}/deliveryaddress",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"ecommerce",
+														"v1",
+														"carts",
+														"{{x-cart_id}}",
+														"deliveryaddress"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Add payment method",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"var cvv = Math.floor(Math.random() * 999) + 1;\r",
+															"var card_due_date_month = Math.floor(Math.random() * 99) + 1;\r",
+															"var card_due_date_year = Math.floor(Math.random() * 9999) + 2025;\r",
+															"pm.environment.set(\"x-card_cvv\", cvv);\r",
+															"pm.environment.set(\"x-card_due_date\", card_due_date_month + '/' + card_due_date_year);"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"data = pm.request.body;\r",
+															"body = data[data.mode];\r",
+															"jsonData = JSON.parse(body);\r",
+															"pm.environment.set(\"x-cardNumber\", jsonData.paymentMethod.cardNumber);\r",
+															"pm.environment.set(\"x-card_due_date\", jsonData.paymentMethod.dueDate);\r",
+															"pm.environment.set(\"x-card_cvv\", jsonData.paymentMethod.cvv);"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "client_id",
+														"value": "{{client_id}}"
+													},
+													{
+														"key": "access_token",
+														"value": "{{access_token}}"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"cart\": {{x-cart_id}},\r\n    \"cliente\": {\r\n        \"codigo\": {{x-customer_id}},\r\n        \"name\": \"{{x-customer_name}}\"\r\n    },\r\n    \"paymentMethod\" : {\r\n        \"cardHolder\" : \"{{x-customer_name}}\",\r\n        \"cardNumber\" : \"{{$randomCreditCardMask}}\",\r\n        \"dueDate\" : \"{{x-card_due_date}}\",\r\n        \"cvv\" : {{x-card_cvv}}\r\n    }\r\n}\r\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/carts/paymentmethod",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"ecommerce",
+														"v1",
+														"carts",
+														"paymentmethod"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "orders",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"data = pm.request.body;\r",
+															"body = data[data.mode];\r",
+															"jsonData = JSON.parse(body);\r",
+															"pm.environment.set(\"x-customer_document\", jsonData.cliente.documento);\r",
+															"pm.environment.set(\"x-order_date\", jsonData.orderDate);\r",
+															"\r",
+															"//var jsonResponseData = JSON.parse(responseBody);\r",
+															"//pm.globals.set(\"x-order_id\", jsonResponseData.order_id);\r",
+															"pm.environment.set(\"x-order_id\", jsonData.order_id);\r",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "client_id",
+														"value": "{{client_id}}",
+														"type": "text",
+														"disabled": true
+													},
+													{
+														"key": "access_token",
+														"value": "{{access_token}}",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"cart\": {{x-cart_id}},\r\n    \"orderDate\": \"{{$randomDateRecent}}\",\r\n    \"cliente\": {\r\n        \"codigo\": {{x-customer_id}},\r\n        \"name\": \"{{x-customer_name}}\",\r\n        \"documento\": \"{{$randomInt}}\"\r\n    },    \r\n    \"products\": [{\r\n            \"produto\" : \"{{x-product_1_name}}\",\r\n            \"sku\" : {{x-sku_1}},\r\n            \"valor\": {{x-product_1_price}}\r\n        },\r\n        {\r\n            \"produto\" : \"{{x-product_2_name}}\",\r\n            \"sku\" : {{x-sku_2}},\r\n            \"valor\": {{x-product_2_price}}\r\n        },\r\n        {\r\n            \"produto\" : \"{{x-product_3_name}}\",\r\n            \"sku\" : {{x-sku_3}},\r\n            \"valor\": {{x-product_3_price}}\r\n        }  \r\n    ],\r\n    \"statusPedidos\": {\r\n        \"code\": 1,\r\n        \"description\": \"waiting payment\"\r\n    },\r\n    \"order_id\" : {{$randomInt}},\r\n    \"origem\": \"e-commerce\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/orders",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"ecommerce",
+														"v1",
+														"orders"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "orders",
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [
+													{
+														"key": "client_id",
+														"value": "",
+														"type": "text",
+														"disabled": true
+													},
+													{
+														"key": "access_token",
+														"value": "",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"cart\": {{x-cart_id}},\r\n    \"orderDate\": \"{{$randomDateRecent}}\",\r\n    \"cliente\": {\r\n        \"codigo\": {{x-customer_id}},\r\n        \"name\": \"{{x-customer_name}}\",\r\n        \"documento\": \"{{$randomInt}}\"\r\n    },    \r\n    \"products\": [{\r\n            \"produto\" : \"{{x-product_1_name}}\",\r\n            \"sku\" : {{x-sku_1}},\r\n            \"valor\": {{x-product_1_price}}\r\n        },\r\n        {\r\n            \"produto\" : \"{{x-product_2_name}}\",\r\n            \"sku\" : {{x-sku_2}},\r\n            \"valor\": {{x-product_2_price}}\r\n        },\r\n        {\r\n            \"produto\" : \"{{x-product_3_name}}\",\r\n            \"sku\" : {{x-sku_3}},\r\n            \"valor\": {{x-product_3_price}}\r\n        }  \r\n    ],\r\n    \"statusPedidos\": {\r\n        \"code\": 1,\r\n        \"description\": \"waiting payment\"\r\n    },\r\n    \"origem\": \"e-commerce\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/ecommerce/v1/orders",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"ecommerce",
+														"v1",
+														"orders"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Payments",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"data = pm.request.body;\r",
+															"body = data[data.mode];\r",
+															"jsonData = JSON.parse(body);\r",
+															"console.log(jsonData);\r",
+															"// response\r",
+															"//var jsonResponseData = JSON.parse(responseBody);\r",
+															"//pm.environment.set(\"x-transaction_id\", jsonResponseData.transaction_id);\r",
+															"pm.environment.set(\"x-transaction_id\", jsonData.transaction_id);"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "client_id",
+														"value": "{{client_id}}",
+														"type": "text"
+													},
+													{
+														"key": "access_token",
+														"value": "{{access_token}}",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"cart\": {{x-cart_id}},\r\n    \"cliente\": {\r\n        \"codigo\": {{x-customer_id}},\r\n        \"name\": \"{{x-customer_name}}\"\r\n    },\r\n    \"paymentMethod\" : {\r\n        \"method\" : \"credit_card\",\r\n        \"cardHolder\" : \"{{x-customer_name}}\",\r\n        \"cardNumber\" : \"{{x-cardNumber}}\",\r\n        \"dueDate\" : \"{{x-card_due_date}}\",\r\n        \"cvv\" : {{x-card_cvv}}\r\n    },\r\n    \"totalValue\": \"{{x-cart_total_value}}\",\r\n    \"transaction_id\" : {{$randomInt}}\r\n}\r\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/payment/v1/payments",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"payment",
+														"v1",
+														"payments"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Payments",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "client_id",
+														"value": "{{client_id}}",
+														"type": "text"
+													},
+													{
+														"key": "access_token",
+														"value": "{{access_token}}",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"transaction_id\" : {{x-transaction_id}},\r\n    \"cart\": {{x-cart_id}},\r\n    \"cliente\": {\r\n        \"codigo\": {{x-customer_id}},\r\n        \"name\": \"{{x-customer_name}}\"\r\n    },\r\n    \"paymentMethod\" : {\r\n        \"method\" : \"credit_card\",\r\n        \"cardHolder\" : \"{{x-customer_name}}\",\r\n        \"cardNumber\" : \"{{x-cardNumber}}\",\r\n        \"dueDate\" : \"{{x-card_due_date}}\",\r\n        \"cvv\" : {{x-card_cvv}}\r\n    },\r\n    \"totalValue\": \"{{x-cart_total_value}}\",\r\n    \"status\" : \"Aproved\"\r\n}\r\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/payment/v1/payments/{{x-transaction_id}}",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"payment",
+														"v1",
+														"payments",
+														"{{x-transaction_id}}"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Insurance Claim",
+					"item": [
+						{
+							"name": "Partner 1",
+							"item": [
+								{
+									"name": "Autentication",
+									"item": [
+										{
+											"name": "OAuth OpenAPP",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code 201\", function () {\r",
+															"   pm.response.to.have.status(201);\r",
+															"});\r",
+															"\r",
+															"var jsonData = JSON.parse(responseBody);\r",
+															"pm.environment.set(\"access_token\", jsonData.access_token);"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/x-www-form-urlencoded",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"key": "client_id",
+															"value": "550",
+															"type": "text"
+														},
+														{
+															"key": "client_secret",
+															"value": "551",
+															"type": "text"
+														},
+														{
+															"key": "grant_type",
+															"value": "client_credentials",
+															"type": "text"
+														}
+													]
+												},
+												"url": {
+													"raw": "https://{{kong-ip}}:8443/sandbox/handle-claim/v1/claims/oauth2/token",
+													"protocol": "https",
+													"host": [
+														"{{kong-ip}}"
+													],
+													"port": "8443",
+													"path": [
+														"sandbox",
+														"handle-claim",
+														"v1",
+														"claims",
+														"oauth2",
+														"token"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Case 1",
+									"item": [
+										{
+											"name": "Create Claim",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"data = pm.request.body;\r",
+															"body = data[data.mode];\r",
+															"jsonData = JSON.parse(body);\r",
+															"console.log(jsonData);\r",
+															"var v_client_id = jsonData.client.code;\r",
+															"console.log(\"cliente number\", v_client_id);\r",
+															"pm.environment.set(\"x-customer_id\", jsonData.client.code);\r",
+															"pm.environment.set(\"x-customer_name\", jsonData.client.name);\r",
+															"pm.environment.set(\"x-customer-email\", jsonData.client.email);\r",
+															"\r",
+															"// response\r",
+															"//var jsonResponseData = JSON.parse(responseBody);\r",
+															"//pm.globals.set(\"x-cart_id\", jsonResponseData.cartid);\r",
+															"\r",
+															"// object damage\r",
+															"pm.environment.set(\"x-object-description\", jsonData.objectDamage.description);\r",
+															"pm.environment.set(\"x-coverage\", jsonData.objectDamage.coverage);\r",
+															"pm.environment.set(\"x-damage-value\", jsonData.objectDamage.value);\r",
+															"\r",
+															"// paymentData\r",
+															"pm.environment.set(\"x-bank-name\", jsonData.paymentData.bankName);\r",
+															"pm.environment.set(\"x-branch-number\", jsonData.paymentData.brachNumber);\r",
+															"pm.environment.set(\"x-account-number\", jsonData.paymentData.accountNumber);\r",
+															"pm.environment.set(\"x-bic\", jsonData.paymentData.bic);\r",
+															"\r",
+															"// claim-id para variar o mock\r",
+															"pm.environment.set(\"x-claim-id\", jsonData.claimId);\r",
+															"pm.environment.set(\"x-policy-number\", jsonData.policyNumber);\r",
+															"\r",
+															"\r",
+															" \r",
+															"\r",
+															"\r",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"pm.environment.set(\"x-customer_id\", \"\");\r",
+															"pm.environment.set(\"x-customer_name\", \"\");\r",
+															"pm.environment.set(\"x-customer-email\",  \"\");\r",
+															"pm.environment.set(\"x-cep\", \"\");\r",
+															"pm.environment.set(\"x-transaction_id\", \"\");"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "client_id",
+														"value": "{{client_id}}",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "access_token",
+														"value": "{{access_token}}",
+														"type": "text",
+														"disabled": true
+													},
+													{
+														"key": "access_token",
+														"value": "a9e4186a-270e-3f97-b58e-6707e452f396",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"client\": {\r\n        \"code\": \"{{$randomInt}}\",\r\n        \"name\" : \"{{$randomFullName}}\",\r\n        \"email\" : \"{{$randomEmail}}\"\r\n    },\r\n    \"objectDamage\" : {\r\n        \"description\" : \"{{$randomProduct}}\",\r\n        \"coverage\" : \"{{$randomInt}}\",\r\n        \"value\" : \"{{$randomPrice}}\"\r\n        \r\n    },\r\n    \"paymentData\" : {\r\n        \"bankName\" : \"{{$randomBankAccountName}}\",\r\n        \"accountNumber\" : \"{{$randomBankAccount}}\",\r\n        \"brachNumber\" : \"{{$randomInt}}\",\r\n        \"bic\" : \"{{$randomBankAccountBic}}\"\r\n    },    \r\n    \"origem\": {\r\n        \"code\": 1,\r\n        \"description\" : \"APP ANDROID\"\r\n    },\r\n    \"policyNumber\" : \"{{$randomInt}}\",\r\n    \"claimId\" : {{$randomInt}}\r\n}\r\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/handle-claim/v1/claims",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"handle-claim",
+														"v1",
+														"claims"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Address by ZipCode",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"let lista_cep = [\r",
+															"    '22640334', '22776010', '22640342', '22640340', '22640354', '22640330', '22640332','22776020','22640356','22640338','22640352','22783123','22621290',\r",
+															"    '22631455','22631310','22621000','22640020','22793000','22775900','22793909','22775904','22621270','22793312','22640100','22631000', '22640101',\r",
+															"    '22640102', '22631002', '22795510', '22790510', '22795290', '22790852', '22795641', '22795445', '24020095', '24020074', '24020071', '24020072',\r",
+															"    '24020073', '24024900', '24023900', '24030013', '24030013', '24020901', '24022959', '24020900', '24030250', '24020141', '24020090'\r",
+															"]\r",
+															"\r",
+															"let min = 1;  // Minimum 4 digit number\r",
+															"let max = 50;  // Maximum 4 digit number\r",
+															"let random4Digit = Math.floor(Math.random() * (max - min + 1)) + min;\r",
+															"pm.environment.set(\"x-cep\", lista_cep[random4Digit]);"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Response status code is 200\", function () {",
+															"    pm.response.to.have.status(200);",
+															"});",
+															"",
+															"pm.test(\"Response body structure is valid\", function () {",
+															"    pm.expect(pm.response.json()).to.have.property('logradouro');",
+															"    pm.expect(pm.response.json()).to.have.property('complemento');",
+															"    pm.expect(pm.response.json()).to.have.property('bairro');",
+															"    pm.expect(pm.response.json()).to.have.property('localidade');",
+															"    pm.expect(pm.response.json()).to.have.property('uf');",
+															"});",
+															"",
+															"pm.environment.set(\"x-address_logradouro\", pm.response.json().logradouro);",
+															"pm.environment.set(\"x-address_complemento\", pm.response.json().complemento);",
+															"pm.environment.set(\"x-address_bairro\", pm.response.json().bairro);",
+															"pm.environment.set(\"x-address_cidade\", pm.response.json().localidade);",
+															"pm.environment.set(\"x-address_uf\", pm.response.json().uf);",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [
+													{
+														"key": "client_id",
+														"value": "",
+														"type": "text",
+														"disabled": true
+													},
+													{
+														"key": "access_token",
+														"value": "",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/correios/v1/cep/{{x-cep}}/json",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"correios",
+														"v1",
+														"cep",
+														"{{x-cep}}",
+														"json"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "capture-informations",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"\r",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												},
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															"pm.environment.set(\"x-cart_total_value\", 0);"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [
+													{
+														"key": "client_id",
+														"value": "{{client_id}}"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json"
+													},
+													{
+														"key": "access_token",
+														"value": ""
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"claimId\" : \"{{x-claim-id}}\",\r\n    \"client\": {\r\n        \"code\": \"{{x-customer_id}}\",\r\n        \"name\" : \"{{x-customer_name}}\",\r\n        \"email\" : \"{{x-customer-email}}\"\r\n    },\r\n    \"objectAddress\": {\r\n            \"cep\": \"{{x-cep}}\",\r\n            \"end\": \"{{x-address_logradouro}}\",\r\n            \"numero\" : {{$randomInt}}, \r\n            \"bairro\": \"{{x-address_bairro}}\",\r\n            \"cidade\": \"{{x-address_cidade}}\",\r\n            \"uf\": \"{{x-address_uf}}\"\r\n    },\r\n    \"objectDamage\" : {\r\n        \"name\" : \"{{x-object-description}}\",\r\n        \"coverage\" : \"{{x-coverage}}\",\r\n        \"value\" : \"{{x-damage-value}}\"\r\n    },\r\n    \"policy\" : {\r\n        \"policyNumber\" : \"{{x-policy-number}}\",\r\n        \"coverage\" : \"{{x-coverage}}\",\r\n        \"ativo\" : {{$randomBoolean}}\r\n    }\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/handle-claim/v1/claims/{{x-claim-id}}/capture-informations",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"handle-claim",
+														"v1",
+														"claims",
+														"{{x-claim-id}}",
+														"capture-informations"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Stakeholders",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"\r",
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"protocolProfileBehavior": {
+												"disableBodyPruning": true
+											},
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "GET",
+												"header": [
+													{
+														"key": "client_id",
+														"value": "{{client_id}}",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "access_token",
+														"value": "",
+														"type": "text"
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"claimId\" : {{x-claim-id}},\r\n    \"policyNumber\" : \"{{x-policy-number}}\",\r\n    \"insuredClient\": {\r\n        \"code\": \"{{x-customer_id}}\",\r\n        \"name\" : \"{{x-customer_name}}\",\r\n        \"email\" : \"{{x-customer-email}}\"\r\n    },    \r\n    \"stakeholders\" : [\r\n        {\r\n            \"code\": \"{{$randomInt}}\",\r\n            \"name\" : \"{{$randomFullName}}\",\r\n            \"email\" : \"{{$randomEmail}}\"\r\n        },\r\n        {\r\n            \"code\": \"{{$randomInt}}\",\r\n            \"name\" : \"{{$randomFullName}}\",\r\n            \"email\" : \"{{$randomEmail}}\"\r\n        }        \r\n    ]\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/handle-claim/v1/claims/{{x-claim-id}}/stackholders",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"handle-claim",
+														"v1",
+														"claims",
+														"{{x-claim-id}}",
+														"stackholders"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "notify-stackholders",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "client_id",
+														"value": "{{client_id}}",
+														"type": "text"
+													},
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "access_token",
+														"value": "{{access_token}}",
+														"type": "text",
+														"disabled": true
+													},
+													{
+														"key": "access_token",
+														"value": "4f48e7a0-773b-35eb-b02d-3ac9f6bad35e",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"claim-id\" : {{x-claim-id}},\r\n    \"policy\" : \"{{x-policy-number}}\",\r\n    \"code\": \"{{x-customer_id}}\",\r\n    \"name\" : \"{{x-customer_name}}\",\r\n    \"email\" : \"{{x-customer-email}}\",\r\n    \"message\" : \"{{$randomLoremSentence}}\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/handle-claim/v1/claims/{{x-claim-id}}/notify-stackholders",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"handle-claim",
+														"v1",
+														"claims",
+														"{{x-claim-id}}",
+														"notify-stackholders"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Validate",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "client_id",
+														"value": "",
+														"type": "text",
+														"disabled": true
+													},
+													{
+														"key": "access_token",
+														"value": "",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"claim-id\" : {{x-claim-id}},\r\n    \"policyNumber\" : \"{{x-policy-number}}\",\r\n    \"client\": {\r\n        \"code\": \"{{x-customer_id}}\"\r\n    }, \r\n    \"objectDamage\" : {\r\n        \"name\" : \"{{x-object-description}}\",\r\n        \"coverage\" : \"{{x-coverage}}\",\r\n        \"value\" : \"{{x-damage-value}}\"\r\n    },\r\n    \"validated\" : \"{{$randomBoolean}}\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/handle-claim/v1/claims/{{x-claim-id}}/validations",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"handle-claim",
+														"v1",
+														"claims",
+														"{{x-claim-id}}",
+														"validations"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Investigate",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "client_id",
+														"value": "",
+														"type": "text",
+														"disabled": true
+													},
+													{
+														"key": "access_token",
+														"value": "",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"claim-id\" : {{x-claim-id}},\r\n    \"policyNumber\" : \"{{x-policy-number}}\",\r\n    \"client\": {\r\n        \"code\": \"{{x-customer_id}}\"\r\n    },   \r\n    \"objectDamage\" : {\r\n        \"object\" : \"{{x-object-description}}\",\r\n        \"coverage\" : \"{{x-coverage}}\",\r\n        \"value\" : \"{{x-damage-value}}\"\r\n    },\r\n    \"result\" : \"{{$randomLoremSentence}}\"\r\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/handle-claim/v1/claims/{{x-claim-id}}/investigation-result",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"handle-claim",
+														"v1",
+														"claims",
+														"{{x-claim-id}}",
+														"investigation-result"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "Payments",
+											"event": [
+												{
+													"listen": "prerequest",
+													"script": {
+														"exec": [
+															""
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												},
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"data = pm.request.body;\r",
+															"body = data[data.mode];\r",
+															"jsonData = JSON.parse(body);\r",
+															"console.log(jsonData);\r",
+															"// response\r",
+															"//var jsonResponseData = JSON.parse(responseBody);\r",
+															"//pm.environment.set(\"x-transaction_id\", jsonResponseData.transaction_id);"
+														],
+														"type": "text/javascript",
+														"packages": {}
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": [
+														{
+															"key": "token",
+															"value": "{{access_token}}",
+															"type": "string"
+														}
+													]
+												},
+												"method": "POST",
+												"header": [
+													{
+														"key": "Content-Type",
+														"value": "application/json",
+														"type": "text"
+													},
+													{
+														"key": "client_id",
+														"value": "{{client_id}}",
+														"type": "text"
+													},
+													{
+														"key": "access_token",
+														"value": "{{access_token}}",
+														"type": "text",
+														"disabled": true
+													}
+												],
+												"body": {
+													"mode": "raw",
+													"raw": "{\r\n    \"claim-id\": {{x-claim-id}},\r\n    \"policyNumber\" : \"{{x-policy-number}}\",\r\n    \"cliente\": {\r\n        \"codigo\": {{x-customer_id}},\r\n        \"name\": \"{{x-customer_name}}\"\r\n    },\r\n    \"paymentData\" : {\r\n        \"bankName\" : \"{{x-bank-name}}\",\r\n        \"accountNumber\" : \"{{x-account-number}}\",\r\n        \"brachNumber\" : \"{{x-branch-number}}\",\r\n        \"bic\" : \"{{x-bic}}\"\r\n    },   \r\n    \"totalValue\": \"{{x-cart_total_value}}\",\r\n    \"transaction_id\" : {{$randomInt}}\r\n}\r\n",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": {
+													"raw": "{{kong-address}}:8000/sandbox/payment/v1/payments",
+													"host": [
+														"{{kong-address}}"
+													],
+													"port": "8000",
+													"path": [
+														"sandbox",
+														"payment",
+														"v1",
+														"payments"
+													],
+													"query": [
+														{
+															"key": "client_id",
+															"value": "{{client_id}}",
+															"disabled": true
+														}
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	]
+}
