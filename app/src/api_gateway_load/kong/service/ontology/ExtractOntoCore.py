@@ -191,11 +191,7 @@ def tranform_to_ontology(api_calls):
                         if "request" in call["_source"] and "method" in call["_source"]["request"] and "request" in call["_source"] and "uri" in call["_source"]["request"]:
                             pattern = r"/(\d+)(?=/|$)"
                             route_aux = call["_source"]["request"]["uri"]
-                            route = re.sub(pattern, '/x', route_aux)
-                            # match = re.search(pattern, antecedent_activity_route)
-                            # if match:
-                            #     operation_name = match.group(1)
-                            #     route = call["_source"]["request"]["method"] + "_" + route                                
+                            route = re.sub(pattern, '/x', route_aux)                             
                             operation_route = call["_source"]["request"]["method"] + "_" + route
                             api_operation = onto_util.get_individual(onto, ns_core.APIOperation, 'http://eamining.edu.pt/', operation_route)
                             if api_operation is None:
@@ -214,7 +210,6 @@ def tranform_to_ontology(api_calls):
                                 api_destination.endpoint_route.append(api_destination_route)
                                 #api_destination.participatedIn.append(api_call)
                             api_destination.participatedIn.append(api_call)
-                        #sync_reasoner()    
                         #API Resource Resouce.uri Resource.data
                         #inicializing the attributes_list
                         attributes_list = []

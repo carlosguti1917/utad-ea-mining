@@ -4,7 +4,8 @@ info:
   description: API endpoints for the ecommerce user journey
   version: 1.0.0
 servers:
-  - url: https://api.example.com/v1
+  - url: https://192.168.0.15:8000/sandbox/ecommerce/v1
+    description: Sandbox server
 paths:
   /products:
     get:
@@ -18,9 +19,15 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Product'
-  /cart:
+  /carts:
     post:
       summary: Create a shopping cart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/cart'
       responses:
         '201':
           description: Successful response with product list
@@ -30,7 +37,7 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Product'      
-  /cart/add:
+  /cart/{id}/items:
     post:
       summary: Add a product to the cart
       requestBody:
@@ -38,13 +45,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/AddToCartRequest'
+              $ref: '#/components/schemas/Product'
       responses:
         '200':
           description: Product added successfully
         '400':
           description: Bad request, invalid input
-  /cart/remove:
+  /cart/{id}:
+    get:
+      summary: get a cart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/cart'
+      responses:
+        '200':
+          description: Product added successfully
+        '400':
+          description: Bad request, invalid input          
+  /cart/{id}/deliveryaddress:
     post:
       summary: Remove a product from the cart
       requestBody:
@@ -52,55 +73,13 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RemoveFromCartRequest'
+              $ref: '#/components/schemas/address'
       responses:
         '200':
           description: Product removed successfully
         '400':
           description: Bad request, invalid input
-  /cart/checkout:
-    post:
-      summary: Check out the shopping cart
-      responses:
-        '200':
-          description: Checkout successful
-  /user/login:
-    post:
-      summary: User login
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/LoginRequest'
-      responses:
-        '200':
-          description: Successful response with product list
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Product'              
-  /user/register:
-    post:
-      summary: User registration
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RegisterRequest'
-      responses:
-        '200':
-          description: Successful response with product list
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Product'              
-  /payment:
+  /cart/{id}/paymentmethod:
     post:
       summary: Process the payment
       requestBody:
@@ -108,24 +87,27 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/PaymentRequest'
+              $ref: '#/components/schemas/paymentmethod'
       responses:
         '200':
           description: Payment processed successfully
         '400':
           description: Payment failed
-  /order:
+
+  /orders:
     post:
-      summary: Create an order
+      summary: Check out the shopping cart
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/cart'
       responses:
         '200':
-          description: Order created successfully
-  /order/send:
-    post:
-      summary: Send order to logistic system or partner
-      responses:
-        '200':
-          description: Order sent successfully
+          description: Checkout successful
+        '400':
+          description: Failure 
 
 components:
   schemas:
@@ -138,36 +120,73 @@ components:
           type: string
         price:
           type: number
-    AddToCartRequest:
+
+    cart:
       type: object
       properties:
-        productId:
+        client:
+          type: object
+          properties:
+            code:
+              type: string  
+            name:
+              type: string
+        products:
+          type: array
+          items:
+            type: object
+            properties:
+              produto:
+                type: string
+              sku:
+                type: integer
+              valor:
+                type: number
+        origin:
+          type: object
+          properties:
+            code:
+              type: integer
+            description:
+              type: string
+
+    address:
+      type: object
+      properties:
+        cep:
+          type: string
+        end:
+          type: string
+        numero:
           type: integer
-        quantity:
+        bairro:
+          type: string
+        cidade:
+          type: string
+        uf:
+          type: string
+
+    paymentmethod:
+      type: object
+      properties:
+        cart:
           type: integer
-    RemoveFromCartRequest:
-      type: object
-      properties:
-        productId:
-          type: integer
-    LoginRequest:
-      type: object
-      properties:
-        username:
-          type: string
-        password:
-          type: string
-    RegisterRequest:
-      type: object
-      properties:
-        username:
-          type: string
-        email:
-          type: string
-        password:
-          type: string
-    PaymentRequest:
-      type: object
-      properties:
-        amount:
-          type: number
+        cliente:
+          type: object
+          properties:
+            codigo:
+              type: string
+            name:
+              type: string
+        paymentMethod:
+          type: object
+          properties:
+            cardHolder:
+              type: string
+            cardNumber:
+              type: string
+            dueDate:
+              type: string
+            cvv:
+              type: integer
+

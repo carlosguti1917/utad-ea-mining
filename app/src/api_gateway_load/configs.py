@@ -71,7 +71,7 @@ PM4PI_ARGS = {
 
 ARCHIMATE_MODEL = {
   "file_path": "./archimate/",
-  "archimate_file_name": "archimate_model.xml", 
+  "archimate_file_name": "archimate_model_data.xml", 
 }
 
 SWAGGERS_FILE_PATH = {

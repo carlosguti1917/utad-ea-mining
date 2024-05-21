@@ -12,6 +12,7 @@ import sys # Add missing import statement for sys module
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', "..", "..")))
 from api_gateway_load import configs
 from api_gateway_load.utils import onto_util
+from api_gateway_load.utils import archimate_util
 
 onto_path.append("app/src/api_gateway_load/repository/")  # Set the path to load the ontology
 #onto = get_ontology("EA Mining OntoUML Teste V1_3.owl").load()
@@ -111,7 +112,13 @@ def prepare_archimate_exchange_model():
         diagram_view_name = ET.SubElement(diagram_view, "name", attrib={"xml:lang": "en"})
         diagram_view_name.text = "API extracted process view"
         diagram_view_documentation = ET.SubElement(diagram_view, "documentation", attrib={"xml:lang": "en"})
-        diagram_view_documentation.text = "Process View Mined from API Logs."        
+        diagram_view_documentation.text = "Process View Mined from API Logs."   
+        
+        diagram_dr_view = ET.SubElement(diagrams, "view", attrib={"identifier": "id-view-ea-data-relation-view", "viewpoint":"Application Usage", "xsi:type":"Diagram"})
+        diagram_view_name = ET.SubElement(diagram_dr_view, "name", attrib={"xml:lang": "en"})
+        diagram_view_name.text = "API extracted Data Relation view"
+        diagram_view_documentation = ET.SubElement(diagram_dr_view, "documentation", attrib={"xml:lang": "en"})
+        diagram_view_documentation.text = "Data Relation View Mined from API Logs."              
         
         return root
     except Exception as error:   
@@ -259,8 +266,6 @@ def add_process_view_diagram_nodes(root):
         #print_root_xml(root)    
         # Get the elements from the root
         elements = root.findall(".//element")
-        #diagram_view = root.find(".//view")
-        #diagram_view = root.find(".//id-view-ea-process-view")
         diagram_view = root.find(".//view[@identifier='id-view-ea-process-view']")
 
         element_width = 100
@@ -294,9 +299,7 @@ def add_process_view_diagram_nodes(root):
         antecedent_node_identifier = None
 
         root_copy_xpaths = etree.fromstring(ET.tostring(root))
-        namespaces = {'ns': 'http://www.opengroup.org/xsd/archimate/3.0/'} # replace with your namespace URI
-        #element = root.xpath(".//ns:element[@name='specific_name']", namespaces=namespaces)
-        #event_relation4 = root_copy_xpaths.xpath(f".//ns:relationship[@target='id-event-2']", namespaces=namespaces)
+        namespaces = {'ns': 'http://www.opengroup.org/xsd/archimate/3.0/'} 
         
         # Iterate over the elements
         for element in elements:
@@ -411,31 +414,6 @@ def print_root_xml(root):
         print("#################### pretty_xml_string ##########################") 
         return pretty_xml_string       
     
-def check_xml():
-    # Parse the XML string and convert it to a pretty-printed XML string
-    
-    file_path = configs.ARCHIMATE_MODEL["file_path"]        
-    file_name = configs.ARCHIMATE_MODEL["archimate_file_name"]
-    # Check if the directory exists
-    # with open(file_path+file_name, "rb") as f:
-    #     f.load(pretty_xml_string.encode('utf-8'))
-    
-    # Parse the XML document and get the root element
-    tree = ET.parse(file_path+file_name)
-    root = tree.getroot()
-    
-    xml_string = ET.tostring(root, encoding='utf-8').decode('utf-8')
-
-    dom = xml.dom.minidom.parseString(xml_string)
-    pretty_xml_string_copy = dom.toprettyxml()
-
-    # Check if the XML document is well-formed
-    try:
-        etree.fromstring(pretty_xml_string_copy)
-        print("The XML document is well-formed.")
-        return True
-    except etree.XMLSyntaxError:
-        print("The XML document is not well-formed.")
         
 def extract_archimate_process():
     """
@@ -448,7 +426,7 @@ def extract_archimate_process():
         root = add_process_view_diagram_nodes(root)
         # print_root_xml(root)
         save_archimate_exchange_model(root) 
-        isValid = check_xml()       
+        isValid = archimate_util.check_xml()       
         if isValid:
             print("The XML document is well-formed.")
     except Exception as error:   
@@ -457,6 +435,3 @@ def extract_archimate_process():
         print(f"In extract_archimate_process module :", __name__)
         raise error           
     
-
-if __name__ == "__main__":
-    extract_archimate_process()    

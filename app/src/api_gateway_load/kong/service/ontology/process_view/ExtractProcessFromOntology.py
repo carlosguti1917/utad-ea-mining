@@ -45,8 +45,8 @@ Considering the ontology onto, the following steps should be performed:
                 Fim da Iteração
                 
 Nova interação para obter os candidatos ao Activiti Connection
-1-Obter os relatores FTC
-2-Utilizar alguma técnica de ARM para detectar itens de baixa dimensão e elemina-los.
+1-Obter os relatores FTC -ok
+2-Utilizar alguma técnica de ARM para detectar itens de baixa dimensão e elemina-los. -ok
     2.1 Talvez usando rare item mining para gerar outro set e eliminar a feature (atributo) da pesquisa, ou high utility item mining.
     2.2 Haverá exceção, como nome do produto, pode aparecer bastante, mas queremos eliminar aqueles items categóricos que irão gerar alta associação
     2.3 O Activites Connection liga duas atividades
@@ -56,14 +56,7 @@ Nova interação para obter os candidatos ao Activiti Connection
                 
    
 def record_frequent_items_to_ignore(onto):
-    #record the attributes that are frequent in the resources of the API calls in files for further processing of mining.
-    #TODO Talvez dê para simplificar buscando direto a lista de atributos.
-    # Poderia obter a lista distinta de nomes de atributos
-    # com a lista de nomes, buscar todos os atributos com o mesmo nome
-    # Mas ainda tem que agrupar pelo nome do recurso, pois o atributo pode ser comum em diferentes recursos de uma API
-    # por outro lado, os recursos devem estar agrupados por API, pois talvez dois recursos em APIs diferentes possam ter o mesmo nome
-    # Não consegui resolver nos testes :-(
-    
+   
     try:
         #clean temp folder
         onto_util.clean_all_files('./temp/')
@@ -332,12 +325,6 @@ def add_frequent_temporal_correlation(onto, correlation_list, ftc_list):
             correlation_list structure([0-correlation_key, 1-api_call_a, 2-operation_a_label, 3-attribute_a, 
                                         4-api_call_b, 5-operation_b_label, 6-attribute_b]) 
     """
-
-    # calc the temporal dependency between api_call and inner_api_call based on the property request_time of the api_call
-    # record the younger as API Antecedent Activity and the older as API Consequent Activity in the ontology onto
-    # create the historicalDependsOn relation between the API Antecedent Activity and the API Consequent Activity
-    # create the relator Frequente Temporal Correlation and create the property mediates between this relator to the API Antecedent Activity and to the API Consequent Activity
-    # record the attributes that are correlated in the correlated_attributes to reapeated_attributes in the created Frequente Temporal Correlation
     
     ftc = None
     new_ftc = False
@@ -366,7 +353,7 @@ def add_frequent_temporal_correlation(onto, correlation_list, ftc_list):
                         api_consequent_activity = ns_process_view.APIConsequentActivity(api_call_b.name)
                         api_consequent_activity.equivalent_to.append(api_call_b)
                     else:
-                        print("This code in if ftc is not None: should not be executed")                                     
+                        raise Exception("This code in add_frequent_temporal_correlation if ftc is not None: should not be executed")                                 
                 
                     # Get the Consumer App related to api_call_a based on the inverse participatedIn property
                     cls_consumer_app = ns_core.ConsumerApp
@@ -522,7 +509,7 @@ def save_frequent_temporal_correlation(onto, api_call_a, api_call_b, correlated_
                  
 
 def mining_activities_connection(onto, ftc_list, selected_transactions):
-    # the goas is to find the activities that are creat a chain of activities that are connected by the same api_name and attributes
+    """ the goas is to find the activities that are creat a chain of activities that are connected by the same api_name and attributes
     # Scan the Frequent Temporal Correlations (FTC) and check que antecedent and consequent activities
     # the candidates are those that have the same api_name and APIOperation and the atecedent request_time and consequent request_time have no other activities between them
     # at least one attribute name of the attribute pair should be present in all individuals of the FTC with the same antecedent and consequent activities api_name and APIOperation
@@ -533,6 +520,11 @@ def mining_activities_connection(onto, ftc_list, selected_transactions):
     # the antecedent of the next FTC should not have the same api_name and APIOperation that already exists in the APIActivietiesConnection as API Antecedent Activity
     # generate the smpf file to be processed by the ARM
     # algorithm to find the frequent sequences
+        args:
+            onto: the ontology
+            ftc_list: the list of Frequent Temporal Correlations
+            selected_transactions: the selected transactions to be processed    
+    """
 
     try:
         ftc = None
@@ -764,7 +756,6 @@ def mining_frequent_temporal_correlations(onto):
                         api_resource_correlations.append(corr)
                     else:
                         continue
-                        #ftc_list.append(save_frequent_temporal_correlation(onto, api_call, inner_api_call, api_resource_correlations))
          
             # for each ConsumerApp save the ontology with the ftc_list
             # check if the correlations are consistent before saving the ontology. This measure how much de correlation repeated in the resources of the api_call
@@ -816,16 +807,7 @@ def mining_frequent_temporal_correlations(onto):
         print("mensagem", str(error))
         print(f"In mining_frequent_temporal_correlations() :", __name__)        
         raise error 
-    
-def mining_processes(onto):   
-    # opem the smpf file with the frequent sequences
-    # Apply the ARM algorithm to find the frequent sequences
-    # select the longest sequences of activities 
-    # each of the longest exclusive sequences of activities is a process, that is recorded in the ontology as a ProcessView.Process.
-    # Create a Archimate XML file with the processes and the activities
-    # save the archimate file
-    pass
-    
+       
 
 def key_func(x):
     value = x[1][0]

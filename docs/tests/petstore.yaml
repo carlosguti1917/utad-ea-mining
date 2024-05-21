@@ -21,9 +21,7 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 servers:
-  # - url: /api/v3
-  - url: https://petstore3.swagger.io/petstore/v3
-    description: Official Server
+  - url: /api/v3
 tags:
   - name: pet
     description: Everything about your Pets

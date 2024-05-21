@@ -122,7 +122,13 @@
   {
     "kind": 2,
     "language": "sparql",
-    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX aPIR: <aPIResource:>\r\nPREFIX ns_data_relation_view: <http://eamining.edu.pt/data-relation-view#>\r\n\r\nSELECT ?resource\r\nWHERE {\r\n    ?resource a ns_core:APIResource .\r\n    ?resource aPIR:resource_uri ?resource_uri .\r\n    FILTER( \r\n        ?resource_uri = \"/sandbox/ecommerce/v1/carts\"\r\n    )\r\n\r\n}\r\n\r\nlimit 100",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX aPIR: <aPIResource:>\r\nPREFIX ns_data_relation_view: <http://eamining.edu.pt/data-relation-view#>\r\n\r\nSELECT ?resource\r\nWHERE {\r\n    ?resource a ns_core:APIResource .\r\n    ?resource aPIR:resource_uri ?resource_uri .\r\n    FILTER( \r\n        #FILTER(REGEX(?label, \"case_id : [0-9]+\"))\r\n        #?resource_uri = \"/sandbox/ecommerce/v1/carts/17/itens\"\r\n        REGEX(?resource_uri, \"/sandbox/ecommerce/v1/carts/\\\\d+/itens\")\r\n        #REGEX(?resource_uri, \"/sandbox/ecommerce/v1/carts/[0-9]+/itens\")\r\n    )\r\n\r\n}\r\n",
+    "metadata": {}
+  },
+  {
+    "kind": 2,
+    "language": "sparql",
+    "value": "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>\r\nPREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> \r\nPREFIX ns_core: <http://eamining.edu.pt/core#>\r\nPREFIX aPIR: <aPIResource:>\r\nPREFIX ns_data_relation_view: <http://eamining.edu.pt/data-relation-view#>\r\n\r\nSELECT ?resource\r\nWHERE {\r\n    ?resource a ns_core:APIResource .\r\n    ?resource aPIR:resource_uri ?resource_uri .\r\n    FILTER( \r\n        REGEX(?resource_uri, \"/ecommerce/v\")\r\n    )\r\n\r\n}",
     "metadata": {}
   }
 ]

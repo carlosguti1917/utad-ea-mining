@@ -1,0 +1,59 @@
+openapi: 3.0.0
+info:
+  title: API Payment
+  description: API endpoints for payment processing
+  version: 1.0.0
+servers:
+  - url: https://api.example.com/payments/v1
+    description: Production server
+  - url: https://api.staging.example.com/payments/v1
+    description: Staging server
+  - url: http://192.168.0.15:8000/sandbox/payments/v1
+    description: Local development server
+paths:
+  /payments:
+    post:
+      summary: Process the payment
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/paymentObject'
+      responses:
+        '200':
+          description: Payment processed successfully
+        '400':
+          description: Payment failed
+
+components:
+  schemas:
+    paymentObject:
+      type: object
+      properties:
+        claimId:
+          type: string
+        policyNumber:
+          type: string
+        client:
+          type: object
+          properties:
+            code:
+              type: string
+            name:
+              type: string  
+        paymentData:
+          type: object  
+          properties:
+            bankName:
+              type: string
+            accountNumber:
+              type: string
+            brachNumber:
+              type: string
+            bic:
+              type: string
+        totalValue:
+          type: string
+        transaction_id:
+          type: integer
