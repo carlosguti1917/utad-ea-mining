@@ -6,7 +6,7 @@ import pymongo
 from io import open
 import sys
 import os.path
-from app.src.api_gateway_load import configs
+from app.src import configs
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 
 print("sys.path",   sys.path)

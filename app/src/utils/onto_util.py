@@ -9,7 +9,7 @@ import pandas as pd
 import pymongo
 from rdflib import XSD
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', "..")))
-from api_gateway_load import configs
+from app.src import configs
 import os
 
 # #onto = get_ontology("app/src/api_gateway_load/repository/Onto EA Mining v0.1-RDFXML.owl").load()

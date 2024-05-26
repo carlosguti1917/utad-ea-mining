@@ -4,7 +4,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from service.ontology import ExtractOntoCore
+from app.src.api_gateway_load.kong.service.ontology.core import ExtractOntoCore
 
 from owlready2 import *
 

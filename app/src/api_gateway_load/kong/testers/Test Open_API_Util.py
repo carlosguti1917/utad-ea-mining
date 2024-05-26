@@ -4,7 +4,7 @@ import sys
 import os
 import pandas as pd
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..')))
-from api_gateway_load.utils import open_api_util
+from app.src.utils import open_api_util
 
 
 test = open_api_util.split_url("http://192.168.0.15:8000/sandbox/handle-claim/v1")

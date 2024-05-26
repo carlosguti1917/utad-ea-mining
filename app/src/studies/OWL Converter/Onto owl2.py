@@ -4,7 +4,7 @@ import sys
 import os
 import os.path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-from api_gateway_load import configs
+from app.src import configs
 
 # Connect to MongoDB
 myclient = MongoClient(configs.MONGO_DB_SERVER["host"])

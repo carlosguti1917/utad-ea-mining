@@ -4,10 +4,10 @@ import yaml
 from owlready2 import *
 import sys # Add missing import statement for sys module
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', "..", "..")))
-from api_gateway_load import configs
-from api_gateway_load.utils import spmf_converter
-from api_gateway_load.utils import onto_util
-from api_gateway_load.utils import open_api_util
+from app.src import configs
+from app.src.utils import spmf_converter
+from app.src.utils import onto_util
+from app.src.utils import open_api_util
 
 onto_path.append("app/src/api_gateway_load/repository/")  # Set the path to load the ontology
 onto = get_ontology(configs.OWL_FILE["file_name"]).load()

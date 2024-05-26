@@ -10,9 +10,9 @@ import os
 import os.path
 import sys # Add missing import statement for sys module
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', "..", "..")))
-from api_gateway_load import configs
-from api_gateway_load.utils import onto_util
-from api_gateway_load.utils import archimate_util
+from app.src import configs
+from app.src.utils import onto_util
+from app.src.utils import archimate_util
 
 onto_path.append("app/src/api_gateway_load/repository/") 
 onto = get_ontology(configs.OWL_FILE["file_name"]).load()

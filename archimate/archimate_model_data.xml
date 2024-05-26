@@ -25,72 +25,27 @@
 			<name>POST_/sandbox/payment/v1/payments</name>
 		</element>
 		<element identifier="id-process-2" xsi:type="BusinessProcess">
-			<name>POST deliveryaddress</name>
-		</element>
-		<element identifier="id-event-6" xsi:type="BusinessEvent">
-			<name>POST_/sandbox/ecommerce/v1/carts</name>
-		</element>
-		<element identifier="id-event-7" xsi:type="BusinessEvent">
-			<name>POST_/sandbox/ecommerce/v1/carts/x/deliveryaddress</name>
-		</element>
-		<element identifier="id-event-8" xsi:type="BusinessEvent">
-			<name>POST_/sandbox/ecommerce/v1/carts/paymentmethod</name>
-		</element>
-		<element identifier="id-event-9" xsi:type="BusinessEvent">
-			<name>POST_/sandbox/ecommerce/v1/carts/x/itens</name>
-		</element>
-		<element identifier="id-event-10" xsi:type="BusinessEvent">
-			<name>GET_/sandbox/ecommerce/v1/carts/x</name>
-		</element>
-		<element identifier="id-event-11" xsi:type="BusinessEvent">
-			<name>POST_/sandbox/ecommerce/v1/orders</name>
-		</element>
-		<element identifier="id-event-12" xsi:type="BusinessEvent">
-			<name>POST_/sandbox/payment/v1/payments</name>
-		</element>
-		<element identifier="id-process-3" xsi:type="BusinessProcess">
-			<name>POST claims</name>
+			<name>GET capture-informations</name>
 		</element>
 		<element identifier="id-actor-OpenApp" xsi:type="BusinessActor">
 			<name>OpenApp</name>
 		</element>
-		<element identifier="id-event-13" xsi:type="BusinessEvent">
+		<element identifier="id-event-6" xsi:type="BusinessEvent">
 			<name>POST_/sandbox/handle-claim/v1/claims</name>
 		</element>
-		<element identifier="id-event-14" xsi:type="BusinessEvent">
+		<element identifier="id-event-7" xsi:type="BusinessEvent">
 			<name>GET_/sandbox/handle-claim/v1/claims/x/capture-informations</name>
 		</element>
-		<element identifier="id-event-15" xsi:type="BusinessEvent">
+		<element identifier="id-event-8" xsi:type="BusinessEvent">
 			<name>GET_/sandbox/handle-claim/v1/claims/x/stackholders</name>
 		</element>
-		<element identifier="id-event-16" xsi:type="BusinessEvent">
+		<element identifier="id-event-9" xsi:type="BusinessEvent">
 			<name>POST_/sandbox/handle-claim/v1/claims/x/notify-stackholders</name>
 		</element>
-		<element identifier="id-event-17" xsi:type="BusinessEvent">
+		<element identifier="id-event-10" xsi:type="BusinessEvent">
 			<name>POST_/sandbox/handle-claim/v1/claims/x/validations</name>
 		</element>
-		<element identifier="id-event-18" xsi:type="BusinessEvent">
-			<name>POST_/sandbox/handle-claim/v1/claims/x/investigation-result</name>
-		</element>
-		<element identifier="id-process-4" xsi:type="BusinessProcess">
-			<name>GET capture-informations</name>
-		</element>
-		<element identifier="id-event-19" xsi:type="BusinessEvent">
-			<name>POST_/sandbox/handle-claim/v1/claims</name>
-		</element>
-		<element identifier="id-event-20" xsi:type="BusinessEvent">
-			<name>GET_/sandbox/handle-claim/v1/claims/x/capture-informations</name>
-		</element>
-		<element identifier="id-event-21" xsi:type="BusinessEvent">
-			<name>GET_/sandbox/handle-claim/v1/claims/x/stackholders</name>
-		</element>
-		<element identifier="id-event-22" xsi:type="BusinessEvent">
-			<name>POST_/sandbox/handle-claim/v1/claims/x/notify-stackholders</name>
-		</element>
-		<element identifier="id-event-23" xsi:type="BusinessEvent">
-			<name>POST_/sandbox/handle-claim/v1/claims/x/validations</name>
-		</element>
-		<element identifier="id-event-24" xsi:type="BusinessEvent">
+		<element identifier="id-event-11" xsi:type="BusinessEvent">
 			<name>POST_/sandbox/handle-claim/v1/claims/x/investigation-result</name>
 		</element>
 		<element identifier="id-domain-1" xsi:type="DataObject">
@@ -149,6 +104,9 @@
 		<relationship identifier="id-relation-5" source="id-process-1" target="id-event-5" xsi:type="Association">
 			<name>id-relation-5</name>
 		</relationship>
+		<relationship identifier="id-relation-OpenApp-id-process-2" source="id-process-2" target="id-actor-OpenApp" xsi:type="Serving">
+			<name>id-relation-OpenApp-id-process-2</name>
+		</relationship>
 		<relationship identifier="id-relation-6" source="id-process-2" target="id-event-6" xsi:type="Association">
 			<name>id-relation-6</name>
 		</relationship>
@@ -166,51 +124,6 @@
 		</relationship>
 		<relationship identifier="id-relation-11" source="id-process-2" target="id-event-11" xsi:type="Association">
 			<name>id-relation-11</name>
-		</relationship>
-		<relationship identifier="id-relation-12" source="id-process-2" target="id-event-12" xsi:type="Association">
-			<name>id-relation-12</name>
-		</relationship>
-		<relationship identifier="id-relation-OpenApp-id-process-3" source="id-process-3" target="id-actor-OpenApp" xsi:type="Serving">
-			<name>id-relation-OpenApp-id-process-3</name>
-		</relationship>
-		<relationship identifier="id-relation-13" source="id-process-3" target="id-event-13" xsi:type="Association">
-			<name>id-relation-13</name>
-		</relationship>
-		<relationship identifier="id-relation-14" source="id-process-3" target="id-event-14" xsi:type="Association">
-			<name>id-relation-14</name>
-		</relationship>
-		<relationship identifier="id-relation-15" source="id-process-3" target="id-event-15" xsi:type="Association">
-			<name>id-relation-15</name>
-		</relationship>
-		<relationship identifier="id-relation-16" source="id-process-3" target="id-event-16" xsi:type="Association">
-			<name>id-relation-16</name>
-		</relationship>
-		<relationship identifier="id-relation-17" source="id-process-3" target="id-event-17" xsi:type="Association">
-			<name>id-relation-17</name>
-		</relationship>
-		<relationship identifier="id-relation-18" source="id-process-3" target="id-event-18" xsi:type="Association">
-			<name>id-relation-18</name>
-		</relationship>
-		<relationship identifier="id-relation-OpenApp-id-process-4" source="id-process-4" target="id-actor-OpenApp" xsi:type="Serving">
-			<name>id-relation-OpenApp-id-process-4</name>
-		</relationship>
-		<relationship identifier="id-relation-19" source="id-process-4" target="id-event-19" xsi:type="Association">
-			<name>id-relation-19</name>
-		</relationship>
-		<relationship identifier="id-relation-20" source="id-process-4" target="id-event-20" xsi:type="Association">
-			<name>id-relation-20</name>
-		</relationship>
-		<relationship identifier="id-relation-21" source="id-process-4" target="id-event-21" xsi:type="Association">
-			<name>id-relation-21</name>
-		</relationship>
-		<relationship identifier="id-relation-22" source="id-process-4" target="id-event-22" xsi:type="Association">
-			<name>id-relation-22</name>
-		</relationship>
-		<relationship identifier="id-relation-23" source="id-process-4" target="id-event-23" xsi:type="Association">
-			<name>id-relation-23</name>
-		</relationship>
-		<relationship identifier="id-relation-24" source="id-process-4" target="id-event-24" xsi:type="Association">
-			<name>id-relation-24</name>
 		</relationship>
 		<relationship identifier="id-relation-be-2" source="id-event-1" target="id-event-2" xsi:type="Flow">
 			<name>id-relation-be-2</name>
@@ -238,39 +151,6 @@
 		</relationship>
 		<relationship identifier="id-relation-be-11" source="id-event-10" target="id-event-11" xsi:type="Flow">
 			<name>id-relation-be-11</name>
-		</relationship>
-		<relationship identifier="id-relation-be-12" source="id-event-11" target="id-event-12" xsi:type="Flow">
-			<name>id-relation-be-12</name>
-		</relationship>
-		<relationship identifier="id-relation-be-14" source="id-event-13" target="id-event-14" xsi:type="Flow">
-			<name>id-relation-be-14</name>
-		</relationship>
-		<relationship identifier="id-relation-be-15" source="id-event-14" target="id-event-15" xsi:type="Flow">
-			<name>id-relation-be-15</name>
-		</relationship>
-		<relationship identifier="id-relation-be-16" source="id-event-15" target="id-event-16" xsi:type="Flow">
-			<name>id-relation-be-16</name>
-		</relationship>
-		<relationship identifier="id-relation-be-17" source="id-event-16" target="id-event-17" xsi:type="Flow">
-			<name>id-relation-be-17</name>
-		</relationship>
-		<relationship identifier="id-relation-be-18" source="id-event-17" target="id-event-18" xsi:type="Flow">
-			<name>id-relation-be-18</name>
-		</relationship>
-		<relationship identifier="id-relation-be-20" source="id-event-19" target="id-event-20" xsi:type="Flow">
-			<name>id-relation-be-20</name>
-		</relationship>
-		<relationship identifier="id-relation-be-21" source="id-event-20" target="id-event-21" xsi:type="Flow">
-			<name>id-relation-be-21</name>
-		</relationship>
-		<relationship identifier="id-relation-be-22" source="id-event-21" target="id-event-22" xsi:type="Flow">
-			<name>id-relation-be-22</name>
-		</relationship>
-		<relationship identifier="id-relation-be-23" source="id-event-22" target="id-event-23" xsi:type="Flow">
-			<name>id-relation-be-23</name>
-		</relationship>
-		<relationship identifier="id-relation-be-24" source="id-event-23" target="id-event-24" xsi:type="Flow">
-			<name>id-relation-be-24</name>
 		</relationship>
 		<relationship identifier="id-relation-de-1" source="id-domain-1" target="id-entity-1" xsi:type="Aggregation">
 			<name>id-relation-de-1</name>
@@ -309,35 +189,20 @@
 				<name xml:lang="en">API extracted process view</name>
 				<documentation xml:lang="en">Process View Mined from API Logs.</documentation>
 				<node identifier="id-node-1" xsi:type="Element" elementRef="id-process-1" x="250" y="400" w="120" h="50"/>
-				<node identifier="id-node-2" xsi:type="Element" elementRef="id-actor-acmeapp" x="50" y="1000" w="120" h="50"/>
+				<node identifier="id-node-2" xsi:type="Element" elementRef="id-actor-acmeapp" x="50" y="500" w="120" h="50"/>
 				<node identifier="id-node-3" xsi:type="Element" elementRef="id-event-1" x="500" y="110" w="120" h="50"/>
 				<node identifier="id-node-4" xsi:type="Element" elementRef="id-event-2" x="500" y="210" w="120" h="50"/>
 				<node identifier="id-node-5" xsi:type="Element" elementRef="id-event-3" x="500" y="310" w="120" h="50"/>
 				<node identifier="id-node-6" xsi:type="Element" elementRef="id-event-4" x="500" y="410" w="120" h="50"/>
 				<node identifier="id-node-7" xsi:type="Element" elementRef="id-event-5" x="500" y="510" w="120" h="50"/>
-				<node identifier="id-node-8" xsi:type="Element" elementRef="id-process-2" x="250" y="1000" w="120" h="50"/>
-				<node identifier="id-node-9" xsi:type="Element" elementRef="id-event-6" x="500" y="610" w="120" h="50"/>
-				<node identifier="id-node-10" xsi:type="Element" elementRef="id-event-7" x="500" y="710" w="120" h="50"/>
-				<node identifier="id-node-11" xsi:type="Element" elementRef="id-event-8" x="500" y="810" w="120" h="50"/>
-				<node identifier="id-node-12" xsi:type="Element" elementRef="id-event-9" x="500" y="910" w="120" h="50"/>
-				<node identifier="id-node-13" xsi:type="Element" elementRef="id-event-10" x="500" y="1010" w="120" h="50"/>
-				<node identifier="id-node-14" xsi:type="Element" elementRef="id-event-11" x="500" y="1110" w="120" h="50"/>
-				<node identifier="id-node-15" xsi:type="Element" elementRef="id-event-12" x="500" y="1210" w="120" h="50"/>
-				<node identifier="id-node-16" xsi:type="Element" elementRef="id-process-3" x="250" y="1600" w="120" h="50"/>
-				<node identifier="id-node-17" xsi:type="Element" elementRef="id-actor-OpenApp" x="50" y="1200" w="120" h="50"/>
-				<node identifier="id-node-18" xsi:type="Element" elementRef="id-event-13" x="500" y="1310" w="120" h="50"/>
-				<node identifier="id-node-19" xsi:type="Element" elementRef="id-event-14" x="500" y="1410" w="120" h="50"/>
-				<node identifier="id-node-20" xsi:type="Element" elementRef="id-event-15" x="500" y="1510" w="120" h="50"/>
-				<node identifier="id-node-21" xsi:type="Element" elementRef="id-event-16" x="500" y="1610" w="120" h="50"/>
-				<node identifier="id-node-22" xsi:type="Element" elementRef="id-event-17" x="500" y="1710" w="120" h="50"/>
-				<node identifier="id-node-23" xsi:type="Element" elementRef="id-event-18" x="500" y="1810" w="120" h="50"/>
-				<node identifier="id-node-24" xsi:type="Element" elementRef="id-process-4" x="250" y="2200" w="120" h="50"/>
-				<node identifier="id-node-25" xsi:type="Element" elementRef="id-event-19" x="500" y="1910" w="120" h="50"/>
-				<node identifier="id-node-26" xsi:type="Element" elementRef="id-event-20" x="500" y="2010" w="120" h="50"/>
-				<node identifier="id-node-27" xsi:type="Element" elementRef="id-event-21" x="500" y="2110" w="120" h="50"/>
-				<node identifier="id-node-28" xsi:type="Element" elementRef="id-event-22" x="500" y="2210" w="120" h="50"/>
-				<node identifier="id-node-29" xsi:type="Element" elementRef="id-event-23" x="500" y="2310" w="120" h="50"/>
-				<node identifier="id-node-30" xsi:type="Element" elementRef="id-event-24" x="500" y="2410" w="120" h="50"/>
+				<node identifier="id-node-8" xsi:type="Element" elementRef="id-process-2" x="250" y="900" w="120" h="50"/>
+				<node identifier="id-node-9" xsi:type="Element" elementRef="id-actor-OpenApp" x="50" y="600" w="120" h="50"/>
+				<node identifier="id-node-10" xsi:type="Element" elementRef="id-event-6" x="500" y="610" w="120" h="50"/>
+				<node identifier="id-node-11" xsi:type="Element" elementRef="id-event-7" x="500" y="710" w="120" h="50"/>
+				<node identifier="id-node-12" xsi:type="Element" elementRef="id-event-8" x="500" y="810" w="120" h="50"/>
+				<node identifier="id-node-13" xsi:type="Element" elementRef="id-event-9" x="500" y="910" w="120" h="50"/>
+				<node identifier="id-node-14" xsi:type="Element" elementRef="id-event-10" x="500" y="1010" w="120" h="50"/>
+				<node identifier="id-node-15" xsi:type="Element" elementRef="id-event-11" x="500" y="1110" w="120" h="50"/>
 				<connection identifier="id-connection-1" xsi:type="Relationship" source="id-node-1" target="id-node-2" relationshipRef="id-relation-acmeapp-id-process-1"/>
 				<connection identifier="id-connection-2" xsi:type="Relationship" source="id-node-1" target="id-node-3" relationshipRef="id-relation-1"/>
 				<connection identifier="id-connection-3" xsi:type="Relationship" source="id-node-1" target="id-node-4" relationshipRef="id-relation-2"/>
@@ -348,69 +213,44 @@
 				<connection identifier="id-connection-8" xsi:type="Relationship" source="id-node-4" target="id-node-5" relationshipRef="id-relation-be-3"/>
 				<connection identifier="id-connection-9" xsi:type="Relationship" source="id-node-5" target="id-node-6" relationshipRef="id-relation-be-4"/>
 				<connection identifier="id-connection-10" xsi:type="Relationship" source="id-node-6" target="id-node-7" relationshipRef="id-relation-be-5"/>
-				<connection identifier="id-connection-11" xsi:type="Relationship" source="id-node-8" target="id-node-9" relationshipRef="id-relation-6"/>
-				<connection identifier="id-connection-12" xsi:type="Relationship" source="id-node-8" target="id-node-10" relationshipRef="id-relation-7"/>
-				<connection identifier="id-connection-13" xsi:type="Relationship" source="id-node-8" target="id-node-11" relationshipRef="id-relation-8"/>
-				<connection identifier="id-connection-14" xsi:type="Relationship" source="id-node-8" target="id-node-12" relationshipRef="id-relation-9"/>
-				<connection identifier="id-connection-15" xsi:type="Relationship" source="id-node-8" target="id-node-13" relationshipRef="id-relation-10"/>
-				<connection identifier="id-connection-16" xsi:type="Relationship" source="id-node-8" target="id-node-14" relationshipRef="id-relation-11"/>
-				<connection identifier="id-connection-17" xsi:type="Relationship" source="id-node-8" target="id-node-15" relationshipRef="id-relation-12"/>
-				<connection identifier="id-connection-18" xsi:type="Relationship" source="id-node-9" target="id-node-10" relationshipRef="id-relation-be-7"/>
-				<connection identifier="id-connection-19" xsi:type="Relationship" source="id-node-10" target="id-node-11" relationshipRef="id-relation-be-8"/>
-				<connection identifier="id-connection-20" xsi:type="Relationship" source="id-node-11" target="id-node-12" relationshipRef="id-relation-be-9"/>
-				<connection identifier="id-connection-21" xsi:type="Relationship" source="id-node-12" target="id-node-13" relationshipRef="id-relation-be-10"/>
-				<connection identifier="id-connection-22" xsi:type="Relationship" source="id-node-13" target="id-node-14" relationshipRef="id-relation-be-11"/>
-				<connection identifier="id-connection-23" xsi:type="Relationship" source="id-node-14" target="id-node-15" relationshipRef="id-relation-be-12"/>
-				<connection identifier="id-connection-24" xsi:type="Relationship" source="id-node-16" target="id-node-17" relationshipRef="id-relation-OpenApp-id-process-3"/>
-				<connection identifier="id-connection-25" xsi:type="Relationship" source="id-node-16" target="id-node-18" relationshipRef="id-relation-13"/>
-				<connection identifier="id-connection-26" xsi:type="Relationship" source="id-node-16" target="id-node-19" relationshipRef="id-relation-14"/>
-				<connection identifier="id-connection-27" xsi:type="Relationship" source="id-node-16" target="id-node-20" relationshipRef="id-relation-15"/>
-				<connection identifier="id-connection-28" xsi:type="Relationship" source="id-node-16" target="id-node-21" relationshipRef="id-relation-16"/>
-				<connection identifier="id-connection-29" xsi:type="Relationship" source="id-node-16" target="id-node-22" relationshipRef="id-relation-17"/>
-				<connection identifier="id-connection-30" xsi:type="Relationship" source="id-node-16" target="id-node-23" relationshipRef="id-relation-18"/>
-				<connection identifier="id-connection-31" xsi:type="Relationship" source="id-node-18" target="id-node-19" relationshipRef="id-relation-be-14"/>
-				<connection identifier="id-connection-32" xsi:type="Relationship" source="id-node-19" target="id-node-20" relationshipRef="id-relation-be-15"/>
-				<connection identifier="id-connection-33" xsi:type="Relationship" source="id-node-20" target="id-node-21" relationshipRef="id-relation-be-16"/>
-				<connection identifier="id-connection-34" xsi:type="Relationship" source="id-node-21" target="id-node-22" relationshipRef="id-relation-be-17"/>
-				<connection identifier="id-connection-35" xsi:type="Relationship" source="id-node-22" target="id-node-23" relationshipRef="id-relation-be-18"/>
-				<connection identifier="id-connection-36" xsi:type="Relationship" source="id-node-24" target="id-node-17" relationshipRef="id-relation-OpenApp-id-process-4"/>
-				<connection identifier="id-connection-37" xsi:type="Relationship" source="id-node-24" target="id-node-25" relationshipRef="id-relation-19"/>
-				<connection identifier="id-connection-38" xsi:type="Relationship" source="id-node-24" target="id-node-26" relationshipRef="id-relation-20"/>
-				<connection identifier="id-connection-39" xsi:type="Relationship" source="id-node-24" target="id-node-27" relationshipRef="id-relation-21"/>
-				<connection identifier="id-connection-40" xsi:type="Relationship" source="id-node-24" target="id-node-28" relationshipRef="id-relation-22"/>
-				<connection identifier="id-connection-41" xsi:type="Relationship" source="id-node-24" target="id-node-29" relationshipRef="id-relation-23"/>
-				<connection identifier="id-connection-42" xsi:type="Relationship" source="id-node-24" target="id-node-30" relationshipRef="id-relation-24"/>
-				<connection identifier="id-connection-43" xsi:type="Relationship" source="id-node-25" target="id-node-26" relationshipRef="id-relation-be-20"/>
-				<connection identifier="id-connection-44" xsi:type="Relationship" source="id-node-26" target="id-node-27" relationshipRef="id-relation-be-21"/>
-				<connection identifier="id-connection-45" xsi:type="Relationship" source="id-node-27" target="id-node-28" relationshipRef="id-relation-be-22"/>
-				<connection identifier="id-connection-46" xsi:type="Relationship" source="id-node-28" target="id-node-29" relationshipRef="id-relation-be-23"/>
-				<connection identifier="id-connection-47" xsi:type="Relationship" source="id-node-29" target="id-node-30" relationshipRef="id-relation-be-24"/>
+				<connection identifier="id-connection-11" xsi:type="Relationship" source="id-node-8" target="id-node-9" relationshipRef="id-relation-OpenApp-id-process-2"/>
+				<connection identifier="id-connection-12" xsi:type="Relationship" source="id-node-8" target="id-node-10" relationshipRef="id-relation-6"/>
+				<connection identifier="id-connection-13" xsi:type="Relationship" source="id-node-8" target="id-node-11" relationshipRef="id-relation-7"/>
+				<connection identifier="id-connection-14" xsi:type="Relationship" source="id-node-8" target="id-node-12" relationshipRef="id-relation-8"/>
+				<connection identifier="id-connection-15" xsi:type="Relationship" source="id-node-8" target="id-node-13" relationshipRef="id-relation-9"/>
+				<connection identifier="id-connection-16" xsi:type="Relationship" source="id-node-8" target="id-node-14" relationshipRef="id-relation-10"/>
+				<connection identifier="id-connection-17" xsi:type="Relationship" source="id-node-8" target="id-node-15" relationshipRef="id-relation-11"/>
+				<connection identifier="id-connection-18" xsi:type="Relationship" source="id-node-10" target="id-node-11" relationshipRef="id-relation-be-7"/>
+				<connection identifier="id-connection-19" xsi:type="Relationship" source="id-node-11" target="id-node-12" relationshipRef="id-relation-be-8"/>
+				<connection identifier="id-connection-20" xsi:type="Relationship" source="id-node-12" target="id-node-13" relationshipRef="id-relation-be-9"/>
+				<connection identifier="id-connection-21" xsi:type="Relationship" source="id-node-13" target="id-node-14" relationshipRef="id-relation-be-10"/>
+				<connection identifier="id-connection-22" xsi:type="Relationship" source="id-node-14" target="id-node-15" relationshipRef="id-relation-be-11"/>
 			</view>
 			<view identifier="id-view-ea-data-relation-view" viewpoint="Application Usage" xsi:type="Diagram">
 				<name xml:lang="en">API extracted Data Relation view</name>
 				<documentation xml:lang="en">Data Relation View Mined from API Logs.</documentation>
-				<node identifier="id-node-31" xsi:type="Element" elementRef="id-domain-1" x="250" y="210" w="120" h="50"/>
-				<node identifier="id-node-32" xsi:type="Element" elementRef="id-entity-1" x="500" y="110" w="120" h="50"/>
-				<node identifier="id-node-33" xsi:type="Element" elementRef="id-entity-2" x="500" y="210" w="120" h="50"/>
-				<node identifier="id-node-34" xsi:type="Element" elementRef="id-entity-3" x="500" y="310" w="120" h="50"/>
-				<node identifier="id-node-35" xsi:type="Element" elementRef="id-entity-4" x="500" y="410" w="120" h="50"/>
-				<node identifier="id-node-36" xsi:type="Element" elementRef="id-domain-2" x="250" y="710" w="120" h="50"/>
-				<node identifier="id-node-37" xsi:type="Element" elementRef="id-entity-5" x="500" y="510" w="120" h="50"/>
-				<node identifier="id-node-38" xsi:type="Element" elementRef="id-entity-6" x="500" y="610" w="120" h="50"/>
-				<node identifier="id-node-39" xsi:type="Element" elementRef="id-entity-7" x="500" y="710" w="120" h="50"/>
-				<node identifier="id-node-40" xsi:type="Element" elementRef="id-entity-8" x="500" y="810" w="120" h="50"/>
-				<node identifier="id-node-41" xsi:type="Element" elementRef="id-entity-9" x="500" y="910" w="120" h="50"/>
-				<node identifier="id-node-42" xsi:type="Element" elementRef="id-entity-10" x="500" y="1010" w="120" h="50"/>
-				<connection identifier="id-connection-48" xsi:type="Relationship" source="id-node-31" target="id-node-32" relationshipRef="id-relation-de-1"/>
-				<connection identifier="id-connection-49" xsi:type="Relationship" source="id-node-31" target="id-node-33" relationshipRef="id-relation-de-2"/>
-				<connection identifier="id-connection-50" xsi:type="Relationship" source="id-node-31" target="id-node-34" relationshipRef="id-relation-de-3"/>
-				<connection identifier="id-connection-51" xsi:type="Relationship" source="id-node-31" target="id-node-35" relationshipRef="id-relation-de-4"/>
-				<connection identifier="id-connection-52" xsi:type="Relationship" source="id-node-36" target="id-node-37" relationshipRef="id-relation-de-5"/>
-				<connection identifier="id-connection-53" xsi:type="Relationship" source="id-node-36" target="id-node-38" relationshipRef="id-relation-de-6"/>
-				<connection identifier="id-connection-54" xsi:type="Relationship" source="id-node-36" target="id-node-39" relationshipRef="id-relation-de-7"/>
-				<connection identifier="id-connection-55" xsi:type="Relationship" source="id-node-36" target="id-node-40" relationshipRef="id-relation-de-8"/>
-				<connection identifier="id-connection-56" xsi:type="Relationship" source="id-node-36" target="id-node-41" relationshipRef="id-relation-de-9"/>
-				<connection identifier="id-connection-57" xsi:type="Relationship" source="id-node-36" target="id-node-42" relationshipRef="id-relation-de-10"/>
+				<node identifier="id-node-16" xsi:type="Element" elementRef="id-domain-1" x="250" y="210" w="120" h="50"/>
+				<node identifier="id-node-17" xsi:type="Element" elementRef="id-entity-1" x="500" y="110" w="120" h="50"/>
+				<node identifier="id-node-18" xsi:type="Element" elementRef="id-entity-2" x="500" y="210" w="120" h="50"/>
+				<node identifier="id-node-19" xsi:type="Element" elementRef="id-entity-3" x="500" y="310" w="120" h="50"/>
+				<node identifier="id-node-20" xsi:type="Element" elementRef="id-entity-4" x="500" y="410" w="120" h="50"/>
+				<node identifier="id-node-21" xsi:type="Element" elementRef="id-domain-2" x="250" y="710" w="120" h="50"/>
+				<node identifier="id-node-22" xsi:type="Element" elementRef="id-entity-5" x="500" y="510" w="120" h="50"/>
+				<node identifier="id-node-23" xsi:type="Element" elementRef="id-entity-6" x="500" y="610" w="120" h="50"/>
+				<node identifier="id-node-24" xsi:type="Element" elementRef="id-entity-7" x="500" y="710" w="120" h="50"/>
+				<node identifier="id-node-25" xsi:type="Element" elementRef="id-entity-8" x="500" y="810" w="120" h="50"/>
+				<node identifier="id-node-26" xsi:type="Element" elementRef="id-entity-9" x="500" y="910" w="120" h="50"/>
+				<node identifier="id-node-27" xsi:type="Element" elementRef="id-entity-10" x="500" y="1010" w="120" h="50"/>
+				<connection identifier="id-connection-23" xsi:type="Relationship" source="id-node-16" target="id-node-17" relationshipRef="id-relation-de-1"/>
+				<connection identifier="id-connection-24" xsi:type="Relationship" source="id-node-16" target="id-node-18" relationshipRef="id-relation-de-2"/>
+				<connection identifier="id-connection-25" xsi:type="Relationship" source="id-node-16" target="id-node-19" relationshipRef="id-relation-de-3"/>
+				<connection identifier="id-connection-26" xsi:type="Relationship" source="id-node-16" target="id-node-20" relationshipRef="id-relation-de-4"/>
+				<connection identifier="id-connection-27" xsi:type="Relationship" source="id-node-21" target="id-node-22" relationshipRef="id-relation-de-5"/>
+				<connection identifier="id-connection-28" xsi:type="Relationship" source="id-node-21" target="id-node-23" relationshipRef="id-relation-de-6"/>
+				<connection identifier="id-connection-29" xsi:type="Relationship" source="id-node-21" target="id-node-24" relationshipRef="id-relation-de-7"/>
+				<connection identifier="id-connection-30" xsi:type="Relationship" source="id-node-21" target="id-node-25" relationshipRef="id-relation-de-8"/>
+				<connection identifier="id-connection-31" xsi:type="Relationship" source="id-node-21" target="id-node-26" relationshipRef="id-relation-de-9"/>
+				<connection identifier="id-connection-32" xsi:type="Relationship" source="id-node-21" target="id-node-27" relationshipRef="id-relation-de-10"/>
 			</view>
 		</diagrams>
 	</views>

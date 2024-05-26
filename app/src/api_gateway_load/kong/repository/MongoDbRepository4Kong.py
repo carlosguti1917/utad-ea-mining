@@ -7,7 +7,7 @@ import sys
 import os.path
 #sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
-import configs as configs
+import app.src.configs as configs
 import domain.Uri
 
 class MongoDbRepository4Kong:

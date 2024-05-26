@@ -6,9 +6,9 @@ import os
 import os.path
 #sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..','..')))
-from api_gateway_load import configs
+from app.src import configs
 from api_gateway_load.kong import ignore
-from api_gateway_load.utils import nested_dicts
+from app.src.utils import nested_dicts
 
 class DataPrepare:
 

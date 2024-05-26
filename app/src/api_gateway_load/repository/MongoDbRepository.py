@@ -1,5 +1,5 @@
 import pymongo
-import app.src.api_gateway_load.configs as configs
+import app.src.configs as configs
 import domain.Uri
 import pandas
 import re

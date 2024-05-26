@@ -11,7 +11,7 @@ import os
 #sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..','..')))
 # Now you can import the config module and use it
-from api_gateway_load import configs
+from app.src import configs
 from api_gateway_load.kong.repository.MongoDbRepository4Kong import MongoDbRepository4Kong
 
 class LoaderCalls:

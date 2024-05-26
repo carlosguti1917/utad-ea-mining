@@ -6,7 +6,7 @@ import os
 import os.path
 import sys # Add missing import statement for sys module
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', "..")))
-from api_gateway_load import configs
+from app.src import configs
 
 
 

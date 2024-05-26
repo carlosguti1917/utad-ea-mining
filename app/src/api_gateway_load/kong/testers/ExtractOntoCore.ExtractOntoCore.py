@@ -6,8 +6,8 @@ from datetime import datetime, timedelta
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..')))
 
-from api_gateway_load import configs
-from api_gateway_load.utils import onto_util
+from app.src import configs
+from app.src.utils import onto_util
 
 onto_path.append("app/src/api_gateway_load/repository/")  # Set the path to load the ontology
 #onto = get_ontology("EA Mining OntoUML Teste V1_3.owl").load()
@@ -15,10 +15,10 @@ onto = get_ontology(configs.OWL_FILE["file_name"]).load()
 
 from api_gateway_load.kong.service import LoaderCalls as loader
 from api_gateway_load.kong.service import DataPrepare
-from api_gateway_load.kong.service.ontology import ExtractOntoCore
-from app.src.api_gateway_load.kong.service.ontology.process_view import ExtractProcessFromOntology
-from app.src.api_gateway_load.kong.service.ontology.process_view import ProcessDiscovery
-from app.src.api_gateway_load.kong.service.ontology.process_view import ExtractArchimateProcessoView
+from app.src.api_gateway_load.kong.service.ontology.core import ExtractOntoCore
+from app.src.generic_service.process_view import ExtractProcessFromOntology
+from app.src.generic_service.process_view import ProcessDiscovery
+from app.src.generic_service.process_view import ExtractArchimateProcessoView
 
 # observação, esta hora é UTC - para o Brasil considerar 3h de avanço em relação a hora desejada.
 beginDate = "2024-05-02T01:50:00.000Z"

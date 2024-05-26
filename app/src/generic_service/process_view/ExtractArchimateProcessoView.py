@@ -10,9 +10,9 @@ import os
 import os.path
 import sys # Add missing import statement for sys module
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', "..", "..")))
-from api_gateway_load import configs
-from api_gateway_load.utils import onto_util
-from api_gateway_load.utils import archimate_util
+from app.src import configs
+from app.src.utils import onto_util
+from app.src.utils import archimate_util
 
 onto_path.append("app/src/api_gateway_load/repository/")  # Set the path to load the ontology
 #onto = get_ontology("EA Mining OntoUML Teste V1_3.owl").load()
@@ -426,7 +426,7 @@ def extract_archimate_process():
         root = add_process_view_diagram_nodes(root)
         # print_root_xml(root)
         save_archimate_exchange_model(root) 
-        isValid = archimate_util.check_xml()       
+        isValid = archimate_util.check_archimate_model_exchange_xml      
         if isValid:
             print("The XML document is well-formed.")
     except Exception as error:   

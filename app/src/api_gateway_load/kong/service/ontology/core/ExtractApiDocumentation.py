@@ -4,10 +4,10 @@ import yaml
 from owlready2 import *
 import sys # Add missing import statement for sys module
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', "..", "..")))
-from api_gateway_load import configs
-from api_gateway_load.utils import spmf_converter
-from api_gateway_load.utils import onto_util
-from api_gateway_load.utils import open_api_util
+from app.src import configs
+from app.src.utils import spmf_converter
+from app.src.utils import onto_util
+from app.src.utils import open_api_util
 
 onto_path.append("app/src/api_gateway_load/repository/")  # Set the path to load the ontology
 onto = get_ontology(configs.OWL_FILE["file_name"]).load()
@@ -254,18 +254,4 @@ def correlate_resources_to_documentations(onto):
         print(f"In get_api_documentations_from_files module :", __name__)
         raise error             
 
-
-
-
-# test = get_resources_from_resource_uri("/sandbox/ecommerce/v1/carts/{id}/itens")
-# test = get_resources_from_resource_uri("/sandbox/ecommerce/v1/carts/{id}")
-# test = get_resources_from_resource_uri("/sandbox/ecommerce/v1/carts")
-# test = get_resources_from_resource_uri("/sandbox/ecommerce/v1/carts/{id}/itens/{id}")
-
-# obtain swaggers and save API Documentations to the ontology
-#docs = get_api_documentations_from_files(onto) 
-
-#correlate the API Resources to the API Documentations
-#doc_api_relators = correlate_resources_to_documentations(onto)
-#print(doc_api_relators)
 

@@ -6,7 +6,7 @@ import os
 import pandas as pd
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..')))
 
-from api_gateway_load import configs
+from app.src import configs
 
 # onto_path.append("app/src/api_gateway_load/repository/")  # Set the path to load the ontology
 # #onto = get_ontology("EA Mining OntoUML Teste V1_3.owl").load()
@@ -16,7 +16,7 @@ from api_gateway_load import configs
 # from api_gateway_load.kong.service import DataPrepare
 # from api_gateway_load.kong.service.ontology import ExtractOntoCore
 # from api_gateway_load.kong.service.ontology.process_view import ExtractOntoProcessView
-from api_gateway_load.utils import onto_util
+from app.src.utils import onto_util
 
 # observação, esta hora é UTC - para o Brasil considerar 3h de avanço em relação a hora desejada.
 #beginDate = "2024-04-15T03:01:00.000Z"
