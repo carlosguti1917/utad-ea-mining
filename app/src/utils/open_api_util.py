@@ -8,37 +8,43 @@ def split_url(url):
             Sometimes the environment is reflect in server address, so the pattern is the seme as "http://address:port/api/version"
             It considers the semantic versioning pattern for APIs, like "v1", "v2", "v3", etc. in the url.
     """
-    parts = url.split('/')
-    server = '/'.join(parts[:3])
-    environment = None
-    version = None
-    api = None
-    
-    # pattern: "/api/version", case declared in swagger without server address
-    if re.match(r'v\d+', parts[2]):
-        version = parts[2]
-        api = parts[1]
+    try:    
+        parts = url.split('/')
+        server = '/'.join(parts[:3])
         environment = None
-        server = None 
-    # pattern: "http://address:port/api/version"            
-    elif re.match(r'v\d+', parts[4]):
-        version = parts[4]
-        api = parts[3]
-        environment = None
-        server = f"{parts[0]}//{parts[2]}"         
-    # pattern: "http://address:port/enviroment/api/version"
-    elif re.match(r'v\d+', parts[5]):
-        version = parts[5]
-        api = parts[4]
-        environment = parts[3]
-        server = f"{parts[0]}//{parts[2]}" 
+        version = None
+        api = None
+        
+        # pattern: "/api/version", case declared in swagger without server address
+        if re.match(r'v\d+', parts[2]):
+            version = parts[2]
+            api = parts[1]
+            environment = None
+            server = None 
+        # pattern: "http://address:port/api/version"            
+        elif re.match(r'v\d+', parts[4]):
+            version = parts[4]
+            api = parts[3]
+            environment = None
+            server = f"{parts[0]}//{parts[2]}"         
+        # pattern: "http://address:port/enviroment/api/version"
+        elif re.match(r'v\d+', parts[5]):
+            version = parts[5]
+            api = parts[4]
+            environment = parts[3]
+            server = f"{parts[0]}//{parts[2]}" 
 
-    return {
-        'server': server,
-        'environment': environment,
-        'API': api,
-        'version': version
-    }
+        return {
+            'server': server,
+            'environment': environment,
+            'API': api,
+            'version': version
+        }
+    except Exception as error:   
+        print('Ocorreu problema {} '.format(error.__class__))
+        print("mensagem", str(error))
+        print(f"In split_url(url) module :", __name__)
+        raise error       
     
 def get_server(url):
     return split_url(url)['server']

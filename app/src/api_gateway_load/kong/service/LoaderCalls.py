@@ -17,9 +17,9 @@ from api_gateway_load.kong.repository.MongoDbRepository4Kong import MongoDbRepos
 class LoaderCalls:
     #TODO talvez um nome melhor seria API Scrapping e pssar para uma pasta scrapping
     
-    def __init__(self, begindate):
+    def __init__(self, begindate, endDate):
         call_list = []
-        call_list = self.getCalls(begindate)
+        call_list = self.getCalls(begindate, endDate)
         #print("qtde de calls", len(call_list['hits']['hits']))
         for call_info in call_list['hits']['hits']:
             jsonobj = json.dumps(call_info)
@@ -29,7 +29,7 @@ class LoaderCalls:
             self.saveCallDetails(call_info)
 
     @staticmethod
-    def getCalls(begindate):
+    def getCalls(begindate, enddate):
         #url = 'https://manager-apiplatform.sensedia.com/api-manager/api/v3/calls?baseUris=https://apiplatform.sensedia.com/sandbox/commerce/v1&apiId=1578&beginDate=' + beginDate
         url = configs.ELASTIC['kong_log']
         sesssion = requests.session()
@@ -38,7 +38,7 @@ class LoaderCalls:
             'Content-Type': 'application/json',
             'Authorization': 'Basic ZWxhc3RpYzphYmMxMjM='
         }
-        req_body = LoaderCalls.getElasticRequestBody(begindate)
+        req_body = LoaderCalls.getElasticRequestBody(begindate, enddate)
         req = requests.get(url, headers=my_headers, data=req_body, verify=False)
         resp_body = req.json()
         jsonobj = json.dumps(resp_body)
@@ -71,7 +71,7 @@ class LoaderCalls:
 
 
     @staticmethod
-    def getElasticRequestBody(begindate) -> str: 
+    def getElasticRequestBody(begindate, enddate) -> str: 
         retorno = {
                     "query": {
                         "bool": {
@@ -82,7 +82,8 @@ class LoaderCalls:
                             {
                             "range": {
                                 "@timestamp": {
-                                "gte": begindate
+                                "gte": begindate,
+                                "lte": enddate,
                                 }
                             }
                             }

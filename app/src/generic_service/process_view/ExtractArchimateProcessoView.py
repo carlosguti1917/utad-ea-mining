@@ -211,7 +211,7 @@ def add_archimate_event_process_elements(root, process_identifier, process_name,
             
         # Load the HeuristicsNet object from the file
         directory = "./temp/process/"       
-        with open(f"{directory}heuristics_net{process_name}.pkl", 'rb') as f:
+        with open(f"{directory}heuristics_net_{process_name}.pkl", 'rb') as f:
             heu_net = pickle.load(f)
         #pm4py.view_heuristics_net(heu_net)  
         
@@ -325,7 +325,7 @@ def add_process_view_diagram_nodes(root):
                 #creating node
                 node_number += 1
                 node_identifier = f"id-node-{node_number}"
-                diagram_view_node = ET.SubElement(diagram_view, "node", attrib={"identifier":node_identifier, "xsi:type":"Element", "elementRef":element_identifier, "x":str(x) , "y":str(y), "w":"120", "h":"50"})                                 
+                diagram_view_node = ET.SubElement(diagram_view, "node", attrib={"identifier":node_identifier, "xsi:type":"Element", "elementRef":element_identifier, "x":str(x) , "y":str(y), "w":"240", "h":"50"})                                 
                 
                 event_number = f"be-{count_be}"
                 relationship_id = f"id-relation-{event_number}"

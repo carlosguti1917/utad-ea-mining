@@ -56,7 +56,9 @@ Nova interação para obter os candidatos ao Activiti Connection
                 
    
 def record_frequent_items_to_ignore(onto):
-   
+    
+    qdt_attribures_analyzed = 0
+    unique_attributes_analysed = []
     try:
         #clean temp folder
         onto_util.clean_all_files('./temp/')
@@ -72,7 +74,6 @@ def record_frequent_items_to_ignore(onto):
             WHERE {
                 ?api_call rdf:type ns_core:APICall .
                 ?api_call aPIC:api_name ?api_name .
-                #FILTER(?api_name = "ecommerce-carts")
             }
             """
         api_names = list(default_world.sparql(query))
@@ -123,7 +124,11 @@ def record_frequent_items_to_ignore(onto):
                         if ns_core.APIResource in api_resource.is_a:
                             api_resource_name = api_resource.resource_name[0]
                             attributes = []
+                            qdt_attribures_analyzed = 0
                             for attribute in api_resource.resource_data:
+                                if qdt_attribures_analyzed > configs.MAX_QUANTITY_ATTRIBUTES_SAMPLE:
+                                    break
+                                qdt_attribures_analyzed += 1
                                 attribute_name = attribute.attribute_name[0]
                                 attribute_value = attribute.attribute_value[0]
                                 api_name = api_call.api_name[0]
@@ -131,8 +136,13 @@ def record_frequent_items_to_ignore(onto):
                                 # verify it the attribute sould be ignored
                                 if attribute_name in onto_util.get_ignored_attributes_from_file('./temp/', api_name):
                                     continue
+                                if (attribute_name, attribute_value) in unique_attributes_analysed:
+                                    print(f"Attribute {qdt_attribures_analyzed} - {attribute_name} value {attribute_value} alredy registered")
+                                    continue                                
+                                unique_attributes_analysed.append((attribute_name, attribute_value))
                                 # calculate the the variation of attribute_values in the other resources of the same api_call.name and with the same resource name
                                 attribute_is_util = verify_attribute_utility(attribute_name, api_resource_name, api_name)
+                                print(f"Attribute {qdt_attribures_analyzed} - {attribute_name} value {attribute_value} is useful: {attribute_is_util}")
                                 if attribute_is_util:
                                     attributes.append((attribute_name, attribute_value))
                                     #TODO registrar na ontologia resouce_equality . Algo como api_resource.AttributesEquality.append(attribute_name)
@@ -179,13 +189,13 @@ def verify_attribute_utility(attribute_name, resource_name, api_call_name):
         attribute_value_list = []
         for attribute_tuple in attributes:
             attribute_value_list.append((attribute_tuple[0].attribute_value[0])) 
-       
-        file_nm = f"api_resource_data_attribute_{attribute_name}.txt"
+        resource_file_name = resource_name.split('/')[-1]
+        file_nm = f"{resource_file_name}_attribute_{attribute_name}.txt"
         file_path = './temp/'
         if  onto_util.file_exists(file_path, file_nm):
             #means that the file with the list of all values for the attibute_name already exists
             # Read the output file line by line. If any pattern is found, then the attribute is considered useful
-            output_file_nm = f"api_resource_data_attribute_{attribute_name}.out"  
+            output_file_nm = f"{resource_file_name}_attribute_{attribute_name}.out"  
             output_file_full_name = os.path.join(file_path, output_file_nm)
             outFile = open(output_file_full_name,'r', encoding='utf-8')
             for string in outFile:
@@ -233,7 +243,7 @@ def verify_attribute_utility(attribute_name, resource_name, api_call_name):
 
             #smpfa = Spmf(spmf_bin_location_dir="c:/gitHub/utad/utad-ea-mining/app/src/studies/spmf/spmf.jar",
             input_file_full_name = os.path.join(file_path, file_nm)
-            output_file_nm = f"api_resource_data_attribute_{attribute_name}.out"
+            output_file_nm = f"{resource_file_name}_attribute_{attribute_name}.out"
             output_file_full_name = os.path.join(file_path, output_file_nm)
             minsup = configs.APRIORI_INVERSE_ARGS["MIM_SUPPORT"]
             maxsup = configs.APRIORI_INVERSE_ARGS["MAX_SUPPORT"]
@@ -254,7 +264,6 @@ def verify_attribute_utility(attribute_name, resource_name, api_call_name):
               
         #pd_rare = smpfa.to_pandas_dataframe(pickle=True)      
         #smpfa.to_csv(f"AprioriInverse{attribute_name}.csv")  
-        
         return util
         
     except Exception as error:

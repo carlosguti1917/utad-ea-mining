@@ -168,7 +168,7 @@ def add_data_relation_view_diagram_nodes():
         connection_number = max(int(connection.get('identifier').split('-')[-1]) for connection in connections if connection.get('identifier').startswith("id-connection-"))
         
         # Initialize position variables       
-        y_offset = int((total_entities // total_domains) * 100)
+        #y_offset = int((total_entities // total_domains) * 100)
         y_domain = 1
         y_entity = 10
         count_domain = 0
@@ -255,6 +255,6 @@ def extract_archimate_data_relation_view():
     except Exception as error:   
         print('Ocorreu problema {} '.format(error.__class__))
         print("mensagem", str(error))
-        print(f"In extract_archimate_process module :", __name__)
+        print(f"In extract_archimate_data_relation_view() module :", __name__)
         raise error           
     

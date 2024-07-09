@@ -3,15 +3,11 @@ from owlready2 import *
 import sys
 import os
 from datetime import datetime, timedelta
-
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..', '..', '..')))
-
 from app.src import configs
 from app.src.utils import onto_util
 
-#onto_path.append("app/src/api_gateway_load/repository/")  # Set the path to load the ontology
-onto_path.append("app/src/repository/")  # Set the path to load the ontology
-#onto = get_ontology("EA Mining OntoUML Teste V1_3.owl").load()
+onto_path.append(configs.OWL_FILE["file_path"])  # Set the path to load the ontology
 onto = get_ontology(configs.OWL_FILE["file_name"]).load()
 
 from app.src.api_gateway_load.kong.service import LoaderCalls as loader
@@ -25,38 +21,45 @@ from app.src.generic_service.data_relation_view import ExtractCorrelateDataObjec
 from app.src.generic_service.data_relation_view import ExtractArchimateDataRelationView
 
 # observação, esta hora é UTC - para o Brasil considerar 3h de avanço em relação a hora desejada.
-beginDate = "2024-05-02T01:50:00.000Z"
+beginDate = "2024-07-06T22:35:00.000Z"
+# observação, esta hora é UTC - para o Brasil considerar 3h de avanço em relação a hora desejada.
+endDate = "2024-07-06T12:50:00.000Z"
+
 
 #Loader Calls from Elastic
-#loader.LoaderCalls(beginDate) # Recupera as chamadas da API do Elastic e grava no MongoDB
+loader.LoaderCalls(beginDate, endDate) # Recupera as chamadas da API do Elastic e grava no MongoDB
 print("LoaderCalls com sucesso")
 
 #Data Preparetion # Vale para versão final - Recupera as chamadas cruas do MongoDB e grava no MongoDB as chamadas limpas de dados do Kong que não interessam
 beginDate = datetime.strptime(beginDate, "%Y-%m-%dT%H:%M:%S.%fZ")
 beginDate = beginDate - timedelta(hours=3) # Subtract 3 hours
 beginDate = beginDate.strftime("%Y-%m-%dT%H:%M:%S.%fZ") # Convert it back to a string in the ISO 8601 format
+endDate = datetime.strptime(endDate, "%Y-%m-%dT%H:%M:%S.%fZ")
+endDate = endDate - timedelta(hours=3) # Subtract 3 hours
+endDate = endDate.strftime("%Y-%m-%dT%H:%M:%S.%fZ") # Convert it back to a string in the ISO 8601 format
 
-#data_prep = DataPrepare.DataPrepare(beginDate)
+data_prep = DataPrepare.DataPrepare(beginDate)
 print("DataPrepare com sucesso")
 
 #Core extration to Ongology
-#extract_onto_core = ExtractOntoCore.ExtractOntoCore(beginDate) # Vale para versão final 
+extract_onto_core = ExtractOntoCore.ExtractOntoCore(beginDate) # Vale para versão final 
 print("Extration of Core Ontology with success")
 
 #remove_frequent_items
-#ExtractProcessFromOntology.record_frequent_items_to_ignore(onto)  # Vale para versão final
+ExtractProcessFromOntology.record_frequent_items_to_ignore(onto)  # Vale para versão final
 print("Remove Frequent Items with success")
 
 #mining process view
-#ftc_list = ExtractProcessFromOntology.mining_frequent_temporal_correlations(onto) # Vale para versão final
+ftc_list = ExtractProcessFromOntology.mining_frequent_temporal_correlations(onto) # Vale para versão final
 print("Mining Frequent Temporal Correlations with success")
 
 #create Process in Ontology
-#ProcessDiscovery.processes_discovery() # Vale para versão final 
+ProcessDiscovery.processes_discovery() # Vale para versão final 
 print("Processes Discovery with success")
 
 #extract the process view in archimate model
 ExtractArchimateProcessoView.extract_archimate_process() # Vale para versão final
+print("Process View in Archimate Extracted with success")
 
 # obtain swaggers and save API Documentations to the ontology
 docs = ExtractApiDocumentation.get_api_documentations_from_files(onto) 

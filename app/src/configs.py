@@ -1,3 +1,24 @@
+
+## CONFIGURATIONS ##
+
+MAX_QUANTITY_ATTRIBUTES_SAMPLE = 20 # Maximum number of attributes to be sampled from the dataset in attribute utilitiy verificarion logic
+
+APRIORI_INVERSE_ARGS = {
+  "MIM_SUPPORT": 0.01,
+  #"MAX_SUPPORT": 1, #  The item is present in all transactions, for small datasets tests
+  #"MAX_SUPPORT": 0.5, #  The item is present in 50% of transactions, for small datasets tests, but suport booleans 
+  "MAX_SUPPORT": 0.3, #  The item is present in 20% of transactions, for small datasets tests, small enums with 5 values
+  #"MAX_SUPPORT": 0.1, #  The item is present in 10% of transactions, for small datasets tests, medium enums with 10 values
+  #"MAX_SUPPORT": 0.06, #  The item is present in 6% of transactions, for medium datasets training set, enums with 15 values - Recomended
+}
+
+PM4PI_ARGS = {
+  #"TOP_K" : 3, # For tests with very small datasets
+  "TOP_K" : 4, # For tests with small datasets (10 tests sets)
+  #"TOP_K" : 8, # For tests with medium datasets (More than 20 tests sets)
+  #"TOP_K" : ?, # For tests with medium datasets (More than 50 tests sets)
+}
+
 # server
 MONGO_DB_SERVER_1 = {
   "host": "192.168.0.15",
@@ -40,6 +61,7 @@ ELASTIC = {
 
 # it only works with file .owl
 OWL_FILE = {
+  "file_path": "app/src/repository/",
   "file_name": "EA Mining OntoUML Teste V1_4.owl",
 }
 
@@ -53,21 +75,7 @@ TEMP_PROCESSING_FILES = {
   "file_name_cleaned_ftc_list": "ftc_list_cleaned.csv",
 }
 
-APRIORI_INVERSE_ARGS = {
-  "MIM_SUPPORT": 0.01,
-  #"MAX_SUPPORT": 1, #  The item is present in all transactions, for small datasets tests
-  "MAX_SUPPORT": 0.5, #  The item is present in 50% of transactions, for small datasets tests, but suport booleans 
-  #"MAX_SUPPORT": 0.3, #  The item is present in 20% of transactions, for small datasets tests, small enums with 5 values
-  #"MAX_SUPPORT": 0.1, #  The item is present in 10% of transactions, for small datasets tests, medium enums with 10 values
-  #"MAX_SUPPORT": 0.06, #  The item is present in 6% of transactions, for medium datasets training set, enums with 15 values - Recomended
-}
 
-PM4PI_ARGS = {
-  "TOP_K" : 3, # For tests with very small datasets
-  #"TOP_K" : 5, # For tests with small datasets (10 tests sets)
-  #"TOP_K__" : ?, # For tests with medium datasets (More than 20 tests sets)
-  #"TOP_K__" : ?, # For tests with medium datasets (More than 50 tests sets)
-}
 
 ARCHIMATE_MODEL = {
   "file_path": "./archimate/",
@@ -80,4 +88,10 @@ SWAGGERS_FILE_PATH = {
 
 DEVELOPER_PORTAL = {
   "url": "./docs/swaggers/",
+}
+
+SENSEDIA = {
+  "domain_url": "https://manager-demov3.sensedia.com",
+  "sensedia_auth": "d4667e61-9c24-48fb-b7fc-d192ff666a5c",
+  "environment": "sandbox",
 }

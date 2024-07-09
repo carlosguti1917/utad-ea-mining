@@ -11,10 +11,8 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 from app.src import configs
 from app.src.utils import onto_util
 
-#onto = get_ontology("app/src/api_gateway_load/repository/Onto EA Mining v0.1-RDFXML.owl").load()
-onto_path.append("app/src/api_gateway_load/repository/")  # Set the path to load the ontology
-#onto = get_ontology("Onto EA Mining v0.1-RDFXML.owl").load()
-#onto = get_ontology("EA Mining OntoUML Teste V1_3.rdf").load()
+#onto_path.append("app/src/api_gateway_load/repository/")  # Set the path to load the ontology
+onto_path.append(configs.OWL_FILE["file_path"])  # Set the path to load the ontology
 onto = get_ontology(configs.OWL_FILE["file_name"]).load()
 ns_core = onto.get_namespace("http://eamining.edu.pt/core#")
 
@@ -100,7 +98,7 @@ def get_onto_resource_attributes_from_json(attributes_list, api_resource, json_o
     elif isinstance(json_obj, list):
         for item in json_obj:
             if item:
-                get_onto_resource_attributes_from_json(attributes_list, api_resource, json_obj)
+                get_onto_resource_attributes_from_json(attributes_list, api_resource, item, "")
 
     return attributes_list
                              
@@ -124,7 +122,6 @@ def tranform_to_ontology(api_calls):
     #sync_reasoner()
     with onto:
         try:      
-
             for call in api_calls:
                 Consumer_app_id = None
                 Consumer_app_name = None
@@ -163,7 +160,6 @@ def tranform_to_ontology(api_calls):
                     # create the individuo for ontology classe API Call, and set its properties started=at as request_time and @timestamp as response_time
                     #API Call.request_time
                     cls_api_call = ns_core.APICall
-                    # TODO tem que verificar se a chamada já não existe
                     # onto_api_call = get_individual(cls, Consumer_app_name)
                     if "@timestamp" in call["_source"]:
                         # o nome da classe e label da API Call é o request_id
@@ -203,7 +199,7 @@ def tranform_to_ontology(api_calls):
                         #ServiceDestination.endpoint_route
                         if "service" in call["_source"] and "host" in call["_source"]["service"] and "path" in call["_source"]["service"]:
                             api_destination_route = call["_source"]["service"]["host"] + call["_source"]["service"]["path"]
-                            api_destination = onto_util.get_individual(onto, ns_core.APIOperation, 'http://eamining.edu.pt/', api_destination_route)                        
+                            api_destination = onto_util.get_individual(onto, ns_core.ServiceDestination, 'http://eamining.edu.pt/', api_destination_route)                        
                             if api_destination is None:
                                 api_destination = ns_core.ServiceDestination(api_destination_route)
                                 api_destination.label.append(api_destination_route)
@@ -264,8 +260,7 @@ def tranform_to_ontology(api_calls):
                             relator_operation_executed.mediates.append(api_operation)
                             relator_operation_executed.mediates.append(api_resource)                       
                             #api_operation.modifies.append(api_resource)
-                            # Não consegui atribuir o a associação materail modifies
-                        
+                            # Não consegui atribuir o a associação materail modifies                        
             try:
                 #save the individuals                  
                 #check de ontology consistency before saving                        
@@ -287,6 +282,7 @@ def tranform_to_ontology(api_calls):
              print('Ocorreu problema {} '.format(error.__class__))
              print("mensagem", str(error))
              print("In tranform_to_ontology module :", __name__) 
+             raise Exception(f"Error in tranforming Json to Ontology: {error}") 
 
 
     

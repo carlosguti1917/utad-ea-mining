@@ -165,7 +165,7 @@ def processes_discovery():
                 print(f"Closing Process Discovery for {consumer_app.name}")
                 sync_reasoner()
                 onto.save()
-    
+        return process_list
     except Exception as error:   
         print('Ocorreu problema {} '.format(error.__class__))
         print("mensagem", str(error))
@@ -279,7 +279,8 @@ def remove_dependent_start_activities(event_log, start_activities):
                             print(f"removing start activity: {source[0]}")
 
         for activity in activity_to_remove:
-            start_activities.pop(activity)
+            if activity in start_activities:
+                start_activities.pop(activity)
                    
         return start_activities
     except Exception as error:   

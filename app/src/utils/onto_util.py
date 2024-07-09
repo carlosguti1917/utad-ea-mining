@@ -320,7 +320,7 @@ def resource_correlations_selection(api_resource_correlations, selected_attribut
         raise error  
     
     
-def validate_json_to_extraction(call):
+def validate_json_to_extraction(call, api_tool_name="kong"):
     """
         Verifica se o json de chamada da API é válido para extração de dados.
         Args:
@@ -328,28 +328,53 @@ def validate_json_to_extraction(call):
     """
     isValid = True
     try:
+        if api_tool_name == "sensedia":
+            #verifica se existe consumer e request_id e se API Call já está registrada na ontologia
+            # Only matter if the call has a consumer and a request_id
+            if not ("_source" in call and "sensedia.app.client_id" in call["_source"]):
+                isValid = False 
+            if not ("_source" in call and "sensedia.app.name" in call["_source"]):
+                isValid = False         
+            if not ("_source" in call and "sensedia.received_on_date" in call["_source"]):  
+                isValid = False
+
+            # in case of resourc is not defined or is not present
+            if "sensedia.request_id" in call["_source"] and "http.url" in call["_source"]:
+                resource_url = call["_source"]["http.url"]
+                if "null" in resource_url:
+                    isValid = False
+                    print("The string 'null' is present in resource_url")
+                else:
+                    #Validate whether the resource_uri is in the correct format, it considers the API semantic version in path
+                    #Define the updated pattern
+                    pattern = r"/v\d+/(.*)"
+                    match = re.search(pattern, resource_url)
+                    if not match:
+                        isValid = False                
+        else:
+        # is Kong as Default
         #verifica se existe consumer e request_id e se API Call já está registrada na ontologia
         # Only matter if the call has a consumer and a request_id
-        if not ("_source" in call and "consumer" in call["_source"] and "id" in call["_source"]["consumer"]):
-            isValid = False 
-        if not ("_source" in call and "consumer" in call["_source"] and "username" in call["_source"]["consumer"]):
-            isValid = False         
-        if not "@timestamp" in call["_source"] and "request" in call["_source"] and "id" in call["_source"]["request"]:  
-            isValid = False
-
-        # in case of resourc is not defined or is not present
-        if "request" in call["_source"] and "uri" in call["_source"]["request"]:
-            resource_uri = call["_source"]["request"]["uri"]
-            if "null" in resource_uri:
+            if not ("_source" in call and "consumer" in call["_source"] and "id" in call["_source"]["consumer"]):
+                isValid = False 
+            if not ("_source" in call and "consumer" in call["_source"] and "username" in call["_source"]["consumer"]):
+                isValid = False         
+            if not "@timestamp" in call["_source"] and "request" in call["_source"] and "id" in call["_source"]["request"]:  
                 isValid = False
-                print("The string 'null' is present in resource_uri")
-            else:
-                #atribuir o resource_name 
-                #Define the updated pattern
-                pattern = r"/v\d+/(.*)"
-                match = re.search(pattern, resource_uri)
-                if not match:
+
+            # in case of resourc is not defined or is not present
+            if "request" in call["_source"] and "uri" in call["_source"]["request"]:
+                resource_uri = call["_source"]["request"]["uri"]
+                if "null" in resource_uri:
                     isValid = False
+                    print("The string 'null' is present in resource_uri")
+                else:
+                    #Validate whether the resource_uri is in the correct format, it considers the API semantic version in path
+                    #Define the updated pattern
+                    pattern = r"/v\d+/(.*)"
+                    match = re.search(pattern, resource_uri)
+                    if not match:
+                        isValid = False
           
                       
         return isValid
@@ -357,7 +382,7 @@ def validate_json_to_extraction(call):
         print('Ocorreu problema {} '.format(error.__class__))
         print("mensagem", str(error))
         print(f"In validate_json_to_extraction module(:", __name__)        
-        raise error      
+        raise error    
 
 def remove_ftc_noise(ftc_list, activity):
     """

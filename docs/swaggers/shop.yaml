@@ -1,0 +1,66 @@
+openapi: 3.0.0
+info:
+  title: Camunda Shop API
+  description: REST API Calls from message sendTask BPMN elements in Camunda process
+  version: 1.0.0
+servers:
+  - url: http://192.168.0.15:8000/sandbox/Shop/v1/
+    description: Sandbox kong local server
+  - url: http://189.122.101.71:8000/sandbox/Shop/v1/
+    description: Kong external gateway
+paths:
+  /Shop:
+    get:
+      summary: Retrieve Shop Catalog
+      operationId: retrieveShopCatalog
+      tags:
+        - Shop
+      responses:
+        '200':
+          description: Successful retrieval of shop catalog
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShopCatalog'
+      security:
+        - bearerAuth: []
+  /ShopName/{ShopID}:
+    get:
+      summary: Retrieve ShopName
+      operationId: retrieveShopName
+      tags:
+        - Shop
+      parameters:
+        - name: ShopID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: ShopName retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShopName'
+      security:
+        - bearerAuth: []
+
+components:
+  schemas:
+    ShopCatalog:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+          location:
+            type: string
+          name:
+            type: string
+    ShopName:
+      type: object
+      properties:
+        ShopName:
+          type: string

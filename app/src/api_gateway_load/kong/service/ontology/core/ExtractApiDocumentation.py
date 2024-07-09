@@ -98,7 +98,10 @@ def get_api_documentations_from_files(onto):
                                 #schema_definition = data['components']['schemas']
 
                                 # Get the attributes of the resource
-                                attributes = schema_definition['properties']
+                                if 'items' in schema_definition and 'properties' in schema_definition['items']:
+                                    attributes = schema_definition['items']['properties']
+                                elif 'properties' in schema_definition:
+                                    attributes = schema_definition['properties']
                                 
                                 resource_schema = f"{sw_resource_schema} {attributes}"
                                 api_documentation.label.append(api_doc_name)
@@ -135,7 +138,7 @@ def relate_api_documentation_to_api_resource(api_documentation, api_resource):
         # Create the property mediates between the Frequente Temporal Correlation and the API Antecedent Activity
         relator_documented_api.mediates.append(api_resource)
         relator_documented_api.mediates.append(api_documentation) 
-        api_resource.isDocumentedBy.append(api_documentation)                                         
+        #api_resource.isDocumentedBy.append(api_documentation)                                         
                                             
         # Create the API Domain an Relator API Domain Map
         domain = open_api_util.get_api(api_documentation.api_documentation_url[0])

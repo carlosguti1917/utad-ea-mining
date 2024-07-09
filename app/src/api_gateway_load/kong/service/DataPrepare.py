@@ -34,6 +34,10 @@ class DataPrepare:
         aux_path_key = {} # inicializando aux  vazia, aux representa a hierarquia de um atributo
         try:
             for call in api_calls:
+                #remove calls with error status 400 or 500
+                if "_source" in call and "response" in call["_source"] and "status" in call["_source"]["response"]:
+                    if call["_source"]["response"]["status"] >= 400:
+                        continue
                 #remove calls with empty Consummer 
                 if "_source" in call and "consumer" in call["_source"] and "id" in call["_source"]["consumer"]:               
                     # remove useless kong attributes 
