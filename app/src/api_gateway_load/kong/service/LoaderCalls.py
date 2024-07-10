@@ -15,7 +15,7 @@ from app.src import configs
 from api_gateway_load.kong.repository.MongoDbRepository4Kong import MongoDbRepository4Kong
 
 class LoaderCalls:
-    #TODO talvez um nome melhor seria API Scrapping e pssar para uma pasta scrapping
+    #TODO talvez um nome melhor seria API Scrapping e passar para uma pasta scrapping
     
     def __init__(self, begindate, endDate):
         call_list = []
@@ -90,7 +90,7 @@ class LoaderCalls:
                         ]
                         }
                     },
-                    "size": 10000,
+                    "size": configs.QTD_LOG_CALLS_SAMPLE,
                     #"from": 0,
                     "_source": [
                         "*"
@@ -98,7 +98,3 @@ class LoaderCalls:
                 }
         return json.dumps(retorno)
 
-# Executa rotina de loader
-#beginDate = "2024-02-14T09:00:56.042Z"
-#x = LoaderCalls(beginDate)
-# TODO evitar gravar novo registro, para isso verificar se o id do request já não está gravado

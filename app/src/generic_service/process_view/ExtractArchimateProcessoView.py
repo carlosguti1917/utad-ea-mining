@@ -372,7 +372,7 @@ def add_process_view_diagram_nodes(root):
             element_ref = node.get('elementRef')
             #relationshipsall = root.findall(".//relationship[@source='"+ element_ref +"']") 
             relationshipsall = root.find(".//relationship[@source='"+ element_ref +"']") 
-            print(f"Relationships: {relationshipsall}")
+            #print(f"Relationships: {relationshipsall}")
             relationships = root.find("relationships")
             for relationship in relationships:
                 
@@ -409,9 +409,9 @@ def print_root_xml(root):
         dom = xml.dom.minidom.parseString(xml_string)
         pretty_xml_string = dom.toprettyxml()
         # Print the pretty-printed XML string
-        print("#################### pretty_xml_string ##########################")
-        print(pretty_xml_string)
-        print("#################### pretty_xml_string ##########################") 
+        #print("#################### pretty_xml_string ##########################")
+        #print(pretty_xml_string)
+        #print("#################### pretty_xml_string ##########################") 
         return pretty_xml_string       
     
         

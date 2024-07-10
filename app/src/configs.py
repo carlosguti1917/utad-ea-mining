@@ -2,6 +2,7 @@
 ## CONFIGURATIONS ##
 
 MAX_QUANTITY_ATTRIBUTES_SAMPLE = 20 # Maximum number of attributes to be sampled from the dataset in attribute utilitiy verificarion logic
+QTD_LOG_CALLS_SAMPLE = 1000 # Maximum number of log calls to be sampled from the dataset (logstash) to be processed. A larger quantity needs more memory and processing time
 
 APRIORI_INVERSE_ARGS = {
   "MIM_SUPPORT": 0.01,

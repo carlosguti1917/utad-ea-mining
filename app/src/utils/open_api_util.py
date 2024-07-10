@@ -92,7 +92,7 @@ def split_resource_subresources(resource_name):
     
 def get_last_resource_name(resource_name):
     """
-        Get the last resource in the path
+        Get the last resource in the path. The last part can´t be an number, it is considered an id
         example: 'carts/123/items/456/' -> items
         example: 'carts/123/items/456' -> items
         example: 'carts/123/items'  - > items
@@ -101,6 +101,12 @@ def get_last_resource_name(resource_name):
     """
     resource_name = resource_name.rstrip('/')
     parts = resource_name.split('/')   
-    parts = [part for i, part in enumerate(parts) if i % 2 == 0]
-    return parts[-1]    
+    # Filter parts to keep every other element starting from the first    
+    parts = [part for i, part in enumerate(parts) if i % 2 == 0]   
+    # Iterate in reverse to find the last part that is not a number
+    for part in reversed(parts):
+        if not part.isdigit():  # Check if the part is not a digit
+            return part
+    # If all parts are numbers or the list is empty, return an empty string or a default value
+    return "no-name"    
     

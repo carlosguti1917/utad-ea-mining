@@ -1,0 +1,6 @@
+variables.CustomerID.type
+variables.CustomerID.ShopID.type
+variables.CustomerID.ShopID.businessKeyRequester.type
+links.method
+links.rel
+links.definitionId

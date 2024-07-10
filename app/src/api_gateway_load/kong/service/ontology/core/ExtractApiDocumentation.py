@@ -180,31 +180,34 @@ def get_resources_from_resource_uri(resource_uri):
     #resource_uri_pattern  = r"/sandbox/ecommerce/v1/carts/\\d+/itens"
     #FILTER(REGEX(?resource_uri, "/sandbox/ecommerce/v1/carts/[0-9]+/itens"))  
     resource_uri_pattern = aux_uri.replace("\\", "\\\\")
+    try:
+        query = f"""
+            PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+            PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
+            PREFIX ns_core: <http://eamining.edu.pt/core#>
+            PREFIX aPIR: <aPIResource:>
 
-    query = f"""
-        PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
-        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#> 
-        PREFIX ns_core: <http://eamining.edu.pt/core#>
-        PREFIX aPIR: <aPIResource:>
-
-        SELECT ?resource
-        WHERE {{
-            ?resource a ns_core:APIResource .
-            ?resource aPIR:resource_uri ?resource_uri .
-            
-            FILTER(REGEX(?resource_uri, "{resource_uri_pattern}"))
-        }}
-    """
-    graph = default_world.as_rdflib_graph()
-    resources = list(graph.query(query))
-    for tuple in resources:
-        res_uri = str(tuple[0])
-        resource = default_world[res_uri]
-        resource_list.append(resource)
-    
-    return resource_list
-    #except Exception as e:
-    #    print("Error executing SPARQL query:", str(e))
+            SELECT ?resource
+            WHERE {{
+                ?resource a ns_core:APIResource .
+                ?resource aPIR:resource_uri ?resource_uri .
+                
+                FILTER(REGEX(?resource_uri, "{resource_uri_pattern}"))
+            }}
+        """
+        graph = default_world.as_rdflib_graph()
+        resources = list(graph.query(query))
+        for tuple in resources:
+            res_uri = str(tuple[0])
+            resource = default_world[res_uri]
+            resource_list.append(resource)
+        
+        return resource_list
+    except Exception as error:   
+        print('Ocorreu problema {} '.format(error.__class__))
+        print("mensagem", str(error))
+        print(f"In get_resources_from_resource_uri({resource_uri}) module :", __name__)
+        raise error   
 
 def get_api_documentations():
     """ Get all API Documentation

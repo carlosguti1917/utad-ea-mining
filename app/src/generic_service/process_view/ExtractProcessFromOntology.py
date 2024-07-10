@@ -257,7 +257,7 @@ def verify_attribute_utility(attribute_name, resource_name, api_call_name):
             # Read the output file line by line. If any pattern is found, then the attribute is considered useful
             outFile = open(output_file_full_name,'r', encoding='utf-8')
             for string in outFile:
-                print(string)
+                #print(string)
                 util = True
                 break
             outFile.close() 
@@ -422,7 +422,7 @@ def add_frequent_temporal_correlation(onto, correlation_list, ftc_list):
 
                     if new_ftc:
                         ftc_list.append(ftc)
-                    print(f"ftc_name {ftc.name} e.mediates[0]= {ftc.mediates[0].api_uri[0]} e.mediates[1]= {ftc.mediates[1].api_uri[0]} partner= {partner.name}")
+                    #print(f"ftc_name {ftc.name} e.mediates[0]= {ftc.mediates[0].api_uri[0]} e.mediates[1]= {ftc.mediates[1].api_uri[0]} partner= {partner.name}")
                 return ftc_list                     
             except Exception as error:
                 print('Ocorreu problema {} '.format(error.__class__))

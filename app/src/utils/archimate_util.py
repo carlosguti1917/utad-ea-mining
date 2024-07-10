@@ -62,16 +62,11 @@ def print_root_xml(root):
         xml_string = ET.tostring(root, encoding='utf-8', method='xml').decode('utf-8')
         xml_string = re.sub('ns0:', '', xml_string)
         xml_string = re.sub('xmlns:ns0', 'xmlns', xml_string)  
-        # Parse the XML string and convert it to a pretty-printed XML string
+        # # Parse the XML string and convert it to a pretty-printed XML string
         print("#################### begin pretty_xml_string ##########################")
         dom = xml.dom.minidom.parseString(xml_string)
-        #pretty_xml_string = dom.toprettyxml()        
         pretty_xml_string = dom.toprettyxml()        
         print(pretty_xml_string)        
-        # xml_string = re.sub('ns0:', '', xml_string)
-        # xml_string = re.sub('xmlns:ns0', 'xmlns', xml_string)         
-        #print(xml_string)        
-        # Print the pretty-printed XML string
         print("#################### end pretty_xml_string ##########################")
     
 def save_archimate_exchange_model(root):

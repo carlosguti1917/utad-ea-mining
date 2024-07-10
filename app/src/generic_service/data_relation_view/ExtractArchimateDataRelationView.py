@@ -246,7 +246,7 @@ def extract_archimate_data_relation_view():
         root_dr = add_archimate_data_relation_element(cdo_list)
 
         root_diagram = add_data_relation_view_diagram_nodes()
-        archimate_util.print_root_xml(root_diagram)  
+        # archimate_util.print_root_xml(root_diagram)  
  
         isValid = archimate_util.check_archimate_model_exchange_xml()       
         if isValid:

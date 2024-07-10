@@ -22,9 +22,9 @@ from app.src.generic_service.data_relation_view import ExtractCorrelateDataObjec
 from app.src.generic_service.data_relation_view import ExtractArchimateDataRelationView
 
 # observação, esta hora é UTC - para o Brasil considerar 3h de avanço em relação a hora desejada.
-beginDate = "2024-07-09T13:47:00.000Z"
+beginDate = "2024-07-10T00:45:00.000Z"
 # observação, esta hora é UTC - para o Brasil considerar 3h de avanço em relação a hora desejada.
-endDate = "2024-07-10T01:50:00.000Z"
+endDate = "2024-07-10T01:59:00.000Z"
 
 
 #Loader Calls from Elastic
@@ -67,10 +67,10 @@ print("Process View in Archimate Extracted with success")
 print("ApiDocumentation Extracted with success")
 
 #correlate the API Resources to the API Documentations
-#doc_api_relators = ExtractApiDocumentation.correlate_resources_to_documentations(onto)
+doc_api_relators = ExtractApiDocumentation.correlate_resources_to_documentations(onto)
 print("ApiDocumentation Correlated to Resources with success")
 
-#fddc_list = ExtractCorrelateDataObject.mining_frequent_data_domain_correlations(onto)
+fddc_list = ExtractCorrelateDataObject.mining_frequent_data_domain_correlations(onto)
 print("Frequent Data Domain Correlations created with success")
 
 data_correlations= ExtractCorrelateDataObject.mining_correlated_data_objects(onto)
@@ -79,5 +79,6 @@ print("Correlated Data Objects created with success")
 #extractract archimate data relation 
 if data_correlations:
     ExtractArchimateDataRelationView.extract_archimate_data_relation_view()
+    print("ArchiMate Data Objects relation created with success")
 
 print("All tests executed with success")
