@@ -1,8 +1,27 @@
-
 ## CONFIGURATIONS ##
+
+from datetime import datetime
+
 
 MAX_QUANTITY_ATTRIBUTES_SAMPLE = 20 # Maximum number of attributes to be sampled from the dataset in attribute utilitiy verificarion logic
 QTD_LOG_CALLS_SAMPLE = 1000 # Maximum number of log calls to be sampled from the dataset (logstash) to be processed. A larger quantity needs more memory and processing time
+
+# Idenfity the consumer app to be used in mining. It refers to the Consumer in Kong API Gateway and app.client_id/app.name in Sensedia API Gateway
+# It is used to reduce de data sample to be processed focousing on specific consumer apps.
+CONSUMER_APPS = [
+  {
+    "client_id": "69be440d-5a95-4eda-abd0-0924e4e2f957",
+    "app_name": "acmeapp"
+  },
+  {
+    "client_id": "9d2bb089-f916-43d7-804f-e72048db394a",
+    "app_name": "EAminingApp"
+  },
+  {
+    "client_id": "ff38289a-5a3b-44bb-9830-7cdb850dd2b3",
+    "app_name": "OpenApp"
+  }
+]
 
 APRIORI_INVERSE_ARGS = {
   "MIM_SUPPORT": 0.01,
@@ -76,11 +95,11 @@ TEMP_PROCESSING_FILES = {
   "file_name_cleaned_ftc_list": "ftc_list_cleaned.csv",
 }
 
-
-
+datahora = datetime.now().strftime("%Y%m%d%H%M")
 ARCHIMATE_MODEL = {
+  "datahora": datahora,
   "file_path": "./archimate/",
-  "archimate_file_name": "archimate_model_data.xml", 
+  "archimate_file_name": f"{datahora}_archimate_model_data.xml", 
 }
 
 SWAGGERS_FILE_PATH = {
@@ -96,3 +115,4 @@ SENSEDIA = {
   "sensedia_auth": "d4667e61-9c24-48fb-b7fc-d192ff666a5c",
   "environment": "sandbox",
 }
+

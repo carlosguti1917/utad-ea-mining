@@ -1,3 +1,4 @@
+from datetime import datetime
 import xml.etree.ElementTree as ET
 import xml.dom.minidom
 from lxml import etree
@@ -84,7 +85,9 @@ def save_archimate_exchange_model(root):
         # Remove extra newlines
         pretty_xml_string = re.sub('\n\s*\n', '\n', pretty_xml_string)        
                      
-        file_path = configs.ARCHIMATE_MODEL["file_path"]        
+        file_path = configs.ARCHIMATE_MODEL["file_path"] 
+        #datahora = datetime.now().strftime("%Y%m%d%H%M")       
+        #file_name = f"{datahora}_{configs.ARCHIMATE_MODEL["archimate_file_name"]}"        
         file_name = configs.ARCHIMATE_MODEL["archimate_file_name"]
         # Check if the directory exists
         if not os.path.exists(file_path):
@@ -103,7 +106,9 @@ def save_archimate_exchange_model(root):
 def check_archimate_model_exchange_xml():
     # check if the xml is well formed
     
-    file_path = configs.ARCHIMATE_MODEL["file_path"]        
+    file_path = configs.ARCHIMATE_MODEL["file_path"]  
+    # datahora = datetime.now().strftime("%Y%m%d%H%M")       
+    # file_name = f"{datahora}_{configs.ARCHIMATE_MODEL["archimate_file_name"]}"    
     file_name = configs.ARCHIMATE_MODEL["archimate_file_name"]
     # Check if the directory exists
     # with open(file_path+file_name, "rb") as f:
@@ -128,6 +133,8 @@ def load_archimate_model_xml():
     try:
         #TODO - check if the file exists if not call archimate_model_prepare
         file_path = configs.ARCHIMATE_MODEL["file_path"]        
+        # datahora = datetime.now().strftime("%Y%m%d%H%M")       
+        # file_name = f"{datahora}_{configs.ARCHIMATE_MODEL["archimate_file_name"]}"        
         file_name = configs.ARCHIMATE_MODEL["archimate_file_name"]
         # Check if the directory exists       
         # Check if the directory exists

@@ -1,0 +1,286 @@
+openapi: 3.0.0
+info:
+  title: Camunda Process API
+  description: REST API Calls from message sendTask BPMN elements in Camunda process
+  version: 1.0.0
+servers:
+  - url: http://192.168.0.15:8000/sandbox/LoyaltyCardManagement/v1
+    description: Sandbox kong local server
+  - url: http://189.122.101.71:8000/sandbox/LoyaltyCardManagement/v1
+    description: Kong external gateway
+paths:
+  /Association/RequestLoyaltyCardAssociationOrder:
+    post:
+      summary: Request LoyaltyCard association order
+      operationId: requestLoyaltyCardAssociationOrder
+      tags:
+        - LoyaltyCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoyaltyCardAssociationOrderRequest'
+      responses:
+        '200':
+          description: Successful retrieval of customer catalog
+
+  /Association/AcceptLoyaltyCardAssociationOrder:
+    post:
+      summary: Accept LoyaltyCard association order
+      operationId: acceptLoyaltyCardAssociationOrder
+      tags:
+        - LoyaltyCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoyaltyCardAssociationOrderAccept'
+      responses:
+        '200':
+          description: LoyaltyCard association order accepted successfully
+      security:
+        - bearerAuth: []
+  /Purchase/RequestPurchaseConsumerOrder:
+    post:
+      summary: Request Purchase Consumer Order
+      operationId: requestPurchaseConsumerOrder
+      tags:
+        - Consumer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseConsumerOrderRequest'
+      responses:
+        '200':
+          description: Purchase consumer order requested successfully
+      security:
+        - bearerAuth: []  
+  /Purchase/PromisePurchaseConsumerOrder:
+    post:
+      summary: Promise Purchase Consumer Order
+      operationId: promisePurchaseConsumerOrder
+      tags:
+        - Consumer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseConsumerOrderPromise'
+      responses:
+        '200':
+          description: Purchase consumer order promised successfully
+      security:
+        - bearerAuth: []   
+  /Purchase/DeclarePurchaseConsumerOrder:
+    post:
+      summary: Declare Purchase Consumer Order
+      operationId: declarePurchaseConsumerOrder
+      tags:
+        - Consumer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseConsumerOrderDeclare'
+      responses:
+        '200':
+          description: Purchase consumer order declared successfully
+      security:
+        - bearerAuth: []                             
+  /Purchase/AcceptPurchaseConsumerOrder:
+    post:
+      summary: Accept Purchase Consumer Order
+      operationId: acceptPurchaseConsumerOrder
+      tags:
+        - Customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseConsumerOrderAccept'
+      responses:
+        '200':
+          description: Purchase consumer order accepted successfully
+      security:
+        - bearerAuth: [] 
+  /Association/DeclareLoyaltyCardAssociationOrder:
+    post:
+      summary: Declare LoyaltyCard association order
+      operationId: declareLoyaltyCardAssociationOrder
+      tags:
+        - LoyaltyCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoyaltyCardAssociationOrderDeclare'
+      responses:
+        '200':
+          description: LoyaltyCard association order declared successfully
+      security:
+        - bearerAuth: []  
+  /Association/PromiseLoyaltyCardAssociationOrder:
+    post:
+      summary: Promise LoyaltyCard association order
+      operationId: promiseLoyaltyCardAssociationOrder
+      tags:
+        - LoyaltyCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoyaltyCardAssociationOrderPromise'
+      responses:
+        '200':
+          description: LoyaltyCard association order promised successfully
+      security:
+        - bearerAuth: []        
+                            
+components:
+  schemas:
+    PurchaseConsumerOrderPromise:
+      type: object
+      properties:
+        messageName:
+          type: string
+        businessKey:
+          type: string
+        resultEnabled:
+          type: boolean
+        variables:
+          type: object
+          properties:
+            CustomerID:
+              type: string
+            ShopID:
+              type: string
+    PurchaseConsumerOrderRequest:
+      type: object
+      properties:
+        businessKey:
+          type: string
+        variables:
+          type: object
+          properties:
+            CustomerID:
+              type: string
+            ShopID:
+              type: string
+            ShopName:
+              type: string
+            LoyaltyCardID:
+              type: string
+            businessKeyRequester:
+              type: string  
+    LoyaltyCardAssociationOrderRequest:
+      type: object
+      properties:
+        businessKey:
+          type: string
+        variables:
+          type: object
+          properties:
+            CustomerID:
+              type: string
+            ShopID:
+              type: string
+            businessKeyRequester:
+              type: string
+    LoyaltyCardAssociationOrderAccept:
+      type: object
+      properties:
+        messageName:
+          type: string
+        resultEnabled:
+          type: boolean
+        businessKey:
+          type: string
+        variables:
+          type: object
+          properties:
+            CustomerID:
+              type: string
+            ShopID:
+              type: string
+    LoyaltyCardAssociationOrderDeclare:
+      type: object
+      properties:
+        messageName:
+          type: string
+        businessKey:
+          type: string
+        resultEnabled:
+          type: boolean
+        variables:
+          type: object
+          properties:
+            CustomerID:
+              type: string
+            ShopID:
+              type: string
+    LoyaltyCardAssociationOrderPromise:
+      type: object
+      properties:
+        messageName:
+          type: string
+        resultEnabled:
+          type: boolean
+        businessKey:
+          type: string
+        CustomerID:
+          type: string
+    LoyaltyCardAssociate:
+      type: object
+      properties:
+        idCustomer:
+          type: string
+        id:
+          type: integer
+        idShop:
+          type: string
+    LoyaltyCardID:
+      type: object
+      properties:
+        LoyaltyCardID:
+          type: integer
+    PurchaseConsumerOrderDeclare:
+      type: object
+      properties:
+        messageName:
+          type: string
+        businessKey:
+          type: string
+        resultEnabled:
+          type: boolean
+        variables:
+          type: object
+          properties:
+            CustomerID:
+              type: string
+            ShopID:
+              type: string              
+    PurchaseConsumerOrderAccept:
+      type: object
+      properties:
+        messageName:
+          type: string
+        businessKey:
+          type: string
+        resultEnabled:
+          type: boolean
+        variables:
+          type: object
+          properties:
+            CustomerID:
+              type: string
+            ShopID:
+              type: string     

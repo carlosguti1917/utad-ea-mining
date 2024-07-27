@@ -22,9 +22,9 @@ from app.src.generic_service.data_relation_view import ExtractCorrelateDataObjec
 from app.src.generic_service.data_relation_view import ExtractArchimateDataRelationView
 
 # observação, esta hora é UTC - para o Brasil considerar 3h de avanço em relação a hora desejada.
-beginDate = "2024-07-10T00:45:00.000Z"
+beginDate = "2024-07-25T02:45:00.000Z"
 # observação, esta hora é UTC - para o Brasil considerar 3h de avanço em relação a hora desejada.
-endDate = "2024-07-10T01:59:00.000Z"
+endDate = "2024-07-25T02:59:00.000Z"
 
 
 #Loader Calls from Elastic
@@ -54,21 +54,23 @@ print("Remove Frequent Items with success")
 #ftc_list = ExtractProcessFromOntology.mining_frequent_temporal_correlations(onto) # Vale para versão final
 print("Mining Frequent Temporal Correlations with success")
 
+#correlate the API Resources to the API Documentations
+#doc_api_relators = ExtractApiDocumentation.correlate_resources_to_documentations(onto)
+print("ApiDocumentation Correlated to Resources with success")
+
 #create Process in Ontology
 #ProcessDiscovery.processes_discovery() # Vale para versão final 
 print("Processes Discovery with success")
 
 #extract the process view in archimate model
-#ExtractArchimateProcessoView.extract_archimate_process() # Vale para versão final
+#ExtractArchimateProcessoView.extract_archimate_process() # Vale para versão final plan
+ExtractArchimateProcessoView.extract_archimate_process_grouped() # Vale para versão final plan
 print("Process View in Archimate Extracted with success")
 
 # obtain swaggers and save API Documentations to the ontology
-#docs = ExtractApiDocumentation.get_api_documentations_from_files(onto) 
+docs = ExtractApiDocumentation.get_api_documentations_from_files(onto) 
 print("ApiDocumentation Extracted with success")
 
-#correlate the API Resources to the API Documentations
-doc_api_relators = ExtractApiDocumentation.correlate_resources_to_documentations(onto)
-print("ApiDocumentation Correlated to Resources with success")
 
 fddc_list = ExtractCorrelateDataObject.mining_frequent_data_domain_correlations(onto)
 print("Frequent Data Domain Correlations created with success")

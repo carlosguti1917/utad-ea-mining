@@ -1,0 +1,969 @@
+{
+  "id": "9f55012c-c0af-4493-8087-04669e0738bb",
+  "version": "2.0",
+  "name": "EAMining-Camunda Example",
+  "url": "http://ec2-54-224-153-239.compute-1.amazonaws.com:8080/",
+  "tests": [{
+    "id": "7abe4aee-bc93-4893-bda7-abb9d36c3cbb",
+    "name": "Case0",
+    "commands": [{
+      "id": "7fed836a-d80f-4c2e-ba6b-c2c6efd2584e",
+      "comment": "",
+      "command": "open",
+      "target": "http://ec2-34-235-130-217.compute-1.amazonaws.com:8080/camunda/app/welcome/default/#!/welcome",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1fbeb67d-b3dc-4403-b8df-f1b11750b109",
+      "comment": "",
+      "command": "click",
+      "target": "css=.form-signin-container",
+      "targets": [
+        ["css=.form-signin-container", "css:finder"],
+        ["xpath=//div[3]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "13a1ac3c-7a1a-4a34-abf6-cd7466ae814b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.ng-touched",
+      "targets": [
+        ["css=.ng-touched", "css:finder"],
+        ["xpath=//input[@type='text']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ad4d01c5-2c50-4379-a40b-b8d9d607e940",
+      "comment": "",
+      "command": "type",
+      "target": "css=.ng-touched",
+      "targets": [
+        ["css=.ng-touched", "css:finder"],
+        ["xpath=//input[@type='text']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "demo"
+    }, {
+      "id": "cf893586-94d5-45ca-af29-afd09091fd1e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.ng-untouched",
+      "targets": [
+        ["css=.ng-untouched", "css:finder"],
+        ["xpath=//input[@type='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "43cb7fdc-a369-4f67-be20-8314136ff8ad",
+      "comment": "",
+      "command": "type",
+      "target": "css=.ng-untouched",
+      "targets": [
+        ["css=.ng-untouched", "css:finder"],
+        ["xpath=//input[@type='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "demo"
+    }, {
+      "id": "0f843d02-63fc-4805-9eac-161b7fa46075",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Log in')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6f5972c3-14d0-40f0-a0e5-3a7fe83234a7",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Tasklist",
+      "targets": [
+        ["linkText=Tasklist", "linkText"],
+        ["css=.tasklist-app .ng-binding", "css:finder"],
+        ["xpath=//a[contains(text(),'Tasklist')]", "xpath:link"],
+        ["xpath=(//a[contains(@href, '/camunda/app/tasklist/default/')])[2]", "xpath:href"],
+        ["xpath=//div[2]/h3/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Tasklist')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "43940bfc-d985-4733-9cb3-adfc26dcb313",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Start process",
+      "targets": [
+        ["linkText=Start process", "linkText"],
+        ["css=.start-process-action .ng-binding", "css:finder"],
+        ["xpath=(//a[contains(@href, '')])[13]", "xpath:href"],
+        ["xpath=//li[3]/view/a", "xpath:position"],
+        ["xpath=//a[contains(.,' Start process')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b5e67b25-db9d-4924-ac3f-7248bdcffc9d",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=ProcessBusinessUnit1",
+      "targets": [
+        ["linkText=BusinessActor1LoyaltyCardManagement", "linkText"],
+        ["css=.processes > .ng-scope:nth-child(1) > .ng-binding", "css:finder"],
+        ["xpath=//a[contains(text(),'BusinessActor1LoyaltyCardManagement')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'BusinessActor1LoyaltyCardManagement')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ab98c5b6-c2c3-4b34-8a36-8673fa786706",
+      "comment": "",
+      "command": "click",
+      "target": "id=business-key-field",
+      "targets": [
+        ["id=business-key-field", "id"],
+        ["css=#business-key-field", "css:finder"],
+        ["xpath=//input[@id='business-key-field']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "85e4b752-fd51-4042-acf4-ed893ab10935",
+      "comment": "",
+      "command": "type",
+      "target": "id=business-key-field",
+      "targets": [
+        ["id=business-key-field", "id"],
+        ["css=#business-key-field", "css:finder"],
+        ["xpath=//input[@id='business-key-field']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Case 10"
+    }, {
+      "id": "f68fab56-7cfc-4053-a100-89ed6b2907a3",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col-xs-8 > .btn-primary",
+      "targets": [
+        ["css=.col-xs-8 > .btn-primary", "css:finder"],
+        ["xpath=(//button[@type='submit'])[3]", "xpath:attributes"],
+        ["xpath=//div[2]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Start')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c9a8c751-d84c-4986-b1b6-aae811c22f4b",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Decide the data to LoyaltyCard association order",
+      "targets": [
+        ["linkText=Decide the data to LoyaltyCard association order", "linkText"],
+        ["css=.message > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Decide the data to LoyaltyCard association order')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '#/?forceDisplayTask=true&task=5375b9d1-3c02-11ef-bdf6-0242ac110002')]", "xpath:href"],
+        ["xpath=//span/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Decide the data to LoyaltyCard association order')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d32eed30-ce35-4adc-bb5f-c60083990758",
+      "comment": "",
+      "command": "click",
+      "target": "name=CustomerID",
+      "targets": [
+        ["name=CustomerID", "name"],
+        ["css=.form-group:nth-child(1) > .ng-valid-cam-variable-type", "css:finder"],
+        ["xpath=//input[@name='CustomerID']", "xpath:attributes"],
+        ["xpath=//div/div/div/form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "c9ce3974-9f07-445f-b26d-7e6e80c7954d",
+      "comment": "",
+      "command": "type",
+      "target": "name=CustomerID",
+      "targets": [
+        ["name=CustomerID", "name"],
+        ["css=.ng-not-empty:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='CustomerID']", "xpath:attributes"],
+        ["xpath=//div/div/div/form/div/input", "xpath:position"]
+      ],
+      "value": "10"
+    }, {
+      "id": "a000fadc-000b-4260-abb7-918dd1ef1ff1",
+      "comment": "",
+      "command": "click",
+      "target": "name=ShopID",
+      "targets": [
+        ["name=ShopID", "name"],
+        ["css=.ng-pristine:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='ShopID']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "38aa9317-7a05-41b5-b1c4-66be33c8446a",
+      "comment": "",
+      "command": "type",
+      "target": "name=ShopID",
+      "targets": [
+        ["name=ShopID", "name"],
+        ["css=.ng-untouched:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='ShopID']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "10"
+    }, {
+      "id": "9ab94441-bd91-4c97-b7e0-33a8a9b47444",
+      "comment": "",
+      "command": "click",
+      "target": "css=.form-actions > .btn-default",
+      "targets": [
+        ["css=.form-actions > .btn-default", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[2]/div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Save')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "eb02c4a2-10b4-45a9-9da5-386c87ec871d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary:nth-child(2)",
+      "targets": [
+        ["css=.btn-primary:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=//div[3]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Complete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8108543f-7b37-4058-9a0b-b307fcd7a05e",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Verify if execute product is possible",
+      "targets": [
+        ["linkText=Verify if execute product is possible", "linkText"],
+        ["css=.task:nth-child(1) .task > .ng-binding", "css:finder"],
+        ["xpath=//a[contains(text(),'Verify if execute product is possible')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '#/?task=5bf88758-3c02-11ef-bdf6-0242ac110002')]", "xpath:href"],
+        ["xpath=//li/div/div/h4/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Verify if execute product is possible')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "896004b1-965f-422f-ba54-f28fedeb5f6f",
+      "comment": "",
+      "command": "click",
+      "target": "name=promise",
+      "targets": [
+        ["name=promise", "name"],
+        ["css=.form-control:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='promise']", "xpath:attributes"],
+        ["xpath=//div/div/div/form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "b8c79227-a535-4aab-83e0-9b597b73108d",
+      "comment": "",
+      "command": "click",
+      "target": "css=.form-actions > .btn-default",
+      "targets": [
+        ["css=.form-actions > .btn-default", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[2]/div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Save')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f54a848b-97de-46f4-a656-cc81f8e8bb12",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary:nth-child(2)",
+      "targets": [
+        ["css=.btn-primary:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=//div[3]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Complete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b7030726-c0aa-4cc4-a5c5-dd382cc91b5a",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Verify if execute product is possible",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b8486c7f-37e9-4937-bd01-0c4bb17abf55",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Verify if execute product is possible",
+      "targets": [
+        ["linkText=Verify if execute product is possible", "linkText"],
+        ["css=.active .task > .ng-binding", "css:finder"],
+        ["xpath=//a[contains(text(),'Verify if execute product is possible')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '#/?task=44c26bcc-3c05-11ef-bdf6-0242ac110002')]", "xpath:href"],
+        ["xpath=//li/div/div/h4/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Verify if execute product is possible')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b2e99395-dfed-4324-bd68-56a570a34eea",
+      "comment": "",
+      "command": "click",
+      "target": "name=promise",
+      "targets": [
+        ["name=promise", "name"],
+        ["css=.form-control:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='promise']", "xpath:attributes"],
+        ["xpath=//div/div/div/form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "9693a6fb-eada-47e3-968a-217e5f293d38",
+      "comment": "",
+      "command": "click",
+      "target": "css=.form-actions > .btn-default",
+      "targets": [
+        ["css=.form-actions > .btn-default", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[2]/div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Save')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "64ca649a-7fa5-4b9d-a9f5-6b8db6fa92ae",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary:nth-child(2)",
+      "targets": [
+        ["css=.btn-primary:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=//div[3]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Complete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2ba8c783-51fb-4f5e-8143-15288dcb4b55",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Check Purchase Consumer Order",
+      "targets": [
+        ["linkText=Check Purchase Consumer Order", "linkText"],
+        ["css=.task:nth-child(1) .task > .ng-binding", "css:finder"],
+        ["xpath=//a[contains(text(),'Check Purchase Consumer Order')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '#/?task=76a2d2d9-3c05-11ef-bdf6-0242ac110002')]", "xpath:href"],
+        ["xpath=//li/div/div/h4/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Check Purchase Consumer Order')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "810570f0-9517-48eb-b7bc-e438319ad5b1",
+      "comment": "",
+      "command": "click",
+      "target": "name=productok",
+      "targets": [
+        ["name=productok", "name"],
+        ["css=.form-control:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='productok']", "xpath:attributes"],
+        ["xpath=//div/div/div/form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "13fc94e7-c893-4887-80d4-7ebb1d99808a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.form-actions > .btn-default",
+      "targets": [
+        ["css=.form-actions > .btn-default", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[2]/div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Save')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "eb63c4cd-ad87-4c91-98c3-3e1610d8404c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary:nth-child(2)",
+      "targets": [
+        ["css=.btn-primary:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=//div[3]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Complete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d654ab9e-c906-4bb4-a318-16165848318c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.task:nth-child(1) .process-definition",
+      "targets": [
+        ["css=.task:nth-child(1) .process-definition", "css:finder"],
+        ["xpath=//h6", "xpath:position"],
+        ["xpath=//h6[contains(.,'BusinessActor1LoyaltyCardManagement')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ff6daec2-e99f-49a1-89fb-6c814d4cb884",
+      "comment": "",
+      "command": "click",
+      "target": "name=productok",
+      "targets": [
+        ["name=productok", "name"],
+        ["css=.form-control:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='productok']", "xpath:attributes"],
+        ["xpath=//div/div/div/form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "abb468fc-a021-4d6c-ad8a-23b4f7f81310",
+      "comment": "",
+      "command": "click",
+      "target": "css=.form-actions > .btn-default",
+      "targets": [
+        ["css=.form-actions > .btn-default", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[2]/div[3]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Save')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f8a0f187-03b0-409c-b1d7-938ff0bd4b20",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary:nth-child(2)",
+      "targets": [
+        ["css=.btn-primary:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=//div[3]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Complete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b28bbc96-d9c7-4934-addc-1123d4f8d58b",
+      "comment": "",
+      "command": "echo",
+      "target": "FIM case 0",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "19ace0b6-dc80-4e2c-b0cc-addadbf64f5a",
+      "comment": "",
+      "command": "click",
+      "target": "css=.app-switch > .dropdown-toggle",
+      "targets": [
+        ["css=.app-switch > .dropdown-toggle", "css:finder"],
+        ["xpath=(//a[contains(@href, '')])[8]", "xpath:href"],
+        ["xpath=//li[4]/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "64da4e4b-b85b-4a38-b522-dcef77399e3f",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Tasklist",
+      "targets": [
+        ["linkText=Tasklist", "linkText"],
+        ["css=.tasklist > .ng-binding", "css:finder"],
+        ["xpath=//a[contains(text(),'Tasklist')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/camunda/app/tasklist/default/')]", "xpath:href"],
+        ["xpath=//li[4]/ul/li[2]/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Tasklist')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }]
+  }, {
+    "id": "ea4736b8-cfa3-4baa-b9f6-b6719ebe0043",
+    "name": "CaseLoyalty",
+    "commands": [{
+      "id": "09fa6919-86e6-4927-b3a1-3365d3696e40",
+      "comment": "",
+      "command": "open",
+      "target": "http://ec2-54-224-153-239.compute-1.amazonaws.com:8080/camunda/app/welcome/default/#!/welcome",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8ef918ac-4b56-4e34-8dd1-ac99c9f1fc90",
+      "comment": "",
+      "command": "click",
+      "target": "css=.form-signin-container",
+      "targets": [
+        ["css=.form-signin-container", "css:finder"],
+        ["xpath=//div[3]/div", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "31523186-5751-41d0-8b81-3fccc7bcacad",
+      "comment": "",
+      "command": "click",
+      "target": "css=.ng-touched",
+      "targets": [
+        ["css=.ng-touched", "css:finder"],
+        ["xpath=//input[@type='text']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0bba2066-4112-4b5e-9cb9-c5f8d93470b4",
+      "comment": "",
+      "command": "type",
+      "target": "css=.ng-touched",
+      "targets": [
+        ["css=.ng-touched", "css:finder"],
+        ["xpath=//input[@type='text']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "demo"
+    }, {
+      "id": "77ed03bb-392f-436a-8ab7-f2debc3f250b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.ng-untouched",
+      "targets": [
+        ["css=.ng-untouched", "css:finder"],
+        ["xpath=//input[@type='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0252f6c6-a6d8-4bb1-8b8e-cdffd7ee1308",
+      "comment": "",
+      "command": "type",
+      "target": "css=.ng-untouched",
+      "targets": [
+        ["css=.ng-untouched", "css:finder"],
+        ["xpath=//input[@type='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "demo"
+    }, {
+      "id": "40c4a0d1-9f38-4194-bc9f-81bce39e54fe",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn",
+      "targets": [
+        ["css=.btn", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//form/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Log in')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5eaa3f0c-5714-4f18-a966-6bbcd5d11757",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Tasklist",
+      "targets": [],
+      "value": "30000"
+    }, {
+      "id": "eadbdf4a-d5c3-445f-a331-6e7169f48e44",
+      "comment": "",
+      "command": "executeScript",
+      "target": "return 4",
+      "targets": [],
+      "value": "check"
+    }, {
+      "id": "c6573ac1-c971-4388-a4a2-338b9f17498f",
+      "comment": "",
+      "command": "while",
+      "target": "${check} < 14",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "55b0f8fb-1de1-4e46-9b5c-cff6d38687c3",
+      "comment": "",
+      "command": "executeScript",
+      "target": "return ${check} + 1",
+      "targets": [],
+      "value": "check"
+    }, {
+      "id": "b63d06ec-831e-4b66-9aa9-7aba12ab50ea",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Start process",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b5db0664-8eb3-4aac-9320-bb856ac8ff0c",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=ProcessBusinessUnit1",
+      "targets": [
+        ["linkText=BusinessActor1LoyaltyCardManagement", "linkText"],
+        ["css=.processes > .ng-scope:nth-child(1) > .ng-binding", "css:finder"],
+        ["xpath=//a[contains(text(),'BusinessActor1LoyaltyCardManagement')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'BusinessActor1LoyaltyCardManagement')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3d8196a4-3fee-4d42-a083-4c560cea042d",
+      "comment": "",
+      "command": "click",
+      "target": "id=business-key-field",
+      "targets": [
+        ["id=business-key-field", "id"],
+        ["css=#business-key-field", "css:finder"],
+        ["xpath=//input[@id='business-key-field']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "567e9ce8-470e-4ffc-9ea5-6363d8a89b37",
+      "comment": "",
+      "command": "type",
+      "target": "id=business-key-field",
+      "targets": [
+        ["id=business-key-field", "id"],
+        ["css=#business-key-field", "css:finder"],
+        ["xpath=//input[@id='business-key-field']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Case ${check}"
+    }, {
+      "id": "2995f33a-355f-4aa9-b1ac-8c1575c6e840",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col-xs-8 > .btn-primary",
+      "targets": [
+        ["css=.col-xs-8 > .btn-primary", "css:finder"],
+        ["xpath=(//button[@type='submit'])[3]", "xpath:attributes"],
+        ["xpath=//div[2]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Start')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "79943b15-699f-4c75-a9e6-0394d703492c",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Decide the data to LoyaltyCard association order",
+      "targets": [
+        ["linkText=Decide the data to LoyaltyCard association order", "linkText"],
+        ["css=.message > a", "css:finder"],
+        ["xpath=//a[contains(text(),'Decide the data to LoyaltyCard association order')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '#/?forceDisplayTask=true&task=5375b9d1-3c02-11ef-bdf6-0242ac110002')]", "xpath:href"],
+        ["xpath=//span/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Decide the data to LoyaltyCard association order')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "52b72337-d40e-437a-b49c-2b66e45e48cb",
+      "comment": "",
+      "command": "click",
+      "target": "name=CustomerID",
+      "targets": [
+        ["name=CustomerID", "name"],
+        ["css=.form-group:nth-child(1) > .ng-valid-cam-variable-type", "css:finder"],
+        ["xpath=//input[@name='CustomerID']", "xpath:attributes"],
+        ["xpath=//div/div/div/form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "fb2f7320-f4f9-4ca5-90e6-e2fde5906dde",
+      "comment": "",
+      "command": "type",
+      "target": "name=CustomerID",
+      "targets": [
+        ["name=CustomerID", "name"],
+        ["css=.ng-not-empty:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='CustomerID']", "xpath:attributes"],
+        ["xpath=//div/div/div/form/div/input", "xpath:position"]
+      ],
+      "value": "${check}"
+    }, {
+      "id": "c4e27f4f-8731-4a48-88c1-02903245a3cc",
+      "comment": "",
+      "command": "click",
+      "target": "name=ShopID",
+      "targets": [
+        ["name=ShopID", "name"],
+        ["css=.ng-pristine:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='ShopID']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "31a933f3-22bb-471f-8541-00f3edfe3d82",
+      "comment": "",
+      "command": "type",
+      "target": "name=ShopID",
+      "targets": [
+        ["name=ShopID", "name"],
+        ["css=.ng-untouched:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='ShopID']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "${check}"
+    }, {
+      "id": "197e87db-c976-4070-81d1-ac4276667ee8",
+      "comment": "",
+      "command": "//click",
+      "target": "css=.form-actions > .btn-default",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e34bfafe-5bfa-4792-9294-8de8e3322634",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary:nth-child(2)",
+      "targets": [
+        ["css=.btn-primary:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=//div[3]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Complete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a890865a-886d-4e3c-be17-85e14400ff93",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Verify if execute product is possible",
+      "targets": [
+        ["linkText=Verify if execute product is possible", "linkText"],
+        ["css=.active .task > .ng-binding", "css:finder"],
+        ["xpath=//a[contains(text(),'Verify if execute product is possible')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '#/?task=f9d3251f-3df9-11ef-8c3f-0242ac110002')]", "xpath:href"],
+        ["xpath=//li/div/div/h4/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Verify if execute product is possible')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e88e0501-b777-4004-8739-d1cfaf543e81",
+      "comment": "",
+      "command": "click",
+      "target": "name=promise",
+      "targets": [
+        ["name=promise", "name"],
+        ["css=.form-control:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='promise']", "xpath:attributes"],
+        ["xpath=//div/div/div/form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d5a8109a-e446-4130-86b7-00ce59cdc7d6",
+      "comment": "",
+      "command": "//click",
+      "target": "css=.form-actions > .btn-default",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7d78df86-5031-421e-a930-612d83816630",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary:nth-child(2)",
+      "targets": [
+        ["css=.btn-primary:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=//div[3]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Complete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "6299fb08-fccf-4e13-b7cb-9ab1786bff2e",
+      "comment": "",
+      "command": "//click",
+      "target": "linkText=Verify if execute product is possible",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3bdf8a9a-6902-41d5-8244-74cb71cd2608",
+      "comment": "",
+      "command": "//click",
+      "target": "name=promise",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "30c1776e-c98b-4f9f-87ed-8d7579f4270d",
+      "comment": "",
+      "command": "//click",
+      "target": "css=.form-actions > .btn-default",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8a923dee-45a9-498e-8d18-b62ccf0a2794",
+      "comment": "",
+      "command": "//click",
+      "target": "css=.btn-primary:nth-child(2)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6cf187d8-c2e4-42b3-a56f-9660f7870971",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Verify if execute product is possible",
+      "targets": [],
+      "value": "30000"
+    }, {
+      "id": "c7abfbf0-606e-4a96-8ef3-3d288f8e47dd",
+      "comment": "",
+      "command": "click",
+      "target": "name=promise",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "95c3815d-0d90-4717-8f83-a9180a1137ed",
+      "comment": "",
+      "command": "//click",
+      "target": "css=.form-actions > .btn-default",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0a6f20eb-fdbf-4a15-aee8-70467508e537",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary:nth-child(2)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6637b97f-b8f6-4f02-92ad-5c33632b02cd",
+      "comment": "",
+      "command": "//click",
+      "target": "linkText=Verify if execute product is possible",
+      "targets": [],
+      "value": "30000"
+    }, {
+      "id": "1f0736ee-3f51-4b73-b3aa-f1817bc2b365",
+      "comment": "",
+      "command": "//click",
+      "target": "name=promise",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "66785602-49f0-4c5e-a1fc-844236e0ff62",
+      "comment": "",
+      "command": "//click",
+      "target": "css=.form-actions > .btn-default",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "67a417cd-86b6-4175-9542-0cf8c97bdcc6",
+      "comment": "",
+      "command": "//click",
+      "target": "css=.btn-primary:nth-child(2)",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1c875008-d08c-4404-acda-d60c40a3754b",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Check Purchase Consumer Order",
+      "targets": [
+        ["linkText=Check Purchase Consumer Order", "linkText"],
+        ["css=.task:nth-child(1) .task > .ng-binding", "css:finder"],
+        ["xpath=//a[contains(text(),'Check Purchase Consumer Order')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '#/?task=76a2d2d9-3c05-11ef-bdf6-0242ac110002')]", "xpath:href"],
+        ["xpath=//li/div/div/h4/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Check Purchase Consumer Order')]", "xpath:innerText"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "c560a4bf-8c01-4a8a-acde-5ff3449c6eab",
+      "comment": "",
+      "command": "click",
+      "target": "name=productok",
+      "targets": [
+        ["name=productok", "name"],
+        ["css=.form-control:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='productok']", "xpath:attributes"],
+        ["xpath=//div/div/div/form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e1996493-4337-4aae-a23d-3ed6a0df4827",
+      "comment": "",
+      "command": "//click",
+      "target": "css=.form-actions > .btn-default",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d7beb7bc-081b-4f95-9857-67695cb8b9c2",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary:nth-child(2)",
+      "targets": [
+        ["css=.btn-primary:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=//div[3]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Complete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ea40dcd3-e96d-4706-991e-e3c2057b5713",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Check LoyaltyCard association order",
+      "targets": [
+        ["linkText=Check LoyaltyCard association order", "linkText"],
+        ["css=.task:nth-child(1) .task > .ng-binding", "css:finder"],
+        ["xpath=//a[contains(text(),'Check LoyaltyCard association order')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '#/?task=e7c5f060-3df7-11ef-8c3f-0242ac110002')]", "xpath:href"],
+        ["xpath=//li/div/div/h4/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Check LoyaltyCard association order')]", "xpath:innerText"]
+      ],
+      "value": "30000"
+    }, {
+      "id": "a2ce1208-4de3-4f92-a012-b7349ac45362",
+      "comment": "",
+      "command": "click",
+      "target": "name=productok",
+      "targets": [
+        ["name=productok", "name"],
+        ["css=.form-control:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='productok']", "xpath:attributes"],
+        ["xpath=//div/div/div/form/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "57a964e2-37ef-4082-bfd3-e25172599b32",
+      "comment": "",
+      "command": "//click",
+      "target": "css=.form-actions > .btn-default",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "06136bcf-8cd8-47e1-bd95-61f47a1dd012",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary:nth-child(2)",
+      "targets": [
+        ["css=.btn-primary:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=//div[3]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Complete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a8f95258-924e-4c05-8eb6-74fb558028a4",
+      "comment": "",
+      "command": "echo",
+      "target": "FIM case 0",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e2daf57f-ce3d-42f3-9c31-ab8c95cd891a",
+      "comment": "",
+      "command": "end",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "e0ecd691-8f2a-469a-b4ab-96f4ff284833",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["7abe4aee-bc93-4893-bda7-abb9d36c3cbb"]
+  }],
+  "urls": ["http://ec2-3-87-36-213.compute-1.amazonaws.com:8080/", "http://ec2-34-205-32-156.compute-1.amazonaws.com:8080/", "http://ec2-54-197-200-233.compute-1.amazonaws.com:8080/", "http://ec2-54-236-16-209.compute-1.amazonaws.com:8080/", "ec2-100-26-28-67.compute-1.amazonaws.com:8080/", "ec2-54-175-249-42.compute-1.amazonaws.com:8080/", "ec2-52-200-222-223.compute-1.amazonaws.com:8080/", "http://ec2-34-235-130-217.compute-1.amazonaws.com:8080/", "http://ec2-34-234-83-154.compute-1.amazonaws.com:8080/", "http://ec2-54-224-153-239.compute-1.amazonaws.com:8080/"],
+  "plugins": []
+}

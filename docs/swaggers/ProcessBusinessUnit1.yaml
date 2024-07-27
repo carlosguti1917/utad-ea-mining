@@ -1,0 +1,132 @@
+openapi: 3.0.0
+info:
+  title: Camunda Customer Process API
+  description: REST API Calls from message sendTask BPMN elements in Camunda process
+  version: 1.0.0
+servers:
+  - url: http://192.168.0.15:8000/sandbox/ProcessBusinessUnit1/v1
+    description: Sandbox kong local server
+  - url: http://189.122.101.71:8000/sandbox/ProcessBusinessUnit1/v1
+    description: Kong external gateway
+paths:
+  /Shop:
+    get:
+      summary: Retrieve Shop Catalog
+      operationId: retrieveShopCatalog
+      tags:
+        - Shop
+      responses:
+        '200':
+          description: Successful retrieval of shop catalog
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShopCatalog'
+      security:
+        - bearerAuth: []
+  /Customer:
+    get:
+      summary: Retrieve Customer catalog
+      operationId: retrieveCustomerCatalog
+      tags:
+        - Customer
+      responses:
+        '200':
+          description: Successful retrieval of customer catalog
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CustomerCatalog'
+      security:
+        - bearerAuth: []
+  /Association/RequestLoyaltyCardAssociationOrder:
+    post:
+      summary: Request LoyaltyCard association order
+      operationId: requestLoyaltyCardAssociationOrder
+      tags:
+        - LoyaltyCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoyaltyCardAssociationOrderRequest'
+      responses:
+        '200':
+          description: Successful retrieval of customer catalog
+
+  /Association/AcceptLoyaltyCardAssociationOrder:
+    post:
+      summary: Accept LoyaltyCard association order
+      operationId: acceptLoyaltyCardAssociationOrder
+      tags:
+        - LoyaltyCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoyaltyCardAssociationOrderAccept'
+      responses:
+        '200':
+          description: LoyaltyCard association order accepted successfully
+      security:
+        - bearerAuth: []      
+  
+components:
+  schemas:
+    CustomerCatalog:
+      type: array
+      items:
+        type: object
+        properties:
+          FiscalNumber:
+            type: integer
+          id:
+            type: integer
+          location:
+            type: string
+          name:
+            type: string
+    ShopCatalog:
+      type: array
+      items:
+        type: object
+        properties:
+          id:
+            type: integer
+          location:
+            type: string
+          name:
+            type: string
+
+    LoyaltyCardAssociationOrderRequest:
+      type: object
+      properties:
+        businessKey:
+          type: string
+        variables:
+          type: object
+          properties:
+            CustomerID:
+              type: string
+            ShopID:
+              type: string
+            businessKeyRequester:
+              type: string          
+    LoyaltyCardAssociationOrderAccept:
+      type: object
+      properties:
+        messageName:
+          type: string
+        resultEnabled:
+          type: boolean
+        businessKey:
+          type: string
+        variables:
+          type: object
+          properties:
+            CustomerID:
+              type: string
+            ShopID:
+              type: string

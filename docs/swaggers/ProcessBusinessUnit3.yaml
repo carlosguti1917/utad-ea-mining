@@ -1,0 +1,145 @@
+openapi: 3.0.0
+info:
+  title: Camunda Process API
+  description: REST API Calls from message sendTask BPMN elements in Camunda process
+  version: 1.0.0
+servers:
+  - url: http://192.168.0.15:8000/sandbox/ProcessBusinessUnit3/v1
+    description: Sandbox kong local server
+  - url: http://189.122.101.71:8000/sandbox/ProcessBusinessUnit3/v1
+    description: Kong external gateway
+paths:
+  /Purchase/PromisePurchaseConsumerOrder:
+    post:
+      summary: Promise Purchase Consumer Order
+      operationId: promisePurchaseConsumerOrder
+      tags:
+        - Consumer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseConsumerOrderPromise'
+      responses:
+        '200':
+          description: Purchase consumer order promised successfully
+      security:
+        - bearerAuth: []   
+  /Purchase/DeclarePurchaseConsumerOrder:
+    post:
+      summary: Declare Purchase Consumer Order
+      operationId: declarePurchaseConsumerOrder
+      tags:
+        - Consumer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseConsumerOrderDeclare'
+      responses:
+        '200':
+          description: Purchase consumer order declared successfully
+      security:
+        - bearerAuth: []                             
+  /Purchase/AcceptPurchaseConsumerOrder:
+    post:
+      summary: Accept Purchase Consumer Order
+      operationId: acceptPurchaseConsumerOrder
+      tags:
+        - Customer
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseConsumerOrderAccept'
+      responses:
+        '200':
+          description: Purchase consumer order accepted successfully
+      security:
+        - bearerAuth: [] 
+  /Purchase/Consume:
+    post:
+      summary: Create Purchase Consumer Order
+      operationId: createPurchaseConsumerOrder
+      tags:
+        - Purchase
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PurchaseConsumerOrderCreate'
+      responses:
+        '200':
+          description: Purchase consumer order created successfully
+      security:
+        - bearerAuth: []            
+                             
+components:
+  schemas:
+    PurchaseConsumerOrderPromise:
+      type: object
+      properties:
+        messageName:
+          type: string
+        businessKey:
+          type: string
+        resultEnabled:
+          type: boolean
+        variables:
+          type: object
+          properties:
+            CustomerID:
+              type: string
+            ShopID:
+              type: string
+    LoyaltyCardID:
+      type: object
+      properties:
+        LoyaltyCardID:
+          type: integer
+    PurchaseConsumerOrderDeclare:
+      type: object
+      properties:
+        messageName:
+          type: string
+        businessKey:
+          type: string
+        resultEnabled:
+          type: boolean
+        variables:
+          type: object
+          properties:
+            CustomerID:
+              type: string
+            ShopID:
+              type: string              
+    PurchaseConsumerOrderAccept:
+      type: object
+      properties:
+        messageName:
+          type: string
+        businessKey:
+          type: string
+        resultEnabled:
+          type: boolean
+        variables:
+          type: object
+          properties:
+            CustomerID:
+              type: string
+            ShopID:
+              type: string     
+    ShopName:
+      type: object
+      properties:
+        ShopName:
+          type: string                 
+    PurchaseConsumerOrderCreate:
+      type: object
+      properties:
+        TopicName:
+          type: string

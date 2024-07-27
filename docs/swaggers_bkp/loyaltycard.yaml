@@ -1,0 +1,72 @@
+openapi: 3.0.0
+info:
+  title: Camunda LoyaltyCard Process API
+  description: REST API Calls from message sendTask BPMN elements in Camunda process
+  version: 1.0.0
+servers:
+  - url: http://192.168.0.15:8000/sandbox/Loyaltycard/v1
+    description: Sandbox kong local server
+  - url: http://189.122.101.71:8000/sandbox/Loyaltycard/v1
+    description: Kong external gateway
+paths:
+  /Association/AssociateLoyaltyCard:
+    post:
+      summary: Associate LoyaltyCard
+      operationId: associateLoyaltyCard
+      tags:
+        - LoyaltyCard
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoyaltyCardAssociate'
+      responses:
+        '200':
+          description: LoyaltyCard associated successfully
+      security:
+        - bearerAuth: []
+  /Card/{CustomerID}/{ShopID}:
+    get:
+      summary: Retrieve LoyaltyCardID
+      operationId: retrieveLoyaltyCardID
+      tags:
+        - LoyaltyCard
+      parameters:
+        - name: CustomerID
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: ShopID
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: LoyaltyCardID retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoyaltyCardID'
+      security:
+        - bearerAuth: []         
+components:
+  schemas:
+    LoyaltyCardAssociate:
+      type: object
+      properties:
+        idCustomer:
+          type: string
+        id:
+          type: integer
+        idShop:
+          type: string
+    LoyaltyCardID:
+      type: object
+      properties:
+        LoyaltyCardID:
+          type: integer             
+
+         

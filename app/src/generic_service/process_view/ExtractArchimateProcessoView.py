@@ -55,7 +55,7 @@ def get_process_from_ontology():
 def save_archimate_exchange_model(root):
 # Create the XML tree and write it to a file
     try:
-        #tree = ET.ElementTree(root)
+        tree = ET.ElementTree(root)
         xml_string = ET.tostring(root,encoding='utf-8').decode('utf-8')
 
         # Parse the XML string and convert it to a pretty-printed XML string
@@ -65,7 +65,8 @@ def save_archimate_exchange_model(root):
         # print("#################### pretty_xml_string ##########################")
         # print(pretty_xml_string)
         # Save the XML string to a file
-        file_path = configs.ARCHIMATE_MODEL["file_path"]        
+        file_path = configs.ARCHIMATE_MODEL["file_path"] 
+        #datahora = datetime.now().strftime("%Y%m%d%H%M")       
         file_name = configs.ARCHIMATE_MODEL["archimate_file_name"]
         # Check if the directory exists
         if not os.path.exists(file_path):
@@ -131,6 +132,7 @@ def add_archimate_process_elements(root, processes):
     """
         Create the xml element for the process
     """
+    contextfull_process = False #To verify if the process has a context pool or not, default is False
     try:
         elements = root.find("elements")
         if elements is None:
@@ -141,23 +143,43 @@ def add_archimate_process_elements(root, processes):
         for process_tuple in processes:
             process_element_number += 1
             process = process_tuple[0]
-            process_id = process.name.replace("/", "-").replace("_", "")
-            process_identifier = f"id-process-{process_element_number}"
-            process_exists = elements.find(f".//element[@identifier='{process_identifier}']")
-            label_parts = process.label[0].split(': ')
+            # get macro process name
+            label_parts = process.label[0].split(': ')            
             if len(label_parts) > 1:
                 process_name_text = label_parts[1]
             else:
-                process_name_text = process.label[0]
-            if process_exists is None:
-                process_element = ET.SubElement(elements, "element", attrib={"identifier": process_identifier, "xsi:type": "BusinessProcess"})
-                process_name = ET.SubElement(process_element, "name")
-                process_name.text = process_name_text  
-                root = add_archimate_actors_to_process(root, process, process_identifier)
-            
-            root, event_number = add_archimate_event_process_elements(root, process_identifier, process_name_text, event_number)   
+                process_name_text = process.label[0]    
+                        
+            for label in process.label:
+                label_parts = label.split(': ')
+                if label_parts[0] == "context_pool":
+                    contextfull_process = True
+                    context_pool = label_parts[1]
+                    process_id = process.name.replace("/", "-").replace("_", "")
+                    #process_identifier = f"id-process-{process_element_number}"
+                    process_identifier = f"id-process-{context_pool}"
+                    process_exists = elements.find(f".//element[@identifier='{process_identifier}']")
+                    if process_exists is None:
+                        process_element = ET.SubElement(elements, "element", attrib={"identifier": process_identifier, "xsi:type": "BusinessProcess"})
+                        process_name = ET.SubElement(process_element, "name")
+                        process_name.text = context_pool  
+                        root = add_archimate_actors_to_process(root, process, process_identifier)                           
+            if contextfull_process == False:
+                process_id = process.name.replace("/", "-").replace("_", "")
+                process_identifier = f"id-process-{process_element_number}"
+                process_exists = elements.find(f".//element[@identifier='{process_identifier}']")
+                if process_exists is None:
+                    process_element = ET.SubElement(elements, "element", attrib={"identifier": process_identifier, "xsi:type": "BusinessProcess"})
+                    process_name = ET.SubElement(process_element, "name")
+                    process_name.text = process_name_text  
+                    root = add_archimate_actors_to_process(root, process, process_identifier)            
+                
+            if contextfull_process == True:
+                root, event_number = add_archimate_event_process_elements(root, None, process_name_text, event_number) 
+            else:
+                root, event_number = add_archimate_event_process_elements(root, process_identifier, process_name_text, event_number)   
         
-        return root
+        return root, contextfull_process
     except Exception as error:   
         print('Ocorreu problema {} '.format(error.__class__))
         print("mensagem", str(error))
@@ -203,6 +225,12 @@ def add_archimate_actors_to_process(root, process, process_identifier):
 def add_archimate_event_process_elements(root, process_identifier, process_name, event_number):   
     """
         Create the xml element for the process
+        args:
+            root: xml.etree.ElementTree
+            process_identifier: str # The identifier of the process, in case of contextfull process it is None because the process identifier ig get from activity pattern
+                if the process_identifier is None, the process is a contextfull process
+            process_name: str
+            event_number: int
     """
     try:
         elements = root.find("elements")
@@ -210,8 +238,8 @@ def add_archimate_event_process_elements(root, process_identifier, process_name,
             elements = ET.SubElement(root, "elements")
             
         # Load the HeuristicsNet object from the file
-        directory = "./temp/process/"       
-        with open(f"{directory}heuristics_net_{process_name}.pkl", 'rb') as f:
+        directory = "./temp/process"       
+        with open(f"{directory}/heu_net_{process_name}.pkl", 'rb') as f:
             heu_net = pickle.load(f)
         #pm4py.view_heuristics_net(heu_net)  
         
@@ -232,17 +260,29 @@ def add_archimate_event_process_elements(root, process_identifier, process_name,
                 event_element_name = ET.SubElement(event_element, "name")
                 event_element_name.text = activity
             
-            #relationships
-            relationships = root.find("relationships")
-            if relationships is None:
-                relationships = ET.SubElement(root, "relationships")            
-                    
-            relationship_id = f"id-relation-{event_number}"
-            relationship_exists = root.find(f".//relationship[@identifier='{relationship_id}']")
-            if relationship_exists is None:
-                relationship = ET.SubElement(relationships, "relationship ", attrib={"identifier": relationship_id, "source": process_identifier, "target": event_identifier, "xsi:type":"Association" })                
-                relationship_name = ET.SubElement(relationship, "name")
-                relationship_name.text = relationship_id           
+            #relationships with process
+            if process_identifier == None:
+                process_context = re.search(r'/([^/]+)/v1', activity).group(1)
+                relationships = root.find("relationships")
+                if relationships is None:
+                    relationships = ET.SubElement(root, "relationships")            
+                relationship_id = f"id-relation-{event_number}"
+                relationship_exists = root.find(f".//relationship[@identifier='{relationship_id}']")
+                if relationship_exists is None:
+                    relationship = ET.SubElement(relationships, "relationship ", attrib={"identifier": relationship_id, "source": f"id-process-{process_context}", "target": event_identifier, "xsi:type":"Association" })                
+                    relationship_name = ET.SubElement(relationship, "name")
+                    relationship_name.text = relationship_id           
+            else:
+                relationships = root.find("relationships")
+                if relationships is None:
+                    relationships = ET.SubElement(root, "relationships")            
+                relationship_id = f"id-relation-{event_number}"
+                relationship_exists = root.find(f".//relationship[@identifier='{relationship_id}']")
+                if relationship_exists is None:
+                    relationship = ET.SubElement(relationships, "relationship ", attrib={"identifier": relationship_id, "source": process_identifier, "target": event_identifier, "xsi:type":"Association" })                
+                    relationship_name = ET.SubElement(relationship, "name")
+                    relationship_name.text = relationship_id
+        
         
         # save_archimate_exchange_model(root)
         # relations = root.findall(".//relationship")
@@ -252,6 +292,201 @@ def add_archimate_event_process_elements(root, process_identifier, process_name,
         print("mensagem", str(error))
         print(f"In create_archimate_process_elements module :", __name__)
         raise error    
+
+def add_process_view_diagram_nodes_contextfull(root):
+    """
+        I need add the nodes at the end of processing to calculate the x, y, w, h
+    """
+    try:
+        #x: The x-coordinate of the top-left corner of the element. This determines the horizontal position of the element from the left side of the parent element or the screen.
+        #y: The y-coordinate of the top-left corner of the element. This determines the vertical position of the element from the top of the parent element or the screen.
+        #w: The width of the element. This determines how wide the element is.
+        #h: The height of the element. This determines how tall the element is.
+        
+        # Get the elements from the root
+        elements = root.findall(".//element")
+        diagram_view = root.find(".//view[@identifier='id-view-ea-process-view']")
+
+        element_width = 100
+        axis_width = 1200        
+        distance_between_elements = 150
+      
+        
+        # Count the number of elements that are of type BusinessProcess
+        total_bp = sum(1 for element in elements if element.attrib.get('xsi:type') == 'BusinessProcess')     
+        # Count the number of elements that are of type BusinessEvent
+        total_be = sum(1 for element in elements if element.attrib.get('xsi:type') == 'BusinessEvent')
+        # Count the number of elements that are of type BusinessActor
+        total_ba = sum(1 for element in elements if element.attrib.get('xsi:type') == 'BusinessActor')
+
+        
+        # Initialize position variables
+        bp_h = 150 # height of the BusinessProcess
+        bp_w = 10 + total_be * 250 # width of the BusinessProcess
+        be_w = 240 # width of the BusinessEvent
+        
+        x_offset = 100  # Initial x offset for positioning elements
+        xy_increment = 100  # Increment for x and y position for each element
+        y_ba = 50  # y position for BusinessActors
+        y_bp = 50  # initial y position for BusinessProcess
+        y_be = 100  # y position for BusinessEvents
+        count_bp = 0
+        count_be = 0
+        count_ba = 0
+        node_number = 0
+        connection_number = 0
+        be_antecedent_identifier = None
+        business_process_list = []
+        aux_matrix = {}
+        x_aux = 50
+        max = 0
+        vx = 0
+
+        root_copy_xpaths = etree.fromstring(ET.tostring(root))
+        namespaces = {'ns': 'http://www.opengroup.org/xsd/archimate/3.0/'} 
+        
+        
+        # Iterate over the elements
+        for element in elements:
+            element_type = element.get("xsi:type")
+            # Check if the element is a BusinessProcess or BusinessEvent
+            element_identifier = element.get('identifier')
+            if element_type == "BusinessProcess":
+                business_process_list.append(element_identifier)
+                count_bp += 1
+                x = 350 
+                if count_bp > 1:
+                    y_bp = y_bp + bp_h + xy_increment
+                y = int(y_bp)
+                node_number += 1
+                node_identifier = f"id-node-{node_number}"
+                diagram_view_node = ET.SubElement(diagram_view, "node", attrib={"identifier":node_identifier, "xsi:type":"Element", "elementRef":element_identifier, "x":str(x) , "y":str(y), "w":str(bp_w), "h":str(bp_h)})                 
+            elif element_type == "BusinessEvent":
+                count_be += 1
+             
+                event_relation = root_copy_xpaths.xpath(f".//ns:relationship[@target='{element_identifier}']", namespaces=namespaces)
+                event_process = event_relation[0].get("source")
+                #calculate x and y position
+                if event_process not in aux_matrix:
+                    # inicialize the posicioanment of the first event
+                    aux_matrix[event_process] = {"lastpos": x_offset}
+                # O código abaixo funciona, mas inicializa x de cada processo na no mesmo eixo x
+                # x_aux = aux_matrix[event_process]["lastpos"] + (be_w + xy_increment) 
+                # x = int(x_aux)
+                # aux_matrix[event_process].update({"lastpos": x})    
+                
+                #max = 0
+                # get the max lastpos
+                for i, j in aux_matrix.items():
+                    if j["lastpos"] > max:
+                        max = j["lastpos"]
+                        
+                lastpos = aux_matrix[event_process]["lastpos"]        
+                if (lastpos < max):
+                    print(f" mudou max: {lastpos} --> lastpos: {lastpos}")
+                    x_aux = max 
+                else:
+                    print(f" não mudou max: {max} --> lastpos: {lastpos}")
+                    x_aux = lastpos + (be_w + xy_increment) 
+                x = int(x_aux)
+                aux_matrix[event_process].update({"lastpos": x})                    
+                        
+                business_process_position = business_process_list.index(event_process) 
+                y_be_aux = y_be     
+                if business_process_position > 0:
+                    y_be_aux =  y_be_aux + ((bp_h + xy_increment) * business_process_position) 
+                y = int(y_be_aux)
+                
+                node_number += 1
+                node_identifier = f"id-node-{node_number}"
+                diagram_view_node = ET.SubElement(diagram_view, "node", attrib={"identifier":node_identifier, "xsi:type":"Element", "elementRef":element_identifier, "x":str(x) , "y":str(y), "w":str(be_w), "h":"50"})                                 
+                
+                event_number = f"be-{count_be}"
+                relationship_id = f"id-relation-{event_number}"
+                #relationships
+                relationships = root.find("relationships")
+                #relationships = root.find("ns:relationships", namespaces=namespaces)
+                if relationships is None:
+                    relationships = ET.SubElement(root, "relationships")
+                relationship_exists = root.find(f".//relationship[@identifier='{relationship_id}']")              
+                if relationship_exists is None:
+                    if be_antecedent_identifier is not None:
+                        # verify it the antecedent and the element are connected to the same BusinessProcess
+                        # event_relation = root_copy_xpaths.xpath(f".//ns:relationship[@target='{element_identifier}']", namespaces=namespaces)
+                        # antecedent_relation = root_copy_xpaths.xpath(f".//ns:relationship[@target='{be_antecedent_identifier}']", namespaces=namespaces)
+                        # event_process = event_relation[0].get("source")
+                        # business_process_position = business_process_list.index(event_process)                        
+                        # antecedent_event_process = antecedent_relation[0].get("source")
+                        # if event_process == antecedent_event_process:
+                        #     relationship = ET.SubElement(relationships, "relationship ", attrib={"identifier": relationship_id, "source": be_antecedent_identifier, "target": element_identifier, "xsi:type":"Flow" })                
+                        #     relationship_name = ET.SubElement(relationship, "name")
+                        #     relationship_name.text = relationship_id
+                        relationship = ET.SubElement(relationships, "relationship ", attrib={"identifier": relationship_id, "source": be_antecedent_identifier, "target": element_identifier, "xsi:type":"Flow" })                
+                        relationship_name = ET.SubElement(relationship, "name")
+                        relationship_name.text = relationship_id                        
+                    
+                    # criar connection
+                    # if antecedent_node_identifier is not None:
+                    #     connection_number += 1
+                    #     connection_idenfitier = f"id-connection-{connection_number}"
+                    #     diagram_view_connection = ET.SubElement(diagram_view, "connection", attrib={"identifier": connection_idenfitier, "xsi:type":"Relationship", "source":antecedent_node_identifier, "target":node_identifier, "relationshipRef":relationship_id})
+                be_antecedent_identifier = element_identifier
+                #antecedent_node_identifier = node_identifier
+            elif element_type == "BusinessActor":
+                count_ba += 1
+                #x = x_offset + (count_ba * x_increment)
+                x = 25
+                total_y_bp = total_bp * (bp_h + xy_increment)
+                fator_y = 0.5 / total_ba
+                y_ba = total_y_bp * (fator_y / count_ba)
+                y = int(y_ba)
+                node_number += 1 
+                node_identifier = f"id-node-{node_number}"
+                diagram_view_node = ET.SubElement(diagram_view, "node", attrib={"identifier":node_identifier, "xsi:type":"Element", "elementRef":element_identifier, "x":str(x) , "y":str(y), "w":"120", "h":"50"})                                 
+
+        # create the connections
+        nodes = root.findall(".//node")
+        for node in nodes:
+            element_ref = node.get('elementRef')
+            relationships = root.find("relationships")
+            for relationship in relationships:
+                
+                # source and target need to be different
+                rel_source = relationship.get("source")
+                rel_target = relationship.get("target")
+                if rel_source != element_ref:
+                    continue
+                                
+                relationship_id = relationship.get("identifier")
+                source_node = node.get('identifier')
+                target_node_obj = root.find(".//node[@elementRef='"+ rel_target +"']")
+                target_node = target_node_obj.get('identifier')
+                if target_node is None:
+                    continue
+                
+                # if source is BusinessProcess and target is BusinessEvent dont create the connection
+                source_node_obj = root.find(".//node[@elementRef='"+ rel_source +"']") 
+                source_element_ref = source_node_obj.get('elementRef')               
+                source_element = root.find(f".//elements/element[@identifier='{source_element_ref}']")
+                target_element_ref = target_node_obj.get('elementRef')
+                target_element = root.find(f".//elements/element[@identifier='{target_element_ref}']")
+                if source_element is not None and target_element is not None:
+                    source_type = source_element.get('xsi:type')
+                    target_type = target_element.get('xsi:type')
+                    if source_type == "BusinessProcess" and target_type == "BusinessEvent":
+                        # Skipping connection creation: source is BusinessProcess and target is BusinessEvent")
+                        continue
+                
+                connection_number += 1
+                connection_idenfitier = f"id-connection-{connection_number}"
+                diagram_view_connection = ET.SubElement(diagram_view, "connection", attrib={"identifier": connection_idenfitier, "xsi:type":"Relationship", "source":source_node, "target":target_node, "relationshipRef":relationship_id})
+        
+        return root
+    except Exception as error:   
+        print('Ocorreu problema {} '.format(error.__class__))
+        print("mensagem", str(error))
+        print(f"In create_archimate_diagram module :", __name__)
+        raise error        
     
 def add_process_view_diagram_nodes(root):
     """
@@ -434,4 +669,26 @@ def extract_archimate_process():
         print("mensagem", str(error))
         print(f"In extract_archimate_process module :", __name__)
         raise error           
-    
+
+def extract_archimate_process_grouped():
+    """
+        Extract the process from the ontology and create the xml element grouping processes by API Contexts
+    """
+    try:
+        root = prepare_archimate_exchange_model()
+        processes = get_process_from_ontology()
+        root, contextfull_process = add_archimate_process_elements(root, processes)
+        if contextfull_process == True:
+            root = add_process_view_diagram_nodes_contextfull(root)
+        else:
+            root = add_process_view_diagram_nodes(root)
+        print_root_xml(root)
+        save_archimate_exchange_model(root) 
+        isValid = archimate_util.check_archimate_model_exchange_xml      
+        if isValid:
+            print("The XML document is well-formed.")
+    except Exception as error:   
+        print('Ocorreu problema {} '.format(error.__class__))
+        print("mensagem", str(error))
+        print(f"In extract_archimate_process module :", __name__)
+        raise error     

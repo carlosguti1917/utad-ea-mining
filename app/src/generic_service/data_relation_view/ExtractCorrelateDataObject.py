@@ -151,6 +151,5 @@ def mining_correlated_data_objects(onto):
         print(f"In mining_correlated_data_objects() :", __name__)        
         raise error
     
-    
 
                
