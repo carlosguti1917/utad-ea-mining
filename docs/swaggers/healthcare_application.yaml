@@ -1,0 +1,200 @@
+openapi: 3.0.0
+info:
+  title: Application Process API
+  description: API endpoints for managing health care processes
+  version: 1.0.0
+servers:
+  - url: http://192.168.0.15:8000/sandbox/Process_Application/v1
+    description: Sandbox kong local server
+  - url: http://189.60.52.78:8000/sandbox/Process_Application/v1
+    description: Kong external gateway
+
+paths:
+  /Customer/SendInformation:
+    post:
+      summary: Send information for application
+      operationId: sendInformation
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SendInformationRequest'      
+      responses:
+        '200':
+          description: Successful operation
+      security:
+        - oauth2: []
+
+  /Customer/SendingCustomerUpdate:
+    post:
+      summary: Send customer update
+      operationId: sendCustomerUpdate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequest'      
+      responses:
+        '200':
+          description: Successful operation
+      security:
+        - oauth2: []
+
+  /Customer/CleanUpProcerssStatus:
+    post:
+      summary: Clean up process status
+      operationId: cleanUpProcessStatus
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequest'      
+      responses:
+        '200':
+          description: Successful operation
+      security:
+        - oauth2: []
+
+  /Customer/GenerateAndSendContract:
+    post:
+      summary: Generate and send contract
+      operationId: generateAndSendContract
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequest'      
+      responses:
+        '200':
+          description: Successful operation
+      security:
+        - oauth2: []
+
+  /Customer/SendDecisionAboutContractcAcceptance:
+    post:
+      summary: Send decision about contract acceptance
+      operationId: sendDecisionAboutContractAcceptance
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CustomerRequest'      
+      responses:
+        '200':
+          description: Successful operation
+      security:
+        - oauth2: []
+
+components:
+  schemas:
+    SendInformationRequest:
+      type: object
+      properties:
+        businessKey:
+          type: string
+          example: "offer6"
+        variables:
+          type: object
+          properties:
+            CustomerID:
+              type: object
+              properties:
+                value:
+                  type: string
+                  example: "Customer6"
+                type:
+                  type: string
+                  example: "string"
+            CustomerEmail:
+              type: object
+              properties:
+                value:
+                  type: string
+                  example: "customer6@teste.com"
+                type:
+                  type: string
+                  example: "string"
+            CustomerName:
+              type: object
+              properties:
+                value:
+                  type: string
+                  example: "Customer 6 Name"
+                type:
+                  type: string
+                  example: "string"
+            api_gateway_ip:
+              type: object
+              properties:
+                value:
+                  type: string
+                  example: "189.60.52.78"
+                type:
+                  type: string
+                  example: "string"
+            businessKey:
+              type: object
+              properties:
+                value:
+                  type: string
+                  example: "offer6"
+                type:
+                  type: string
+                  example: "string"
+            assesment_decision:
+              type: object
+              properties:
+                value:
+                  type: string
+                  example: "alternative_offer"
+                type:
+                  type: string
+                  example: "string"  
+    CustomerRequest:
+      type: object
+      properties:
+        CustomerEmail:
+          type: object
+          properties:
+            type:
+              type: string
+              example: "string"
+            value:
+              type: string
+              example: "customer6@teste.com"
+        CustomerID:
+          type: object
+          properties:
+            type:
+              type: string
+              example: "string"
+            value:
+              type: string
+              example: "Customer6"
+        CustomerName:
+          type: object
+          properties:
+            type:
+              type: string
+              example: "string"
+            value:
+              type: string
+              example: "Customer 6 Name"
+        message:
+          type: string
+          example: "Your application was reject, however we offer a different plan"
+        step:
+          type: string
+          example: "alternative_offer"
+
+  securitySchemes:
+    oauth2:
+      type: oauth2
+      flows:
+        authorizationCode:
+          authorizationUrl: https://example.com/oauth/authorize
+          tokenUrl: https://example.com/oauth/token
+          scopes:
+            read: Grants read access
+            write: Grants write access
+            admin: Grants access to admin operations

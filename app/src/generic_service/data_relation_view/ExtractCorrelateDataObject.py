@@ -96,6 +96,7 @@ def mining_frequent_data_domain_correlations(onto):
                     fddc_name = f"fddc_{domain_nm}_{entity_name}"
                     fddc = onto_util.get_individual(onto, ns_data_relation_view.FrequentDataDomainCorrelation, "http://eamining.edu.pt/", fddc_name)
                     if fddc is not None:
+                        fddc_list.append(fddc)
                         continue
                     fddc = ns_data_relation_view.FrequentDataDomainCorrelation(fddc_name)
                     fddc.label.append(f"fddc={domain_nm}:{entity_name}")
@@ -132,6 +133,7 @@ def mining_correlated_data_objects(onto):
                 cdo_name = f"cdo_{data_domain_name}_{entity_name}_"
                 cdo = onto_util.get_individual(onto, ns_data_relation_view.CorrelatedDataObjects, "http://eamining.edu.pt/", cdo_name)
                 if cdo is not None:
+                    cdo_list.append(cdo)
                     continue
                 cdo = ns_data_relation_view.CorrelatedDataObjects(cdo_name)
                 cdo.label.append(f"cdo={data_domain_name}:{entity_name}")
@@ -139,7 +141,6 @@ def mining_correlated_data_objects(onto):
                 cdo.CorrelatedEntity.append(entity)
                 cdo.domain_name.append(data_domain_name)
                 cdo.entity_name.append(entity_name)
-                
                 cdo_list.append(cdo)
             
             sync_reasoner()

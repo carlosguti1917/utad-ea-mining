@@ -20,8 +20,18 @@ CONSUMER_APPS = [
   {
     "client_id": "ff38289a-5a3b-44bb-9830-7cdb850dd2b3",
     "app_name": "OpenApp"
-  }
+  },
+  {
+    "client_id": "123456",
+    "app_name": "CamundaApp"
+  },   
+  {
+    "client_id": "1234562",
+    "app_name": "HealthCareApp"
+  }  
+  
 ]
+
 
 APRIORI_INVERSE_ARGS = {
   "MIM_SUPPORT": 0.01,
@@ -33,8 +43,8 @@ APRIORI_INVERSE_ARGS = {
 }
 
 PM4PI_ARGS = {
-  #"TOP_K" : 3, # For tests with very small datasets
-  "TOP_K" : 4, # For tests with small datasets (10 tests sets)
+  "TOP_K" : 3, # For tests with very small datasets
+  #"TOP_K" : 4, # For tests with small datasets (10 tests sets)
   #"TOP_K" : 8, # For tests with medium datasets (More than 20 tests sets)
   #"TOP_K" : ?, # For tests with medium datasets (More than 50 tests sets)
 }
@@ -93,6 +103,7 @@ TEMP_PROCESSING_FILES = {
   "file_path": "./temp/",
   "file_ftc_list_name": "ftc_list.csv",
   "file_name_cleaned_ftc_list": "ftc_list_cleaned.csv",
+  "pkl_file_path": "./temp/process",
 }
 
 datahora = datetime.now().strftime("%Y%m%d%H%M")
@@ -100,6 +111,7 @@ ARCHIMATE_MODEL = {
   "datahora": datahora,
   "file_path": "./archimate/",
   "archimate_file_name": f"{datahora}_archimate_model_data.xml", 
+  #"archimate_file_name": f"teste_archimate_model_data.xml", 
 }
 
 SWAGGERS_FILE_PATH = {
@@ -115,4 +127,11 @@ SENSEDIA = {
   "sensedia_auth": "d4667e61-9c24-48fb-b7fc-d192ff666a5c",
   "environment": "sandbox",
 }
+
+AI_MODEL = {
+  "model": "https://manager-demov3.sensedia.com",
+  "base_url": "http://localhost:3000/v1",
+  "api_key": "lm-studio",
+}
+
 

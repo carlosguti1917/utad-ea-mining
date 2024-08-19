@@ -1,6 +1,7 @@
 import json
 from owlready2 import *
 from datetime import datetime
+import pytz
 #from owlready2 import Reasoner
 import sys
 import os
@@ -33,7 +34,11 @@ class ExtractOntoCore:
         # self.myclient = pymongo.MongoClient(configs.MONGO_DB_SERVER["host"])
         # self.mydb = self.myclient[configs.MONGO_DB_SERVER["databasename"]]
         # self.collection_call_cleaned = self.mydb["kong-api-call-cleaned"]
-        api_calls = list(collection_call_cleaned.find({"_source.@timestamp": {"$gt": begindate}}))
+        #begindate_dt = datetime.fromisoformat(begindate).replace(tzinfo=pytz.UTC)
+        begindate_dt = datetime.fromisoformat(begindate)
+        begindate_timestamp = int(begindate_dt.timestamp() * 1000)  # Convert to milliseconds
+        
+        api_calls = list(collection_call_cleaned.find({"_source.started_at": {"$gt": begindate_timestamp}}).sort("_source.started_at", 1))
         tranform_to_ontology(api_calls)
 
 def get_onto_resource_attributes_from_json(attributes_list, api_resource, json_obj, key_hierarchy):
@@ -118,7 +123,7 @@ def tranform_to_ontology(api_calls):
     Args:
         api_calls (list): list of json api calls to be transformed to ontology
     """
-    
+    conta = 0
     #sync_reasoner()
     with onto:
         try:      
@@ -137,13 +142,16 @@ def tranform_to_ontology(api_calls):
                     Consumer_app_id = call["_source"]["consumer"]["id"] 
                 if "_source" in call and "consumer" in call["_source"] and "username" in call["_source"]["consumer"]:
                     Consumer_app_name = call["_source"]["consumer"]["username"]           
-                if "@timestamp" in call["_source"] and "request" in call["_source"] and "id" in call["_source"]["request"]:  # o nome da classe e label da API Call é o request_id  
+                if "started_at" in call["_source"] and "request" in call["_source"] and "id" in call["_source"]["request"]:  # o nome da classe e label da API Call é o request_id  
                     request_id = call["_source"]["request"]["id"]  
                           
                 if request_id is None and Consumer_app_id is None and Consumer_app_name is None:
                     continue
                 if onto_util.get_individual(onto, cls_api_call, 'http://eamining.edu.pt/', request_id):
                     continue
+                
+                conta += 1	
+                print(f"ConsumerApp: {Consumer_app_name}", " : request_id: ", request_id, " : conta: ", conta)
                 
                 #Consumer App
                 if Consumer_app_id is not None and Consumer_app_name is not None:
@@ -161,18 +169,21 @@ def tranform_to_ontology(api_calls):
                     #API Call.request_time
                     cls_api_call = ns_core.APICall
                     # onto_api_call = get_individual(cls, Consumer_app_name)
-                    if "@timestamp" in call["_source"]:
+                    if "started_at" in call["_source"]:
                         # o nome da classe e label da API Call é o request_id
                         api_call = cls_api_call(request_id)
                         api_call.label.append(request_id)
                         #api_call.request_time.append(call["_source"]["@timestamp"])
-                        parsed_datetime = datetime.fromisoformat(call["_source"]["@timestamp"])
-                        #xsd_timestamp = datetime(parsed_datetime)
+                        #parsed_datetime = datetime.fromisoformat(call["_source"]["started_at"])
+                        timestamp = call["_source"]["started_at"] / 1000  # Convert milliseconds to seconds
+                        #parsed_datetime = datetime.fromtimestamp(timestamp, pytz.UTC).isoformat(timespec='milliseconds')
+                        parsed_datetime = datetime.fromtimestamp(timestamp, pytz.UTC)
+                        #xsd_timestamp_request = datetime(parsed_datetime)
                         api_call.request_time.append(parsed_datetime)
                         # #TODO confirmar o response_time
                         if "response" in call["_source"] and "headers" in call["_source"]["response"] and "date" in call["_source"]["response"]["headers"]:
-                            parsed_datetime = datetime.strptime(call["_source"]["response"]["headers"]["date"], '%a, %d %b %Y %H:%M:%S %Z')
-                            xsd_timestamp = parsed_datetime.isoformat() + 'Z'                    
+                            parsed_datetime_response = datetime.strptime(call["_source"]["response"]["headers"]["date"], '%a, %d %b %Y %H:%M:%S %Z')
+                            xsd_timestamp_response = parsed_datetime_response.isoformat() + 'Z'                    
                         if "response" in call["_source"] and "status" in call["_source"]["response"]:
                             api_call.result_status.append(call["_source"]["response"]["status"])               
                         if "request" in call["_source"] and "uri" in call["_source"]["request"]:
@@ -265,6 +276,7 @@ def tranform_to_ontology(api_calls):
                 #save the individuals                  
                 #check de ontology consistency before saving                        
                 sync_reasoner()
+                #print("Ontology is consistent")
                 onto.save(format="rdfxml")
                 #pass
                 #TODO Ao final tem que criar um API Documentation e criar a relação material is documented by

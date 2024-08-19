@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions xmlns="https://www.omg.org/spec/DMN/20191111/MODEL/" xmlns:dmndi="https://www.omg.org/spec/DMN/20191111/DMNDI/" xmlns:dc="http://www.omg.org/spec/DMN/20180521/DC/" xmlns:modeler="http://camunda.org/schema/modeler/1.0" xmlns:camunda="http://camunda.org/schema/1.0/dmn" id="Definitions_0ftsw0f" name="DRD" namespace="http://camunda.org/schema/1.0/dmn" exporter="Camunda Modeler" exporterVersion="5.23.0" modeler:executionPlatform="Camunda Platform" modeler:executionPlatformVersion="7.21.0">
+  <decision id="Decision_09aokyw" name="AssessApplication" camunda:historyTimeToLive="180">
+    <decisionTable id="DecisionTable_0vncpix">
+      <input id="Input_1" label="input" camunda:inputVariable="assesment_decision">
+        <inputExpression id="InputExpression_1" typeRef="string">
+          <text></text>
+        </inputExpression>
+      </input>
+      <output id="Output_1" name="assesment_decision" typeRef="string" />
+      <output id="OutputClause_06azc9f" name="risk_group_output" typeRef="string" />
+      <output id="OutputClause_0570p8c" name="insurance_type_output" typeRef="string" />
+      <rule id="DecisionRule_0ypghy8">
+        <description>nok</description>
+        <inputEntry id="UnaryTests_005tbvg">
+          <text>"rejected"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0lz6kc3">
+          <text>"rejected"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_0ik6xzh">
+          <text>"low"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1dcefzg">
+          <text>"Standard"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_0iuer8k">
+        <description>ok</description>
+        <inputEntry id="UnaryTests_0sylgjr">
+          <text>"accepted"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_12nd6uj">
+          <text>"accepted"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_06nhmcj">
+          <text>"low"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1mx64rl">
+          <text>"Standard"</text>
+        </outputEntry>
+      </rule>
+      <rule id="DecisionRule_1yhkm9f">
+        <description>offer</description>
+        <inputEntry id="UnaryTests_1s7vnj7">
+          <text>"alternative_offer"</text>
+        </inputEntry>
+        <outputEntry id="LiteralExpression_0rjjfsk">
+          <text>"alternative_offer"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_119cf76">
+          <text>"low"</text>
+        </outputEntry>
+        <outputEntry id="LiteralExpression_1j70ea4">
+          <text>"Standard"</text>
+        </outputEntry>
+      </rule>
+    </decisionTable>
+  </decision>
+  <dmndi:DMNDI>
+    <dmndi:DMNDiagram>
+      <dmndi:DMNShape dmnElementRef="Decision_09aokyw">
+        <dc:Bounds height="80" width="180" x="160" y="100" />
+      </dmndi:DMNShape>
+    </dmndi:DMNDiagram>
+  </dmndi:DMNDI>
+</definitions>

@@ -108,13 +108,15 @@ def processes_discovery():
                 if event_log is None or len(event_log) == 0:
                     continue
                 start_activities = pm4py.get_start_activities(event_log, activity_key='antecedent_activity_name', case_id_key='case_id', timestamp_key='antecedent_request_time')
-
+                
                 # remove cases with less than two activities
                 start_activities = remove_isolated_activities(event_log, start_activities)
                         
                 # remove not pure start activities, those that also depends on (follows) another activity
                 start_activities = remove_dependent_start_activities(event_log, start_activities)
                 
+                #start_activities = get_the_oldest_start_activity(event_log, start_activities)                
+
                 if start_activities is None or len(start_activities) == 0:
                     continue
                                
@@ -124,7 +126,11 @@ def processes_discovery():
                 filtered_dataframe_variant = resolve_duplicated_process(filtered_dataframe_variant)
                 event_log2 = pm4py.convert_to_event_log(filtered_dataframe_variant)
                 start_activities = pm4py.get_start_activities(event_log2, activity_key='antecedent_activity_name', case_id_key='case_id', timestamp_key='antecedent_request_time')
-               
+                
+                #start_activities = get_the_logest_start_activities(event_log2, start_activities2)
+
+                
+                
 
                 # Iterate through each remaining start activity and filter the dataframe by the start and end activities as a separate process
                 for start_activity in start_activities:
@@ -135,15 +141,16 @@ def processes_discovery():
                     #heu_net = pm4py.discover_heuristics_net(test_k, dependency_threshold=0.5)
                     heu_net = pm4py.discover_heuristics_net(test_k)            
                     #pm4py.view_heuristics_net(heu_net)
-                    heu_net_list.append(heu_net) 
+                    #heu_net_list.append(heu_net) 
                 
                 #heu_net = resolve_duplicated_process(heu_net, start_activities)
                     
-                for heu_net in heu_net_list:
+                #for heu_net in heu_net_list:
                     # Save the Heuristics Net visualization to a file
                     # process_name = re.match(r'(\w+)_', start_activity).group(1) + " " + re.search(r'.*/([^/]+)$', start_activity).group(1)
                     process_name = re.search(r'/([^/]+)/v1', start_activity).group(1)
-                    directory = "./temp/process"
+                    #directory = "./temp/process"
+                    directory = configs.TEMP_PROCESSING_FILES["pkl_file_path"]
                     os.makedirs(directory, exist_ok=True)
                     datahora = datetime.now().strftime("%Y%m%d%H%M")
                     pm4py.save_vis_heuristics_net(heu_net, f"{directory}/heu_net_{process_name}_{datahora}.png")
@@ -212,7 +219,8 @@ def processes_discovery_contextless():
                     # Save the Heuristics Net visualization to a file
                     # process_name = re.match(r'(\w+)_', start_activity).group(1) + " " + re.search(r'.*/([^/]+)$', start_activity).group(1)
                     process_name = re.search(r'/([^/]+)/v1', start_activity).group(1)
-                    directory = "./temp/process"
+                    #directory = "./temp/process"
+                    directory = configs.TEMP_PROCESSING_FILES["pkl_file_path"]
                     os.makedirs(directory, exist_ok=True)
                     datahora = datetime.now().strftime("%Y%m%d%H%M")
                     pm4py.save_vis_heuristics_net(heu_net, f"{directory}/heu_net_{process_name}_{datahora}.png")
@@ -251,9 +259,7 @@ def resolve_duplicated_process(event_log: pm4py.objects.log.obj.EventLog) -> pm4
         variants_count = pm4py.stats.get_variants(event_log)
         variants = list(variants_count.keys())  # Extracting variants as lists of activities
         subprocesses = detect_subprocesses(variants) 
-        
-        
-           
+
         filtered_variants = [variant for variant in variants if variant not in subprocesses]
         
         # Filter the original event log based on filtered variants
@@ -284,10 +290,10 @@ def detect_subprocesses(variants):
         for variant2 in variants[i+1:]:
             #print(f"detect_subprocesses Variant1: {variant1}" and f"Variant2: {variant2}")
             # Priority for the longer variant
-            if is_subsequence(variant2, variant1):
-                subprocesses.add(variant2)
-            elif is_subsequence(variant1, variant2):
+            if is_subsequence(variant1, variant2):
                 subprocesses.add(variant1)
+            elif is_subsequence(variant2, variant1):
+                subprocesses.add(variant2)
     return subprocesses
 
 def is_subsequence(smaller, larger):
@@ -447,6 +453,21 @@ def add_process_to_ontology(process_name, start_activity, process_variant_log):
         print("mensagem", str(error))
         print(f"In save_process_into_ontology module :", __name__)
         raise error       
+    
+def remove_not_start_endpoints(start_activities):
+    """
+        Remove start activities that are part of another start activity
+        args:
+            start_activities: list of start activities
+    """
+    try:
+        filtered_activities = [activity for activity in start_activities if activity in configs.START_ENDPOINTS]
+        return filtered_activities
+    except Exception as error:   
+        print('Ocorreu problema {} '.format(error.__class__))
+        print("mensagem", str(error))
+        print(f"In remove_isolated_activies module :", __name__)
+        raise error       
         
 def remove_isolated_activities(event_log, start_activities):
     """
@@ -527,7 +548,80 @@ def remove_dependent_start_activities(event_log, start_activities):
         print("mensagem", str(error))
         print(f"In remove_isolated_activies module :", __name__)
         raise error    
+
+def get_the_oldest_start_activity(event_log, start_activities):
+    """
+        Get the oldest start activity
+        args:
+            start_activities: list of start activities
+    """
+    try:
+        # Step 1: Initialize a dictionary to store the timestamps of the first event for each start activity
+        start_times = {}
+
+        # For each start activity, find the timestamp of the first event
+        for start_activity in start_activities:
+            # Filter the event log to include only events starting with this activity
+            filtered_log = pm4py.filter_start_activities(event_log, {start_activity}, retain=True, activity_key='antecedent_activity_name', case_id_key='case_id', timestamp_key='antecedent_request_time')
+            # Convert the filtered log to a dataframe
+            filtered_dataframe = pm4py.convert_to_dataframe(filtered_log)
+            # Find the timestamp of the first event
+            start_time = filtered_dataframe['time:timestamp'].min()
+            # Store the timestamp in the dictionary
+            start_times[start_activity] = start_time
+
+        # Step 4: Find the start activity with the oldest first event
+        oldest_start_activity = min(start_times, key=start_times.get)
+        print(f"The start activity that represents the oldest first event is: {oldest_start_activity}")
         
+        keys_to_remove = [key for key in start_activities if key != oldest_start_activity]
+        for key in keys_to_remove:
+            start_activities.pop(key, None)        
+        
+        return start_activities
+    except Exception as error:   
+        print('Ocorreu problema {} '.format(error.__class__))
+        print("mensagem", str(error))
+        print(f"In get_the_oldest_start_activity module :", __name__)
+        raise error
+
+def get_the_logest_start_activities(event_log, start_activities):
+    """
+        Get the longest start activities
+        args:
+            start_activities: list of start activities
+    """
+    try:
+        # Step 1: Get the start activities from the event log
+        start_activities = pm4py.get_start_activities(event_log, activity_key='antecedent_activity_name', case_id_key='case_id', timestamp_key='antecedent_request_time')
+        # Step 2: Initialize a dictionary to store the length of chains for each start activity
+        chain_lengths = {}
+        # Step 3: For each start activity, calculate the length of the chain it initiates
+        for start_activity in start_activities:
+            # Filter the event log to include only events starting with this activity
+            filtered_log = pm4py.filter_start_activities(event_log, {start_activity}, retain=True, activity_key='antecedent_activity_name', case_id_key='case_id', timestamp_key='antecedent_request_time')          
+            # Convert the filtered log to a dataframe
+            filtered_dataframe = pm4py.convert_to_dataframe(filtered_log)
+            # Calculate the length of the chain
+            chain_length = len(filtered_dataframe)
+            # Store the length in the dictionary
+            chain_lengths[start_activity] = chain_length
+
+        # Step 4: Find the start activity with the maximum chain length
+        longest_chain_start_activity = max(chain_lengths, key=chain_lengths.get)
+
+        keys_to_remove = [key for key in start_activities if key != longest_chain_start_activity]
+        for key in keys_to_remove:
+            start_activities.pop(key, None)
+
+        # Step 5: Return this start activity
+        print(f"The start activity that represents the longest chain is: {longest_chain_start_activity}")
+        return start_activities
+    except Exception as error:   
+        print('Ocorreu problema {} '.format(error.__class__))
+        print("mensagem", str(error))
+        print(f"In get_the_logest_start_activity module :", __name__)
+        raise error
 
 if __name__ == "__main__":
     processes_discovery()    

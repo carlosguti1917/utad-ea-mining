@@ -53,17 +53,17 @@ def get_process_from_ontology():
 
      
 
-def add_archimate_data_relation_element(cdo_list):   
+def add_archimate_data_relation_element(cdo_list, file_name=None):   
     """
         Create the xml element for the each element in the correlated_data_objects_list
     """
     #root = old_root
-    root = archimate_util.load_archimate_model_xml()
+    root = archimate_util.load_archimate_model_xml(file_name)
     try:
 
         namespaces = {'': 'http://www.opengroup.org/xsd/archimate/3.0/'}  
         elements = root.find(".//elements", namespaces)   
-        print("Elements: ", len(elements))     
+        #print("Elements: ", len(elements))     
 
         if elements is None:
             elements = ET.SubElement(root, "elements")
@@ -113,7 +113,7 @@ def add_archimate_data_relation_element(cdo_list):
         elements_check = root.find(".//elements", namespaces) 
         print("Elements: ", len(elements_check))
         print("Elements: ", len(elements))
-        archimate_util.save_archimate_exchange_model(root)
+        archimate_util.save_archimate_exchange_model(root, file_name)
         return root
     except Exception as error:   
         print('Ocorreu problema {} '.format(error.__class__))
@@ -123,12 +123,12 @@ def add_archimate_data_relation_element(cdo_list):
     
 
     
-def add_data_relation_view_diagram_nodes():
+def add_data_relation_view_diagram_nodes(file_name):
     """
         It add the nodes to the data relation view diagram
         It need add the nodes at the end of processing to calculate the x, y, w, h
     """
-    root = archimate_util.load_archimate_model_xml()
+    root = archimate_util.load_archimate_model_xml(file_name)
     
     try:
         #x: The x-coordinate of the top-left corner of the element. This determines the horizontal position of the element from the left side of the parent element or the screen.
@@ -165,7 +165,10 @@ def add_data_relation_view_diagram_nodes():
         total_domains = sum(1 for element in elements if element.get('identifier') and element.get('identifier').startswith("id-domain")) 
         total_entities = sum(1 for element in elements if element.get('identifier') and element.get('identifier').startswith("id-entity"))
         connections = root.findall(".//views/diagrams/view/connection", namespaces) 
-        connection_number = max(int(connection.get('identifier').split('-')[-1]) for connection in connections if connection.get('identifier').startswith("id-connection-"))
+        connection_number = max(
+            (int(connection.get('identifier').split('-')[-1]) for connection in connections if connection.get('identifier') and connection.get('identifier').startswith("id-connection-")),
+            default=0 
+        )
         
         # Initialize position variables       
         #y_offset = int((total_entities // total_domains) * 100)
@@ -175,7 +178,11 @@ def add_data_relation_view_diagram_nodes():
         count_entity = 0
         node_number = 0
         nodes = root.findall(".//views/diagrams/view/node", namespaces)        
-        node_number = max(int(node.get('identifier').split('-')[-1]) for node in nodes if node.get('identifier').startswith("id-node-"))
+        #node_number = max(int(node.get('identifier').split('-')[-1]) for node in nodes if node.get('identifier').startswith("id-node-"))
+        node_number = max(
+            (int(node.get('identifier').split('-')[-1]) for node in nodes if node.get('identifier') and node.get('identifier').startswith("id-node-")),
+            default=0 
+        )        
                 
         # Iterate over the elements
         for element in elements:
@@ -236,19 +243,19 @@ def add_data_relation_view_diagram_nodes():
         raise error        
    
         
-def extract_archimate_data_relation_view():
+def extract_archimate_data_relation_view(file_name):
     """
         Extract the archimate data relation view from the ontology and create the xml element
     """
     try:
         # get Correlated Data Objects
         cdo_list = list(onto.search(type=ns_data_relation_view.CorrelatedDataObjects))
-        root_dr = add_archimate_data_relation_element(cdo_list)
+        root_dr = add_archimate_data_relation_element(cdo_list, file_name)
 
-        root_diagram = add_data_relation_view_diagram_nodes()
+        root_diagram = add_data_relation_view_diagram_nodes(file_name)
         # archimate_util.print_root_xml(root_diagram)  
  
-        isValid = archimate_util.check_archimate_model_exchange_xml()       
+        isValid = archimate_util.check_archimate_model_exchange_xml(file_name)       
         if isValid:
             print("The XML document is well-formed.")
             

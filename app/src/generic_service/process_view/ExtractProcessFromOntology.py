@@ -21,8 +21,7 @@ ns_gufo = onto.get_namespace("http://purl.org/nemo/gufo#")
 ns_core = onto.get_namespace("http://eamining.edu.pt/core#")
 ns_process_view = onto.get_namespace("http://eamining.edu.pt/process-view#")
 
-#TODO seria bom ter um pre-processing, talvez usando algum algoritmo de feature extration ou feature selection para remover 
-# atributos que irão gerar alta correlação, e selecionar aqueles que mais interessam.
+
 
 '''
 Remover atritubos que são categóricos e que irão gerar alta correlação, como nome do produto, nome do cliente, etc.
@@ -145,8 +144,6 @@ def record_frequent_items_to_ignore(onto):
                                 print(f"Attribute {qdt_attribures_analyzed} - {attribute_name} value {attribute_value} is useful: {attribute_is_util}")
                                 if attribute_is_util:
                                     attributes.append((attribute_name, attribute_value))
-                                    #TODO registrar na ontologia resouce_equality . Algo como api_resource.AttributesEquality.append(attribute_name)
-                                    # Mas tem uma questão na ontologia, pois quem é o primeiro recursou que vai ser comparado com os demais?
                                 else:
                                     onto_util.add_ignored_attribute_to_file(attribute_name, './temp/', api_name)
                                     
@@ -340,10 +337,12 @@ def add_frequent_temporal_correlation(onto, correlation_list, ftc_list):
     api_call_a = correlation_list[1]
     api_call_b = correlation_list[4]
        
-    with onto:
-    #     if api_call_a.api_uri != api_call_b.api_uri:
-        if api_call_a.api_uri != api_call_b.api_uri:
-            try:
+    with onto:       
+        try:
+            # if api_call_a.api_uri != api_call_b.api_uri:
+            # if api_call_b is the start actitity, ignore   
+            #print(f"api_call_b.api_uri {api_call_b.api_uri[0]}")            
+            if api_call_a.api_uri != api_call_b.api_uri:
                 #verify FrequentTemporalCorrelation already exists, if not create it
                 for e in ftc_list:
                     if e.mediates[0] == api_call_a and e.mediates[1] == api_call_b:
@@ -424,11 +423,11 @@ def add_frequent_temporal_correlation(onto, correlation_list, ftc_list):
                         ftc_list.append(ftc)
                     #print(f"ftc_name {ftc.name} e.mediates[0]= {ftc.mediates[0].api_uri[0]} e.mediates[1]= {ftc.mediates[1].api_uri[0]} partner= {partner.name}")
                 return ftc_list                     
-            except Exception as error:
-                print('Ocorreu problema {} '.format(error.__class__))
-                print("mensagem", str(error))
-                print(f"In save_frequent_temporal_correlation({api_call_a}, {api_call_b}) :", __name__)        
-                raise error     
+        except Exception as error:
+            print('Ocorreu problema {} '.format(error.__class__))
+            print("mensagem", str(error))
+            print(f"In save_frequent_temporal_correlation({api_call_a}, {api_call_b}) :", __name__)        
+            raise error     
 
                     
 def save_frequent_temporal_correlation(onto, api_call_a, api_call_b, correlated_attributes):      
@@ -547,6 +546,11 @@ def mining_activities_connection(onto, ftc_list, selected_transactions):
                 for ftc in ftcs:
                     antecedent = ftc.mediates[0]
                     consequent = ftc.mediates[1]
+                    # if start activity in consequent side ignore and does not create the activityconnection
+                    # TODO remover, parece meio forçar a barra
+                    # if consequent.participatedIn[0].endpoint_route[0] in configs.START_ENDPOINTS:
+                    #     continue
+                    
                     case_id = row['case_id']
                     #activity = ns_process_view.APIActivitiesConnection(name=f"{correlation_id}_{case_id}")                    
                     activity = ns_process_view.APIActivitiesConnection()
@@ -567,6 +571,34 @@ def mining_activities_connection(onto, ftc_list, selected_transactions):
                     
                 # if new_actitivities:
                 #     ftc_list.append(ftc)        
+        
+        # Iterate over the activities_list to remove longer elapsed time activities
+        # for i, activity in enumerate(activities_list):
+        #     antecedent_i = activity.isEventProperPartOf[0]
+        #     consequent_i = activity.isEventProperPartOf[1]
+        #     for j, other_activity in enumerate(activities_list):
+        #         if i != j:
+        #             other_antecedent_j = other_activity.isEventProperPartOf[0]
+        #             other_consequent_j = other_activity.isEventProperPartOf[1]
+        #             if antecedent_i.api_uri[0] == other_antecedent_j.api_uri[0]: 
+        #                 if consequent_i.api_uri[0] != other_consequent_j.api_uri[0]:
+        #                     antecedent_time = antecedent_i.request_time[0] if antecedent_i.request_time else None
+        #                     consequent_time = consequent_i.request_time[0] if consequent_i.request_time else None
+        #                     if isinstance(antecedent_time, datetime) and isinstance(consequent_time, datetime):
+        #                         elapsed_time = consequent_time - antecedent_time
+                            
+        #                     other_antecedent_time_str = other_antecedent_j.request_time[0] if other_antecedent_j.request_time else None
+        #                     other_consequent_time_str = other_consequent_j.request_time[0] if other_consequent_j.request_time else None                            
+        #                     if isinstance(other_antecedent_time_str, datetime) and isinstance(other_consequent_time_str, datetime):
+        #                         other_elapsed_time = other_consequent_time_str - other_antecedent_time_str                                
+                            
+        #                     if elapsed_time > other_elapsed_time:
+        #                         destroy_entity(activity)
+        #                         activities_list.pop(i)
+        #                     else:
+        #                         destroy_entity(other_activity)
+        #                         activities_list.pop(j)        
+        
                                    
         return ftc_list, activities_list #return the ftc_list with the activities connections uptated 
 
@@ -583,6 +615,7 @@ def mining_frequent_temporal_correlations(onto):
     """
     ftc_list = []
     unified_ftc_list = []
+    activity_connection_list = []
     api_resource_correlations = []
     # Find all ConsumerApp 
     #consumer_apps = [individual for individual in onto.individuals() if individual.is_a[0] == ns_core.ConsumerApp]  
@@ -714,11 +747,6 @@ def mining_frequent_temporal_correlations(onto):
                     
                     if api_call.api_uri[0] == inner_api_call.api_uri[0]:
                         continue                        
-                    # Cada chamada tem uma operação que modifica um recurso
-                    # obter as duas operações
-                    # obter os recursos modificados através do relator operationExecuted
-                    # obter os atributos dos recursos
-                    # comparar os atributos dos recursos evitando os atributos frequentes  
                     
                     # get the modified resources of the inner_api_call
                     query_i = f"""
@@ -758,7 +786,11 @@ def mining_frequent_temporal_correlations(onto):
 
                     if api_call_operation.label[0] == inner_api_call_operation.label[0]:
                         continue 
-                                                                
+                    
+                    # if operation of the innter API Call is in the START_OPERATION, then ignore it
+                    # if inner_api_call_operation.endpoint_route[0] in configs.START_ENDPOINTS:
+                    #     continue
+                                                    
                     #check the correlation between the attributes of the resources:
                     corr = onto_util.get_api_resources_correlations(api_call, api_call_resource, inner_api_call, inner_api_call_resource)
                     if corr is not None and len(corr) > 0:
@@ -777,6 +809,8 @@ def mining_frequent_temporal_correlations(onto):
             #Select the api_resource_correlations that have the selected_attribute_pairs
             selected_api_res_corrls = onto_util.resource_correlations_selection(api_resource_correlations, selected_attribute_pairs)
             
+            
+            
             #add ftc
             for selected_corr in selected_api_res_corrls:
                 ftc_list = add_frequent_temporal_correlation(onto, selected_corr, ftc_list)
@@ -792,10 +826,12 @@ def mining_frequent_temporal_correlations(onto):
                     file_name = configs.TEMP_PROCESSING_FILES["file_ftc_list_name"]
                     #select the candidates to activities connections and save file_ftc_list_cleaned.csv
                     selected_transactions = onto_util.event_transactions_selection(file_path, file_name) 
-                    #minint activities connections from selected_transactions e saving the ontology
+                    #minint activities connections from selected_transactions and saving the ontology
                     ftc_list, activities_list = mining_activities_connection(onto, ftc_list, selected_transactions) 
                     print(f"activites_list len  : {len(activities_list)}")
                     unified_ftc_list.extend(ftc_list)
+                    activity_connection_list.extend(activities_list)
+                    
                 sync_reasoner()
                 onto.save(format="rdfxml")
             except RecursionError as error:
@@ -810,7 +846,7 @@ def mining_frequent_temporal_correlations(onto):
                 print("mensagem", str(error))
                 print("In extractAPIConcepts module :", __name__)  
                 raise Exception(f"Ontology inconsistency found: {il}")                 
-        return unified_ftc_list                         
+        return activity_connection_list                         
     except Exception as error:
         print('Ocorreu problema {} '.format(error.__class__))
         print("mensagem", str(error))

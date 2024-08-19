@@ -35,6 +35,13 @@ def prepare_archimate_exchange_model():
         elements = ET.SubElement(root, "elements")
         relationships = ET.SubElement(root, "relationships")
         
+        # # Create uri property definition
+        property_definitions = ET.SubElement(root, "propertyDefinitions")
+        property_definition = ET.SubElement(property_definitions, "propertyDefinition", attrib={"identifier": "uri", "type": "string"})
+        name_uri= ET.SubElement(property_definition, "name")
+        name_uri.text = "uri"        
+        
+        
         # Create the view and diagram
         views = ET.SubElement(root, "views")
         # view = ET.SubElement(views, "view", attrib={"name": "API extracted process"})
@@ -70,7 +77,7 @@ def print_root_xml(root):
         print(pretty_xml_string)        
         print("#################### end pretty_xml_string ##########################")
     
-def save_archimate_exchange_model(root):
+def save_archimate_exchange_model(root, file_name=None):
 # Create the XML tree and write it to a file
     try:
         #tree = ET.ElementTree(root)
@@ -88,7 +95,8 @@ def save_archimate_exchange_model(root):
         file_path = configs.ARCHIMATE_MODEL["file_path"] 
         #datahora = datetime.now().strftime("%Y%m%d%H%M")       
         #file_name = f"{datahora}_{configs.ARCHIMATE_MODEL["archimate_file_name"]}"        
-        file_name = configs.ARCHIMATE_MODEL["archimate_file_name"]
+        if file_name is None:
+            file_name = configs.ARCHIMATE_MODEL["archimate_file_name"]
         # Check if the directory exists
         if not os.path.exists(file_path):
             # If the directory doesn't exist, create it
@@ -103,13 +111,14 @@ def save_archimate_exchange_model(root):
         print(f"In save_archimate_exchange_model module :", __name__)
         raise error       
     
-def check_archimate_model_exchange_xml():
+def check_archimate_model_exchange_xml(file_name=None):
     # check if the xml is well formed
     
     file_path = configs.ARCHIMATE_MODEL["file_path"]  
     # datahora = datetime.now().strftime("%Y%m%d%H%M")       
     # file_name = f"{datahora}_{configs.ARCHIMATE_MODEL["archimate_file_name"]}"    
-    file_name = configs.ARCHIMATE_MODEL["archimate_file_name"]
+    if file_name is None:
+        file_name = configs.ARCHIMATE_MODEL["archimate_file_name"]
     # Check if the directory exists
     # with open(file_path+file_name, "rb") as f:
     #     f.load(pretty_xml_string.encode('utf-8'))
@@ -129,12 +138,14 @@ def check_archimate_model_exchange_xml():
     except etree.XMLSyntaxError:
         print("The XML document is not well-formed.")    
         
-def load_archimate_model_xml():
+def load_archimate_model_xml(file_name=None):
     try:
         #TODO - check if the file exists if not call archimate_model_prepare
         file_path = configs.ARCHIMATE_MODEL["file_path"]        
         # datahora = datetime.now().strftime("%Y%m%d%H%M")       
         # file_name = f"{datahora}_{configs.ARCHIMATE_MODEL["archimate_file_name"]}"        
+        #if file_name is None:   
+            
         file_name = configs.ARCHIMATE_MODEL["archimate_file_name"]
         # Check if the directory exists       
         # Check if the directory exists

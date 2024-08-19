@@ -1,0 +1,1025 @@
+{
+  "id": "9f55012c-c0af-4493-8087-04669e0738bb",
+  "version": "2.0",
+  "name": "EAMining-Camunda Example",
+  "url": "ec2-54-162-89-229.compute-1.amazonaws.com:8080/",
+  "tests": [{
+    "id": "ea4736b8-cfa3-4baa-b9f6-b6719ebe0043",
+    "name": "CaseHealthCare0",
+    "commands": [{
+      "id": "09fa6919-86e6-4927-b3a1-3365d3696e40",
+      "comment": "",
+      "command": "open",
+      "target": "http://ec2-54-162-89-229.compute-1.amazonaws.com:8080/camunda/app/welcome/default/#!/welcome",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "8ef918ac-4b56-4e34-8dd1-ac99c9f1fc90",
+      "comment": "",
+      "command": "//click",
+      "target": "css=.form-signin-container",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "31523186-5751-41d0-8b81-3fccc7bcacad",
+      "comment": "",
+      "command": "//click",
+      "target": "css=.ng-touched",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0bba2066-4112-4b5e-9cb9-c5f8d93470b4",
+      "comment": "",
+      "command": "//type",
+      "target": "css=.ng-touched",
+      "targets": [],
+      "value": "demo"
+    }, {
+      "id": "77ed03bb-392f-436a-8ab7-f2debc3f250b",
+      "comment": "",
+      "command": "//click",
+      "target": "css=.ng-untouched",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0252f6c6-a6d8-4bb1-8b8e-cdffd7ee1308",
+      "comment": "",
+      "command": "//type",
+      "target": "css=.ng-untouched",
+      "targets": [],
+      "value": "demo"
+    }, {
+      "id": "40c4a0d1-9f38-4194-bc9f-81bce39e54fe",
+      "comment": "",
+      "command": "//click",
+      "target": "css=.btn",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5eaa3f0c-5714-4f18-a966-6bbcd5d11757",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Tasklist",
+      "targets": [],
+      "value": "3000"
+    }, {
+      "id": "eadbdf4a-d5c3-445f-a331-6e7169f48e44",
+      "comment": "",
+      "command": "executeScript",
+      "target": "return 0",
+      "targets": [],
+      "value": "check"
+    }, {
+      "id": "41d190b3-cb65-4bf4-ac31-d06f4e5e1c46",
+      "comment": "while Offer case",
+      "command": "while",
+      "target": "${check} < 9",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "71bb4fdc-4334-4dab-a5a5-7cb8cf0b98df",
+      "comment": "",
+      "command": "executeScript",
+      "target": "return ${check} + 1",
+      "targets": [],
+      "value": "check"
+    }, {
+      "id": "6c4b822e-47b8-4dae-a0fe-b0d39dcecd0a",
+      "comment": "",
+      "command": "pause",
+      "target": "3000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4d07e026-6b1b-4126-a843-0a9ef672af53",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Start process",
+      "targets": [
+        ["linkText=Start process", "linkText"],
+        ["css=.start-process-action .ng-binding", "css:finder"],
+        ["xpath=(//a[contains(@href, '')])[13]", "xpath:href"],
+        ["xpath=//li[3]/view/a", "xpath:position"],
+        ["xpath=//a[contains(.,' Start process')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5cc97f91-9a1d-4f03-8fdd-a1e5146cec08",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Applicant_Process-TO-BE-2",
+      "targets": [
+        ["linkText=Applicant_Process-TO-BE-2", "linkText"],
+        ["css=.processes > .ng-scope:nth-child(1) > .ng-binding", "css:finder"],
+        ["xpath=//a[contains(text(),'Applicant_Process-TO-BE-2')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Applicant_Process-TO-BE-2')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f0e5f366-f53e-4917-a69d-a6d164c12105",
+      "comment": "",
+      "command": "type",
+      "target": "name=CustomerID",
+      "targets": [
+        ["name=CustomerID", "name"],
+        ["css=.ng-dirty:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='CustomerID']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Customer${check}"
+    }, {
+      "id": "f02ffc90-a44a-4a47-ac41-e983d9383617",
+      "comment": "",
+      "command": "type",
+      "target": "name=CustomerName",
+      "targets": [
+        ["name=CustomerName", "name"],
+        ["css=.form-group:nth-child(2) > .ng-valid-cam-variable-type", "css:finder"],
+        ["xpath=//input[@name='CustomerName']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Customer ${check} Name"
+    }, {
+      "id": "041c2a9a-f0ec-4d4f-8bf0-a477692ec2b0",
+      "comment": "",
+      "command": "type",
+      "target": "name=CustomerEmail",
+      "targets": [
+        ["name=CustomerEmail", "name"],
+        ["css=.form-group:nth-child(3) > .form-control", "css:finder"],
+        ["xpath=//input[@name='CustomerEmail']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "customer${check}@teste.com"
+    }, {
+      "id": "9de05ae6-42aa-460e-8c61-cb21de7f7651",
+      "comment": "",
+      "command": "type",
+      "target": "name=businessKey",
+      "targets": [
+        ["name=businessKey", "name"],
+        ["css=.form-group:nth-child(4) > .form-control", "css:finder"],
+        ["xpath=//input[@name='businessKey']", "xpath:attributes"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": "offer${check}"
+    }, {
+      "id": "70f42022-d0cc-4d39-88cf-c99b438681ec",
+      "comment": "",
+      "command": "click",
+      "target": "name=assesment_decision",
+      "targets": [
+        ["name=assesment_decision", "name"],
+        ["css=.ng-untouched:nth-child(2)", "css:finder"],
+        ["xpath=//select[@name='assesment_decision']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "1f426138-f84c-4ba1-945f-0de04ca677ee",
+      "comment": "",
+      "command": "select",
+      "target": "name=assesment_decision",
+      "targets": [],
+      "value": "label=alternative_offer"
+    }, {
+      "id": "4b92bf20-91bb-4837-b7ef-c4080cd5c3e8",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col-xs-8 > .btn-primary",
+      "targets": [
+        ["css=.col-xs-8 > .btn-primary", "css:finder"],
+        ["xpath=(//button[@type='submit'])[3]", "xpath:attributes"],
+        ["xpath=//div[2]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Start')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "ca85f017-0ca3-416d-8281-50e2226e7f55",
+      "comment": "",
+      "command": "click",
+      "target": "css=.name > .ng-binding",
+      "targets": [
+        ["css=.name > .ng-binding", "css:finder"],
+        ["xpath=(//a[contains(@href, '')])[15]", "xpath:href"],
+        ["xpath=//h4/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ddc6e2c8-394c-411d-a4b5-9bb1e8312532",
+      "comment": "",
+      "command": "click",
+      "target": "css=.task:nth-child(1) .process-definition",
+      "targets": [
+        ["css=.task:nth-child(1) .process-definition", "css:finder"],
+        ["xpath=//h6", "xpath:position"],
+        ["xpath=//h6[contains(.,'Employee_Process-TO-BE-2')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "e949deea-2aef-4e6f-82a0-2173fd0395b0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary:nth-child(2)",
+      "targets": [
+        ["css=.btn-primary:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=//div[3]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Complete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "3d0d72f0-345f-48ce-98fb-807242cf4d4b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.name > .ng-binding",
+      "targets": [
+        ["css=.name > .ng-binding", "css:finder"],
+        ["xpath=(//a[contains(@href, '')])[15]", "xpath:href"],
+        ["xpath=//h4/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "d3eadacc-57df-403e-9b45-e389a3c64274",
+      "comment": "",
+      "command": "pause",
+      "target": "3000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "fd5a8bae-7465-4000-aa5d-1163d1feda3e",
+      "comment": "",
+      "command": "while",
+      "target": "!selenium.isElementPresent(\"linkText=Alternative offer is created\")",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "d73baed5-9b32-43b7-828b-f3e0e72f6b94",
+      "comment": "",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "3000"
+    }, {
+      "id": "5ea2747e-f95a-4e40-9253-8e23c2671c35",
+      "comment": "",
+      "command": "click",
+      "target": "css=.name > .ng-binding",
+      "targets": [
+        ["css=.name > .ng-binding", "css:finder"],
+        ["xpath=(//a[contains(@href, '')])[15]", "xpath:href"],
+        ["xpath=//h4/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "2bdea318-9188-44cf-9bed-cce0d84277c7",
+      "comment": "",
+      "command": "end",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ad9c6e8b-546e-422c-8653-51f25967906c",
+      "comment": "",
+      "command": "//click",
+      "target": "css=.name > .ng-binding",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c5b9a97e-0e10-45fc-a1fd-c317d2bfd029",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "linkText=Alternative offer is created",
+      "targets": [],
+      "value": "10000"
+    }, {
+      "id": "2549b9ad-5060-439b-8dc2-d53623a11188",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Alternative offer is created",
+      "targets": [
+        ["linkText=Alternative offer is created", "linkText"],
+        ["css=.task:nth-child(1) .task > .ng-binding", "css:finder"],
+        ["xpath=//a[contains(text(),'Alternative offer is created')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '#/?task=d29532ec-5b71-11ef-a88c-0242ac110002')]", "xpath:href"],
+        ["xpath=//li/div/div/h4/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Alternative offer is created')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "0a9121d4-3a8d-4dab-ac87-cde64734e817",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary:nth-child(2)",
+      "targets": [
+        ["css=.btn-primary:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=//div[3]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Complete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c05325fa-500a-4221-b521-231f423ecd2b",
+      "comment": "",
+      "command": "pause",
+      "target": "3000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a2afe0be-e0a5-41e8-92fe-e10b7f5fe2ed",
+      "comment": "",
+      "command": "click",
+      "target": "css=.name > .ng-binding",
+      "targets": [
+        ["css=.name > .ng-binding", "css:finder"],
+        ["xpath=(//a[contains(@href, '')])[15]", "xpath:href"],
+        ["xpath=//h4/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "e46e8c25-e9a7-4090-8036-5ff29f95334f",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Decision if contract is accepted",
+      "targets": [
+        ["linkText=Decision if contract is accepted", "linkText"],
+        ["css=.task:nth-child(1) .task > .ng-binding", "css:finder"],
+        ["xpath=//a[contains(text(),'Decision if contract is accepted')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '#/?task=0b3a63c5-5b72-11ef-a88c-0242ac110002')]", "xpath:href"],
+        ["xpath=//li/div/div/h4/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Decision if contract is accepted')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "936a3d3f-6ca4-4d63-9fde-885bf341cdec",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary:nth-child(2)",
+      "targets": [
+        ["css=.btn-primary:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=//div[3]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Complete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "4c999f56-b7ed-4d33-91f5-e774f09c2649",
+      "comment": "",
+      "command": "end",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "3b38b905-93f7-45ad-a817-72e340d7642a",
+      "comment": "while accepted case",
+      "command": "while",
+      "target": "${check} < 11",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0f5e2907-deaa-4be7-ba73-9f19bde86d59",
+      "comment": "",
+      "command": "executeScript",
+      "target": "return ${check} + 1",
+      "targets": [],
+      "value": "check"
+    }, {
+      "id": "ed931ce3-44d5-4a56-9b2d-99c274d16976",
+      "comment": "",
+      "command": "pause",
+      "target": "2000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4a7ecb92-d643-4807-93d7-874cba174870",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "linkText=Start process",
+      "targets": [],
+      "value": "10000"
+    }, {
+      "id": "9f6ac1b6-ad7b-4bcc-bcc4-8ee2596946e3",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Start process",
+      "targets": [
+        ["linkText=Start process", "linkText"],
+        ["css=.start-process-action .ng-binding", "css:finder"],
+        ["xpath=(//a[contains(@href, '')])[13]", "xpath:href"],
+        ["xpath=//li[3]/view/a", "xpath:position"],
+        ["xpath=//a[contains(.,' Start process')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "8561e75d-7d98-4825-bbd3-d36b618bfd50",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "linkText=Applicant_Process-TO-BE-2",
+      "targets": [],
+      "value": "3000"
+    }, {
+      "id": "97ef7c02-0a68-4d61-8449-fb7da376d272",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Applicant_Process-TO-BE-2",
+      "targets": [
+        ["linkText=Applicant_Process-TO-BE-2", "linkText"],
+        ["css=.processes > .ng-scope:nth-child(1) > .ng-binding", "css:finder"],
+        ["xpath=//a[contains(text(),'Applicant_Process-TO-BE-2')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Applicant_Process-TO-BE-2')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "5940e85d-493b-4e9c-95ba-e807859641ca",
+      "comment": "",
+      "command": "type",
+      "target": "name=CustomerID",
+      "targets": [
+        ["name=CustomerID", "name"],
+        ["css=.ng-dirty:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='CustomerID']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Customer${check}"
+    }, {
+      "id": "9a36d442-c3e2-4e95-afea-38848701325b",
+      "comment": "",
+      "command": "type",
+      "target": "name=CustomerName",
+      "targets": [
+        ["name=CustomerName", "name"],
+        ["css=.form-group:nth-child(2) > .ng-valid-cam-variable-type", "css:finder"],
+        ["xpath=//input[@name='CustomerName']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Customer ${check} Name"
+    }, {
+      "id": "10110595-0b43-41d9-9b21-25d4694a0130",
+      "comment": "",
+      "command": "type",
+      "target": "name=CustomerEmail",
+      "targets": [
+        ["name=CustomerEmail", "name"],
+        ["css=.form-group:nth-child(3) > .form-control", "css:finder"],
+        ["xpath=//input[@name='CustomerEmail']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "customer${check}@teste.com"
+    }, {
+      "id": "bc04b47d-0146-4e4f-aed4-0307f7ee6342",
+      "comment": "",
+      "command": "type",
+      "target": "name=businessKey",
+      "targets": [
+        ["name=businessKey", "name"],
+        ["css=.form-group:nth-child(4) > .form-control", "css:finder"],
+        ["xpath=//input[@name='businessKey']", "xpath:attributes"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": "accepted${check}"
+    }, {
+      "id": "f2e3b805-090f-43bf-baac-8adfe1294408",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col-xs-8 > .btn-primary",
+      "targets": [
+        ["css=.col-xs-8 > .btn-primary", "css:finder"],
+        ["xpath=(//button[@type='submit'])[3]", "xpath:attributes"],
+        ["xpath=//div[2]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Start')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "a7f4ab7b-43d9-4e13-80f7-1d692612bdce",
+      "comment": "",
+      "command": "end",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c3b457a9-d53b-4d8a-a412-b1a76b28c775",
+      "comment": "while Rejectec case",
+      "command": "while",
+      "target": "${check} < 12",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a93b1cf4-1aa9-40e4-a24f-459c6443767b",
+      "comment": "",
+      "command": "pause",
+      "target": "2000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2d29b476-8c46-4418-9900-d971ca6d1998",
+      "comment": "",
+      "command": "executeScript",
+      "target": "return ${check} + 1",
+      "targets": [],
+      "value": "check"
+    }, {
+      "id": "35ec2ab2-5f2d-418a-9b54-ea62e7257250",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Start process",
+      "targets": [
+        ["linkText=Start process", "linkText"],
+        ["css=.start-process-action .ng-binding", "css:finder"],
+        ["xpath=(//a[contains(@href, '')])[13]", "xpath:href"],
+        ["xpath=//li[3]/view/a", "xpath:position"],
+        ["xpath=//a[contains(.,' Start process')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "afd2b80a-a907-4932-8a01-8e44e0cbaf7d",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Applicant_Process-TO-BE-2",
+      "targets": [
+        ["linkText=Applicant_Process-TO-BE-2", "linkText"],
+        ["css=.processes > .ng-scope:nth-child(1) > .ng-binding", "css:finder"],
+        ["xpath=//a[contains(text(),'Applicant_Process-TO-BE-2')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Applicant_Process-TO-BE-2')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "0ed3596a-cd89-4a6c-9705-5eed1f33bcd7",
+      "comment": "",
+      "command": "type",
+      "target": "name=CustomerID",
+      "targets": [
+        ["name=CustomerID", "name"],
+        ["css=.ng-dirty:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='CustomerID']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Customer${check}"
+    }, {
+      "id": "a3583a64-b858-41f0-b65d-394ee7dfa849",
+      "comment": "",
+      "command": "type",
+      "target": "name=CustomerName",
+      "targets": [
+        ["name=CustomerName", "name"],
+        ["css=.form-group:nth-child(2) > .ng-valid-cam-variable-type", "css:finder"],
+        ["xpath=//input[@name='CustomerName']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Customer ${check} Name"
+    }, {
+      "id": "b979568c-a77c-466d-83c8-7c0e1f66bce9",
+      "comment": "",
+      "command": "type",
+      "target": "name=CustomerEmail",
+      "targets": [
+        ["name=CustomerEmail", "name"],
+        ["css=.form-group:nth-child(3) > .form-control", "css:finder"],
+        ["xpath=//input[@name='CustomerEmail']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "customer${check}@teste.com"
+    }, {
+      "id": "1e2d2da9-f135-4638-ae2b-8594ee8f4a2c",
+      "comment": "",
+      "command": "type",
+      "target": "name=businessKey",
+      "targets": [
+        ["name=businessKey", "name"],
+        ["css=.form-group:nth-child(4) > .form-control", "css:finder"],
+        ["xpath=//input[@name='businessKey']", "xpath:attributes"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": "rejected${check}"
+    }, {
+      "id": "034ef146-9dee-4c5b-91e9-9eaddc074a97",
+      "comment": "",
+      "command": "click",
+      "target": "name=assesment_decision",
+      "targets": [
+        ["name=assesment_decision", "name"],
+        ["css=.ng-untouched:nth-child(2)", "css:finder"],
+        ["xpath=//select[@name='assesment_decision']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "eb48a549-8435-45c1-9015-869b4c5515e3",
+      "comment": "",
+      "command": "select",
+      "target": "name=assesment_decision",
+      "targets": [],
+      "value": "label=rejected"
+    }, {
+      "id": "bc22f812-abf4-490f-8376-287ee6fe41e0",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col-xs-8 > .btn-primary",
+      "targets": [
+        ["css=.col-xs-8 > .btn-primary", "css:finder"],
+        ["xpath=(//button[@type='submit'])[3]", "xpath:attributes"],
+        ["xpath=//div[2]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Start')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "44a1c0b8-c397-4183-adf6-7fc7aafee3a4",
+      "comment": "",
+      "command": "end",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "2c5664b7-554d-431d-aa11-79f308e58be1",
+    "name": "CaseHealthCareTipical",
+    "commands": [{
+      "id": "80afa1ab-0fff-427b-9bbc-c4eb5ca33ed0",
+      "comment": "",
+      "command": "open",
+      "target": "http://ec2-54-162-89-229.compute-1.amazonaws.com:8080/camunda/app/welcome/default/#!/welcome",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "b2fceed8-40f8-4598-80f0-13e7749027cd",
+      "comment": "",
+      "command": "//click",
+      "target": "css=.form-signin-container",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f3e277b7-c804-4472-b0c9-377414cdcf45",
+      "comment": "",
+      "command": "//click",
+      "target": "css=.ng-touched",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "0aa6d5a4-c038-43ca-a415-d3f0a7d907ea",
+      "comment": "",
+      "command": "//type",
+      "target": "css=.ng-touched",
+      "targets": [],
+      "value": "demo"
+    }, {
+      "id": "3e6df296-d6aa-485d-8d1a-28474f144d8c",
+      "comment": "",
+      "command": "//click",
+      "target": "css=.ng-untouched",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "acdd896f-7bd4-4fcf-ab4f-e530dc084afc",
+      "comment": "",
+      "command": "//type",
+      "target": "css=.ng-untouched",
+      "targets": [],
+      "value": "demo"
+    }, {
+      "id": "1b87c48a-1ae7-4ced-8e83-8e2877a71388",
+      "comment": "",
+      "command": "//click",
+      "target": "css=.btn",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "23629e9d-a7de-4b1a-945e-901fe1246c21",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Tasklist",
+      "targets": [],
+      "value": "3000"
+    }, {
+      "id": "35cb832a-15f1-43c8-adf3-f197103f118a",
+      "comment": "",
+      "command": "executeScript",
+      "target": "return 0",
+      "targets": [],
+      "value": "check"
+    }, {
+      "id": "b69123bc-d959-41a4-81df-566c175b299c",
+      "comment": "while Offer case",
+      "command": "while",
+      "target": "${check} < 12",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2c367e8b-9025-49c4-8e4a-897cb5397595",
+      "comment": "",
+      "command": "executeScript",
+      "target": "return ${check} + 1",
+      "targets": [],
+      "value": "check"
+    }, {
+      "id": "90146a09-9c56-42e1-a3cf-49c980c6303c",
+      "comment": "",
+      "command": "pause",
+      "target": "6000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "513bd741-f273-48e7-9738-78f20094da10",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Start process",
+      "targets": [
+        ["linkText=Start process", "linkText"],
+        ["css=.start-process-action .ng-binding", "css:finder"],
+        ["xpath=(//a[contains(@href, '')])[13]", "xpath:href"],
+        ["xpath=//li[3]/view/a", "xpath:position"],
+        ["xpath=//a[contains(.,' Start process')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b19a0631-5be6-4931-a735-2ba7530eaa6e",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Applicant_Process-TO-BE-2",
+      "targets": [
+        ["linkText=Applicant_Process-TO-BE-2", "linkText"],
+        ["css=.processes > .ng-scope:nth-child(1) > .ng-binding", "css:finder"],
+        ["xpath=//a[contains(text(),'Applicant_Process-TO-BE-2')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '')]", "xpath:href"],
+        ["xpath=//a", "xpath:position"],
+        ["xpath=//a[contains(.,'Applicant_Process-TO-BE-2')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "7ba7f7c3-2a4e-46c9-b024-4e5be8969548",
+      "comment": "",
+      "command": "type",
+      "target": "name=CustomerID",
+      "targets": [
+        ["name=CustomerID", "name"],
+        ["css=.ng-dirty:nth-child(2)", "css:finder"],
+        ["xpath=//input[@name='CustomerID']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "Customer${check}"
+    }, {
+      "id": "b3b7f71f-b0e4-4365-b1c7-c239f13ae18e",
+      "comment": "",
+      "command": "type",
+      "target": "name=CustomerName",
+      "targets": [
+        ["name=CustomerName", "name"],
+        ["css=.form-group:nth-child(2) > .ng-valid-cam-variable-type", "css:finder"],
+        ["xpath=//input[@name='CustomerName']", "xpath:attributes"],
+        ["xpath=//div[2]/input", "xpath:position"]
+      ],
+      "value": "Customer ${check} Name"
+    }, {
+      "id": "14aaeed4-6a5a-49a3-a39f-8ad5eb8a01fd",
+      "comment": "",
+      "command": "type",
+      "target": "name=CustomerEmail",
+      "targets": [
+        ["name=CustomerEmail", "name"],
+        ["css=.form-group:nth-child(3) > .form-control", "css:finder"],
+        ["xpath=//input[@name='CustomerEmail']", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "customer${check}@teste.com"
+    }, {
+      "id": "29380582-dff6-4f4b-b203-358e5c20a3ce",
+      "comment": "",
+      "command": "type",
+      "target": "name=businessKey",
+      "targets": [
+        ["name=businessKey", "name"],
+        ["css=.form-group:nth-child(4) > .form-control", "css:finder"],
+        ["xpath=//input[@name='businessKey']", "xpath:attributes"],
+        ["xpath=//div[4]/input", "xpath:position"]
+      ],
+      "value": "offer${check}"
+    }, {
+      "id": "b6821dfa-acf8-41cf-ae49-9d80986f24ab",
+      "comment": "",
+      "command": "click",
+      "target": "name=assesment_decision",
+      "targets": [
+        ["name=assesment_decision", "name"],
+        ["css=.ng-untouched:nth-child(2)", "css:finder"],
+        ["xpath=//select[@name='assesment_decision']", "xpath:attributes"],
+        ["xpath=//select", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "201922f7-be78-44a8-9b2c-25d9c51d8339",
+      "comment": "",
+      "command": "select",
+      "target": "name=assesment_decision",
+      "targets": [],
+      "value": "label=alternative_offer"
+    }, {
+      "id": "ad2fe355-65af-48c3-83ae-d52b513270ac",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col-xs-8 > .btn-primary",
+      "targets": [
+        ["css=.col-xs-8 > .btn-primary", "css:finder"],
+        ["xpath=(//button[@type='submit'])[3]", "xpath:attributes"],
+        ["xpath=//div[2]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Start')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "0ae135c8-34a4-4655-b0ef-252f492187cf",
+      "comment": "",
+      "command": "click",
+      "target": "css=.name > .ng-binding",
+      "targets": [
+        ["css=.name > .ng-binding", "css:finder"],
+        ["xpath=(//a[contains(@href, '')])[15]", "xpath:href"],
+        ["xpath=//h4/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "bd850416-ab27-4956-8c65-8c94dbac85a8",
+      "comment": "",
+      "command": "click",
+      "target": "css=.task:nth-child(1) .process-definition",
+      "targets": [
+        ["css=.task:nth-child(1) .process-definition", "css:finder"],
+        ["xpath=//h6", "xpath:position"],
+        ["xpath=//h6[contains(.,'Employee_Process-TO-BE-2')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "f9b4a775-41a7-4260-ad58-10e838900422",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary:nth-child(2)",
+      "targets": [
+        ["css=.btn-primary:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=//div[3]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Complete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "df348b4c-7520-4eeb-b2df-e2f66605b4a9",
+      "comment": "",
+      "command": "click",
+      "target": "css=.name > .ng-binding",
+      "targets": [
+        ["css=.name > .ng-binding", "css:finder"],
+        ["xpath=(//a[contains(@href, '')])[15]", "xpath:href"],
+        ["xpath=//h4/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "3587b32e-854a-40ea-a48d-cb2fe6ced65a",
+      "comment": "",
+      "command": "pause",
+      "target": "3000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "c7453c00-61c7-4314-8c0f-13b846e4b604",
+      "comment": "",
+      "command": "while",
+      "target": "!selenium.isElementPresent(\"linkText=Alternative offer is created\")",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "7372743e-d778-41bd-9451-2a5ca43760d1",
+      "comment": "",
+      "command": "pause",
+      "target": "",
+      "targets": [],
+      "value": "3000"
+    }, {
+      "id": "06807596-e5d7-4fa1-90f1-3c182116145e",
+      "comment": "",
+      "command": "click",
+      "target": "css=.name > .ng-binding",
+      "targets": [
+        ["css=.name > .ng-binding", "css:finder"],
+        ["xpath=(//a[contains(@href, '')])[15]", "xpath:href"],
+        ["xpath=//h4/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "983c0612-15c6-4b3e-9906-43e3b2155d59",
+      "comment": "",
+      "command": "end",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "4d5d2dfb-c4b2-46ea-bb03-a9c76853e124",
+      "comment": "",
+      "command": "//click",
+      "target": "css=.name > .ng-binding",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1c6c00bb-e92c-45b8-be1f-5eef4b16a20a",
+      "comment": "",
+      "command": "waitForElementPresent",
+      "target": "linkText=Alternative offer is created",
+      "targets": [],
+      "value": "10000"
+    }, {
+      "id": "dc69dd77-ff54-4eab-89a3-dbcdf5bdc672",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Alternative offer is created",
+      "targets": [
+        ["linkText=Alternative offer is created", "linkText"],
+        ["css=.task:nth-child(1) .task > .ng-binding", "css:finder"],
+        ["xpath=//a[contains(text(),'Alternative offer is created')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '#/?task=d29532ec-5b71-11ef-a88c-0242ac110002')]", "xpath:href"],
+        ["xpath=//li/div/div/h4/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Alternative offer is created')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "98e59665-d975-4928-b5b0-186249a3bf42",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary:nth-child(2)",
+      "targets": [
+        ["css=.btn-primary:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=//div[3]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Complete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "d8cb105a-f68f-41ca-bee6-7e709c3f3b7a",
+      "comment": "",
+      "command": "pause",
+      "target": "5000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "6be0d6ba-49a4-4f92-9cee-04b70886c40b",
+      "comment": "",
+      "command": "click",
+      "target": "css=.name > .ng-binding",
+      "targets": [
+        ["css=.name > .ng-binding", "css:finder"],
+        ["xpath=(//a[contains(@href, '')])[15]", "xpath:href"],
+        ["xpath=//h4/a", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "24cfc380-9987-4eb7-b277-96334f9b4f96",
+      "comment": "",
+      "command": "click",
+      "target": "linkText=Decision if contract is accepted",
+      "targets": [
+        ["linkText=Decision if contract is accepted", "linkText"],
+        ["css=.task:nth-child(1) .task > .ng-binding", "css:finder"],
+        ["xpath=//a[contains(text(),'Decision if contract is accepted')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '#/?task=0b3a63c5-5b72-11ef-a88c-0242ac110002')]", "xpath:href"],
+        ["xpath=//li/div/div/h4/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Decision if contract is accepted')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "190be8f0-0104-4a29-95cf-ea313dec01cd",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-primary:nth-child(2)",
+      "targets": [
+        ["css=.btn-primary:nth-child(2)", "css:finder"],
+        ["xpath=(//button[@type='submit'])[2]", "xpath:attributes"],
+        ["xpath=//div[3]/button[2]", "xpath:position"],
+        ["xpath=//button[contains(.,'Complete')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "fc0b4721-af35-4fbf-a0cc-339ada8d035f",
+      "comment": "",
+      "command": "pause",
+      "target": "5000",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "e8234b44-98e5-41d4-8766-cbc1041ec747",
+      "comment": "",
+      "command": "end",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "e0ecd691-8f2a-469a-b4ab-96f4ff284833",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": []
+  }],
+  "urls": ["http://ec2-3-87-36-213.compute-1.amazonaws.com:8080/", "http://ec2-34-205-32-156.compute-1.amazonaws.com:8080/", "http://ec2-54-197-200-233.compute-1.amazonaws.com:8080/", "http://ec2-54-236-16-209.compute-1.amazonaws.com:8080/", "ec2-100-26-28-67.compute-1.amazonaws.com:8080/", "ec2-54-175-249-42.compute-1.amazonaws.com:8080/", "ec2-52-200-222-223.compute-1.amazonaws.com:8080/", "http://ec2-34-235-130-217.compute-1.amazonaws.com:8080/", "http://ec2-34-234-83-154.compute-1.amazonaws.com:8080/", "http://ec2-54-224-153-239.compute-1.amazonaws.com:8080/", "ec2-54-163-204-116.compute-1.amazonaws.com:8080/", "http://ec2-3-88-220-51.compute-1.amazonaws.com:8080/", "http://ec2-3-86-17-98.compute-1.amazonaws.com:8080/", "http://ec2-18-234-151-172.compute-1.amazonaws.com:8080/", "http://ec2-52-86-206-37.compute-1.amazonaws.com:8080//", "ec2-54-162-89-229.compute-1.amazonaws.com:8080/"],
+  "plugins": []
+}

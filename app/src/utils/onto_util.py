@@ -574,7 +574,6 @@ def event_transactions_selection(file_path, file_name):
             file_name: the name of the file (ftc_list.csv)
                     
     """
-    
     # get the younger transaction in the file, that is the transaction with the smaler start datetime and store in the under_analisys_transaction
     # iterate through the file and select the transactions that start datetime between the begin and end date of the previous transaction  
     #   Inicialize a processing_list and a new_list

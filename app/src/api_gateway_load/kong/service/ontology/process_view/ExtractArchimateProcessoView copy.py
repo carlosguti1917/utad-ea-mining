@@ -414,7 +414,7 @@ def print_root_xml(root):
 def check_xml():
     # Parse the XML string and convert it to a pretty-printed XML string
     
-    file_path = configs.ARCHIMATE_MODEL["file_path"]        
+    file_path = configs.ARCHIMATE_MODEL["file_path"] 
     file_name = configs.ARCHIMATE_MODEL["archimate_file_name"]
     # Check if the directory exists
     # with open(file_path+file_name, "rb") as f:

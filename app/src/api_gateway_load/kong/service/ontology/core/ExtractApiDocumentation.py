@@ -25,7 +25,6 @@ def get_api_documentations_from_files(onto):
     doc_list = []
     # Load all Swagger files
     file_path = configs.SWAGGERS_FILE_PATH["file_path"]
-    #file_path =  "./docs/tests/" # for tests only
         
     try: 
         with onto:

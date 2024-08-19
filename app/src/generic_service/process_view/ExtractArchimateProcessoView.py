@@ -1,6 +1,7 @@
 import pandas as pd
 import re
 from owlready2 import *
+from datetime import datetime
 import xml.etree.ElementTree as ET
 import xml.dom.minidom
 from lxml import etree
@@ -13,6 +14,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 from app.src import configs
 from app.src.utils import onto_util
 from app.src.utils import archimate_util
+from app.src.utils import ai_gen_util
 
 onto_path.append("app/src/api_gateway_load/repository/")  # Set the path to load the ontology
 #onto = get_ontology("EA Mining OntoUML Teste V1_3.owl").load()
@@ -52,81 +54,83 @@ def get_process_from_ontology():
         print(f"In get_event_log module :", __name__)
         raise error
 
-def save_archimate_exchange_model(root):
-# Create the XML tree and write it to a file
-    try:
-        tree = ET.ElementTree(root)
-        xml_string = ET.tostring(root,encoding='utf-8').decode('utf-8')
+# def save_archimate_exchange_model(root, file_name=None):
+# # Create the XML tree and write it to a file
+#     try:
+#         tree = ET.ElementTree(root)
+#         xml_string = ET.tostring(root,encoding='utf-8').decode('utf-8')
 
-        # Parse the XML string and convert it to a pretty-printed XML string
-        dom = xml.dom.minidom.parseString(xml_string)
-        pretty_xml_string = dom.toprettyxml()
-        # Print the pretty-printed XML string
-        # print("#################### pretty_xml_string ##########################")
-        # print(pretty_xml_string)
-        # Save the XML string to a file
-        file_path = configs.ARCHIMATE_MODEL["file_path"] 
-        #datahora = datetime.now().strftime("%Y%m%d%H%M")       
-        file_name = configs.ARCHIMATE_MODEL["archimate_file_name"]
-        # Check if the directory exists
-        if not os.path.exists(file_path):
-            # If the directory doesn't exist, create it
-            os.makedirs(file_path)        
-        with open(file_path+file_name, "wb") as f:
-            f.write(pretty_xml_string.encode('utf-8'))
+#         # Parse the XML string and convert it to a pretty-printed XML string
+#         dom = xml.dom.minidom.parseString(xml_string)
+#         pretty_xml_string = dom.toprettyxml()
+#         # Print the pretty-printed XML string
+#         # print("#################### pretty_xml_string ##########################")
+#         # print(pretty_xml_string)
+#         # Save the XML string to a file
+#         file_path = configs.ARCHIMATE_MODEL["file_path"] 
+#         if file_name is None:
+#             file_name = configs.ARCHIMATE_MODEL["archimate_file_name"]
+#         # Check if the directory exists
+#         if not os.path.exists(file_path):
+#             # If the directory doesn't exist, create it
+#             os.makedirs(file_path)        
+#         with open(file_path+file_name, "wb") as f:
+#             f.write(pretty_xml_string.encode('utf-8'))
+        
+#         return file_name
             
-    except Exception as error:   
-        print('Ocorreu problema {} '.format(error.__class__))
-        print("mensagem", str(error))
-        print(f"In save_archimate_exchange_model module :", __name__)
-        raise error        
+#     except Exception as error:   
+#         print('Ocorreu problema {} '.format(error.__class__))
+#         print("mensagem", str(error))
+#         print(f"In save_archimate_exchange_model module :", __name__)
+#         raise error        
 
-def prepare_archimate_exchange_model():
-    """
-        prepare the inicial xml of the archimate model
-        returns:
-            file: xml.etree.ElementTree (named as root)
-    """
-    try:
-        # Create the root element for the ArchiMate model
-        root = ET.Element("model", attrib={
-            "xmlns": "http://www.opengroup.org/xsd/archimate/3.0/",
-            "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
-            "xsi:schemaLocation": "http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Diagram.xsd",
-            "identifier": "id-ea-mining-exchange-model-1",
-        })
+# def prepare_archimate_exchange_model():
+#     """
+#         prepare the inicial xml of the archimate model
+#         returns:
+#             file: xml.etree.ElementTree (named as root)
+#     """
+#     try:
+#         # Create the root element for the ArchiMate model
+#         root = ET.Element("model", attrib={
+#             "xmlns": "http://www.opengroup.org/xsd/archimate/3.0/",
+#             "xmlns:xsi": "http://www.w3.org/2001/XMLSchema-instance",
+#             "xsi:schemaLocation": "http://www.opengroup.org/xsd/archimate/3.0/ http://www.opengroup.org/xsd/archimate/3.1/archimate3_Diagram.xsd",
+#             "identifier": "id-ea-mining-exchange-model-1",
+#         })
 
-        # Add the name element to the root element
-        name = ET.SubElement(root, "name", attrib={"xml:lang": "en"})
-        name.text = "EA Mining Exchange Model"
-        documentation = ET.SubElement(root, "documentation", attrib={"xml:lang": "en"})
-        documentation.text = "Model generated by IA mining process to be imported in ArchiMate Tool."
+#         # Add the name element to the root element
+#         name = ET.SubElement(root, "name", attrib={"xml:lang": "en"})
+#         name.text = "EA Mining Exchange Model"
+#         documentation = ET.SubElement(root, "documentation", attrib={"xml:lang": "en"})
+#         documentation.text = "Model generated by IA mining process to be imported in ArchiMate Tool."
         
-        elements = ET.SubElement(root, "elements")
-        relationships = ET.SubElement(root, "relationships")
+#         elements = ET.SubElement(root, "elements")
+#         relationships = ET.SubElement(root, "relationships")
         
-        # Create the view and diagram
-        views = ET.SubElement(root, "views")
-        # view = ET.SubElement(views, "view", attrib={"name": "API extracted process"})
-        diagrams= ET.SubElement(views, "diagrams")
-        diagram_view = ET.SubElement(diagrams, "view", attrib={"identifier": "id-view-ea-process-view", "viewpoint":"Application Usage", "xsi:type":"Diagram"})
-        diagram_view_name = ET.SubElement(diagram_view, "name", attrib={"xml:lang": "en"})
-        diagram_view_name.text = "API extracted process view"
-        diagram_view_documentation = ET.SubElement(diagram_view, "documentation", attrib={"xml:lang": "en"})
-        diagram_view_documentation.text = "Process View Mined from API Logs."   
+#         # Create the view and diagram
+#         views = ET.SubElement(root, "views")
+#         # view = ET.SubElement(views, "view", attrib={"name": "API extracted process"})
+#         diagrams= ET.SubElement(views, "diagrams")
+#         diagram_view = ET.SubElement(diagrams, "view", attrib={"identifier": "id-view-ea-process-view", "viewpoint":"Application Usage", "xsi:type":"Diagram"})
+#         diagram_view_name = ET.SubElement(diagram_view, "name", attrib={"xml:lang": "en"})
+#         diagram_view_name.text = "API extracted process view"
+#         diagram_view_documentation = ET.SubElement(diagram_view, "documentation", attrib={"xml:lang": "en"})
+#         diagram_view_documentation.text = "Process View Mined from API Logs."   
         
-        diagram_dr_view = ET.SubElement(diagrams, "view", attrib={"identifier": "id-view-ea-data-relation-view", "viewpoint":"Application Usage", "xsi:type":"Diagram"})
-        diagram_view_name = ET.SubElement(diagram_dr_view, "name", attrib={"xml:lang": "en"})
-        diagram_view_name.text = "API extracted Data Relation view"
-        diagram_view_documentation = ET.SubElement(diagram_dr_view, "documentation", attrib={"xml:lang": "en"})
-        diagram_view_documentation.text = "Data Relation View Mined from API Logs."              
+#         diagram_dr_view = ET.SubElement(diagrams, "view", attrib={"identifier": "id-view-ea-data-relation-view", "viewpoint":"Application Usage", "xsi:type":"Diagram"})
+#         diagram_view_name = ET.SubElement(diagram_dr_view, "name", attrib={"xml:lang": "en"})
+#         diagram_view_name.text = "API extracted Data Relation view"
+#         diagram_view_documentation = ET.SubElement(diagram_dr_view, "documentation", attrib={"xml:lang": "en"})
+#         diagram_view_documentation.text = "Data Relation View Mined from API Logs."              
         
-        return root
-    except Exception as error:   
-        print('Ocorreu problema {} '.format(error.__class__))
-        print("mensagem", str(error))
-        print(f"In prepare_archimate_exchange_model module :", __name__)
-        raise error
+#         return root
+#     except Exception as error:   
+#         print('Ocorreu problema {} '.format(error.__class__))
+#         print("mensagem", str(error))
+#         print(f"In prepare_archimate_exchange_model module :", __name__)
+#         raise error
     
 def add_archimate_process_elements(root, processes):   
     """
@@ -134,7 +138,11 @@ def add_archimate_process_elements(root, processes):
     """
     contextfull_process = False #To verify if the process has a context pool or not, default is False
     try:
-        elements = root.find("elements")
+        
+        namespaces = {'': 'http://www.opengroup.org/xsd/archimate/3.0/'}  
+        elements = root.find(".//elements", namespaces)   
+        #print("Elements: ", len(elements))           
+        #elements = root.find("elements")
         if elements is None:
             elements = ET.SubElement(root, "elements")
         
@@ -150,6 +158,7 @@ def add_archimate_process_elements(root, processes):
             else:
                 process_name_text = process.label[0]    
                         
+            # Create the Business Process elements
             for label in process.label:
                 label_parts = label.split(': ')
                 if label_parts[0] == "context_pool":
@@ -158,7 +167,7 @@ def add_archimate_process_elements(root, processes):
                     process_id = process.name.replace("/", "-").replace("_", "")
                     #process_identifier = f"id-process-{process_element_number}"
                     process_identifier = f"id-process-{context_pool}"
-                    process_exists = elements.find(f".//element[@identifier='{process_identifier}']")
+                    process_exists = elements.find(f".//element[@identifier='{process_identifier}']", namespaces)
                     if process_exists is None:
                         process_element = ET.SubElement(elements, "element", attrib={"identifier": process_identifier, "xsi:type": "BusinessProcess"})
                         process_name = ET.SubElement(process_element, "name")
@@ -167,13 +176,14 @@ def add_archimate_process_elements(root, processes):
             if contextfull_process == False:
                 process_id = process.name.replace("/", "-").replace("_", "")
                 process_identifier = f"id-process-{process_element_number}"
-                process_exists = elements.find(f".//element[@identifier='{process_identifier}']")
+                process_exists = elements.find(f".//element[@identifier='{process_identifier}']", namespaces)
                 if process_exists is None:
                     process_element = ET.SubElement(elements, "element", attrib={"identifier": process_identifier, "xsi:type": "BusinessProcess"})
                     process_name = ET.SubElement(process_element, "name")
                     process_name.text = process_name_text  
                     root = add_archimate_actors_to_process(root, process, process_identifier)            
                 
+            # Create the Business Event elements
             if contextfull_process == True:
                 root, event_number = add_archimate_event_process_elements(root, None, process_name_text, event_number) 
             else:
@@ -187,6 +197,7 @@ def add_archimate_process_elements(root, processes):
         raise error
 
 def add_archimate_actors_to_process(root, process, process_identifier):
+    namespaces = {'': 'http://www.opengroup.org/xsd/archimate/3.0/'}  
     try:
         labels  = process.label
         for label in labels:
@@ -196,20 +207,29 @@ def add_archimate_actors_to_process(root, process, process_identifier):
                 continue
             actor_name = label_parts[1]
             actor_identifier = f"id-actor-{actor_name}"
-            elements = root.find("elements")
+            #elements = root.find("elements")
+            elements = root.find(".//elements", namespaces) 
             if elements is None:
                 elements = ET.SubElement(root, "elements")
-            actor_exists = elements.find(f".//element[@identifier='{actor_identifier}']")
+
+            #actor_exists = elements.find(f".//element[@identifier='{actor_identifier}']", namespaces)
+            #diagram_view = root.find(".//view[@identifier='id-view-ea-data-relation-view']", namespaces)
+            actor_exists = None
+            for element in elements:
+                if element.get("identifier") == actor_identifier:
+                    actor_exists = element
+                    break
             if actor_exists is None:
                 actor_element = ET.SubElement(elements, "element", attrib={"identifier": actor_identifier, "xsi:type": "BusinessActor"})
                 actor_element_name = ET.SubElement(actor_element, "name")
                 actor_element_name.text = actor_name
             #relationships
-            relationships = root.find("relationships")
+            #relationships = root.find("relationships")
+            relationships = root.find(".//relationships", namespaces) 
             if relationships is None:
                 relationships = ET.SubElement(root, "relationships")            
             relationship_id = f"id-relation-{actor_name}-{process_identifier}"
-            relationship_exists = root.find(f".//relationship[@identifier='{relationship_id}']")
+            relationship_exists = root.find(f".//relationship[@identifier='{relationship_id}']", namespaces)
             if relationship_exists is None:
                 relationship = ET.SubElement(relationships, "relationship ", attrib={"identifier": relationship_id, "source": process_identifier, "target": actor_identifier, "xsi:type":"Serving" })                
                 relationship_name = ET.SubElement(relationship, "name")
@@ -233,12 +253,16 @@ def add_archimate_event_process_elements(root, process_identifier, process_name,
             event_number: int
     """
     try:
-        elements = root.find("elements")
+        namespaces = {'': 'http://www.opengroup.org/xsd/archimate/3.0/'}  
+        elements = root.find(".//elements", namespaces) 
+        #elements = root.find("elements")
         if elements is None:
             elements = ET.SubElement(root, "elements")
             
         # Load the HeuristicsNet object from the file
-        directory = "./temp/process"       
+        #directory = "./temp/process"       
+        directory = configs.TEMP_PROCESSING_FILES["pkl_file_path"]
+        datahora = datetime.now().strftime("%Y%m%d%H%M")
         with open(f"{directory}/heu_net_{process_name}.pkl", 'rb') as f:
             heu_net = pickle.load(f)
         #pm4py.view_heuristics_net(heu_net)  
@@ -253,27 +277,37 @@ def add_archimate_event_process_elements(root, process_identifier, process_name,
             # print(f"Activity name: {activity_name}, Activity ID: {activity_id}")
             # Create the Business Event elements
             activity_id =  activity.replace("/", "-").replace("_", "")
+            #activity_name = ai_gen_util.translate_uri_to_task_name(activity)
+            activity_name = activity
             event_identifier = f"id-event-{event_number}"
-            event_exists = elements.find(f".//element[@identifier='{event_identifier}']")
+            event_exists = elements.find(f".//element[@identifier='{event_identifier}']", namespaces)
             if event_exists is None:
                 event_element = ET.SubElement(elements, "element", attrib={"identifier": event_identifier, "xsi:type": "BusinessEvent" })
                 event_element_name = ET.SubElement(event_element, "name")
-                event_element_name.text = activity
+                event_element_name.text = activity_name
+                # Save uri = activity in the element properties
+                properties = ET.SubElement(event_element, "properties")
+                property_element = ET.SubElement(properties, "property", attrib={"propertyDefinitionRef": "uri"})
+                value_element = ET.SubElement(property_element, "value", attrib={"xml:lang": "pt"})
+                value_element.text = activity
+                
             
             #relationships with process
             if process_identifier == None:
                 process_context = re.search(r'/([^/]+)/v1', activity).group(1)
-                relationships = root.find("relationships")
+                #relationships = root.find("relationships")
+                relationships = root.find(".//relationships", namespaces) 
                 if relationships is None:
                     relationships = ET.SubElement(root, "relationships")            
                 relationship_id = f"id-relation-{event_number}"
-                relationship_exists = root.find(f".//relationship[@identifier='{relationship_id}']")
+                relationship_exists = root.find(f".//relationship[@identifier='{relationship_id}']", namespaces)
                 if relationship_exists is None:
                     relationship = ET.SubElement(relationships, "relationship ", attrib={"identifier": relationship_id, "source": f"id-process-{process_context}", "target": event_identifier, "xsi:type":"Association" })                
                     relationship_name = ET.SubElement(relationship, "name")
                     relationship_name.text = relationship_id           
             else:
-                relationships = root.find("relationships")
+                #relationships = root.find("relationships")
+                relationships = root.find(".//relationships", namespaces) 
                 if relationships is None:
                     relationships = ET.SubElement(root, "relationships")            
                 relationship_id = f"id-relation-{event_number}"
@@ -304,8 +338,13 @@ def add_process_view_diagram_nodes_contextfull(root):
         #h: The height of the element. This determines how tall the element is.
         
         # Get the elements from the root
+        namespaces = {'': 'http://www.opengroup.org/xsd/archimate/3.0/'} 
         elements = root.findall(".//element")
-        diagram_view = root.find(".//view[@identifier='id-view-ea-process-view']")
+        #elements = root.findall(".//element", namespaces)
+        #diagram_view = root.find(".//view[@identifier='id-view-ea-process-view']")
+        diagram_view = root.find(".//view[@identifier='id-view-ea-process-view']", namespaces)
+        #diagram_view = root.find(".//view[@identifier='id-view-ea-process-view']", namespaces=namespaces)
+        #archimate_util.print_root_xml(root)
 
         element_width = 100
         axis_width = 1200        
@@ -342,8 +381,8 @@ def add_process_view_diagram_nodes_contextfull(root):
         max = 0
         vx = 0
 
-        root_copy_xpaths = etree.fromstring(ET.tostring(root))
-        namespaces = {'ns': 'http://www.opengroup.org/xsd/archimate/3.0/'} 
+        root_copy = etree.fromstring(ET.tostring(root))
+        #namespaces = {'ns': 'http://www.opengroup.org/xsd/archimate/3.0/'} 
         
         
         # Iterate over the elements
@@ -364,8 +403,27 @@ def add_process_view_diagram_nodes_contextfull(root):
             elif element_type == "BusinessEvent":
                 count_be += 1
              
-                event_relation = root_copy_xpaths.xpath(f".//ns:relationship[@target='{element_identifier}']", namespaces=namespaces)
-                event_process = event_relation[0].get("source")
+                #event_relation = root_copy_xpaths.xpath(f".//ns:relationship[@target='{element_identifier}']", namespaces=namespaces)
+                # event_relation = root_copy.xpath(f".//ns:relationship[@target='{element_identifier}']", namespaces=namespaces)
+                #archimate_util.print_root_xml(root)
+                relationships = root.find(".//relationships", namespaces)
+                for relationship in relationships:
+                    if relationship.get("target") == element_identifier:
+                        event_relation = relationship
+                        break
+                
+                #event_relation2 = root_copy.findall(f".//ns:relationships/ns:relationship[@target='{element_identifier}']", namespaces={'ns': 'http://www.opengroup.org/xsd/archimate/3.0/'} )
+                #event_relation3 = root_copy.findall(f".//ns:relationships/ns:relationship[@target='{element_identifier}']", namespaces=namespaces)
+                #event_relation = root.findall(f".//relationship[@target='{element_identifier}']", namespaces=namespaces)
+                #event_relation = root.findall(f".//relationship[@target='{element_identifier}']", namespaces)
+                #event_relation = root.xpath(f".//ns:relationship[@target='{element_identifier}']", namespaces=namespaces)
+                #event_relation2 = root.findall(f".//ns0:relationships/ns0:relationship[@target='{element_identifier}']", namespaces={'ns0': 'http://www.opengroup.org/xsd/archimate/3.0/'} )
+                #event_relation3 = root.findall(f".//'':relationships/'':relationship[@target='{element_identifier}']", namespaces=namespaces)
+                #event_relation4 = root.findall(f".//ns:relationships/ns:relationship[@target='{element_identifier}']", namespaces=namespaces)                
+                #event_relation1 = root.xpath(f".//ns:relationship[@target='{element_identifier}']", namespaces=namespaces)
+
+                #event_process = event_relation[0].get("source")
+                event_process = event_relation.get("source")
                 #calculate x and y position
                 if event_process not in aux_matrix:
                     # inicialize the posicioanment of the first event
@@ -404,11 +462,11 @@ def add_process_view_diagram_nodes_contextfull(root):
                 event_number = f"be-{count_be}"
                 relationship_id = f"id-relation-{event_number}"
                 #relationships
-                relationships = root.find("relationships")
-                #relationships = root.find("ns:relationships", namespaces=namespaces)
+                #relationships = root.find("relationships")
+                relationships = root.find(".//relationships", namespaces)
                 if relationships is None:
                     relationships = ET.SubElement(root, "relationships")
-                relationship_exists = root.find(f".//relationship[@identifier='{relationship_id}']")              
+                relationship_exists = root.find(f".//relationship[@identifier='{relationship_id}']", namespaces)              
                 if relationship_exists is None:
                     if be_antecedent_identifier is not None:
                         # verify it the antecedent and the element are connected to the same BusinessProcess
@@ -448,7 +506,8 @@ def add_process_view_diagram_nodes_contextfull(root):
         nodes = root.findall(".//node")
         for node in nodes:
             element_ref = node.get('elementRef')
-            relationships = root.find("relationships")
+            #relationships = root.find("relationships")
+            relationships = root.find(".//relationships", namespaces) 
             for relationship in relationships:
                 
                 # source and target need to be different
@@ -467,9 +526,22 @@ def add_process_view_diagram_nodes_contextfull(root):
                 # if source is BusinessProcess and target is BusinessEvent dont create the connection
                 source_node_obj = root.find(".//node[@elementRef='"+ rel_source +"']") 
                 source_element_ref = source_node_obj.get('elementRef')               
-                source_element = root.find(f".//elements/element[@identifier='{source_element_ref}']")
+                #source_element = root.find(f".//elements/element[@identifier='{source_element_ref}']", namespaces)
+                #source_element = root.findall(f".//element[@identifier='{source_element_ref}']", namespaces)
+                #elements = root.find(".//elements", namespaces)
+                source_element = None
+                elements = root.findall(".//element")
+                for el in elements:
+                    if el.get("identifier") == source_element_ref:
+                        source_element = el
+                        break
                 target_element_ref = target_node_obj.get('elementRef')
-                target_element = root.find(f".//elements/element[@identifier='{target_element_ref}']")
+                #target_element = root.find(f".//elements/element[@identifier='{target_element_ref}']", namespaces)
+                target_element = None
+                for el_t in elements:
+                    if el_t.get("identifier") == target_element_ref:
+                        target_element = el_t
+                        break                
                 if source_element is not None and target_element is not None:
                     source_type = source_element.get('xsi:type')
                     target_type = target_element.get('xsi:type')
@@ -514,6 +586,9 @@ def add_process_view_diagram_nodes(root):
         # Count the number of elements that are of type BusinessActor
         total_ba = sum(1 for element in elements if element.attrib.get('xsi:type') == 'BusinessActor')
 
+        if total_bp == 0:
+            print("No BusinessProcess elements found in the model in add_process_view_diagram_nodes(root).")
+            return root
         
         # Initialize position variables
         
@@ -636,31 +711,33 @@ def add_process_view_diagram_nodes(root):
    
    
 
-def print_root_xml(root):
+# def print_root_xml(root):
         
-        clone_root = root
-        xml_string = ET.tostring(clone_root,encoding='utf-8').decode('utf-8')
-        # Parse the XML string and convert it to a pretty-printed XML string
-        dom = xml.dom.minidom.parseString(xml_string)
-        pretty_xml_string = dom.toprettyxml()
-        # Print the pretty-printed XML string
-        #print("#################### pretty_xml_string ##########################")
-        #print(pretty_xml_string)
-        #print("#################### pretty_xml_string ##########################") 
-        return pretty_xml_string       
+#         clone_root = root
+#         xml_string = ET.tostring(clone_root,encoding='utf-8').decode('utf-8')
+#         # Parse the XML string and convert it to a pretty-printed XML string
+#         dom = xml.dom.minidom.parseString(xml_string)
+#         pretty_xml_string = dom.toprettyxml()
+#         # Print the pretty-printed XML string
+#         #print("#################### pretty_xml_string ##########################")
+#         #print(pretty_xml_string)
+#         #print("#################### pretty_xml_string ##########################") 
+#         return pretty_xml_string       
     
         
-def extract_archimate_process():
+def extract_archimate_process(file_name):
     """
         Extract the process from the ontology and create the xml element
     """
     try:
-        root = prepare_archimate_exchange_model()
+        #root = prepare_archimate_exchange_model()
+        # root = archimate_util.prepare_archimate_exchange_model()
+        root = archimate_util.load_archimate_model_xml(file_name)
         processes = get_process_from_ontology()
         root = add_archimate_process_elements(root, processes)
         root = add_process_view_diagram_nodes(root)
         # print_root_xml(root)
-        save_archimate_exchange_model(root) 
+        archimate_util.save_archimate_exchange_model(root) 
         isValid = archimate_util.check_archimate_model_exchange_xml      
         if isValid:
             print("The XML document is well-formed.")
@@ -670,21 +747,25 @@ def extract_archimate_process():
         print(f"In extract_archimate_process module :", __name__)
         raise error           
 
-def extract_archimate_process_grouped():
+def extract_archimate_process_contexfull(file_name):
     """
         Extract the process from the ontology and create the xml element grouping processes by API Contexts
     """
     try:
-        root = prepare_archimate_exchange_model()
+        #root = prepare_archimate_exchange_model()
+        #root = archimate_util.prepare_archimate_exchange_model()
+        root = archimate_util.load_archimate_model_xml(file_name)
+        #archimate_util.print_root_xml(root)
         processes = get_process_from_ontology()
         root, contextfull_process = add_archimate_process_elements(root, processes)
         if contextfull_process == True:
             root = add_process_view_diagram_nodes_contextfull(root)
         else:
             root = add_process_view_diagram_nodes(root)
-        print_root_xml(root)
-        save_archimate_exchange_model(root) 
-        isValid = archimate_util.check_archimate_model_exchange_xml      
+        #archimate_util.print_root_xml(root)
+        #save_archimate_exchange_model(root, file_name) 
+        archimate_util.save_archimate_exchange_model(root, file_name)
+        isValid = archimate_util.check_archimate_model_exchange_xml(file_name)      
         if isValid:
             print("The XML document is well-formed.")
     except Exception as error:   

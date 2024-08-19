@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Camunda Process API
+  title: Camunda Business Process 2 API
   description: REST API Calls from message sendTask BPMN elements in Camunda process
   version: 1.0.0
 servers:
