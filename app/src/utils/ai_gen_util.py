@@ -9,13 +9,9 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 from app.src import configs
 
 # Point to the local server
-client = OpenAI(base_url=configs.AI_MODEL["base_url"], api_key=configs.AI_MODEL["api_key"])
+#client = OpenAI(base_url=configs.AI_MODEL["base_url"], api_key=configs.AI_MODEL["api_key"]) # no need to pass the base_url when using the open AI server
+client = OpenAI(api_key=configs.AI_MODEL["api_key"])
 #client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
-
-# messages is a list of messages in the conversation. It includes:
-# A system message that sets the context or instructions for the model.
-# A user message that provides the input or question to the model.
-
 
 def translate_uri_to_task_name(uri):
   system_message = """It should always return a JSON with two fields named as 'task_name' with the suggested name of the task
@@ -32,22 +28,25 @@ def translate_uri_to_task_name(uri):
                             "task_name": "<generated task name>",
                             "original_endpoint": "<input URI>"
                         }
-                      The task_name should be repeated, unless it has the same uri and original_endpoint value.
+                      The task_name should not be repeated, unless it has the same uri and original_endpoint value.
                       Some exemple of expected resulting content are: 
                             {"task_name": "Get Card", "original_endpoint": "GET_/sandbox/ProcessBusinessUnit2/v1/Card/x/x"},
                             {"task_name": "Get Shop", "original_endpoint": "GET_/sandbox/ProcessBusinessUnit1/v1/Shop"},
                             {"task_name": "Promise Loyalty Card Association", "original_endpoint": "POST_/sandbox/ProcessBusinessUnit2/v1/Association/PromiseLoyaltyCardAssociationOrder"},
-                            {"task_name": "Promise Purchase Consumer Order", "original_endpoint": "POST_/sandbox/ProcessBusinessUnit3/v1/Purchase/PromisePurchaseConsumerOrder"},
                             {"task_name": "Declare Purchase Consumer Order", "original_endpoint": "POST_/sandbox/ProcessBusinessUnit3/v1/Purchase/DeclarePurchaseConsumerOrder"}.
                       """
   completion = client.chat.completions.create(
-      model="lmstudio-ai/gemma-2b-it-GGUF",
-      #model=configs.AI_MODEL["model"],
+      #model="lmstudio-ai/gemma-2b-it-GGUF",
+      model=configs.AI_MODEL["model"],
       messages=[
         {"role": "system", "content": system_message},
         {"role": "user", "content": f"Translate the API {uri} to a business short name to name a BPMN Service Task."}
       ],
       temperature=0.6,
+      max_tokens=600,
+      top_p=1,
+      n=1,
+      stream=False,
     )
 
   try:
@@ -57,14 +56,62 @@ def translate_uri_to_task_name(uri):
     task_name = response_json.get('task_name')
     print(f"Original Endpoint: {uri}, Task Name: {task_name}")
     return task_name
-  except json.JSONDecodeError:
+  except json.JSONDecodeError as e:
       print(f"Invalid JSON format received. translate_to_task_name ({uri}):")
-      raise json.JSONDecodeError 
+      raise e 
   except Exception as error:   
       print('Ocorreu problema {} '.format(error.__class__))
       print("mensagem", str(error))
       print(f"In create_archimate_process_elements module :", __name__)
       raise error      
+  
+def translate_string_to_process_name(original_name):
+  system_message = """It should always return a JSON with two fields named as 'process_name' with the suggested name to the process 
+              and the original string representing the API uri named as original_endpoint. 
+              If the suggested process_name has more tha one word, each word should be separated by an space.
+              Each uppercase letter followed by a lowercase letter separates the words in the task_name, such as in camelCase string pattern. 
+              In the same way, in strings with underscore each underscore separates words in the task_name and 
+              for string with hyphen each hyphen separates words in the process_name. All these words should be separated by an space.
+              The followin words represent the api envirionment and should be ignorad for task_name: sandbox, qa, hml, dev, prod, homolog, homologation, homologacao, homologação, homolog, production, producao, produção, test, teste, testing, demo, development, desenvolvimento, desenv, dev, homolog, homologation, homologacao, homologação, homolog, production, producao, produção, test, teste, testing, demo, development, desenvolvimento, desenv, dev.
+              The process_name should be short with no more than six words.
+              The response should be in the format: 
+                {
+                    "process_name": "<generated process_name>",
+                    "original_name": "<input URI>"
+                }
+              The process_name should not be repeated, unless it has the same uri and original_name value.
+              """
+  completion = client.chat.completions.create(
+      #model="lmstudio-ai/gemma-2b-it-GGUF",
+      model=configs.AI_MODEL["model"],
+      messages=[
+        {"role": "system", "content": system_message},
+        {"role": "user", "content": f"Translate the string {original_name} to a business short name to name a BPMN Service Task."}
+      ],
+      temperature=0.6,
+      max_tokens=600,
+      top_p=1,
+      n=1,
+      stream=False,
+    )
+
+  try:
+    response_content = completion.choices[0].message.content
+    # Parse the content to extract the 'task_name'
+    response_json = json.loads(response_content)
+    process_name = response_json.get('process_name')
+    print(f"Original Endpoint: {original_name}, Task Name: {process_name}")
+    return process_name
+  except json.JSONDecodeError as e:
+      print(f"Invalid JSON format received. translate_to_task_name ({original_name}):")
+      raise e 
+  except Exception as error:   
+      print('Ocorreu problema {} '.format(error.__class__))
+      print("mensagem", str(error))
+      print(f"In create_archimate_process_elements module :", __name__)
+      raise error 
+
+  
 
 def translate_api_list_to_task_name(api_list):
   task_names = []
@@ -138,3 +185,50 @@ def translate_process_name_to_domain_context(domain):
       print("mensagem", str(error))
       print(f"In create_archimate_process_elements module :", __name__)
       raise error      
+    
+def translate_resource_to_entity_name(original_name):
+  system_message = """It should always return a JSON with two fields named as entity_name with the suggested name of the data entity
+                      and the original string representing the resource named as original_endpoint. 
+                      If the suggested entity_name has more tha one word, each word should be separated by an space.
+                      Each uppercase letter followed by a lowercase letter separates the words in the entity_name, such as in camelCase string pattern. 
+                      In the same way, in strings with underscore each underscore separates words in the entity_name and for string with hyphen each hyphen separates words in the entity_name. All these words should be separated by an space.
+                      The followin words represent the api envirionment and should be ignorad for entity_name: sandbox, qa, hml, dev, prod, homolog, homologation, homologacao, homologação, homolog, production, producao, produção, test, teste, testing, demo, development, desenvolvimento, desenv, dev, homolog, homologation, homologacao, homologação, homolog, production, producao, produção, test, teste, testing, demo, development, desenvolvimento, desenv, dev.
+                      The entity_name should be short with no more than six words.
+                      The response should be in the format: 
+                        {
+                            "entity_name": "<generated task name>",
+                            "original_name": "<input original_name>"
+                        }
+                      The entity_name should not be repeated, unless it has the same uri and original_endpoint value.
+                      Some exemple of expected resulting content are: 
+                            {"entity_name": "Loyalty Card Association", "original_name": "PromiseLoyaltyCardAssociationOrder"},
+                            {"entity_name": "Purchase Consumer Order", "original_name": "DeclarePurchaseConsumerOrder"}.
+                      """
+  completion = client.chat.completions.create(
+      #model="lmstudio-ai/gemma-2b-it-GGUF",
+      model=configs.AI_MODEL["model"],
+      messages=[
+        {"role": "system", "content": system_message},
+        {"role": "user", "content": f"Translate the {original_name} to a entity name to name a Archimate Data Object."}      ],
+      temperature=0.6,
+      max_tokens=1000,
+      top_p=1,
+      n=1,
+      stream=False,
+    )
+
+  try:
+    response_content = completion.choices[0].message.content
+    # Parse the content to extract the 'task_name'
+    response_json = json.loads(response_content)
+    entity_name = response_json.get('entity_name')
+    print(f"Original URI: {original_name}, entity_name: {entity_name}")
+    return entity_name
+  except json.JSONDecodeError:
+      print(f"Invalid JSON format received. translate_to_task_name ({uri}):")
+      raise json.JSONDecodeError 
+  except Exception as error:   
+      print('Ocorreu problema {} '.format(error.__class__))
+      print("mensagem", str(error))
+      print(f"In create_archimate_process_elements module :", __name__)
+      raise error        

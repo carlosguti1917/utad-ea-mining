@@ -13,6 +13,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '.
 from app.src import configs
 from app.src.utils import onto_util
 from app.src.utils import archimate_util
+from app.src.utils import ai_gen_util
 
 onto_path.append("app/src/api_gateway_load/repository/") 
 onto = get_ontology(configs.OWL_FILE["file_name"]).load()
@@ -83,7 +84,8 @@ def add_archimate_data_relation_element(cdo_list, file_name=None):
                 domain_identifier = f"id-domain-{domain_element_number}"                
                 domain_element = ET.SubElement(elements, "element", attrib={"identifier": domain_identifier, "xsi:type": "DataObject"} )
                 domain_element_name = ET.SubElement(domain_element, "name")
-                domain_element_name.text = domain_name  
+                #domain_element_name.text = domain_name  
+                domain_element_name.text = ai_gen_util.translate_resource_to_entity_name(entity_name)
                 domain_list.append(domain_name)
 
             # add entity elements to the achinmate model
@@ -93,7 +95,8 @@ def add_archimate_data_relation_element(cdo_list, file_name=None):
                 entity_identifier = f"id-entity-{entity_number}"
                 entity_element = ET.SubElement(elements, "element", attrib={"identifier": entity_identifier, "xsi:type": "DataObject" })
                 entity_element_name = ET.SubElement(entity_element, "name")
-                entity_element_name.text = entity_name
+                #entity_element_name.text = entity_name
+                entity_element_name.text= ai_gen_util.translate_resource_to_entity_name(entity_name)
                 entity_list.append(entity_name) 
                 
                 # add relationships to the achinmate model

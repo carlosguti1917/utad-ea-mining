@@ -1,6 +1,5 @@
-variables.CustomerID.type
 variables.CustomerID.ShopID.type
 variables.CustomerID.ShopID.businessKeyRequester.type
-links.method
-links.rel
+variables.CustomerID.ShopID.businessKeyRequester.api_gateway_ip.value
+variables.CustomerID.ShopID.businessKeyRequester.api_gateway_ip.type
 links.definitionId

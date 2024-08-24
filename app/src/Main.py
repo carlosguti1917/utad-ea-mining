@@ -23,10 +23,11 @@ from app.src.generic_service.data_relation_view import ExtractCorrelateDataObjec
 from app.src.generic_service.data_relation_view import ExtractArchimateDataRelationView
 
 # observação, esta hora é UTC - para o Brasil considerar 3h de avanço em relação a hora desejada.
-#beginDate = "2024-08-18T18:00:00.000Z"
-beginDate = "2024-07-25T02:00:00.000Z"
+#beginDate = "2024-08-18T18:00:00.000Z" # Health
+# beginDate = "2024-07-25T02:00:00.000Z" Loyalty Card
+beginDate = "2024-06-03T22:37:40.000Z"
 # observação, esta hora é UTC - para o Brasil considerar 3h de avanço em relação a hora desejada.
-endDate = "2024-08-18T19:00:00.000Z"
+endDate = "2024-06-03T22:40:00.000Z" # Loyalty Card
 
 start_time = datetime.now()
 
@@ -47,19 +48,19 @@ endDate = endDate.strftime("%Y-%m-%dT%H:%M:%S.%fZ") # Convert it back to a strin
 print("DataPrepare com sucesso")
 
 #Core extration to Ongology
-extract_onto_core = ExtractOntoCore.ExtractOntoCore(beginDate) # Vale para versão final 
+#extract_onto_core = ExtractOntoCore.ExtractOntoCore(beginDate) # Vale para versão final 
 print("Extration of Core Ontology with success")
 
 #remove_frequent_items
-ExtractProcessFromOntology.record_frequent_items_to_ignore(onto)  # Vale para versão final
+#ExtractProcessFromOntology.record_frequent_items_to_ignore(onto)  # Vale para versão final
 print("Remove Frequent Items with success")
 
 #mining process view
-ftc_list = ExtractProcessFromOntology.mining_frequent_temporal_correlations(onto) # Vale para versão final
+#ftc_list = ExtractProcessFromOntology.mining_frequent_temporal_correlations(onto) # Vale para versão final
 print("Mining Frequent Temporal Correlations with success")
 
 #create Process in Ontology
-process_list = ProcessDiscovery.processes_discovery() # Vale para versão final 
+#process_list = ProcessDiscovery.processes_discovery() # Vale para versão final 
 print("Processes Discovery with success")
 
 # prepare the inicial xml of the archimate model
@@ -73,17 +74,17 @@ ExtractArchimateProcessoView.extract_archimate_process_contexfull(file_name) # V
 print("Process View in Archimate Extracted with success")
 
 # obtain swaggers and save API Documentations to the ontology
-docs = ExtractApiDocumentation.get_api_documentations_from_files(onto) 
+#docs = ExtractApiDocumentation.get_api_documentations_from_files(onto) 
 print("ApiDocumentation Extracted with success")
 
 #correlate the API Resources to the API Documentations
-doc_api_relators = ExtractApiDocumentation.correlate_resources_to_documentations(onto)
+#doc_api_relators = ExtractApiDocumentation.correlate_resources_to_documentations(onto)
 print("ApiDocumentation Correlated to Resources with success")
 
-fddc_list = ExtractCorrelateDataObject.mining_frequent_data_domain_correlations(onto)
+#fddc_list = ExtractCorrelateDataObject.mining_frequent_data_domain_correlations(onto)
 print("Frequent Data Domain Correlations created with success")
 
-data_correlations= ExtractCorrelateDataObject.mining_correlated_data_objects(onto)
+#data_correlations= ExtractCorrelateDataObject.mining_correlated_data_objects(onto)
 print("Correlated Data Objects created with success")
 
 #extractract archimate data relation 

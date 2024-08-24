@@ -37,7 +37,7 @@ APRIORI_INVERSE_ARGS = {
   "MIM_SUPPORT": 0.01,
   #"MAX_SUPPORT": 1, #  The item is present in all transactions, for small datasets tests
   #"MAX_SUPPORT": 0.5, #  The item is present in 50% of transactions, for small datasets tests, but suport booleans 
-  "MAX_SUPPORT": 0.3, #  The item is present in 20% of transactions, for small datasets tests, small enums with 5 values
+  "MAX_SUPPORT": 0.3, #  The item is present in 30% of transactions, for small datasets tests, small enums with 5 values
   #"MAX_SUPPORT": 0.1, #  The item is present in 10% of transactions, for small datasets tests, medium enums with 10 values
   #"MAX_SUPPORT": 0.06, #  The item is present in 6% of transactions, for medium datasets training set, enums with 15 values - Recomended
 }
@@ -111,7 +111,6 @@ ARCHIMATE_MODEL = {
   "datahora": datahora,
   "file_path": "./archimate/",
   "archimate_file_name": f"{datahora}_archimate_model_data.xml", 
-  #"archimate_file_name": f"teste_archimate_model_data.xml", 
 }
 
 SWAGGERS_FILE_PATH = {
@@ -129,9 +128,13 @@ SENSEDIA = {
 }
 
 AI_MODEL = {
-  "model": "https://manager-demov3.sensedia.com",
-  "base_url": "http://localhost:3000/v1",
-  "api_key": "lm-studio",
+  # "model": "lmstudio-ai/gemma-2b-it-GGUF",
+  # "base_url": "http://localhost:3000/v1",
+  # "api_key": "lm-studio",
+  # "model": "gpt-3.5-turbo",
+  "model": "gpt-4o-mini",
+  "base_url": "https://api.openai.com/v1/chat/completions",
+  "api_key": "sk-svcacct-iYarsjFPXofXSTPQCOZJkYh9PmogpcEpZXvBX71ltaBgQeYnnlmmokmZoCDIEKIWdVPeovT3BlbkFJwE4FZYqqMiPvti-YOhNQfSpNIa3Rr9tdWMiABRWhQ_-pedb-998UrN29F_YxVGacfekoYA",
 }
 
 
