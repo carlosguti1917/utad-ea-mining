@@ -85,7 +85,7 @@ def add_archimate_data_relation_element(cdo_list, file_name=None):
                 domain_element = ET.SubElement(elements, "element", attrib={"identifier": domain_identifier, "xsi:type": "DataObject"} )
                 domain_element_name = ET.SubElement(domain_element, "name")
                 #domain_element_name.text = domain_name  
-                domain_element_name.text = ai_gen_util.translate_resource_to_entity_name(entity_name)
+                domain_element_name.text = ai_gen_util.translate_api_context_to_domain(domain_name)
                 domain_list.append(domain_name)
 
             # add entity elements to the achinmate model

@@ -149,9 +149,9 @@ def translate_endpoints_to_task_name(api_list):
     return task_name
 
 
-def translate_process_name_to_domain_context(domain):
-  system_message = """It should always return a JSON with two fields named as 'data_domain_name' with the suggested name of the domain
-                      and the original string representing the Data Domain as original_domain. 
+def translate_api_context_to_domain(domain):
+  system_message = """It should always return a JSON with two fields named as data_domain_name with the suggested name of the domain 
+                          and the original string representing the Data Domain as original_domain. 
                       If the suggested data_domain_name has more tha one word, each word should be separated by an space.
                       Each uppercase letter followed by a lowercase letter separates the words in the data_domain_name, such as in camelCase string pattern. 
                       In the same way, in strings with underscore each underscore separates words in the data_domain_name and 
@@ -159,14 +159,20 @@ def translate_process_name_to_domain_context(domain):
                       The followin words represent the api envirionment and should be ignorad for data_domain_name: sandbox, qa, hml, dev, prod, homolog, homologation, homologacao, homologação, homolog, production, producao, produção, test, teste, testing, demo, development, desenvolvimento, desenv, dev, homolog, homologation, homologacao, homologação, homolog, production, producao, produção, test, teste, testing, demo, development, desenvolvimento, desenv, dev.
                       The data_domain_name should be short with no more than four words.
                       Retun the result in JSON format.
+                        Example of expected resulting content are:
+                            {"data_domain_name": "Business Process 1", "original_domain": "ProcessBusinessUnit1"}
                       """
   completion = client.chat.completions.create(
-      model="lmstudio-ai/gemma-2b-it-GGUF",
+      model=configs.AI_MODEL["model"],
       messages=[
         {"role": "system", "content": system_message},
-        {"role": "user", "content": f"Translate the Domain {domain} to a business short name to name a Data Domain Context."}
+        {"role": "user", "content": f"Translate the Domain {domain} to a business short name in order to name a Data Domain Context."}
       ],
-      temperature=0.8,
+      temperature=0.6,
+      max_tokens=600,
+      top_p=1,
+      n=1,
+      stream=False,
     )
 
   try:
@@ -174,11 +180,11 @@ def translate_process_name_to_domain_context(domain):
     #response_content = completion.json()
     # Parse the content to extract the 'task_name'
     response_json = json.loads(response_content)
-    task_name = response_json.get('task_name')
-    print(f"Original Endpoint: {domain}, Task Name: {task_name}")
-    return task_name
+    data_domain_name = response_json.get('data_domain_name')
+    print(f"Original Endpoint: {domain}, data_domain_name Name: {data_domain_name}") 
+    return data_domain_name
   except json.JSONDecodeError:
-      print(f"Invalid JSON format received. translate_to_task_name ({uri}):")
+      print(f"Invalid JSON format received. translate_api_context_to_domain ({domain}):")
       raise json.JSONDecodeError 
   except Exception as error:   
       print('Ocorreu problema {} '.format(error.__class__))

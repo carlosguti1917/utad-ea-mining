@@ -23,14 +23,15 @@ from app.src.generic_service.data_relation_view import ExtractCorrelateDataObjec
 from app.src.generic_service.data_relation_view import ExtractArchimateDataRelationView
 
 # observação, esta hora é UTC - para o Brasil considerar 3h de avanço em relação a hora desejada.
+beginDate = "2024-08-24T20:30:00.000Z" # Ecommerce
 #beginDate = "2024-08-18T18:00:00.000Z" # Health
 # beginDate = "2024-07-25T02:00:00.000Z" Loyalty Card
-beginDate = "2024-06-03T22:37:40.000Z"
+#beginDate = "2024-06-03T22:37:40.000Z" 
 # observação, esta hora é UTC - para o Brasil considerar 3h de avanço em relação a hora desejada.
-endDate = "2024-06-03T22:40:00.000Z" # Loyalty Card
+endDate = "2024-08-24T21:30:00.000Z" # ecommerce
+#endDate = "2024-06-03T22:40:00.000Z" # Loyalty Card
 
 start_time = datetime.now()
-
 
 #Loader Calls from Elastic
 #loader.LoaderCalls(beginDate, endDate) # Recupera as chamadas da API do Elastic e grava no MongoDB
@@ -69,8 +70,7 @@ root = archimate_util.prepare_archimate_exchange_model()
 archimate_util.save_archimate_exchange_model(root, file_name)
 
 #extract the process view in archimate model
-#ExtractArchimateProcessoView.extract_archimate_process(file_name) #legado
-ExtractArchimateProcessoView.extract_archimate_process_contexfull(file_name) # Vale para versão final plan
+#ExtractArchimateProcessoView.extract_archimate_process_contexfull(file_name) # Vale para versão final plan
 print("Process View in Archimate Extracted with success")
 
 # obtain swaggers and save API Documentations to the ontology
@@ -81,10 +81,10 @@ print("ApiDocumentation Extracted with success")
 #doc_api_relators = ExtractApiDocumentation.correlate_resources_to_documentations(onto)
 print("ApiDocumentation Correlated to Resources with success")
 
-#fddc_list = ExtractCorrelateDataObject.mining_frequent_data_domain_correlations(onto)
+fddc_list = ExtractCorrelateDataObject.mining_frequent_data_domain_correlations(onto)
 print("Frequent Data Domain Correlations created with success")
 
-#data_correlations= ExtractCorrelateDataObject.mining_correlated_data_objects(onto)
+data_correlations= ExtractCorrelateDataObject.mining_correlated_data_objects(onto)
 print("Correlated Data Objects created with success")
 
 #extractract archimate data relation 
