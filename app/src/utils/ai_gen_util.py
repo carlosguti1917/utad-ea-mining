@@ -10,8 +10,16 @@ from app.src import configs
 
 # Point to the local server
 #client = OpenAI(base_url=configs.AI_MODEL["base_url"], api_key=configs.AI_MODEL["api_key"]) # no need to pass the base_url when using the open AI server
-client = OpenAI(api_key=configs.AI_MODEL["api_key"])
+#client = OpenAI(api_key=configs.AI_MODEL["api_key"])
 #client = OpenAI(base_url="http://localhost:1234/v1", api_key="lm-studio")
+from dotenv import load_dotenv
+api_key = os.getenv("API_KEY")
+if not api_key:
+    raise ValueError("API_KEY environment variable is not set")
+
+client = OpenAI(api_key=os.getenv("API_KEY"))
+
+
 
 def translate_uri_to_task_name(uri):
   system_message = """It should always return a JSON with two fields named as 'task_name' with the suggested name of the task

@@ -70,7 +70,7 @@ root = archimate_util.prepare_archimate_exchange_model()
 archimate_util.save_archimate_exchange_model(root, file_name)
 
 #extract the process view in archimate model
-#ExtractArchimateProcessoView.extract_archimate_process_contexfull(file_name) # Vale para versão final plan
+ExtractArchimateProcessoView.extract_archimate_process_contexfull(file_name) # Vale para versão final plan
 print("Process View in Archimate Extracted with success")
 
 # obtain swaggers and save API Documentations to the ontology
@@ -81,10 +81,10 @@ print("ApiDocumentation Extracted with success")
 #doc_api_relators = ExtractApiDocumentation.correlate_resources_to_documentations(onto)
 print("ApiDocumentation Correlated to Resources with success")
 
-fddc_list = ExtractCorrelateDataObject.mining_frequent_data_domain_correlations(onto)
+#fddc_list = ExtractCorrelateDataObject.mining_frequent_data_domain_correlations(onto)
 print("Frequent Data Domain Correlations created with success")
 
-data_correlations= ExtractCorrelateDataObject.mining_correlated_data_objects(onto)
+#data_correlations= ExtractCorrelateDataObject.mining_correlated_data_objects(onto)
 print("Correlated Data Objects created with success")
 
 #extractract archimate data relation 
