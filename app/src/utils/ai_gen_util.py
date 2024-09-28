@@ -16,20 +16,20 @@ client = OpenAI(api_key=configs.AI_MODEL["api_key"])
 def translate_uri_to_task_name(uri):
   system_message = """It should always return a JSON with two fields named as 'task_name' with the suggested name of the task
                       and the original string representing the API uri named as original_endpoint. 
-                      If the suggested task_name has more tha one word, each word should be separated by an space.
-                      The task_name should consider the verb in the beginning of the string and the last noun in the uri string.
-                      Each uppercase letter followed by a lowercase letter separates the words in the task_name, such as in camelCase string pattern. 
-                      In the same way, in strings with underscore each underscore separates words in the task_name and 
-                      for string with hyphen each hyphen separates words in the task_name. All these words should be separated by an space.
+                      If the suggested task_name has more than one word, each word should be separated by a space.
+                      The task_name should consider the verb at the beginning of the string and the last noun in the URI string.
+                      Each uppercase letter followed by a lowercase letter separates the words in the task_name, such as in the camelCase string pattern. 
+                      In the same way, in strings with underscores, each underscore separates words in the task_name and 
+                      for strings with a hyphen, each hyphen separates words in the task_name. A space should separate all these words.
                       The followin words represent the api envirionment and should be ignorad for task_name: sandbox, qa, hml, dev, prod, homolog, homologation, homologacao, homologação, homolog, production, producao, produção, test, teste, testing, demo, development, desenvolvimento, desenv, dev, homolog, homologation, homologacao, homologação, homolog, production, producao, produção, test, teste, testing, demo, development, desenvolvimento, desenv, dev.
-                      The task_name should be short with no more than six words.
+                      The task_name should be short and should be no more than six words long.
                       The response should be in the format: 
                         {
                             "task_name": "<generated task name>",
                             "original_endpoint": "<input URI>"
                         }
-                      The task_name should not be repeated, unless it has the same uri and original_endpoint value.
-                      Some exemple of expected resulting content are: 
+                      The task_name should not be repeated unless it has the same URI and original_endpoint value.
+                      Some examples of expected resulting content are: 
                             {"task_name": "Get Card", "original_endpoint": "GET_/sandbox/ProcessBusinessUnit2/v1/Card/x/x"},
                             {"task_name": "Get Shop", "original_endpoint": "GET_/sandbox/ProcessBusinessUnit1/v1/Shop"},
                             {"task_name": "Promise Loyalty Card Association", "original_endpoint": "POST_/sandbox/ProcessBusinessUnit2/v1/Association/PromiseLoyaltyCardAssociationOrder"},
@@ -152,15 +152,17 @@ def translate_endpoints_to_task_name(api_list):
 def translate_api_context_to_domain(domain):
   system_message = """It should always return a JSON with two fields named as data_domain_name with the suggested name of the domain 
                           and the original string representing the Data Domain as original_domain. 
-                      If the suggested data_domain_name has more tha one word, each word should be separated by an space.
-                      Each uppercase letter followed by a lowercase letter separates the words in the data_domain_name, such as in camelCase string pattern. 
-                      In the same way, in strings with underscore each underscore separates words in the data_domain_name and 
-                      for string with hyphen each hyphen separates words in the data_domain_name. All these words should be separated by an space.
+                      If the suggested data_domain_name has more tha one word, each word should be separated by a space.
+                      Each uppercase letter followed by a lowercase letter separates the words in the data_domain_name, such as in the camelCase string pattern. 
+                      In the same way, in strings with an underscore, each underscore separates words in the data_domain_name and 
+                      for strings with a hyphen, each hyphen separates words in the data_domain_name. A space should separate all these words.
                       The followin words represent the api envirionment and should be ignorad for data_domain_name: sandbox, qa, hml, dev, prod, homolog, homologation, homologacao, homologação, homolog, production, producao, produção, test, teste, testing, demo, development, desenvolvimento, desenv, dev, homolog, homologation, homologacao, homologação, homolog, production, producao, produção, test, teste, testing, demo, development, desenvolvimento, desenv, dev.
-                      The data_domain_name should be short with no more than four words.
+                      The data_domain_name should be short and not more than four words long.
                       Retun the result in JSON format.
-                        Example of expected resulting content are:
-                            {"data_domain_name": "Business Process 1", "original_domain": "ProcessBusinessUnit1"}
+                      Avoid names with the string Domain in the data_domain_name.
+                      Examples of expected resulting content are:
+                          {"data_domain_name": "Business Process 1", "original_domain": "ProcessBusinessUnit1"}    
+                    
                       """
   completion = client.chat.completions.create(
       model=configs.AI_MODEL["model"],
@@ -195,18 +197,20 @@ def translate_api_context_to_domain(domain):
 def translate_resource_to_entity_name(original_name):
   system_message = """It should always return a JSON with two fields named as entity_name with the suggested name of the data entity
                       and the original string representing the resource named as original_endpoint. 
-                      If the suggested entity_name has more tha one word, each word should be separated by an space.
+                      If the suggested entity_name has more than one word, each word should be separated by a space.
                       Each uppercase letter followed by a lowercase letter separates the words in the entity_name, such as in camelCase string pattern. 
-                      In the same way, in strings with underscore each underscore separates words in the entity_name and for string with hyphen each hyphen separates words in the entity_name. All these words should be separated by an space.
-                      The followin words represent the api envirionment and should be ignorad for entity_name: sandbox, qa, hml, dev, prod, homolog, homologation, homologacao, homologação, homolog, production, producao, produção, test, teste, testing, demo, development, desenvolvimento, desenv, dev, homolog, homologation, homologacao, homologação, homolog, production, producao, produção, test, teste, testing, demo, development, desenvolvimento, desenv, dev.
+                      In the same way, in strings with underscore each underscore separates words in the entity_name and for strings with hyphen each hyphen separates words in the entity_name. All these words should be separated by a space.
+                      The following words represent the API environment and should be ignored for entity_name: sandbox, qa, hml, dev, prod, homolog, homologation, homologacao, homologação, homolog, production, producao, produção, test, teste, testing, demo, development, desenvolvimento, desenv, dev, homolog, homologation, homologacao, homologação, homolog, production, producao, produção, test, teste, testing, demo, development, desenvolvimento, desenv, dev.
                       The entity_name should be short with no more than six words.
+                      Avoid names with "Data Object" or "Archimate Data Object" in the entity_name.                   
                       The response should be in the format: 
                         {
-                            "entity_name": "<generated task name>",
+                            "entity_name": "<generated entity name>",
                             "original_name": "<input original_name>"
                         }
-                      The entity_name should not be repeated, unless it has the same uri and original_endpoint value.
-                      Some exemple of expected resulting content are: 
+                      Some examples of expected resulting content are: 
+                            {"entity_name": "Orders", "original_name": "orders"},                      
+                            {"entity_name": "Items", "original_name": "Items"},
                             {"entity_name": "Loyalty Card Association", "original_name": "PromiseLoyaltyCardAssociationOrder"},
                             {"entity_name": "Purchase Consumer Order", "original_name": "DeclarePurchaseConsumerOrder"}.
                       """

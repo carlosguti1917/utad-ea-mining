@@ -134,7 +134,7 @@ AI_MODEL = {
   # "model": "gpt-3.5-turbo",
   "model": "gpt-4o-mini",
   "base_url": "https://api.openai.com/v1/chat/completions",
-  "api_key": "sk-svcacct-iYarsjFPXofXSTPQCOZJkYh9PmogpcEpZXvBX71ltaBgQeYnnlmmokmZoCDIEKIWdVPeovT3BlbkFJwE4FZYqqMiPvti-YOhNQfSpNIa3Rr9tdWMiABRWhQ_-pedb-998UrN29F_YxVGacfekoYA",
+  "api_key": "change-the-api-key",
 }
 
 

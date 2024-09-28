@@ -97,7 +97,13 @@ def add_archimate_data_relation_element(cdo_list, file_name=None):
                 entity_element_name = ET.SubElement(entity_element, "name")
                 #entity_element_name.text = entity_name
                 entity_element_name.text= ai_gen_util.translate_resource_to_entity_name(entity_name)
+                if any(substring in entity_element_name.text for substring in ['Data Object', 'Translate', 'ArchiMate']):
+                    print("Entity name: ", entity_name)
                 entity_list.append(entity_name) 
+                properties = ET.SubElement(entity_element, "properties")
+                property_element = ET.SubElement(properties, "property", attrib={"propertyDefinitionRef": "uri"})
+                value_property_element= ET.SubElement(property_element, "value", attrib={"xml:lang": "pt"})
+                value_property_element.text = entity_name                
                 
                 # add relationships to the achinmate model
                 relationships = root.find(".//relationships", namespaces) 
