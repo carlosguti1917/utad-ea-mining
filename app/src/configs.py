@@ -132,9 +132,9 @@ AI_MODEL = {
   # "base_url": "http://localhost:3000/v1",
   # "api_key": "lm-studio",
   # "model": "gpt-3.5-turbo",
+  # to set the API_KEY in windows: setx API_KEY "your-actual-api-key" or change in the .env file
   "model": "gpt-4o-mini",
   "base_url": "https://api.openai.com/v1/chat/completions",
-  "api_key": "change-the-api-key",
 }
 
 
